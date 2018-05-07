@@ -13,7 +13,7 @@ export default (state = initialState, action) => {
       newState.allFoods = newState.allFoods.concat(action.food);
       break;
     case GET_FOOD:
-      newState.allFoods = action.food;
+      newState.allFoods = action.allFoods;
       break;
     default:
       return state;

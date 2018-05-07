@@ -12,6 +12,7 @@ import '../public/index.css';
 import exampleComponent from './components/exampleComponent';
 import testComponent from './components/testComponent';
 import addFood from './components/addFood';
+import addFoodContainer from './containers/foodContainer';
 import Home from './components/home';
 
 ReactDOM.render(
@@ -22,7 +23,7 @@ ReactDOM.render(
           <Route exact path="/" component={Home} />
           <Route exact path="/example" component={exampleComponent} />
           <Route exact path="/test" component={testComponent} />
-          <Route exact path="/addfood" component={addFood} />
+          <Route exact path="/addfood" component={addFoodContainer} />
         </Switch>
       </div>
     </BrowserRouter>
