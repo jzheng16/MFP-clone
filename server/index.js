@@ -3,8 +3,6 @@ const passport = require('passport');
 const session = require('cookie-session');
 const path = require('path');
 const morgan = require('morgan');
-const db = require('../db/index');
-const bodyParser = require('body-parser');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -19,10 +17,8 @@ const PORT = process.env.PORT || 3000;
 // );
 
 // Body parsing middleware, body-parser is now built into express
-// app.use(express.urlencoded({ extended: true }));
-// app.use(express.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(morgan('dev'));
 
 // Authentication middleware
@@ -44,12 +40,6 @@ app.use((err, req, res) => {
   console.log(err.stack);
   res.status(500).send(err.message || 'Something broke!');
 });
-
-// db.sync().then(() =>
-//   app.listen(PORT, () => {
-//     console.log(`Listening on ${PORT}`);
-//   }),
-// );
 
 const server = app.listen(PORT, () => {
   console.log(`Listening on ${PORT}`);

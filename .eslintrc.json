@@ -17,6 +17,7 @@
     "indentSwitchCase": true,
     "react/self-closing-comp": 0,
     "no-console": 0,
+    "class-methods-use-this": 1,
     "arrow-parens": [
       "error",
       "as-needed"

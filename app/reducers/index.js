@@ -1,5 +1,8 @@
-const exReducer = function dummyReducer(state = {}, action) {
-  return state;
-};
+import { combineReducers } from 'redux';
+import FoodReducer from './foods';
 
-module.exports = exReducer;
+const rootReducer = combineReducers({
+  foods: FoodReducer
+});
+
+module.exports = rootReducer;

@@ -5,10 +5,14 @@ import { Provider } from 'react-redux';
 /* prettier-ignore */
 import { Router, Route, BrowserRouter, Switch, IndexRedirect } from 'react-router-dom';
 import store from './store';
+// stylesheet
+import '../public/index.css';
+
+// Components
 import exampleComponent from './components/exampleComponent';
 import testComponent from './components/testComponent';
+import addFood from './components/addFood';
 import Home from './components/home';
-import '../public/index.css';
 
 ReactDOM.render(
   <Provider store={store}>
@@ -18,6 +22,7 @@ ReactDOM.render(
           <Route exact path="/" component={Home} />
           <Route exact path="/example" component={exampleComponent} />
           <Route exact path="/test" component={testComponent} />
+          <Route exact path="/addfood" component={addFood} />
         </Switch>
       </div>
     </BrowserRouter>

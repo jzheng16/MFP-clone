@@ -15,15 +15,6 @@ module.exports = db;
 
 require('./models');
 
-db
-  .authenticate()
-  .then(() => {
-    console.log('Connection has been established successfully.');
-  })
-  .catch(err => {
-    console.error('Unable to connect to the database:', err);
-  });
-
 db.didSync = db
   .sync()
   .then(() => console.log('sync successful'));

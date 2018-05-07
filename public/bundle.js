@@ -82,6 +82,107 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./app/actions.js":
+/*!************************!*\
+  !*** ./app/actions.js ***!
+  \************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var ADD_TODO = exports.ADD_TODO = 'ADD_TODO';
+var DELETE_TODO = exports.DELETE_TODO = 'DELETE_TODO';
+var TOGGLE_TODO = exports.TOGGLE_TODO = 'TOGGLE_TODO';
+
+var ADD_FOOD = exports.ADD_FOOD = 'ADD_FOOD';
+var GET_FOOD = exports.GET_FOOD = 'GET_FOOD';
+
+/***/ }),
+
+/***/ "./app/components/addFood.jsx":
+/*!************************************!*\
+  !*** ./app/components/addFood.jsx ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+exports.default = function (props) {
+  return React.createElement(
+    "form",
+    { onSubmit: console.log(props.addFood) },
+    React.createElement(
+      "div",
+      null,
+      React.createElement(
+        "label",
+        { htmlFor: "name" },
+        "Add a food that you eat: ",
+        React.createElement("input", { id: "name", type: "text", name: "name" })
+      )
+    ),
+    React.createElement(
+      "div",
+      null,
+      React.createElement(
+        "label",
+        { htmlFor: "calories" },
+        "Calories: ",
+        React.createElement("input", { id: "calories", type: "number", name: "calories" })
+      )
+    ),
+    React.createElement(
+      "div",
+      null,
+      React.createElement(
+        "label",
+        { htmlFor: "carbs" },
+        "Carbs: ",
+        React.createElement("input", { id: "carbs", type: "number", name: "carbs" })
+      )
+    ),
+    React.createElement(
+      "div",
+      null,
+      React.createElement(
+        "label",
+        { htmlFor: "protein" },
+        "Protein: ",
+        React.createElement("input", { id: "protein", type: "number", name: "protein" })
+      )
+    ),
+    React.createElement(
+      "div",
+      null,
+      React.createElement(
+        "label",
+        { htmlFor: "fat" },
+        "Fat: ",
+        React.createElement("input", { id: "fat", type: "number", name: "fat" })
+      )
+    ),
+    React.createElement(
+      "button",
+      { type: "submit" },
+      " Add Food "
+    )
+  );
+};
+
+/***/ }),
+
 /***/ "./app/components/exampleComponent.js":
 /*!********************************************!*\
   !*** ./app/components/exampleComponent.js ***!
@@ -234,6 +335,8 @@ var _store = __webpack_require__(/*! ./store */ "./app/store.jsx");
 
 var _store2 = _interopRequireDefault(_store);
 
+__webpack_require__(/*! ../public/index.css */ "./public/index.css");
+
 var _exampleComponent = __webpack_require__(/*! ./components/exampleComponent */ "./app/components/exampleComponent.js");
 
 var _exampleComponent2 = _interopRequireDefault(_exampleComponent);
@@ -242,15 +345,18 @@ var _testComponent = __webpack_require__(/*! ./components/testComponent */ "./ap
 
 var _testComponent2 = _interopRequireDefault(_testComponent);
 
+var _addFood = __webpack_require__(/*! ./components/addFood */ "./app/components/addFood.jsx");
+
+var _addFood2 = _interopRequireDefault(_addFood);
+
 var _home = __webpack_require__(/*! ./components/home */ "./app/components/home.jsx");
 
 var _home2 = _interopRequireDefault(_home);
 
-__webpack_require__(/*! ../public/index.css */ "./public/index.css");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-/* prettier-ignore */
+// Components
+// Entry point for webpack
 _reactDom2.default.render(_react2.default.createElement(
   _reactRedux.Provider,
   { store: _store2.default },
@@ -265,11 +371,58 @@ _reactDom2.default.render(_react2.default.createElement(
         null,
         _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _home2.default }),
         _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/example', component: _exampleComponent2.default }),
-        _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/test', component: _testComponent2.default })
+        _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/test', component: _testComponent2.default }),
+        _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/addfood', component: _addFood2.default })
       )
     )
   )
-), document.getElementById('main')); // Entry point for webpack
+), document.getElementById('main'));
+// stylesheet
+
+/* prettier-ignore */
+
+/***/ }),
+
+/***/ "./app/reducers/foods.jsx":
+/*!********************************!*\
+  !*** ./app/reducers/foods.jsx ***!
+  \********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _actions = __webpack_require__(/*! ../actions */ "./app/actions.js");
+
+var initialState = {
+  allFoods: [],
+  food: {}
+};
+
+// When posting something, you don't care about it as long as it is inside the database and then updated correctly amongst the list of foods
+
+exports.default = function () {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+  var action = arguments[1];
+
+  var newState = Object.assign({}, state);
+  switch (action.type) {
+    case _actions.ADD_FOOD:
+      newState.allFoods = newState.allFoods.concat(action.food);
+      break;
+    case _actions.GET_FOOD:
+      newState.allFoods = action.food;
+      break;
+    default:
+      return state;
+  }
+  return newState;
+};
 
 /***/ }),
 
@@ -283,14 +436,19 @@ _reactDom2.default.render(_react2.default.createElement(
 "use strict";
 
 
-var exReducer = function dummyReducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  var action = arguments[1];
+var _redux = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 
-  return state;
-};
+var _foods = __webpack_require__(/*! ./foods */ "./app/reducers/foods.jsx");
 
-module.exports = exReducer;
+var _foods2 = _interopRequireDefault(_foods);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var rootReducer = (0, _redux.combineReducers)({
+  foods: _foods2.default
+});
+
+module.exports = rootReducer;
 
 /***/ }),
 
