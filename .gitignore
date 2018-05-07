@@ -36,6 +36,6 @@
 ehthumbs.db
 
 # Ignore bundle.js because that can be created on compile #
-/public/bundle.js
-/public/bundle.js.map
+public/bundle.js
+public/bundle.js.map
 node_modules
