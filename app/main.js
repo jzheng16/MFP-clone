@@ -9,8 +9,7 @@ import store from './store';
 import '../public/index.css';
 
 // Components
-import exampleComponent from './components/exampleComponent';
-import testComponent from './components/testComponent';
+import listFoods from './components/listFoods';
 import addFood from './components/addFood';
 import addFoodContainer from './containers/foodContainer';
 import Home from './components/home';
@@ -21,8 +20,7 @@ ReactDOM.render(
       <div className="container">
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route exact path="/example" component={exampleComponent} />
-          <Route exact path="/test" component={testComponent} />
+          <Route exact path="/getfood" component={addFoodContainer} />
           <Route exact path="/addfood" component={addFoodContainer} />
         </Switch>
       </div>

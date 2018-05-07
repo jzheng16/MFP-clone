@@ -1,9 +1,8 @@
 const React = require('react');
 
 
-export default props => {
-  return (
-
+export default props =>
+  (
     <form onSubmit={props.addFood}>
       <div>
         <label htmlFor="name">
@@ -33,5 +32,4 @@ export default props => {
       <button type="submit"> Add Food </button>
     </form >
   );
-};
 
