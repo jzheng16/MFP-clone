@@ -1,8 +1,10 @@
 const React = require('react');
 
+
 export default props => {
   return (
-    <form onSubmit={console.log(props.addFood)}>
+
+    <form onSubmit={props.addFood}>
       <div>
         <label htmlFor="name">
           Add a food that you eat: <input id="name" type="text" name="name" />
@@ -29,7 +31,7 @@ export default props => {
         </label>
       </div>
       <button type="submit"> Add Food </button>
-    </form>
+    </form >
   );
 };
 

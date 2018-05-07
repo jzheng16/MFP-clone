@@ -1,14 +1,15 @@
 import axios from 'axios';
 import { ADD_FOOD, GET_FOOD } from '../actions';
 
+
 export const addFood = food => ({
   type: ADD_FOOD,
   food
 });
 
-export const getFood = food => ({
+export const getFood = allFoods => ({
   type: GET_FOOD,
-  food
+  allFoods
 });
 
 export const createFood = food => dispatch => {
@@ -19,7 +20,7 @@ export const createFood = food => dispatch => {
 
 export const fetchFood = () => dispatch => {
   axios.get('/api/food/getfood')
-    .then(foods => dispatch(foods.data))
+    .then(allFoods => dispatch(getFood(allFoods.data)))
     .catch(err => console.error('error getting foods', err));
 };
 

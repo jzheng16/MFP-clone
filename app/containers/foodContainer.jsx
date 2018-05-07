@@ -5,16 +5,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import createFood from '../action-creators/foodAction';
-import addFood from '../components/addFood';
+import { createFood, fetchFood } from '../action-creators/foodAction';
+import Food from '../components/addFood';
+import ListFoods from '../components/listFoods';
 
-const mapStateToProps = () => { };
+const mapStateToProps = state => ({
+  foods: state.foods // Our foods are all on the food state because that is what it is called in our reducer
+});
 const mapDispatchToProps = dispatch => ({
   createFood(food) {
     return dispatch(createFood(food));
+  },
+  fetchFood() {
+    return dispatch(fetchFood());
   }
 });
-
 
 class FoodContainer extends Component {
   constructor(props) {
@@ -22,18 +27,28 @@ class FoodContainer extends Component {
     this.addFood = this.addFood.bind(this);
   }
 
-
-  componentDidMount() { }
+  componentWillMount() {
+    this.props.fetchFood();
+  }
 
   addFood(e) {
-    console.log('what is this value? ', e);
     e.preventDefault();
+    const newFood = {
+      name: e.target.name.value,
+      calories: e.target.calories.value,
+      carbs: e.target.carbs.value,
+      protein: e.target.protein.value,
+      fat: e.target.fat.value,
+    };
+    this.props.createFood(newFood);
   }
+
 
   render() {
     return (
       <div>
-        <addFood {...this.props} addFood={this.addFood} />
+        <Food addFood={this.addFood} />
+        <ListFoods {...this.props} {...this.state} />
       </div>
     );
   }
