@@ -1,11 +1,14 @@
-import { Router, Route, withRouter, Switch, IndexRedirect } from 'react-router-dom';
+import { Route, withRouter, Switch } from 'react-router-dom';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { listFoods, addFood, Home } from './components';
-import foodContainer from './containers/foodContainer';
+import { Home } from './components';
+import FoodContainer from './containers/FoodContainer';
+import LoginContainer from './containers/LoginContainer';
 
+// TODO: Map me function and put it inside the component did mount to validate user
 const mapDispatchToProps = dispatch => ({});
 const mapStateToProps = state => ({});
+
 
 class Routes extends Component {
   componentDidMount() { }
@@ -14,8 +17,10 @@ class Routes extends Component {
       <div>
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route exact path="/addFood" component={foodContainer} />
-          <Route exact path="/listFoods" component={foodContainer} />
+          <Route exact path="/login" component={LoginContainer} />
+          <Route exact path="/addFood" component={FoodContainer} />
+          <Route exact path="/listFoods" component={FoodContainer} />
+          <Route exact path="/home" component={Home} />
         </Switch>
       </div>
     );

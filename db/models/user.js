@@ -38,34 +38,34 @@ const User = db.define(
       type: Sequelize.STRING
     },
 
-  },
-  {
-    hooks: {
-    },
-    instanceMethods: {
-      correctPassword: (userInputPassword) => User.encryptPassword(userInputPassword, this.salt()) === this.password()
-    },
-    classMethods: {
-      generateSalt: () => crypto.randomBytes(16).toString('base64'),
-      encryptPassword: (plaintext, salt) => crypto
-        .createHash('RSA-SHA256')
-        .update(plaintext)
-        .update(salt)
-        .digest('hex')
-    }
   }
 );
+
+module.exports = User;
+
+User.prototype.correctPassword = function (candidatePwd) {
+  return User.encryptPassword(candidatePwd, this.salt()) === this.password();
+};
+
+User.generateSalt = function () {
+  return crypto.randomBytes(16).toString('base64')
+};
+
+User.encryptPassword = function (plainText, salt) {
+  return crypto
+    .createHash('RSA-SHA256')
+    .update(plainText)
+    .update(salt)
+    .digest('hex')
+};
 
 // Hooks to salt and hash password. Only do it if the password has been set or 'changed'
 const setSaltAndPassword = user => {
   if (user.changed('password')) {
-    user.salt = User.generateSalt();
+    user.salt = User.generateSalt()
     user.password = User.encryptPassword(user.password(), user.salt());
   }
 };
 
 User.beforeCreate(setSaltAndPassword);
 User.beforeUpdate(setSaltAndPassword);
-
-
-module.exports = User;
