@@ -1,12 +1,11 @@
 import axios from 'axios';
-import createBrowserHistory from 'history/createBrowserHistory';
 
 import { GET_USER, REMOVE_USER } from '../actions';
 
 import history from '../../history';
 
 export const getUser = user => ({ type: GET_USER, payload: user });
-export const removeUser = () => ({ type: GET_USER });
+export const removeUser = () => ({ type: REMOVE_USER });
 
 // Fetches user info on login
 export const fetchingUser = () => dispatch => {
@@ -27,13 +26,16 @@ export const loggingIn = (email, password) => dispatch => {
 
 export const signingUp = user => dispatch => {
   axios.post('/api/auth/signup', user)
-    .then(newUser => dispatch(loggingIn(newUser)))
+    .then(newUser => dispatch(getUser(newUser.data)))
     .catch(err => console.error('Oops had trouble signing up: ', err));
 };
 
 // TODO: Figure out Do i need a .get or .post? Or is any one ok?
 export const loggingOut = () => dispatch => {
-  axios.post('/api/auth/logout')
-    .then(dispatch(removeUser()))
+  axios.get('/api/auth/logout')
+    .then(() => {
+      dispatch(removeUser());
+      history.push('/home');
+    })
     .catch(err => console.error('trouble logging out ', err));
 };
