@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 export default props => (
   <div>
@@ -13,6 +14,13 @@ export default props => (
       </label>
       <button type="submit"> Submit </button>
     </form>
+
+    <b> Don&#39;t have an account? Sign-up!
+      <NavLink to="/signup"> Sign-up </NavLink>
+    </b>
+
+
+    <button type="submit" onClick={props.handleLogout}> Logout </button>
 
   </div>
 );

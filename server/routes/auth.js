@@ -15,6 +15,7 @@ passport.deserializeUser((id, done) => {
 });
 
 // Login
+
 router.post('/login', (req, res, next) => {
   User.findOne({ where: { email: req.body.email } })
     .then(user => {
@@ -36,7 +37,7 @@ router.post('/login', (req, res, next) => {
 router.post('/signup', (req, res, next) => {
   User.create(req.body)
     .then(user => {
-      if (!user) {
+      if (user) {
         req.login(user, err => (err ? next(err) : res.json(user)));
       }
     })
