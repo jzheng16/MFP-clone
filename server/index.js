@@ -3,10 +3,10 @@ const passport = require('passport');
 const session = require('express-session');
 const path = require('path');
 const morgan = require('morgan');
-
 const db = require('../db');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
+const myStore = new SequelizeStore({ db });
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -16,9 +16,7 @@ app.use(session({
   secret: process.env.SESSION_SECRET || 'test secret only for development',
   resave: false,
   saveUninitialized: false,
-  store: new SequelizeStore({
-    db
-  })
+  store: myStore
 }));
 
 // Body parsing middleware, body-parser is now built into express
@@ -29,18 +27,6 @@ app.use(morgan('dev'));
 // Authentication middleware
 app.use(passport.initialize());
 app.use(passport.session());
-
-/*
-Need to serialize user data so that subsequent requests will use information stored on cookie
-instead of providing credentials all the time
-Deserialization will run on each request to obtain the user information that is stored on a cookie session
-*/
-passport.serializeUser((user, done) => done(null, user.id));
-passport.deserializeUser((id, done) => {
-  User.findById(id)
-    .then(user => done(null, user))
-    .catch(done);
-});
 
 // Serve up static files in public folder
 app.use(express.static(path.resolve(__dirname, '..', 'public')));
@@ -61,3 +47,5 @@ app.use((err, req, res) => {
 const server = app.listen(PORT, () => {
   console.log(`Listening on ${PORT}`);
 });
+
+myStore.sync();

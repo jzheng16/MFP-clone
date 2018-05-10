@@ -50,7 +50,7 @@ router.post('/signup', (req, res, next) => {
     });
 });
 
-// Create route to authenticate ? Not sure..
+// Create route to fetch the logged in user. This route will be hit every time a user accesses our page
 router.get('/me', (req, res) => res.json(req.user));
 
 // Create routes for login

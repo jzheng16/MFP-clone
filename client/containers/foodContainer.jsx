@@ -1,13 +1,9 @@
-// What do I have to do here... ???
-// Import the actions needed to add food
-// Handle the onsubmit
-// Pass down the actions to the dumb component
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { createFood, fetchFood } from '../action-creators/foodAction';
-import Food from '../components/addFood';
-import ListFoods from '../components/listFoods';
+import { createFood, fetchFood } from '../store/action-creators/foodAction';
+import { ListFoods, AddFood } from '../components';
+
 
 const mapStateToProps = state => ({
   foods: state.foods // Our foods are all on the food state because that is what it is called in our reducer
@@ -47,7 +43,7 @@ class FoodContainer extends Component {
   render() {
     return (
       <div>
-        <Food addFood={this.addFood} />
+        <AddFood addFood={this.addFood} />
         <ListFoods {...this.props} {...this.state} />
       </div>
     );
