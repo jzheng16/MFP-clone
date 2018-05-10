@@ -7,6 +7,9 @@ const Home = () => (
       <NavLink to="/"> Home </NavLink>
     </li>
     <li>
+      <NavLink to="/login"> Login! </NavLink>
+    </li>
+    <li>
       <NavLink to="/addFood"> Add food </NavLink>
     </li>
     <li>
