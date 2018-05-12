@@ -28,7 +28,6 @@ class LoginContainer extends Component {
   handleLogin(e) {
     e.preventDefault();
     this.props.loggingIn(e.target.email.value, e.target.password.value);
-    console.log('What is user?', this);
   }
 
   handleLogout() {

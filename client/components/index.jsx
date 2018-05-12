@@ -8,3 +8,4 @@ export { default as AddFood } from './AddFood';
 export { default as Home } from './home';
 export { default as LoginForm } from './LoginForm';
 export { default as SignUpForm } from './SignUpForm';
+export { default as NavBar } from './NavBar';

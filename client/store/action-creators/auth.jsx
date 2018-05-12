@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 import { GET_USER, REMOVE_USER } from '../actions';
-
+import store from '..';
 import history from '../../history';
 
 export const getUser = user => ({ type: GET_USER, payload: user });
@@ -10,7 +10,7 @@ export const removeUser = () => ({ type: REMOVE_USER });
 // Fetches user info on login
 export const fetchingUser = () => dispatch => {
   axios.get('/api/auth/me')
-    .then(user => dispatch(getUser(user)))
+    .then(user => dispatch(getUser(user.data)))
     .catch(err => console.error('Trouble fetching user ', err));
 };
 
