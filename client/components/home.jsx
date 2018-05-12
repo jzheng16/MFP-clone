@@ -2,20 +2,10 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 const Home = () => (
-  <ul>
-    <li>
-      <NavLink to="/"> Home </NavLink>
-    </li>
-    <li>
-      <NavLink to="/login"> Login! </NavLink>
-    </li>
-    <li>
-      <NavLink to="/addFood"> Add food </NavLink>
-    </li>
-    <li>
-      <NavLink to="/listFoods"> List Foods </NavLink>
-    </li>
-  </ul>
+  <div>
+    <h1> Welcome to MyFitnessClone! </h1>
+    <NavLink to="/addfood"> Add a Food! </NavLink>
+  </div>
 );
 
 module.exports = Home;

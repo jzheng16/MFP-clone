@@ -1,7 +1,52 @@
 a {
-  color: red;
+  color: black;
+  margin: auto;
+}
+
+.active{
+  font-weight: bold;
 }
 
 .someList {
   color: red;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr; /* can also do repeat(4, 1fr) */
+  grid-template-rows: 1fr 1fr 1fr;
+}
+
+.nav {
+  grid-column: 1/4; 
+  grid-row: 1/2;
+}
+
+.routes{
+  grid-column: 1/4;
+  grid-row:  2/3;
+}
+.signup{
+  border:#f2f2f2;
+  padding: 20px;
+}
+
+#email, #password {
+  width: 100%;
+  border-style: solid;
+  border-radius: 4px;
+  display: inline-block;
+  padding: 12px 20px;
+
+}
+
+#signupButton {
+  background-color: green;
+
+}
+
+#logout {
+  border:none;
+  margin-left: 80%;
+ 
 }

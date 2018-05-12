@@ -11,6 +11,28 @@ const myStore = new SequelizeStore({ db });
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+/*
+Need to serialize user data so that subsequent requests will use information stored on cookie
+instead of providing credentials all the time
+Deserialization will run on each request to obtain the user information that is stored on a cookie session
+*/
+
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+});
+passport.deserializeUser((id, done) => {
+  console.log('passport deserializing user', id);
+  db.models.user.findById(id)
+    .then(user => done(null, user))
+    .catch(err => done(err));
+});
+
+// Body parsing middleware, body-parser is now built into express
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(morgan('dev'));
+
+
 // Create a session for each request Session Middleware
 app.use(session({
   secret: process.env.SESSION_SECRET || 'test secret only for development',
@@ -19,14 +41,10 @@ app.use(session({
   store: myStore
 }));
 
-// Body parsing middleware, body-parser is now built into express
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-app.use(morgan('dev'));
-
 // Authentication middleware
 app.use(passport.initialize());
 app.use(passport.session());
+
 
 // Serve up static files in public folder
 app.use(express.static(path.resolve(__dirname, '..', 'public')));

@@ -21,19 +21,24 @@ const mapStateToProps = state => ({
 class Routes extends Component {
   componentDidMount() {
     this.props.fetchingUser();
-    console.log('Routes props?', this.props);
   }
   render() {
     return (
-      <div>
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/login" component={LoginContainer} />
-          <Route exact path="/signup" component={SignUpContainer} />
-          <Route exact path="/addFood" component={FoodContainer} />
-          <Route exact path="/listFoods" component={FoodContainer} />
-          <Route exact path="/home" component={Home} />
-        </Switch>
+      <div className="routes">
+        {this.props.user ?
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/login" component={LoginContainer} />
+            <Route exact path="/addFood" component={FoodContainer} />
+            <Route exact path="/listFoods" component={FoodContainer} />
+            <Route exact path="/home" component={Home} />
+          </Switch>
+          :
+          <Switch>
+            <Route exact path="/login" component={LoginContainer} />
+            <Route exact path="/signup" component={SignUpContainer} />
+          </Switch>
+        }
       </div>
     );
   }
