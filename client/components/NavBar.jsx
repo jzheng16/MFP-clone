@@ -8,10 +8,13 @@ import logo from '../../public/mfp.png';
 export default props => (
   <div className="nav">
     {props.user ?
-      <nav>
-        <NavLink to="/home" exact activeClassName="active">  <img src={logo} alt="MyFitnessPal" height="40px" width="40px" />  </NavLink>
+      <nav className="navitems">
+        <NavLink id="navhome" to="/home" exact activeClassName="active">  <img src={logo} alt="MyFitnessPal" height="40px" width="40px" />  </NavLink>
         <NavLink to="/foods" exact activeClassName="active"> Foods </NavLink>
-        <button id="logout" type="submit" onClick={props.handleLogout}> Logout </button>
+        <NavLink to="/measurements" exact activeClassName="active"> Track Measurements </NavLink>
+        <NavLink to="/goals" exact activeClassName="active">Goals </NavLink>
+        <NavLink to="/me" exact activeClassName="active"> Me! </NavLink>
+        <NavLink to="/logout" id="logout" onClick={props.handleLogout}> Logout </NavLink>
       </nav>
       :
       <nav>

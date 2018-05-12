@@ -14,7 +14,7 @@ a {
 .container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr; /* can also do repeat(4, 1fr) */
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 3fr 2fr;
 }
 
 .nav {
@@ -22,9 +22,19 @@ a {
   grid-row: 1/2;
 }
 
+#navhome {
+  padding-right: 20px;
+}
+
 .routes{
   grid-column: 1/4;
-  grid-row:  2/3;
+  grid-row:  2/6;
+}
+
+.home{
+  grid-column: 1/4;
+  grid-row: 2/4;
+  text-align: center;
 }
 .signup{
   border:#f2f2f2;

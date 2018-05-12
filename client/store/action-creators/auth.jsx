@@ -1,7 +1,5 @@
 import axios from 'axios';
-
 import { GET_USER, REMOVE_USER } from '../actions';
-import store from '..';
 import history from '../../history';
 
 export const getUser = user => ({ type: GET_USER, payload: user });
@@ -17,9 +15,8 @@ export const fetchingUser = () => dispatch => {
 export const loggingIn = (email, password) => dispatch => {
   axios.post('/api/auth/login', { email, password })
     .then(user => {
-      console.log('Is this the user? ', user.data);
       dispatch(getUser(user.data));
-      history.push('/home');
+      history.push('/');
     })
     .catch(err => console.error('Had trouble logging in', err));
 };
@@ -35,7 +32,7 @@ export const loggingOut = () => dispatch => {
   axios.get('/api/auth/logout')
     .then(() => {
       dispatch(removeUser());
-      history.push('/home');
+      history.push('/login');
     })
     .catch(err => console.error('trouble logging out ', err));
 };

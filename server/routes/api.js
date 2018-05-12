@@ -5,7 +5,8 @@ const api = require('express').Router();
 // 404 error handling placed at end of api route
 api
   .use('/food', require('./food.js'))
-  .use('/auth', require('./auth'));
+  .use('/auth', require('./auth'))
+  .use('/goal', require('./goal'));
 
 // No routes hit?
 api.use((req, res) => res.status(404).end());
