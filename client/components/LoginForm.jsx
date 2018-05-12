@@ -15,8 +15,8 @@ export default props => (
       <button type="submit"> Submit </button>
     </form>
 
-    <b> Don&#39;t have an account? Sign-up!
-      <NavLink to="/signup"> Sign-up </NavLink>
+    <b> Don&#39;t have an account?
+      <NavLink to="/signup"> Sign-up! </NavLink>
     </b>
 
   </div>

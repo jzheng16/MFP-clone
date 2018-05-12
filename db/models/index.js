@@ -1,4 +1,7 @@
 const Food = require('./food');
 const User = require('./user');
+const Goal = require('./goal');
 
-module.exports = { Food, User };
+Goal.belongsTo(User);
+
+module.exports = { Food, User, Goal };

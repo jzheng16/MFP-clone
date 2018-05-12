@@ -7,3 +7,6 @@ export const GET_FOOD = 'GET_FOOD';
 
 export const GET_USER = 'GET_USER';
 export const REMOVE_USER = 'REMOVE_USER';
+
+export const GET_GOAL = 'GET_GOAL';
+export const UPDATE_GOAL = 'UPDATE_GOAL';
