@@ -1,4 +1,4 @@
-const { User, Goal } = require('../../db/models');
+const { Goal } = require('../../db/models');
 const router = require('express').Router();
 
 // Query the user and eager load his goals
@@ -15,7 +15,6 @@ router.get('/goal', (req, res) => {
 
 // Update goals
 router.post('/goal', (req, res) => {
-  console.log('What is req.user?', req.user);
   Goal.update(
     {
       calorie: req.body.calorie,
@@ -26,11 +25,15 @@ router.post('/goal', (req, res) => {
     },
     {
       where: {
-        user_id: req.user.id.dataValues
-      }
+        user_id: req.user.dataValues.id
+      },
+      returning: true,
+      plain: true
     }
   )
-    .then(goal => res.json(goal))
+    .then(goal => {
+      res.json(goal[1]);
+    })
     .catch(err => console.error('cannot retrieve goals', err));
 });
 
