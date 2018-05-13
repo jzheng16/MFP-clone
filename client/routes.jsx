@@ -1,11 +1,11 @@
 import { Route, withRouter, Switch } from 'react-router-dom';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Home } from './components';
 import FoodContainer from './containers/FoodContainer';
 import LoginContainer from './containers/LoginContainer';
 import SignUpContainer from './containers/SignUpContainer';
 import HomeContainer from './containers/HomeContainer';
+import GoalContainer from './containers/GoalContainer';
 import { fetchingUser } from './store/action-creators/auth';
 
 // TODO: Map me function and put it inside the component did mount to validate user
@@ -33,6 +33,7 @@ class Routes extends Component {
             <Route exact path="/addFood" component={FoodContainer} />
             <Route exact path="/listFoods" component={FoodContainer} />
             <Route exact path="/home" component={HomeContainer} />
+            <Route exact path="/goal" component={GoalContainer} />
           </Switch>
           :
           <Switch>

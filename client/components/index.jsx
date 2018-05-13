@@ -9,3 +9,4 @@ export { default as Home } from './home';
 export { default as LoginForm } from './LoginForm';
 export { default as SignUpForm } from './SignUpForm';
 export { default as NavBar } from './NavBar';
+export { default as Goal } from './Goal';

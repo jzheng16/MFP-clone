@@ -60,3 +60,13 @@ a {
   margin-left: 80%;
  
 }
+
+.goal-list {
+
+  list-style-type: none;
+
+}
+
+#update-goal {
+  color: green;
+}

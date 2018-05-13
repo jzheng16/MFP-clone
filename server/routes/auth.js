@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const User = require('../../db/models/user');
-const db = require('../../db');
+
 // Login
 
 router.post('/login', (req, res, next) => {
