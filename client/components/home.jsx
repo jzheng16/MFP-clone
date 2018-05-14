@@ -19,7 +19,7 @@ const Home = props => (
           <br></br>
           <Link to="/addfood"> Add Food </Link>
           <br></br>
-          <Link to="/goals"> Click here to get started! </Link>
+          <Link to="/goal"> Click here to get started! </Link>
         </div>
         :
         <div className="home">
