@@ -6,7 +6,8 @@ const api = require('express').Router();
 api
   .use('/food', require('./food.js'))
   .use('/auth', require('./auth'))
-  .use('/goal', require('./goal'));
+  .use('/goal', require('./goal'))
+  .use('/diary', require('./diary'));
 
 // No routes hit?
 api.use((req, res) => res.status(404).end());
