@@ -1,9 +1,10 @@
-import { ADD_FOOD_TO_DIARY, SELECT_MEAL_TYPE, SELECT_DIARY_DATE } from '../actions';
+import { ADD_FOOD_TO_DIARY, SELECT_MEAL_TYPE, SELECT_DIARY_DATE, REVISED_ADD_FOOD_TO_DIARY } from '../actions';
 
 const initialState = {
   entries: [],
   currentMealTypeId: 0,
-  currentDiaryDate: {}
+  currentDiaryDate: {},
+  revisedEntries: []
 };
 
 export default (state = initialState, action) => {
@@ -18,6 +19,10 @@ export default (state = initialState, action) => {
     case SELECT_DIARY_DATE:
       newState.currentDiaryDate = action.payload;
       break;
+    case REVISED_ADD_FOOD_TO_DIARY:
+      newState.revisedEntries = action.payload;
+      break;
+
     default:
       return state;
   }

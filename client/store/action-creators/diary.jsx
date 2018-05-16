@@ -1,15 +1,30 @@
 import axios from 'axios';
-import { ADD_FOOD_TO_DIARY, SELECT_MEAL_TYPE, SELECT_DIARY_DATE } from '../actions';
+import { ADD_FOOD_TO_DIARY, SELECT_MEAL_TYPE, SELECT_DIARY_DATE, REVISED_ADD_FOOD_TO_DIARY } from '../actions';
 
 export const addFoodToDiary = food => ({
   type: ADD_FOOD_TO_DIARY,
   payload: food
 });
 
+export const revisedAddFoodToDiary = diary => ({
+  type: REVISED_ADD_FOOD_TO_DIARY,
+  payload: diary
+});
+
+export const fetchingDiary = (user_id, date_id) => dispatch => {
+  console.log('user id?', user_id, date_id);
+  console.log('user id?', { user_id, date_id });
+
+  axios.get(`/api/diary/${date_id}`)
+    .then(revisedEntries => dispatch(revisedAddFoodToDiary(revisedEntries.data)))
+    .catch(err => console.error('trouble fetching diary', err));
+};
+
 export const updatingDiary = entry => dispatch => {
   axios.post('/api/diary', entry)
     .then(newEntry => {
       console.log('what is entry in action reducer?', newEntry.data);
+      dispatch(revisedAddFoodToDiary(newEntry.data));
     })
     .catch(err => console.error('error updating diary db', err));
 };
