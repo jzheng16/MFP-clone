@@ -9,9 +9,6 @@ const Diary = db.define('diary', {
   user_food_entry: {
     type: Sequelize.ARRAY(Sequelize.ARRAY(Sequelize.INTEGER)),
     defaultValue: []
-  },
-  meal_type: {
-    type: Sequelize.STRING
   }
 });
 

@@ -3,7 +3,7 @@ const Sequelize = require('sequelize');
 
 const Date = db.define('date', {
   day: {
-    type: Sequelize.DATE
+    type: Sequelize.STRING
   },
   dow: {
     type: Sequelize.STRING,

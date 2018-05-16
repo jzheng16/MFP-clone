@@ -10,7 +10,7 @@ export default props => (
     {props.user ?
       <nav className="navitems">
         <NavLink id="navhome" to="/home" exact activeClassName="active">  <img src={logo} alt="MyFitnessPal" height="40px" width="40px" />  </NavLink>
-        <NavLink to="/foods" exact activeClassName="active"> Foods </NavLink>
+        <NavLink to="/diary" exact activeClassName="active"> Diary </NavLink>
         <NavLink to="/measurements" exact activeClassName="active"> Track Measurements </NavLink>
         <NavLink to="/goal" exact activeClassName="active">Goals </NavLink>
         <NavLink to="/me" exact activeClassName="active"> Me! </NavLink>
