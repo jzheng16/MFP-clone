@@ -10,3 +10,5 @@ export const REMOVE_USER = 'REMOVE_USER';
 
 export const GET_GOAL = 'GET_GOAL';
 export const UPDATE_GOAL = 'UPDATE_GOAL';
+
+export const ADD_FOOD_TO_DIARY = 'ADD_FOOD_TO_DIARY';

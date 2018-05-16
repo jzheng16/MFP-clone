@@ -19,6 +19,7 @@ class HomeContainer extends Component {
   }
   componentDidMount() {
     this.props.fetchingGoal();
+
     console.log('did this work?', this.props);
   }
 

@@ -70,3 +70,22 @@ a {
 #update-goal {
   color: green;
 }
+
+.addFood {
+  column-count: 2;
+  column-width: auto;
+}
+
+/* .diary {
+  column-count: 2;
+  column-width: auto;
+} */
+.displayFoods {
+  column-count: 1;
+  column-width: auto;
+}
+
+.displayStats {
+  column-count: 4;
+  column-width: auto;
+}
