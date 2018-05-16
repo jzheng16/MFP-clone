@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom';
 
 export default props => (
   <div>
-    <h1> Your Food Diary for DAY </h1> <hr />
+    <h1> Your Food Diary for {props.diary.currentDiaryDate.day} </h1> <hr />
     <div className="diary">
       <div className="displayFoods">
         <div className="listBreakfast"> Breakfast
-          {props.diary ?
-            props.diary.map(entry => (
+          {props.diary.entries ?
+            props.diary.entries.map(entry => (
               <li key={entry.id}>
                 {entry.name}
               </li>
@@ -16,14 +16,14 @@ export default props => (
             :
             null
           }
-          <Link to="/addFood"> Add Food </Link>
+          <button onClick={() => props.selectedMealType(1)}> Add Food </button>
         </div>
         <h1> Lunch </h1>
-        <Link to="/addFood"> Add Food </Link>
+        <button onClick={() => props.selectedMealType(2)}> Add Food </button>
         <h1> Dinner </h1>
-        <Link to="/addFood"> Add Food </Link>
+        <button onClick={() => props.selectedMealType(3)}> Add Food </button>
         <h1> Snacks </h1>
-        <Link to="/addFood"> Add Food </Link>
+        <button onClick={() => props.selectedMealType(4)}> Add Food </button>
       </div>
       <div className="displayStats">
         <h1> Calories </h1>
