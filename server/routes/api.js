@@ -7,7 +7,8 @@ api
   .use('/food', require('./food.js'))
   .use('/auth', require('./auth'))
   .use('/goal', require('./goal'))
-  .use('/diary', require('./diary'));
+  .use('/diary', require('./diary'))
+  .use('/date', require('./date'));
 
 // No routes hit?
 api.use((req, res) => res.status(404).end());

@@ -15,4 +15,4 @@ db.didSync
   .then(seedGoals)
   .then(() => console.log('database seeded successfully'))
   .catch(error => console.error(error))
-  .finally(() => db.close);
+  .finally(() => db.close());

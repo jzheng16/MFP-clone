@@ -12,3 +12,6 @@ export const GET_GOAL = 'GET_GOAL';
 export const UPDATE_GOAL = 'UPDATE_GOAL';
 
 export const ADD_FOOD_TO_DIARY = 'ADD_FOOD_TO_DIARY';
+export const SELECT_MEAL_TYPE = 'SELECT_MEAL_TYPE';
+export const SELECT_DIARY_DATE = 'SELECT_DIARY_DATE';
+

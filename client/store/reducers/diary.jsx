@@ -1,14 +1,22 @@
-import { ADD_FOOD_TO_DIARY } from '../actions';
+import { ADD_FOOD_TO_DIARY, SELECT_MEAL_TYPE, SELECT_DIARY_DATE } from '../actions';
 
 const initialState = {
-  diary: []
+  entries: [],
+  currentMealTypeId: 0,
+  currentDiaryDate: {}
 };
 
 export default (state = initialState, action) => {
   const newState = Object.assign({}, state);
   switch (action.type) {
     case ADD_FOOD_TO_DIARY:
-      newState.diary = newState.diary.concat(action.payload);
+      newState.entries = newState.entries.concat(action.payload);
+      break;
+    case SELECT_MEAL_TYPE:
+      newState.currentMealTypeId = action.payload;
+      break;
+    case SELECT_DIARY_DATE:
+      newState.currentDiaryDate = action.payload;
       break;
     default:
       return state;
