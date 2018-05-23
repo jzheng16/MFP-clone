@@ -80,10 +80,10 @@ a {
   column-count: 2;
   column-width: auto;
 } */
-.displayFoods {
+/* .displayFoods {
   column-count: 1;
   column-width: auto;
-}
+} */
 
 .displayStats {
   column-count: 4;

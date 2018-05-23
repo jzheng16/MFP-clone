@@ -2,11 +2,17 @@ const router = require('express').Router();
 const db = require('../../db');
 
 const Diary = db.model('diary');
-const Date = db.model('date');
+// const Date = db.model('date');
 
 
-router.get('/', (req, res) => {
-  Diary.findAll()
+router.get('/:date_id', (req, res) => {
+  console.log('what is req.body?', req.body);
+  Diary.findOne({
+    where: {
+      user_id: req.user.dataValues.id,
+      date_id: req.params.date_id
+    }
+  })
     .then(entry => {
       console.log('entry', entry);
       res.json(entry);
@@ -39,5 +45,13 @@ router.post('/', (req, res) => {
     })
     .catch(error => console.error('err', error));
 });
+
+// TODO: try this
+/*
+Room.update(
+  { 'job_ids': db.fn('array_append', sequelize.col('user_food_entry'), req.body.user_food_entry) },
+  { 'where': { 'id': roomId } }
+);
+*/
 
 module.exports = router;
