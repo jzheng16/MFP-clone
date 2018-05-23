@@ -8,7 +8,7 @@ import reducer from './reducers';
 
 const store = createStore(
   reducer,
-  composeWithDevTools(applyMiddleware(createLogger({ collapsed: true }), thunkMiddleware)),
+  composeWithDevTools(applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))),
 );
 
 export default store;
