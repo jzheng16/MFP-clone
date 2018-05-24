@@ -1,4 +1,8 @@
-import { ADD_FOOD_TO_DIARY, SELECT_MEAL_TYPE, SELECT_DIARY_DATE, REVISED_ADD_FOOD_TO_DIARY, ADD_TO_BREAKFAST, ADD_TO_LUNCH, ADD_TO_DINNER, ADD_TO_SNACK } from '../actions';
+import {
+  ADD_FOOD_TO_DIARY, SELECT_MEAL_TYPE, SELECT_DIARY_DATE,
+  REVISED_ADD_FOOD_TO_DIARY, ADD_TO_BREAKFAST, ADD_TO_LUNCH, ADD_TO_DINNER, ADD_TO_SNACK,
+  RECEIVE_DATABASE_QUERY, RETRIEVING_FOOD_FROM_DATABASE
+} from '../actions';
 
 const initialState = {
   entries: [],
@@ -8,7 +12,8 @@ const initialState = {
   breakfast: [],
   lunch: [],
   dinner: [],
-  snack: []
+  snack: [],
+  databaseQuery: {}
 };
 
 export default (state = initialState, action) => {
@@ -37,6 +42,9 @@ export default (state = initialState, action) => {
       break;
     case ADD_TO_SNACK:
       newState.snack = newState.snack.concat(action.payload);
+      break;
+    case RECEIVE_DATABASE_QUERY:
+      newState.databaseQuery = action.payload;
       break;
 
     default:

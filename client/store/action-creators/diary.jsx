@@ -1,5 +1,10 @@
 import axios from 'axios';
-import { ADD_FOOD_TO_DIARY, SELECT_MEAL_TYPE, SELECT_DIARY_DATE, REVISED_ADD_FOOD_TO_DIARY, ADD_TO_BREAKFAST, ADD_TO_LUNCH, ADD_TO_DINNER, ADD_TO_SNACK } from '../actions';
+import {
+  ADD_FOOD_TO_DIARY, SELECT_MEAL_TYPE, SELECT_DIARY_DATE, REVISED_ADD_FOOD_TO_DIARY,
+  ADD_TO_BREAKFAST, ADD_TO_LUNCH, ADD_TO_DINNER, ADD_TO_SNACK, RECEIVE_DATABASE_QUERY,
+  RETRIEVING_FOOD_FROM_DATABASE
+} from '../actions';
+import API_KEY from '../../../config';
 
 export const addFoodToDiary = food => ({
   type: ADD_FOOD_TO_DIARY,
@@ -111,4 +116,18 @@ export const gettingDiaryId = date => dispatch => {
     .then(dateInfo => dispatch(selectedDiaryDate(dateInfo.data)))
     .catch(err => console.error('err retrieving date ', err));
 };
+
+export const receiveDatabaseQuery = data => ({
+  type: RECEIVE_DATABASE_QUERY,
+  payload: data
+});
+export const searchingDatabase = query => dispatch => {
+  axios.get(`https://api.nal.usda.gov/ndb/search/?format=json&q=${query}&sort=n&max=25&offset=0&api_key=${API_KEY}`)
+    .then(results => {
+      console.log('results from query', results.data);
+      dispatch(receiveDatabaseQuery(results.data));
+    })
+    .catch(err => console.error('Could not search database', err));
+};
+// API ACTIONS
 

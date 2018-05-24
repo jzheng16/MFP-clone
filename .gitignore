@@ -39,3 +39,6 @@ ehthumbs.db
 public/bundle.js
 public/bundle.js.map
 node_modules
+
+# API File #
+config.js
