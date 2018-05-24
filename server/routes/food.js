@@ -23,7 +23,8 @@ router.post('/addfood', (req, res) => {
 router.get('/getfood/:foodId', (req, res) => {
   Food.findOne({
     where: {
-      id: req.params.foodId
+      id: req.params.foodId,
+      user_id: req.user.dataValues.id
     }
   })
     .then(food => res.json(food))

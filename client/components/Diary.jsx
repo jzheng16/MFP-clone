@@ -5,80 +5,164 @@ import shortid from 'shortid';
 // TODO: Fetch diary and display its shit on here
 
 export default props => {
-  console.log('diary props?', props);
-  const { revisedEntries } = props.diary;
-  console.log('entries', revisedEntries);
-
+  const { breakfast, lunch, dinner } = props.diary;
+  const total = [...breakfast, ...lunch, ...dinner];
+  const totalCalories = total.reduce((accum, entry) => accum + entry.calories, 0);
+  const totalCarbs = total.reduce((accum, entry) => accum + entry.carbs, 0);
+  const totalProtein = total.reduce((accum, entry) => accum + entry.protein, 0);
+  const totalFat = total.reduce((accum, entry) => accum + entry.fat, 0);
 
   return (
     <div>
       <h1> Your Food Diary for {props.diary.currentDiaryDate.day} </h1> <hr />
       <div className="diary">
         <div className="displayFoods">
+          <h1> Breakfast </h1>
+          <table className="listBreakfast">
+            <thead>
+              <tr>
+                <th> Name </th>
+                <th> Calories </th>
+                <th> Carbs </th>
+                <th> Protein </th>
+                <th> Fat </th>
+              </tr>
+            </thead>
+            <tbody>
+              {props.diary && props.diary.breakfast ?
+                props.diary.breakfast
+                  .map(entry => (
+                    <tr key={shortid.generate()}>
+                      <td> {entry.name} </td>
+                      <td> {entry.calories} </td>
+                      <td> {entry.carbs} </td>
+                      <td> {entry.protein} </td>
+                      <td> {entry.fat} </td>
+                    </tr>
 
-          <div className="listBreakfast"> <h1> Breakfast </h1>
-            {props.diary && props.diary.breakfast ?
-              props.diary.breakfast
-                .map(entry => (
-                  <li key={shortid.generate()}>
-                    {entry.name}
-                  </li>
-                ))
-              :
-              null
-            }
-            <button onClick={() => props.selectedMealType(1)}> Add Food </button>
-          </div>
+                  ))
+                :
+                null
+              }
+            </tbody>
+          </table>
+          <button onClick={() => props.selectedMealType(1)}> Add Food </button>
+          <h1> Lunch </h1>
+          <table className="listLunch">
+            <thead>
+              <tr>
+                <th> Name </th>
+                <th> Calories </th>
+                <th> Carbs </th>
+                <th> Protein </th>
+                <th> Fat </th>
+              </tr>
+            </thead>
+            <tbody>
+              {props.diary && props.diary.lunch ?
+                props.diary.lunch
+                  .map(entry => (
+                    <tr key={shortid.generate()}>
+                      <td> {entry.name} </td>
+                      <td> {entry.calories} </td>
+                      <td> {entry.carbs} </td>
+                      <td> {entry.protein} </td>
+                      <td> {entry.fat} </td>
+                    </tr>
 
-          <div className="listLunch"> <h1> Lunch </h1>
-            {props.diary && props.diary.lunch ?
-              props.diary.lunch
-                .map(entry => (
-                  <li key={shortid.generate()}>
-                    {entry.name}
-                  </li>
-                ))
-              :
-              null
-            }
-            <button onClick={() => props.selectedMealType(2)}> Add Food </button>
-          </div>
+                  ))
+                :
+                null
+              }
+            </tbody>
 
-          <div className="listDinner"> <h1> Dinner </h1>
-            {props.diary && props.diary.dinner ?
-              props.diary.dinner
-                .map(entry => (
-                  <li key={shortid.generate()}>
-                    {entry.name}
-                  </li>
-                ))
-              :
-              null
-            }
-            <button onClick={() => props.selectedMealType(3)}> Add Food </button>
-          </div>
+          </table>
+          <button onClick={() => props.selectedMealType(2)}> Add Food </button>
+          <h1> Dinner </h1>
+          <table className="listDinner">
+            <thead>
+              <tr>
+                <th> Name </th>
+                <th> Calories </th>
+                <th> Carbs </th>
+                <th> Protein </th>
+                <th> Fat </th>
+              </tr>
+            </thead>
+            <tbody>
+              {props.diary && props.diary.dinner ?
+                props.diary.dinner
+                  .map(entry => (
+                    <tr key={shortid.generate()}>
+                      <td> {entry.name} </td>
+                      <td> {entry.calories} </td>
+                      <td> {entry.carbs} </td>
+                      <td> {entry.protein} </td>
+                      <td> {entry.fat} </td>
+                    </tr>
 
-          <div className="listSnacks"> <h1> Snacks </h1>
-            {props.diary && props.diary.snack ?
-              props.diary.snack
-                .map(entry => (
-                  <li key={shortid.generate()}>
-                    {entry.name}
-                  </li>
-                ))
-              :
-              null
-            }
-            <button onClick={() => props.selectedMealType(4)}> Add Food </button>
-          </div>
+                  ))
+                :
+                null
+              }
+            </tbody>
 
-          <div className="displayStats">
-            <h1> Calories </h1>
-            <h1> Carbs </h1>
-            <h1> Fats </h1>
-            <h1> Protein </h1>
-          </div>
+          </table>
+          <button onClick={() => props.selectedMealType(3)}> Add Food </button>
+          <h1> Snacks </h1>
+          <table className="listBreakfast">
+            <thead>
+              <tr>
+                <th> Name </th>
+                <th> Calories </th>
+                <th> Carbs </th>
+                <th> Protein </th>
+                <th> Fat </th>
+              </tr>
+            </thead>
+            <tbody>
+              {props.diary && props.diary.snack ?
+                props.diary.snack
+                  .map(entry => (
+                    <tr key={shortid.generate()}>
+                      <td> {entry.name} </td>
+                      <td> {entry.calories} </td>
+                      <td> {entry.carbs} </td>
+                      <td> {entry.protein} </td>
+                      <td> {entry.fat} </td>
+                    </tr>
+
+                  ))
+                :
+                null
+              }
+            </tbody>
+
+          </table>
+          <button onClick={() => props.selectedMealType(4)}> Add Food </button>
         </div>
+        {total ?
+          <table className="totalCalculations">
+            <thead>
+              <tr>
+                <th> Calories </th>
+                <th> Carbs </th>
+                <th> Protein </th>
+                <th> Fat </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td> {totalCalories} </td>
+                <td> {totalCarbs} </td>
+                <td> {totalProtein} </td>
+                <td> {totalFat} </td>
+              </tr>
+            </tbody>
+          </table>
+          :
+          null
+        }
       </div>
     </div>
 

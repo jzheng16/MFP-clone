@@ -11,3 +11,5 @@ export { default as SignUpForm } from './SignUpForm';
 export { default as NavBar } from './NavBar';
 export { default as Goal } from './Goal';
 export { default as Diary } from './Diary';
+export { default as SearchFood } from './SearchFood';
+export { default as ListSearchResult } from './ListSearchResult';

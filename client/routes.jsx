@@ -8,6 +8,7 @@ import HomeContainer from './containers/HomeContainer';
 import GoalContainer from './containers/GoalContainer';
 import DiaryContainer from './containers/DiaryContainer';
 import { fetchingUser } from './store/action-creators/auth';
+import ListSearchResultContainer from './containers/ListSearchResultContainer';
 
 // TODO: Map me function and put it inside the component did mount to validate user
 const mapDispatchToProps = dispatch => ({
@@ -35,6 +36,7 @@ class Routes extends Component {
             <Route exact path="/diary" component={DiaryContainer} />
             <Route exact path="/home" component={HomeContainer} />
             <Route exact path="/goal" component={GoalContainer} />
+            <Route exact path="/food/search" component={ListSearchResultContainer} />
           </Switch>
           :
           <Switch>

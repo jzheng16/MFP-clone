@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { createFood, fetchFood } from '../store/action-creators/foodAction';
-import { addingUserFoodToDiary } from '../store/action-creators/diary';
-import { ListFoods, AddFood } from '../components';
-
+import { addingUserFoodToDiary, searchingDatabase } from '../store/action-creators/diary';
+import { ListFoods, AddFood, SearchFood } from '../components';
+import history from '../history';
 
 const mapStateToProps = state => ({
   foods: state.foods,
@@ -20,6 +20,9 @@ const mapDispatchToProps = dispatch => ({
   },
   addingUserFoodToDiary(foodId) {
     return dispatch(addingUserFoodToDiary(foodId));
+  },
+  searchingDatabase(query) {
+    return dispatch(searchingDatabase(query));
   }
 
 });
@@ -29,6 +32,7 @@ class FoodContainer extends Component {
     super(props);
     this.addFood = this.addFood.bind(this);
     this.addingUserFoodToDiary = this.addingUserFoodToDiary.bind(this);
+    this.searchingDatabase = this.searchingDatabase.bind(this);
   }
 
   componentWillMount() {
@@ -57,11 +61,18 @@ class FoodContainer extends Component {
     this.props.addingUserFoodToDiary(entry);
   }
 
+  searchingDatabase(e) {
+    e.preventDefault();
+    this.props.searchingDatabase(e.target.q.value);
+    history.push('/food/search');
+  }
+
 
   render() {
     return (
       <div>
         <div className="addFood">
+          <SearchFood {...this.props} searchingDatabase={this.searchingDatabase} />
           <AddFood addFood={this.addFood} />
           <ListFoods {...this.props} {...this.state} addingUserFoodToDiary={this.addingUserFoodToDiary} />
         </div>
