@@ -7,7 +7,7 @@ export default props => (
         <li key={item.ndbno}> {item.name} </li>
         {/* <li> {item.group} </li> */}
 
-        <button onClick={() => console.log(item.ndbno)}> Add Foood </button>
+        <button onClick={() => props.addingFoodToDiary(item.ndbno)}> Add Foood </button>
       </ul>
 
     ))

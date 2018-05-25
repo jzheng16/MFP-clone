@@ -33,9 +33,9 @@ class DiaryContainer extends Component {
 
   componentDidMount() {
     this.props.gettingDiaryId(moment().format('YYYY-MM-DD'));
-    if (this.props.diary.currentDiaryDate.id) {
-      this.props.fetchingDiary(this.props.user.id, this.props.diary.currentDiaryDate.id);
-    }
+    // if (this.props.diary.currentDiaryDate.id) {
+    //   this.props.fetchingDiary(this.props.user.id, this.props.diary.currentDiaryDate.id);
+    // }
   }
 
   componentDidUpdate(prevProps) {
