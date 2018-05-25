@@ -21,7 +21,6 @@ router.get('/:date_id', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  console.log('what is req.body?', req.body);
   Diary.findOrCreate({
     where: {
       user_id: req.body.user_id,
@@ -29,29 +28,46 @@ router.post('/', (req, res) => {
     }
   })
     .spread((entry, created) => {
-      entry.user_food_entry.push(req.body.user_food_entry);
-      entry.update({
-        user_food_entry: entry.user_food_entry
-      }, {
-        where: {
-          user_id: req.body.user_id,
-          date_id: req.body.date_id
-        }
-      })
-        .then(finalEntry => {
-          console.log('FINAL ENTRY?', finalEntry.dataValues);
-          res.json(finalEntry);
-        });
-    })
-    .catch(error => console.error('err', error));
+      if (req.body.user_food_entry) {
+        entry.user_food_entry.push(req.body.user_food_entry);
+        entry.update({
+          user_food_entry: entry.user_food_entry
+        }, {
+          where: {
+            user_id: req.body.user_id,
+            date_id: req.body.date_id
+          }
+        })
+          .then(finalEntry => res.json(finalEntry));
+      } else if (req.body.db_food_entry) {
+        entry.db_food_entry.push(req.body.db_food_entry);
+        entry.update({
+          db_food_entry: entry.db_food_entry
+        }, {
+          where: {
+            user_id: req.body.user_id,
+            date_id: req.body.date_id
+          }
+        })
+          .then(finalEntry => res.json(finalEntry))
+          .catch(error => console.error('err', error));
+      }
+    });
 });
 
-// TODO: try this
+// Works but when a new entry is initialized, it isn't an array of arrays..
 /*
-Room.update(
-  { 'job_ids': db.fn('array_append', sequelize.col('user_food_entry'), req.body.user_food_entry) },
-  { 'where': { 'id': roomId } }
-);
+ Diary.update(
+          {
+            db_food_entry: db.fn('||', req.body.db_food_entry, db.col('db_food_entry'))
+          },
+          {
+            where: {
+              user_id: req.body.user_id,
+              date_id: req.body.date_id
+            }
+          }
+        );
+      }
 */
-
 module.exports = router;

@@ -1,14 +1,13 @@
 import {
   ADD_FOOD_TO_DIARY, SELECT_MEAL_TYPE, SELECT_DIARY_DATE,
-  REVISED_ADD_FOOD_TO_DIARY, ADD_TO_BREAKFAST, ADD_TO_LUNCH, ADD_TO_DINNER, ADD_TO_SNACK,
-  RECEIVE_DATABASE_QUERY, RETRIEVING_FOOD_FROM_DATABASE
+  ADD_TO_BREAKFAST, ADD_TO_LUNCH, ADD_TO_DINNER, ADD_TO_SNACK,
+  RECEIVE_DATABASE_QUERY,
 } from '../actions';
 
 const initialState = {
   entries: [],
   currentMealTypeId: 0,
   currentDiaryDate: {},
-  revisedEntries: [],
   breakfast: [],
   lunch: [],
   dinner: [],
@@ -27,9 +26,6 @@ export default (state = initialState, action) => {
       break;
     case SELECT_DIARY_DATE:
       newState.currentDiaryDate = action.payload;
-      break;
-    case REVISED_ADD_FOOD_TO_DIARY:
-      newState.revisedEntries = action.payload;
       break;
     case ADD_TO_BREAKFAST:
       newState.breakfast = newState.breakfast.concat(action.payload);

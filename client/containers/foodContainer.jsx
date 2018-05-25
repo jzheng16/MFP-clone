@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { createFood, fetchFood } from '../store/action-creators/foodAction';
-import { addingUserFoodToDiary, searchingDatabase } from '../store/action-creators/diary';
+import { addingFoodToDiary, searchingDatabase } from '../store/action-creators/diary';
 import { ListFoods, AddFood, SearchFood } from '../components';
 import history from '../history';
 
@@ -18,8 +18,8 @@ const mapDispatchToProps = dispatch => ({
   fetchFood() {
     return dispatch(fetchFood());
   },
-  addingUserFoodToDiary(foodId) {
-    return dispatch(addingUserFoodToDiary(foodId));
+  addingFoodToDiary(foodId) {
+    return dispatch(addingFoodToDiary(foodId));
   },
   searchingDatabase(query) {
     return dispatch(searchingDatabase(query));
@@ -31,7 +31,7 @@ class FoodContainer extends Component {
   constructor(props) {
     super(props);
     this.addFood = this.addFood.bind(this);
-    this.addingUserFoodToDiary = this.addingUserFoodToDiary.bind(this);
+    this.addingFoodToDiary = this.addingFoodToDiary.bind(this);
     this.searchingDatabase = this.searchingDatabase.bind(this);
   }
 
@@ -52,13 +52,13 @@ class FoodContainer extends Component {
     this.props.createFood(newFood);
   }
 
-  addingUserFoodToDiary(foodId) {
+  addingFoodToDiary(foodId) {
     const entry = {
       user_id: this.props.user.id,
       date_id: this.props.diary.currentDiaryDate.id,
       user_food_entry: [foodId, this.props.diary.currentMealTypeId]
     };
-    this.props.addingUserFoodToDiary(entry);
+    this.props.addingFoodToDiary(entry);
   }
 
   searchingDatabase(e) {
@@ -74,7 +74,7 @@ class FoodContainer extends Component {
         <div className="addFood">
           <SearchFood {...this.props} searchingDatabase={this.searchingDatabase} />
           <AddFood addFood={this.addFood} />
-          <ListFoods {...this.props} {...this.state} addingUserFoodToDiary={this.addingUserFoodToDiary} />
+          <ListFoods {...this.props} {...this.state} addingFoodToDiary={this.addingFoodToDiary} />
         </div>
       </div>
     );

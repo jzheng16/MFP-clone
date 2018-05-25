@@ -1,19 +1,15 @@
 import axios from 'axios';
 import {
-  ADD_FOOD_TO_DIARY, SELECT_MEAL_TYPE, SELECT_DIARY_DATE, REVISED_ADD_FOOD_TO_DIARY,
+  ADD_FOOD_TO_DIARY, SELECT_MEAL_TYPE, SELECT_DIARY_DATE,
   ADD_TO_BREAKFAST, ADD_TO_LUNCH, ADD_TO_DINNER, ADD_TO_SNACK, RECEIVE_DATABASE_QUERY,
   RETRIEVING_FOOD_FROM_DATABASE
 } from '../actions';
 import API_KEY from '../../../config';
+import { addFood } from './foodAction';
 
 export const addFoodToDiary = food => ({
   type: ADD_FOOD_TO_DIARY,
   payload: food
-});
-
-export const revisedAddFoodToDiary = diary => ({
-  type: REVISED_ADD_FOOD_TO_DIARY,
-  payload: diary
 });
 
 export const addToBreakfast = food => ({
@@ -33,31 +29,43 @@ export const addToSnack = food => ({
   payload: food
 });
 
-export const mappingDiaryDataToFoodData = (foodId, mealTypeId) => dispatch => {
-  switch (mealTypeId) {
-    case 1:
-      axios.get(`/api/food/getfood/${foodId}`)
-        .then(food => dispatch(addToBreakfast(food.data)))
-        .catch(err => console.error('trouble with mapping diary to food ', err));
-      break;
-    case 2:
-      axios.get(`/api/food/getfood/${foodId}`)
-        .then(food => dispatch(addToLunch(food.data)))
-        .catch(err => console.error('trouble with mapping diary to food ', err));
-      break;
-    case 3:
-      axios.get(`/api/food/getfood/${foodId}`)
-        .then(food => dispatch(addToDinner(food.data)))
-        .catch(err => console.error('trouble with mapping diary to food ', err));
-      break;
-    case 4:
-      axios.get(`/api/food/getfood/${foodId}`)
-        .then(food => dispatch(addToSnack(food.data)))
-        .catch(err => console.error('trouble with mapping diary to food ', err));
-      break;
-    default:
-      break;
-  }
+export const mappingUserDiaryDataToFoodData = (foodId, mealTypeId) => dispatch => {
+  axios.get(`/api/food/getfood/${foodId}`)
+    .then(food => {
+      if (mealTypeId === 1) {
+        dispatch(addToBreakfast(food.data));
+      } else if (mealTypeId === 2) {
+        dispatch(addToLunch(food.data));
+      } else if (mealTypeId === 3) {
+        dispatch(addToDinner(food.data));
+      } else {
+        dispatch(addToSnack(food.data));
+      }
+    })
+    .catch(err => console.error('trouble with mapping diary to food ', err));
+};
+
+export const mappingDbDiaryDataToFoodData = (foodId, mealTypeId) => dispatch => {
+  axios.get(`https://api.nal.usda.gov/ndb/nutrients/?format=json&api_key=${API_KEY}&nutrients=208&nutrients=205&nutrients=203&nutrients=204&ndbno=${foodId}`)
+    .then(report => {
+      const foodInfo = {
+        name: report.data.report.foods[0].name,
+        calories: report.data.report.foods[0].nutrients[0].gm,
+        carbs: report.data.report.foods[0].nutrients[1].gm,
+        protein: report.data.report.foods[0].nutrients[2].gm,
+        fat: report.data.report.foods[0].nutrients[3].gm
+      };
+      if (mealTypeId === 1) {
+        dispatch(addToBreakfast(foodInfo));
+      } else if (mealTypeId === 2) {
+        dispatch(addToLunch(foodInfo));
+      } else if (mealTypeId === 3) {
+        dispatch(addToDinner(foodInfo));
+      } else {
+        dispatch(addToSnack(foodInfo));
+      }
+    })
+    .catch(err => console.error('trouble with mapping diary to food ', err));
 };
 
 // Fetch diary and turn the arrays into a list of foods
@@ -67,35 +75,38 @@ export const fetchingDiary = (user_id, date_id) => dispatch => {
     .then(diary => {
       if (diary.data.user_food_entry) {
         diary.data.user_food_entry.forEach(entry => {
-          dispatch(mappingDiaryDataToFoodData(entry[0], entry[1]));
+          dispatch(mappingUserDiaryDataToFoodData(entry[0], entry[1]));
         });
-        // ESLINT ERROR
-        // for (entry of revisedEntries.data.user_food_entry) {
-        //   dispatch(mappingDiaryDataToFoodData(entry[0], entry[1]));
-        // }
       }
-      dispatch(revisedAddFoodToDiary(diary.data))
-        .catch(err => console.error('trouble fetching diary', err));
-    });
+      if (diary.data.db_food_entry) {
+        diary.data.db_food_entry.forEach(entry => {
+          dispatch(mappingDbDiaryDataToFoodData(entry[0], entry[1]));
+        });
+      }
+      dispatch(addFoodToDiary(diary.data));
+    })
+    .catch(err => console.error('trouble fetching diary', err));
 };
 
 
 export const updatingDiary = entry => dispatch => {
   axios.post('/api/diary', entry)
     .then(newEntry => {
-      console.log('what is entry in action reducer?', newEntry.data);
-      dispatch(revisedAddFoodToDiary(newEntry.data));
+      dispatch(addFoodToDiary(newEntry.data));
     })
     .catch(err => console.error('error updating diary db', err));
 };
 
 // Have to also dispatch an action to post to insert into diary database with food id, serving size, and type
-export const addingUserFoodToDiary = entry => dispatch => {
-  axios.get(`/api/food/getfood/${entry.user_food_entry[0]}`)
-    .then(food => dispatch(addFoodToDiary(food.data)))
-    // is this possible?
-    .then(dispatch(updatingDiary(entry)))
-    .catch(err => console.error('error dispatching userfood to diary', err));
+export const addingFoodToDiary = entry => dispatch => {
+  // Update database
+  dispatch(updatingDiary(entry));
+  // Add food to list of foods in diary
+  if (entry.user_food_entry) {
+    dispatch(mappingUserDiaryDataToFoodData(entry.user_food_entry[0], entry.user_food_entry[1]));
+  } else if (entry.db_food_entry) {
+    dispatch(mappingDbDiaryDataToFoodData(entry.db_food_entry[0], entry.db_food_entry[1]));
+  }
 };
 
 
