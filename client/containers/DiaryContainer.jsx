@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import moment from 'moment';
 import { connect } from 'react-redux';
 import { Diary } from '../components';
-import { selectedMealType, selectedDiaryDate, gettingDiaryId, fetchingDiary } from '../store/action-creators/diary';
+import { selectedMealType, selectedDiaryDate, gettingDiaryId, fetchingDiary, removingFoodFromDiary } from '../store/action-creators/diary';
 import history from '../history';
 
 const mapState = state => ({
@@ -22,6 +22,9 @@ const mapDispatch = dispatch => ({
   },
   fetchingDiary(user_id, date_id) {
     dispatch(fetchingDiary(user_id, date_id));
+  },
+  removingFoodFromDiary(entry) {
+    dispatch(removingFoodFromDiary(entry));
   }
 });
 
@@ -29,6 +32,7 @@ class DiaryContainer extends Component {
   constructor(props) {
     super(props);
     this.selectedMealType = this.selectedMealType.bind(this);
+    this.removeFood = this.removeFood.bind(this);
   }
 
   componentDidMount() {
@@ -54,9 +58,18 @@ class DiaryContainer extends Component {
     this.props.selectedMealType(typeId);
   }
 
+  removeFood(foodId, typeId) {
+    const entry = {
+      id: foodId,
+      typeId,
+      date_id: this.props.diary.currentDiaryDate.id
+    };
+    this.props.removingFoodFromDiary(entry);
+  }
+
   render() {
     return (
-      <Diary {...this.props} selectedMealType={this.selectedMealType} />
+      <Diary {...this.props} selectedMealType={this.selectedMealType} removeFood={this.removeFood} />
     );
   }
 }

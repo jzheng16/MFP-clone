@@ -1,11 +1,10 @@
 import axios from 'axios';
 import {
   ADD_FOOD_TO_DIARY, SELECT_MEAL_TYPE, SELECT_DIARY_DATE,
-  ADD_TO_BREAKFAST, ADD_TO_LUNCH, ADD_TO_DINNER, ADD_TO_SNACK, RECEIVE_DATABASE_QUERY,
-  RETRIEVING_FOOD_FROM_DATABASE
+  ADD_TO_BREAKFAST, ADD_TO_LUNCH, ADD_TO_DINNER, ADD_TO_SNACK, RECEIVE_DATABASE_QUERY, REMOVE_USER_FOOD_FROM_DIARY,
+  REMOVE_DB_FOOD_FROM_DIARY, REMOVE_FROM_BREAKFAST, REMOVE_FROM_LUNCH, REMOVE_FROM_DINNER, REMOVE_FROM_SNACK
 } from '../actions';
 import API_KEY from '../../../config';
-import { addFood } from './foodAction';
 
 export const addFoodToDiary = food => ({
   type: ADD_FOOD_TO_DIARY,
@@ -49,6 +48,7 @@ export const mappingDbDiaryDataToFoodData = (foodId, mealTypeId) => dispatch => 
   axios.get(`https://api.nal.usda.gov/ndb/nutrients/?format=json&api_key=${API_KEY}&nutrients=208&nutrients=205&nutrients=203&nutrients=204&ndbno=${foodId}`)
     .then(report => {
       const foodInfo = {
+        id: report.data.report.foods[0].ndbno,
         name: report.data.report.foods[0].name,
         calories: report.data.report.foods[0].nutrients[0].gm,
         carbs: report.data.report.foods[0].nutrients[1].gm,
@@ -140,5 +140,53 @@ export const searchingDatabase = query => dispatch => {
     })
     .catch(err => console.error('Could not search database', err));
 };
+
+export const removeUserFoodFromDiary = entryArr => ({
+  type: REMOVE_USER_FOOD_FROM_DIARY,
+  payload: entryArr
+});
+export const removeDbFoodFromDiary = entryArr => ({
+  type: REMOVE_DB_FOOD_FROM_DIARY,
+  payload: entryArr
+});
+
+export const removeFoodFromMeal = (foodId, typeId) => {
+  if (typeId === 1) {
+    return {
+      type: REMOVE_FROM_BREAKFAST,
+      payload: foodId
+    };
+  } else if (typeId === 2) {
+    return {
+      type: REMOVE_FROM_LUNCH,
+      payload: foodId
+    };
+  } else if (typeId === 3) {
+    return {
+      type: REMOVE_FROM_DINNER,
+      payload: foodId
+    };
+  }
+
+  return {
+    type: REMOVE_FROM_SNACK,
+    payload: foodId
+  };
+};
+
+export const removingFoodFromDiary = entry => (dispatch, getState) => {
+  if (typeof entry.id === 'string') {
+    const obj = { db_food_entry: [entry.id, entry.typeId], date_id: entry.date_id };
+    axios.post('/api/diary/diaryentry', obj)
+      .then(updatedEntry => dispatch(updatingDiary(updatedEntry.data)));
+  } else {
+    const obj = { user_food_entry: [entry.id, entry.typeId], date_id: entry.date_id };
+    axios.post('/api/diary/diaryentry', obj)
+      .then(updatedEntry => dispatch(updatingDiary(updatedEntry.data)));
+  }
+  dispatch(removeFoodFromMeal(entry.id, entry.typeId));
+};
+
+
 // API ACTIONS
 
