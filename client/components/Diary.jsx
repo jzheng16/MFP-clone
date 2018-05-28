@@ -38,9 +38,11 @@ export default props => {
                       <td> {entry.carbs} </td>
                       <td> {entry.protein} </td>
                       <td> {entry.fat} </td>
+                      <td> <button onClick={(() => props.removeFood(entry.id, 1))}> Remove Food </button> </td>
                     </tr>
 
                   ))
+
                 :
                 null
               }
@@ -68,6 +70,7 @@ export default props => {
                       <td> {entry.carbs} </td>
                       <td> {entry.protein} </td>
                       <td> {entry.fat} </td>
+                      <td> <button onClick={(() => props.removeFood(entry.id, 2))}> Remove Food </button> </td>
                     </tr>
 
                   ))
@@ -99,6 +102,7 @@ export default props => {
                       <td> {entry.carbs} </td>
                       <td> {entry.protein} </td>
                       <td> {entry.fat} </td>
+                      <td> <button onClick={(() => props.removeFood(entry.id, 3))}> Remove Food </button> </td>
                     </tr>
 
                   ))
@@ -130,6 +134,7 @@ export default props => {
                       <td> {entry.carbs} </td>
                       <td> {entry.protein} </td>
                       <td> {entry.fat} </td>
+                      <td> <button onClick={(() => props.removeFood(entry.id, 4))}> Remove Food </button> </td>
                     </tr>
 
                   ))
