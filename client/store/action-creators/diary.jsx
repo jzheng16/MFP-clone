@@ -28,23 +28,23 @@ export const addToSnack = food => ({
   payload: food
 });
 
-export const mappingUserDiaryDataToFoodData = (foodId, mealTypeId) => dispatch => {
+export const mappingUserDiaryDataToFoodData = (foodId, mealTypeId, servingSize) => dispatch => {
   axios.get(`/api/food/getfood/${foodId}`)
     .then(food => {
       if (mealTypeId === 1) {
-        dispatch(addToBreakfast(food.data));
+        dispatch(addToBreakfast(Object.assign({}, food.data, { servingSize })));
       } else if (mealTypeId === 2) {
-        dispatch(addToLunch(food.data));
+        dispatch(addToLunch(Object.assign({}, food.data, { servingSize })));
       } else if (mealTypeId === 3) {
-        dispatch(addToDinner(food.data));
+        dispatch(addToDinner(Object.assign({}, food.data, { servingSize })));
       } else {
-        dispatch(addToSnack(food.data));
+        dispatch(addToSnack(Object.assign({}, food.data, { servingSize })));
       }
     })
     .catch(err => console.error('trouble with mapping diary to food ', err));
 };
 
-export const mappingDbDiaryDataToFoodData = (foodId, mealTypeId) => dispatch => {
+export const mappingDbDiaryDataToFoodData = (foodId, mealTypeId, servingSize) => dispatch => {
   axios.get(`https://api.nal.usda.gov/ndb/nutrients/?format=json&api_key=${API_KEY}&nutrients=208&nutrients=205&nutrients=203&nutrients=204&ndbno=${foodId}`)
     .then(report => {
       const foodInfo = {
@@ -53,7 +53,8 @@ export const mappingDbDiaryDataToFoodData = (foodId, mealTypeId) => dispatch => 
         calories: report.data.report.foods[0].nutrients[0].gm,
         carbs: report.data.report.foods[0].nutrients[1].gm,
         protein: report.data.report.foods[0].nutrients[2].gm,
-        fat: report.data.report.foods[0].nutrients[3].gm
+        fat: report.data.report.foods[0].nutrients[3].gm,
+        servingSize
       };
       if (mealTypeId === 1) {
         dispatch(addToBreakfast(foodInfo));
@@ -75,12 +76,12 @@ export const fetchingDiary = (user_id, date_id) => dispatch => {
     .then(diary => {
       if (diary.data.user_food_entry) {
         diary.data.user_food_entry.forEach(entry => {
-          dispatch(mappingUserDiaryDataToFoodData(entry[0], entry[1]));
+          dispatch(mappingUserDiaryDataToFoodData(entry[0], entry[1], entry[2]));
         });
       }
       if (diary.data.db_food_entry) {
         diary.data.db_food_entry.forEach(entry => {
-          dispatch(mappingDbDiaryDataToFoodData(entry[0], entry[1]));
+          dispatch(mappingDbDiaryDataToFoodData(entry[0], entry[1], entry[2]));
         });
       }
       dispatch(addFoodToDiary(diary.data));
@@ -103,9 +104,9 @@ export const addingFoodToDiary = entry => dispatch => {
   dispatch(updatingDiary(entry));
   // Add food to list of foods in diary
   if (entry.user_food_entry) {
-    dispatch(mappingUserDiaryDataToFoodData(entry.user_food_entry[0], entry.user_food_entry[1]));
+    dispatch(mappingUserDiaryDataToFoodData(entry.user_food_entry[0], entry.user_food_entry[1], entry.user_food_entry[2]));
   } else if (entry.db_food_entry) {
-    dispatch(mappingDbDiaryDataToFoodData(entry.db_food_entry[0], entry.db_food_entry[1]));
+    dispatch(mappingDbDiaryDataToFoodData(entry.db_food_entry[0], entry.db_food_entry[1], entry.db_food_entry[2]));
   }
 };
 

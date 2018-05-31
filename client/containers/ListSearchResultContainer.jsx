@@ -20,11 +20,12 @@ class ListSearchResultContainer extends Component {
     super(props);
     this.addingFoodToDiary = this.addingFoodToDiary.bind(this);
   }
-  addingFoodToDiary(ndbno) {
+  addingFoodToDiary(e, ndbno) {
+    e.preventDefault();
     const entry = {
       user_id: this.props.user.id,
       date_id: this.props.diary.currentDiaryDate.id,
-      db_food_entry: [ndbno, this.props.diary.currentMealTypeId]
+      db_food_entry: [ndbno, this.props.diary.currentMealTypeId, e.target.serving_size.value]
     };
     this.props.addingFoodToDiary(entry);
   }

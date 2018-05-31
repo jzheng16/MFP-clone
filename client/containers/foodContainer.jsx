@@ -52,11 +52,13 @@ class FoodContainer extends Component {
     this.props.createFood(newFood);
   }
 
-  addingFoodToDiary(foodId) {
+  addingFoodToDiary(e, foodId) {
+    e.preventDefault();
+    console.log('getting sent in properly?', e.target.serving_size.value);
     const entry = {
       user_id: this.props.user.id,
       date_id: this.props.diary.currentDiaryDate.id,
-      user_food_entry: [foodId, this.props.diary.currentMealTypeId]
+      user_food_entry: [foodId, this.props.diary.currentMealTypeId, e.target.serving_size.value]
     };
     this.props.addingFoodToDiary(entry);
   }
