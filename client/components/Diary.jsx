@@ -7,12 +7,14 @@ import shortid from 'shortid';
 export default props => {
   const { breakfast, lunch, dinner } = props.diary;
   const total = [...breakfast, ...lunch, ...dinner];
-  const totalCalories = total.reduce((accum, entry) => accum + entry.calories, 0);
-  const totalCarbs = total.reduce((accum, entry) => accum + entry.carbs, 0);
-  const totalProtein = total.reduce((accum, entry) => accum + entry.protein, 0);
-  const totalFat = total.reduce((accum, entry) => accum + entry.fat, 0);
+  const totalCalories = total.reduce((accum, entry) => accum + (entry.calories * entry.servingSize), 0);
+  const totalCarbs = total.reduce((accum, entry) => accum + (entry.carbs * entry.servingSize), 0);
+  const totalProtein = total.reduce((accum, entry) => accum + (entry.protein * entry.servingSize), 0);
+  const totalFat = total.reduce((accum, entry) => accum + (entry.fat * entry.servingSize), 0);
+
 
   return (
+
     <div>
       <h1> Your Food Diary for {props.diary.currentDiaryDate.day} </h1> <hr />
       <div className="diary">
@@ -22,6 +24,7 @@ export default props => {
             <thead>
               <tr>
                 <th> Name </th>
+                <th> Qty </th>
                 <th> Calories </th>
                 <th> Carbs </th>
                 <th> Protein </th>
@@ -31,13 +34,14 @@ export default props => {
             <tbody>
               {props.diary && props.diary.breakfast ?
                 props.diary.breakfast
-                  .map(entry => (
+                  .map((entry, index) => (
                     <tr key={shortid.generate()}>
                       <td> {entry.name} </td>
-                      <td> {entry.calories} </td>
-                      <td> {entry.carbs} </td>
-                      <td> {entry.protein} </td>
-                      <td> {entry.fat} </td>
+                      <td> {entry.servingSize} </td>
+                      <td> {entry.calories * entry.servingSize} </td>
+                      <td> {entry.carbs * entry.servingSize} </td>
+                      <td> {entry.protein * entry.servingSize} </td>
+                      <td> {entry.fat * entry.servingSize} </td>
                       <td> <button onClick={(() => props.removeFood(entry.id, 1))}> Remove Food </button> </td>
                     </tr>
 
@@ -54,6 +58,7 @@ export default props => {
             <thead>
               <tr>
                 <th> Name </th>
+                <th> Qty </th>
                 <th> Calories </th>
                 <th> Carbs </th>
                 <th> Protein </th>
@@ -63,13 +68,14 @@ export default props => {
             <tbody>
               {props.diary && props.diary.lunch ?
                 props.diary.lunch
-                  .map(entry => (
+                  .map((entry, index) => (
                     <tr key={shortid.generate()}>
                       <td> {entry.name} </td>
-                      <td> {entry.calories} </td>
-                      <td> {entry.carbs} </td>
-                      <td> {entry.protein} </td>
-                      <td> {entry.fat} </td>
+                      <td> {entry.servingSize} </td>
+                      <td> {entry.calories * entry.servingSize} </td>
+                      <td> {entry.carbs * entry.servingSize} </td>
+                      <td> {entry.protein * entry.servingSize} </td>
+                      <td> {entry.fat * entry.servingSize} </td>
                       <td> <button onClick={(() => props.removeFood(entry.id, 2))}> Remove Food </button> </td>
                     </tr>
 
@@ -86,6 +92,7 @@ export default props => {
             <thead>
               <tr>
                 <th> Name </th>
+                <th> Qty </th>
                 <th> Calories </th>
                 <th> Carbs </th>
                 <th> Protein </th>
@@ -95,13 +102,14 @@ export default props => {
             <tbody>
               {props.diary && props.diary.dinner ?
                 props.diary.dinner
-                  .map(entry => (
+                  .map((entry, index) => (
                     <tr key={shortid.generate()}>
                       <td> {entry.name} </td>
-                      <td> {entry.calories} </td>
-                      <td> {entry.carbs} </td>
-                      <td> {entry.protein} </td>
-                      <td> {entry.fat} </td>
+                      <td> {entry.servingSize} </td>
+                      <td> {entry.calories * entry.servingSize} </td>
+                      <td> {entry.carbs * entry.servingSize} </td>
+                      <td> {entry.protein * entry.servingSize} </td>
+                      <td> {entry.fat * entry.servingSize} </td>
                       <td> <button onClick={(() => props.removeFood(entry.id, 3))}> Remove Food </button> </td>
                     </tr>
 
@@ -118,6 +126,7 @@ export default props => {
             <thead>
               <tr>
                 <th> Name </th>
+                <th> Qty </th>
                 <th> Calories </th>
                 <th> Carbs </th>
                 <th> Protein </th>
@@ -127,13 +136,14 @@ export default props => {
             <tbody>
               {props.diary && props.diary.snack ?
                 props.diary.snack
-                  .map(entry => (
+                  .map((entry, index) => (
                     <tr key={shortid.generate()}>
                       <td> {entry.name} </td>
-                      <td> {entry.calories} </td>
-                      <td> {entry.carbs} </td>
-                      <td> {entry.protein} </td>
-                      <td> {entry.fat} </td>
+                      <td> {entry.servingSize} </td>
+                      <td> {entry.calories * entry.servingSize} </td>
+                      <td> {entry.carbs * entry.servingSize} </td>
+                      <td> {entry.protein * entry.servingSize} </td>
+                      <td> {entry.fat * entry.servingSize} </td>
                       <td> <button onClick={(() => props.removeFood(entry.id, 4))}> Remove Food </button> </td>
                     </tr>
 

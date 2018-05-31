@@ -6,7 +6,12 @@ export default props => (
       {props.foods.allFoods && props.foods.allFoods.map(food => (
         <li key={food.id}>
           {food.name}   {food.calories}
-          <button onClick={() => props.addingFoodToDiary(food.id)}> Add Food to Diary </button>
+          <form onSubmit={e => props.addingFoodToDiary(e, food.id)}>
+            <label htmlFor="serving_size"> Select Serving Size
+              <input type="number" defaultValue="1" name="serving_size" />
+            </label>
+            <button type="submit"> Add Food to Diary </button>
+          </form>
         </li>
       ))
       }
