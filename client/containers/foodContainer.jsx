@@ -30,7 +30,7 @@ const mapDispatchToProps = dispatch => ({
 class FoodContainer extends Component {
   constructor(props) {
     super(props);
-    this.addFood = this.addFood.bind(this);
+    // this.addFood = this.addFood.bind(this);
     this.addingFoodToDiary = this.addingFoodToDiary.bind(this);
     this.searchingDatabase = this.searchingDatabase.bind(this);
   }
@@ -39,7 +39,7 @@ class FoodContainer extends Component {
     this.props.fetchFood();
   }
 
-  addFood(e) {
+  addFood = e => {
     e.preventDefault();
     const newFood = {
       name: e.target.name.value,
@@ -54,11 +54,11 @@ class FoodContainer extends Component {
 
   addingFoodToDiary(e, foodId) {
     e.preventDefault();
-    console.log('getting sent in properly?', e.target.serving_size.value);
+    console.log('getting sent in properly?', parseInt(e.target.serving_size.value, 10));
     const entry = {
       user_id: this.props.user.id,
       date_id: this.props.diary.currentDiaryDate.id,
-      user_food_entry: [foodId, this.props.diary.currentMealTypeId, e.target.serving_size.value]
+      user_food_entry: [foodId, this.props.diary.currentMealTypeId, parseInt(e.target.serving_size.value, 10)]
     };
     this.props.addingFoodToDiary(entry);
   }
