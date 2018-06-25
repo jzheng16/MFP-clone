@@ -103,11 +103,11 @@ export const addingFoodToDiary = entry => dispatch => {
   // Update database
   dispatch(updatingDiary(entry));
   // Add food to list of foods in diary
-  if (entry.user_food_entry) {
-    dispatch(mappingUserDiaryDataToFoodData(entry.user_food_entry[0], entry.user_food_entry[1], entry.user_food_entry[2]));
-  } else if (entry.db_food_entry) {
-    dispatch(mappingDbDiaryDataToFoodData(entry.db_food_entry[0], entry.db_food_entry[1], entry.db_food_entry[2]));
-  }
+  // if (entry.user_food_entry) {
+  //   dispatch(mappingUserDiaryDataToFoodData(entry.user_food_entry[0], entry.user_food_entry[1], entry.user_food_entry[2]));
+  // } else if (entry.db_food_entry) {
+  //   dispatch(mappingDbDiaryDataToFoodData(entry.db_food_entry[0], entry.db_food_entry[1], entry.db_food_entry[2]));
+  // }
 };
 
 
