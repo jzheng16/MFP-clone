@@ -16,11 +16,7 @@ const mapDispatch = dispatch => ({
 
 
 class ListSearchResultContainer extends Component {
-  constructor(props) {
-    super(props);
-    this.addingFoodToDiary = this.addingFoodToDiary.bind(this);
-  }
-  addingFoodToDiary(e, ndbno) {
+  addingFoodToDiary = (e, ndbno) => {
     console.log('typeof ndbno?', typeof ndbno);
     e.preventDefault();
     const entry = {

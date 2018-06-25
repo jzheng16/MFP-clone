@@ -29,12 +29,6 @@ const mapDispatch = dispatch => ({
 });
 
 class DiaryContainer extends Component {
-  constructor(props) {
-    super(props);
-    this.selectedMealType = this.selectedMealType.bind(this);
-    this.removeFood = this.removeFood.bind(this);
-  }
-
   componentDidMount() {
     this.props.gettingDiaryId(moment().format('YYYY-MM-DD'));
     if (this.props.diary.currentDiaryDate.id) {
@@ -49,16 +43,16 @@ class DiaryContainer extends Component {
   }
 
   // TODO: Test to see if I need this? Can't I just pass down props and dispatch selectedMealType from store
-  selectedMealType(typeId) {
+  selectedMealType = typeId => {
     this.props.selectedMealType(typeId);
     history.push('/addFood');
   }
 
-  selectedDiaryDate(typeId) {
+  selectedDiaryDate = typeId => {
     this.props.selectedMealType(typeId);
   }
 
-  removeFood(foodId, typeId) {
+  removeFood = (foodId, typeId) => {
     const entry = {
       id: foodId,
       typeId,
