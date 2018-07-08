@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Diary } from '../components';
 import { selectedMealType, selectedDiaryDate, gettingDiaryId, fetchingDiary, removingFoodFromDiary } from '../store/action-creators/diary';
 import history from '../history';
+import _ from 'lodash/fp';
 
 const mapState = state => ({
   user: state.auth.user,
@@ -37,9 +38,9 @@ class DiaryContainer extends Component {
 
   componentDidMount() {
     this.props.gettingDiaryId(moment().format('YYYY-MM-DD'));
-    if (this.props.diary.currentDiaryDate.id) {
-      this.props.fetchingDiary(this.props.user.id, this.props.diary.currentDiaryDate.id);
-    }
+    // if (this.props.diary.currentDiaryDate.id) {
+    //   this.props.fetchingDiary(this.props.user.id, this.props.diary.currentDiaryDate.id);
+    // }
   }
 
   componentDidUpdate(prevProps) {
