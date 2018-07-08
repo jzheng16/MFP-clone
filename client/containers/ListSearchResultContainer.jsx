@@ -21,9 +21,6 @@ class ListSearchResultContainer extends Component {
     this.addingFoodToDiary = this.addingFoodToDiary.bind(this);
   }
   addingFoodToDiary(e, ndbno) {
-    console.log('typeof ndbno?', typeof ndbno);
-    console.log('ndbno', ndbno);
-
     e.preventDefault();
     const entry = {
       user_id: this.props.user.id,
