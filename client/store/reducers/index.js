@@ -11,4 +11,4 @@ const rootReducer = combineReducers({
   diary: diaryReducer
 });
 
-module.exports = rootReducer;
+export default rootReducer;

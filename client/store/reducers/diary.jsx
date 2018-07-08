@@ -28,7 +28,20 @@ export default (state = initialState, action) => {
       newState.currentDiaryDate = action.payload;
       break;
     case ADD_TO_BREAKFAST:
-      newState.breakfast = newState.breakfast.concat(action.payload);
+      let existingBreakfastIndex = -1;
+      newState.breakfast.forEach((breakfast, index) => {
+        if (breakfast.id === action.id) {
+          console.log('hello');
+
+          return index;
+        }
+      });
+      if (existingBreakfastIndex > -1) {
+        newState.breakfast[existingBreakfastIndex].servingSize += action.servingSize;
+      }
+      else {
+        newState.breakfast = newState.breakfast.concat(action.payload);
+      }
       break;
     case ADD_TO_LUNCH:
       newState.lunch = newState.lunch.concat(action.payload);
