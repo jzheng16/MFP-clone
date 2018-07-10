@@ -1,8 +1,8 @@
 import React from 'react';
 import Routes from './routes';
 import NavBarContainer from './containers/NavBarContainer';
-// TODO:
-// import Navbar from './components/navbar';
+import { hot } from 'react-hot-loader';
+
 const app = () => (
   <div className="container">
     <NavBarContainer />
@@ -10,4 +10,4 @@ const app = () => (
   </div>
 );
 
-module.exports = app;
+export default hot(module)(app);
