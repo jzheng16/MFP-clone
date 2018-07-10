@@ -1,4 +1,4 @@
-a {
+/* a {
   color: black;
   margin: auto;
 }
@@ -13,8 +13,9 @@ a {
 
 .container {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr; /* can also do repeat(4, 1fr) */
-  grid-template-rows: 1fr 3fr 2fr;
+  grid-template-columns: 1fr 1fr 1fr;  can also do repeat(4, 1fr) 
+  grid-template-rows: 2fr 2fr 2fr;
+  height: 100%;
 }
 
 .nav {
@@ -28,13 +29,19 @@ a {
 
 .routes{
   grid-column: 1/4;
-  grid-row:  2/6;
+  grid-row:  2/7;
+
 }
 
 .home{
   grid-column: 1/4;
-  grid-row: 2/4;
+  grid-row: 2/7;
   text-align: center;
+  background-image: url('maxresdefault.jpg');
+  height: 50%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
 .signup{
   border:#f2f2f2;
@@ -76,16 +83,17 @@ a {
   column-width: auto;
 }
 
-/* .diary {
+ .diary {
   column-count: 2;
   column-width: auto;
-} */
-/* .displayFoods {
+} 
+ .displayFoods {
   column-count: 1;
   column-width: auto;
-} */
+} 
 
 .displayStats {
   column-count: 4;
   column-width: auto;
-}
+} 
+*/

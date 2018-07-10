@@ -1,13 +1,24 @@
 import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
+import styled from 'styled-components';
 
+const Title = styled.h1`
+  font-size: 1.5em;
+  text-align: center;
+  color: red;
+`;
+const Title1 = styled.h1`
+  font-size: 1.5em;
+  text-align: center;
+  color: blue;
+`;
 
 const Home = props => (
-  <div>
+  <div className="home">
     {
       props.goal && props.user.weight ?
         <div>
-          <h1> Welcome to MyFitnessClone! </h1> <br></br>
+          <Title> Welcome to MyFitnessClone!</Title> <br></br>
           <i> This page will show your calorie goal and how much you&#39;ve accomplished </i> <br></br>
           <i> Your current weight and your macro split</i> <br></br>
           <b> Weight: {props.user.weight[props.user.weight.length - 1]} </b> <br></br>
@@ -22,8 +33,8 @@ const Home = props => (
           <Link to="/goal"> Click here to get started! </Link>
         </div>
         :
-        <div className="home">
-          <h1> Welcome to MyFitnessClone! </h1> <br></br>
+        <div>
+          <Title1> Welcome to MyFitnessClone! </Title1> <br></br>
           <i> This page will show your calorie goal and how much you&#39;ve accomplished </i> <br></br>
           <i> Your current weight and your macro split</i> <br></br>
           <i> Will have a link to get started if you are new </i> <br></br>

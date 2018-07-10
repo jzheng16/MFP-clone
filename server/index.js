@@ -6,6 +6,12 @@ const morgan = require('morgan');
 const db = require('../db');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
+//webpack HMR
+const webpack = require('webpack')
+const config = require('../webpack.config.js');
+const webpackDevMiddleware = require('webpack-dev-middleware')
+const compiler = webpack(config);
+
 const myStore = new SequelizeStore({ db });
 
 const app = express();
@@ -31,6 +37,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(morgan('dev'));
 
+//webpack middleware
+app.use(webpackDevMiddleware(compiler, {
+  publicPath: config.output.publicPath
+}));
+app.use(require("webpack-hot-middleware")(compiler));
 
 // Create a session for each request Session Middleware
 app.use(session({
