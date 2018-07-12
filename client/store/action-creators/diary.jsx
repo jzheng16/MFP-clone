@@ -28,6 +28,7 @@ export const addToSnack = food => ({
   payload: food
 });
 
+
 export const mappingUserDiaryDataToFoodData = (foodId, mealTypeId, servingSize) => dispatch => {
   axios.get(`/api/food/getfood/${foodId}`)
     .then(food => {
@@ -45,8 +46,11 @@ export const mappingUserDiaryDataToFoodData = (foodId, mealTypeId, servingSize) 
 };
 
 export const mappingDbDiaryDataToFoodData = (foodId, mealTypeId, servingSize) => dispatch => {
+  console.log(foodId, mealTypeId, servingSize);
+
   axios.get(`https://api.nal.usda.gov/ndb/nutrients/?format=json&api_key=${API_KEY}&nutrients=208&nutrients=205&nutrients=203&nutrients=204&ndbno=${foodId}`)
     .then(report => {
+      console.log(report);
       const foodInfo = {
         id: report.data.report.foods[0].ndbno,
         name: report.data.report.foods[0].name,
@@ -89,26 +93,23 @@ export const fetchingDiary = (user_id, date_id) => dispatch => {
     .catch(err => console.error('trouble fetching diary', err));
 };
 
-
-export const updatingDiary = entry => dispatch => {
+export const addingFoodToDiary = entry => dispatch => {
+  console.log('what is entry,', entry);
   axios.post('/api/diary', entry)
     .then(newEntry => {
       dispatch(addFoodToDiary(newEntry.data));
+      if (entry.user_food_entry) {
+        dispatch(mappingUserDiaryDataToFoodData(entry.user_food_entry[0], entry.user_food_entry[1], entry.user_food_entry[2]));
+      }
+      else if (entry.db_food_entry) {
+        dispatch(mappingDbDiaryDataToFoodData(entry.db_food_entry[0], entry.db_food_entry[1], entry.db_food_entry[2]));
+      }
+
     })
     .catch(err => console.error('error updating diary db', err));
 };
 
-// Have to also dispatch an action to post to insert into diary database with food id, serving size, and type
-export const addingFoodToDiary = entry => dispatch => {
-  // Update database
-  dispatch(updatingDiary(entry));
-  // Add food to list of foods in diary
-  // if (entry.user_food_entry) {
-  //   dispatch(mappingUserDiaryDataToFoodData(entry.user_food_entry[0], entry.user_food_entry[1], entry.user_food_entry[2]));
-  // } else if (entry.db_food_entry) {
-  //   dispatch(mappingDbDiaryDataToFoodData(entry.db_food_entry[0], entry.db_food_entry[1], entry.db_food_entry[2]));
-  // }
-};
+
 
 
 // Post into diary model, will be given a user id, a date (have to use to set), an array
