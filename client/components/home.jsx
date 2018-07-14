@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 const Title = styled.h1`
   position: relative;
-  top: -400px;
+  top: 400px;
   font-size: 1.5em;
   text-align: center;
   color: orange;
@@ -30,10 +30,9 @@ const HomeHeader = styled.div`
 
 const HomeImage = styled.img`
   display: block;
-  max-width: 40%;
+  max-width: 100%;
   height: auto;
   margin: 0 auto;
-  z-index: -1;
 `;
 
 const StyledLink = styled(Link)`
@@ -58,8 +57,9 @@ const StyledButton = styled.button`
 
 const Home = props => (
   <HomeHeader>
-    <HomeImage src={require("../../public/homeImage.png")} />
+
     <Title> Welcome to MyFitnessClone!</Title>
+    <HomeImage src={require('../../public/mfpimage.jpg')} />
     <hr />
     {props.goal && props.user.weight ?
       <div>

@@ -14,13 +14,8 @@ const mapDispatch = dispatch => ({
   }
 });
 class HomeContainer extends Component {
-  constructor(props) {
-    super(props);
-  }
   componentDidMount() {
     this.props.fetchingGoal();
-
-    console.log('did this work?', this.props);
   }
 
   render() {
