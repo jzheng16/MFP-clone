@@ -43,6 +43,12 @@ class DiaryContainer extends Component {
     }
   }
 
+  // componentWillReceiveProps(nextProps) {
+  //   if (_.isEqual(this.props.diary.entries, nextProps.diary.entries)) {
+  //     this.props.fetchingDiary(this.props.user.id, this.props.diary.currentDiaryDate.id);
+  //   }
+  // }
+
   // TODO: Test to see if I need this? Can't I just pass down props and dispatch selectedMealType from store
   selectedMealType = typeId => {
     this.props.selectedMealType(typeId);
