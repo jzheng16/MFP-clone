@@ -4,6 +4,8 @@ import {
   RECEIVE_DATABASE_QUERY, REMOVE_USER_FOOD_FROM_DIARY, REMOVE_DB_FOOD_FROM_DIARY, REMOVE_FROM_BREAKFAST, REMOVE_FROM_LUNCH, REMOVE_FROM_DINNER, REMOVE_FROM_SNACK
 } from '../actions';
 
+import _ from 'lodash';
+
 const initialState = {
   entries: [],
   currentMealTypeId: 0,
@@ -17,6 +19,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
   const newState = Object.assign({}, state);
+  let existingFoodIndex = -1;
   switch (action.type) {
     case ADD_FOOD_TO_DIARY:
       newState.entries = newState.entries.concat(action.payload);
@@ -28,16 +31,40 @@ export default (state = initialState, action) => {
       newState.currentDiaryDate = action.payload;
       break;
     case ADD_TO_BREAKFAST:
-      newState.breakfast = newState.breakfast.concat(action.payload);
+      existingFoodIndex = _.findIndex(newState.breakfast, { id: action.payload.id });
+      if (existingFoodIndex > -1) {
+        newState.breakfast[existingFoodIndex].servingSize += action.payload.servingSize;
+      }
+      else {
+        newState.breakfast = newState.breakfast.concat(action.payload);
+      }
       break;
     case ADD_TO_LUNCH:
-      newState.lunch = newState.lunch.concat(action.payload);
+      existingFoodIndex = _.findIndex(newState.lunch, { id: action.payload.id });
+      if (existingFoodIndex > -1) {
+        newState.lunch[existingFoodIndex].servingSize += action.payload.servingSize;
+      }
+      else {
+        newState.lunch = newState.lunch.concat(action.payload);
+      }
       break;
     case ADD_TO_DINNER:
-      newState.dinner = newState.dinner.concat(action.payload);
+      existingFoodIndex = _.findIndex(newState.dinner, { id: action.payload.id });
+      if (existingFoodIndex > -1) {
+        newState.dinner[existingFoodIndex].servingSize += action.payload.servingSize;
+      }
+      else {
+        newState.dinner = newState.dinner.concat(action.payload);
+      }
       break;
     case ADD_TO_SNACK:
-      newState.snack = newState.snack.concat(action.payload);
+      existingFoodIndex = _.findIndex(newState.snack, { id: action.payload.id });
+      if (existingFoodIndex > -1) {
+        newState.snack[existingFoodIndex].servingSize += action.payload.servingSize;
+      }
+      else {
+        newState.snack = newState.snack.concat(action.payload);
+      }
       break;
     case RECEIVE_DATABASE_QUERY:
       newState.databaseQuery = action.payload;

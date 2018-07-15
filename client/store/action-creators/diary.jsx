@@ -104,6 +104,7 @@ export const addingFoodToDiary = entry => dispatch => {
       else if (entry.db_food_entry) {
         dispatch(mappingDbDiaryDataToFoodData(entry.db_food_entry[0], entry.db_food_entry[1], entry.db_food_entry[2]));
       }
+      dispatch(addFoodToDiary(newEntry.data));
 
     })
     .catch(err => console.error('error updating diary db', err));
@@ -180,11 +181,11 @@ export const removingFoodFromDiary = entry => (dispatch, getState) => {
   if (typeof entry.id === 'string') {
     const obj = { db_food_entry: [entry.id, entry.typeId], date_id: entry.date_id };
     axios.post('/api/diary/diaryentry', obj)
-      .then(updatedEntry => dispatch(updatingDiary(updatedEntry.data)));
+      .then(updatedEntry => dispatch(addingFoodToDiary(updatedEntry.data)));
   } else {
     const obj = { user_food_entry: [entry.id, entry.typeId], date_id: entry.date_id };
     axios.post('/api/diary/diaryentry', obj)
-      .then(updatedEntry => dispatch(updatingDiary(updatedEntry.data)));
+      .then(updatedEntry => dispatch(addingFoodToDiary(updatedEntry.data)));
   }
   dispatch(removeFoodFromMeal(entry.id, entry.typeId));
 };
