@@ -17,14 +17,13 @@ const mapDispatch = dispatch => ({
 
 class ListSearchResultContainer extends Component {
   addingFoodToDiary = (e, ndbno) => {
-    console.log('typeof ndbno?', typeof ndbno);
     e.preventDefault();
     const entry = {
       user_id: this.props.user.id,
       date_id: this.props.diary.currentDiaryDate.id,
-      db_food_entry: [parseInt(ndbno, 10), this.props.diary.currentMealTypeId, parseInt(e.target.serving_size.value, 10)]
+      db_food_entry: [+ndbno, this.props.diary.currentMealTypeId, +e.target.serving_size.value]
     };
-    this.props.addingFoodToDiary(entry);
+    this.props.addingFoodToDiary([entry]);
   }
   render() {
     return (

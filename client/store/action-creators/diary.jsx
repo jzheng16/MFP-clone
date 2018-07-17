@@ -93,21 +93,22 @@ export const fetchingDiary = (user_id, date_id) => dispatch => {
     .catch(err => console.error('trouble fetching diary', err));
 };
 
-export const addingFoodToDiary = entry => dispatch => {
-  console.log('what is entry,', entry);
-  axios.post('/api/diary', entry)
-    .then(newEntry => {
-      dispatch(addFoodToDiary(newEntry.data));
-      if (entry.user_food_entry) {
-        dispatch(mappingUserDiaryDataToFoodData(entry.user_food_entry[0], entry.user_food_entry[1], entry.user_food_entry[2]));
-      }
-      else if (entry.db_food_entry) {
-        dispatch(mappingDbDiaryDataToFoodData(entry.db_food_entry[0], entry.db_food_entry[1], entry.db_food_entry[2]));
-      }
-      dispatch(addFoodToDiary(newEntry.data));
+export const addingFoodToDiary = entryArr => dispatch => {
+  console.log('what is entry,', entryArr);
+  entryArr.forEach(entry => {
+    axios.post('/api/diary', entry)
+      .then(newEntry => {
+        dispatch(addFoodToDiary(newEntry.data));
+        if (entry.user_food_entry) {
+          dispatch(mappingUserDiaryDataToFoodData(entry.user_food_entry[0], entry.user_food_entry[1], entry.user_food_entry[2]));
+        }
+        else if (entry.db_food_entry) {
+          dispatch(mappingDbDiaryDataToFoodData(entry.db_food_entry[0], entry.db_food_entry[1], entry.db_food_entry[2]));
+        }
 
-    })
-    .catch(err => console.error('error updating diary db', err));
+      })
+      .catch(err => console.error('error updating diary db', err));
+  })
 };
 
 

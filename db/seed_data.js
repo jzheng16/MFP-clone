@@ -165,8 +165,6 @@ for (let i = 0; i < 300; i++) {
 
 }
 
-console.log(Dates);
-
 const Goal =
   [{
     id: 1, calorie: 1953, weight: 136, carbs: 79, protein: 130, fat: 41, user_id: 1
