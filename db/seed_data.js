@@ -329,34 +329,34 @@ const Food = [{
   id: 3, name: 'Fringe-eared oryx', calories: 235, carbs: 69, protein: 124, fat: 140, user_id: 1
 },
 {
-  id: 4, name: 'Sea birds (unidentified)', calories: 318, carbs: 111, protein: 42, fat: 108, user_id: 1
+  id: 4, name: 'Sea birds', calories: 318, carbs: 111, protein: 42, fat: 108, user_id: 1
 },
 {
-  id: 5, name: 'Red-necked phalarope', calories: 276, carbs: 80, protein: 96, fat: 63, user_id: 5
+  id: 5, name: 'Red-necked phalarope', calories: 276, carbs: 80, protein: 96, fat: 63, user_id: 1
 },
 {
-  id: 6, name: 'Blackish oystercatcher', calories: 201, carbs: 112, protein: 124, fat: 54, user_id: 6
+  id: 6, name: 'Blackish oystercatcher', calories: 201, carbs: 112, protein: 124, fat: 54, user_id: 1
 },
 {
-  id: 7, name: 'Gull, kelp', calories: 345, carbs: 52, protein: 132, fat: 147, user_id: 7
+  id: 7, name: 'Gull, kelp', calories: 345, carbs: 52, protein: 132, fat: 147, user_id: 1
 },
 {
-  id: 8, name: 'Squirrel, palm', calories: 264, carbs: 119, protein: 52, fat: 80, user_id: 8
+  id: 8, name: 'Squirrel, palm', calories: 264, carbs: 119, protein: 52, fat: 80, user_id: 1
 },
 {
-  id: 9, name: 'Squirrel, uinta ground', calories: 205, carbs: 72, protein: 70, fat: 110, user_id: 9
+  id: 9, name: 'Squirrel, uinta ground', calories: 205, carbs: 72, protein: 70, fat: 110, user_id: 1
 },
 {
-  id: 10, name: 'Otter, canadian river', calories: 228, carbs: 51, protein: 116, fat: 50, user_id: 10
+  id: 10, name: 'Otter, canadian river', calories: 228, carbs: 51, protein: 116, fat: 50, user_id: 1
 },
 {
-  id: 11, name: 'Horned puffin', calories: 581, carbs: 121, protein: 99, fat: 133, user_id: 11
+  id: 11, name: 'Horned puffin', calories: 581, carbs: 121, protein: 99, fat: 133, user_id: 1
 },
 {
-  id: 12, name: 'Thirteen-lined squirrel', calories: 517, carbs: 148, protein: 141, fat: 87, user_id: 12
+  id: 12, name: 'Thirteen-lined squirrel', calories: 517, carbs: 148, protein: 141, fat: 87, user_id: 1
 },
 {
-  id: 13, name: 'Black-tailed deer', calories: 553, carbs: 64, protein: 92, fat: 51, user_id: 13
+  id: 13, name: 'Black-tailed deer', calories: 553, carbs: 64, protein: 92, fat: 51, user_id: 1
 },
 {
   id: 14, name: 'Devil, tasmanian', calories: 559, carbs: 123, protein: 78, fat: 109, user_id: 14
