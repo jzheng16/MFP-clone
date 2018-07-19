@@ -32,9 +32,6 @@ const mapDispatch = dispatch => ({
 class DiaryContainer extends Component {
   componentDidMount() {
     this.props.gettingDiaryId(moment().format('YYYY-MM-DD'));
-    // if (this.props.diary.currentDiaryDate.id) {
-    //   this.props.fetchingDiary(this.props.user.id, this.props.diary.currentDiaryDate.id);
-    // }
   }
 
   componentDidUpdate(prevProps) {
@@ -43,11 +40,10 @@ class DiaryContainer extends Component {
     }
   }
 
-  // componentWillReceiveProps(nextProps) {
-  //   if (_.isEqual(this.props.diary.entries, nextProps.diary.entries)) {
-  //     this.props.fetchingDiary(this.props.user.id, this.props.diary.currentDiaryDate.id);
-  //   }
-  // }
+  previousDayDiary = () => {
+    this.props.gettingDiaryId(moment().add(-1, 'days').format('YYYY-MM-DD'));
+
+  }
 
   // TODO: Test to see if I need this? Can't I just pass down props and dispatch selectedMealType from store
   selectedMealType = typeId => {
@@ -70,7 +66,7 @@ class DiaryContainer extends Component {
 
   render() {
     return (
-      <Diary {...this.props} selectedMealType={this.selectedMealType} removeFood={this.removeFood} />
+      <Diary {...this.props} selectedMealType={this.selectedMealType} removeFood={this.removeFood} previousDayDiary={this.previousDayDiary} />
     );
   }
 }

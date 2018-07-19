@@ -80,7 +80,7 @@ const Home = props => (
         <StyledLink to="/addfood"> <StyledButton > Add Food </StyledButton> </StyledLink>
 
         <StyledLink to="/goal"> Edit Goals </StyledLink>
-
+        <button onClick={props.testing}> Click me </button>
       </div>
       :
       <div>

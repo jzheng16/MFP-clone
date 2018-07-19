@@ -5,6 +5,7 @@ import { createFood, fetchFood } from '../store/action-creators/foodAction';
 import { addingFoodToDiary, searchingDatabase } from '../store/action-creators/diary';
 import { ListFoods, AddFood, SearchFood } from '../components';
 import history from '../history';
+import _ from 'lodash';
 
 const mapStateToProps = state => ({
   foods: state.foods,
@@ -30,9 +31,10 @@ const mapDispatchToProps = dispatch => ({
 class FoodContainer extends Component {
   constructor(props) {
     super(props);
-    // this.addFood = this.addFood.bind(this);
-    this.addingFoodToDiary = this.addingFoodToDiary.bind(this);
     this.searchingDatabase = this.searchingDatabase.bind(this);
+    this.state = {
+      isChecked: []
+    }
   }
 
   componentWillMount() {
@@ -52,23 +54,48 @@ class FoodContainer extends Component {
     this.props.createFood(newFood);
   }
 
-  addingFoodToDiary(e, foodId) {
-    e.preventDefault();
-    console.log('getting sent in properly?', parseInt(e.target.serving_size.value, 10));
-    const entry = {
-      user_id: this.props.user.id,
-      date_id: this.props.diary.currentDiaryDate.id,
-      user_food_entry: [foodId, this.props.diary.currentMealTypeId, parseInt(e.target.serving_size.value, 10)]
-    };
-    this.props.addingFoodToDiary(entry);
+  onChange = e => {
+    let index;
+    let checkedArr = this.state.isChecked;
+
+    if (e.target.checked) {
+      checkedArr.push(+e.target.value);
+    }
+    else {
+      index = checkedArr.indexOf(+e.target.value);
+      checkedArr.splice(index, 1);
+    }
+    this.setState({ isChecked: checkedArr });
   }
 
-  searchingDatabase(e) {
+  addingFoodToDiary = e => {
+    e.preventDefault();
+    let addFoodArr = [];
+    let servingSizeArr = Array.from(e.target.qty);
+
+
+    this.state.isChecked.forEach(food_id => {
+      let qtyIndex = _.findIndex(servingSizeArr, { id: food_id + '' })
+      let qty = +e.target.qty[qtyIndex].value;
+      let entry = {
+        user_id: this.props.user.id,
+        date_id: this.props.diary.currentDiaryDate.id,
+        mealType: this.props.diary.currentMealTypeId,
+        food_id,
+        qty
+      };
+
+      addFoodArr.push(entry);
+    });
+    console.log('Final addFoodArr', addFoodArr);
+    this.props.addingFoodToDiary(addFoodArr);
+  }
+
+  searchingDatabase = e => {
     e.preventDefault();
     this.props.searchingDatabase(e.target.q.value);
     history.push('/food/search');
   }
-
 
   render() {
     return (
@@ -76,7 +103,7 @@ class FoodContainer extends Component {
         <div className="addFood">
           <SearchFood {...this.props} searchingDatabase={this.searchingDatabase} />
           <AddFood addFood={this.addFood} />
-          <ListFoods {...this.props} {...this.state} addingFoodToDiary={this.addingFoodToDiary} />
+          <ListFoods {...this.props} {...this.state} addingFoodToDiary={this.addingFoodToDiary} onChange={this.onChange} />
         </div>
       </div>
     );

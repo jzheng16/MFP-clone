@@ -22,7 +22,13 @@ export default (state = initialState, action) => {
   let existingFoodIndex = -1;
   switch (action.type) {
     case ADD_FOOD_TO_DIARY:
-      newState.entries = newState.entries.concat(action.payload);
+      existingFoodIndex = _.findIndex(newState.entries, { id: action.payload.id });
+      if (existingFoodIndex > -1) {
+        newState.entries[existingFoodIndex].qty = action.payload.qty;
+      }
+      else {
+        newState.entries = newState.entries.concat(action.payload);
+      }
       break;
     case SELECT_MEAL_TYPE:
       newState.currentMealTypeId = action.payload;

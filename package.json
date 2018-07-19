@@ -3,7 +3,8 @@
     "build": "webpack",
     "start-dev": "node server/index.js",
     "start": "nodemon server/index.js --ignore public --ignore client",
-    "seed": "node db/seed.js"
+    "seed": "node db/seed.js",
+    "test": "(npm run build|| true) && npm run start-dev"
   },
   "devDependencies": {
     "babel": "^6.23.0",

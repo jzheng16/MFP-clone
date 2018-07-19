@@ -5,7 +5,7 @@
 
 export { default as ListFoods } from './ListFoods';
 export { default as AddFood } from './AddFood';
-export { default as Home } from './home';
+export { default as Home } from './Home';
 export { default as LoginForm } from './LoginForm';
 export { default as SignUpForm } from './SignUpForm';
 export { default as NavBar } from './NavBar';
