@@ -156,11 +156,11 @@ const User =
 
 const Dates = [];
 
-for (let i = 0; i < 300; i++) {
+for (let i = 0; i < 1000; i++) {
   let days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-  let dayOfWeek = moment().add(i, 'day').isoWeekday();
+  let dayOfWeek = moment('2018-01-01', 'YYYY-MM-DD').add(i, 'day').isoWeekday();
   let formattedDayOfWeek = days[dayOfWeek - 1];
-  let formattedDate = moment().add(i, 'day').format('YYYY-MM-DD');
+  let formattedDate = moment('2018-01-01', 'YYYY-MM-DD').add(i, 'day').format('YYYY-MM-DD');
   Dates.push({ id: i + 1, day: formattedDate, dow: formattedDayOfWeek });
 
 }
@@ -468,7 +468,136 @@ const Food = [{
   id: 50, name: 'Horned lark', calories: 235, carbs: 111, protein: 139, fat: 88, user_id: 50
 }];
 
+const Diary = [
+  {
+    user_id: 1,
+    date_id: 200,
+    food_id: 1,
+    mealType: 1,
+    qty: 2
+  },
+  {
+    user_id: 1,
+    date_id: 200,
+    food_id: 2,
+    mealType: 2,
+    qty: 2
+  },
+  {
+    user_id: 1,
+    date_id: 200,
+    food_id: 3,
+    mealType: 3,
+    qty: 2,
+
+  },
+  {
+    user_id: 1,
+    date_id: 200,
+    food_id: 4,
+    mealType: 2,
+    qty: 5,
+  },
+  {
+    user_id: 1,
+    date_id: 200,
+    food_id: 5,
+    mealType: 4,
+    qty: 3,
+  },
+  {
+    user_id: 1,
+    date_id: 200,
+    food_id: 3,
+    mealType: 1,
+    qty: 5,
+  },
+  {
+    user_id: 1,
+    date_id: 200,
+    food_id: 3,
+    mealType: 2,
+    qty: 3,
+  },
+  {
+    user_id: 1,
+    date_id: 200,
+    food_id: 4,
+    mealType: 1,
+    qty: 2,
+  },
+]
+
+// const Diary_Food = [
+//   {
+//     mealType: 1,
+//     qty: 2,
+//     diary_id: 1,
+//     food_id: 5
+//   },
+//   {
+//     mealType: 1,
+//     qty: 3,
+//     diary_id: 1,
+//     food_id: 5
+//   },
+//   {
+//     mealType: 1,
+//     qty: 2,
+//     diary_id: 1,
+//     food_id: 6
+//   },
+//   {
+//     mealType: 1,
+//     qty: 10,
+//     diary_id: 1,
+//     food_id: 7
+//   },
+//   {
+//     mealType: 2,
+//     qty: 10,
+//     diary_id: 1,
+//     food_id: 3
+//   },
+//   {
+//     mealType: 2,
+//     qty: 10,
+//     diary_id: 1,
+//     food_id: 4
+//   },
+//   {
+//     mealType: 3,
+//     qty: 10,
+//     diary_id: 1,
+//     food_id: 7
+//   },
+//   {
+//     mealType: 3,
+//     qty: 10,
+//     diary_id: 1,
+//     food_id: 5
+//   },
+//   {
+//     mealType: 4,
+//     qty: 5,
+//     diary_id: 1,
+//     food_id: 1
+//   },
+//   {
+//     mealType: 4,
+//     qty: 9,
+//     diary_id: 1,
+//     food_id: 8
+//   },
+//   {
+//     mealType: 4,
+//     qty: 100,
+//     diary_id: 1,
+//     food_id: 6
+//   },
+// ]
+
 module.exports = {
-  User, Dates, Food, Goal
+  User, Dates, Food, Goal, Diary, //Diary_Food
 };
 

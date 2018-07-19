@@ -74,16 +74,21 @@ class FoodContainer extends Component {
     let servingSizeArr = Array.from(e.target.qty);
 
 
-    this.state.isChecked.forEach(foodId => {
-      let qtyIndex = _.findIndex(servingSizeArr, { id: foodId + '' })
-      let servingSize = +e.target.qty[qtyIndex].value;
+
+    this.state.isChecked.forEach(food_id => {
+      let qtyIndex = _.findIndex(servingSizeArr, { id: food_id + '' })
+      let qty = +e.target.qty[qtyIndex].value;
       let entry = {
         user_id: this.props.user.id,
         date_id: this.props.diary.currentDiaryDate.id,
-        user_food_entry: [foodId, this.props.diary.currentMealTypeId, servingSize]
+        mealType: this.props.diary.currentMealTypeId,
+        food_id,
+        qty
       };
+
       addFoodArr.push(entry);
     });
+    console.log('Final addFoodArr', addFoodArr);
     this.props.addingFoodToDiary(addFoodArr);
   }
 

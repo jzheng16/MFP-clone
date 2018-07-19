@@ -76,39 +76,27 @@ export const mappingDbDiaryDataToFoodData = (foodId, mealTypeId, servingSize) =>
 // Fetch diary and turn the arrays into a list of foods
 export const fetchingDiary = (user_id, date_id) => dispatch => {
   axios.get(`/api/diary/${date_id}`)
-    // This is where I add the logic to retrieve food data from database and sort depending on breakfast lunch and dinner?
+    //Returns nested object with date_id, user_id, and all foods within that diary, need only food
     .then(diary => {
-      if (diary.data.user_food_entry) {
-        diary.data.user_food_entry.forEach(entry => {
-          dispatch(mappingUserDiaryDataToFoodData(entry[0], entry[1], entry[2]));
-        });
-      }
-      if (diary.data.db_food_entry) {
-        diary.data.db_food_entry.forEach(entry => {
-          dispatch(mappingDbDiaryDataToFoodData(entry[0], entry[1], entry[2]));
-        });
-      }
+      console.log('What is this?', diary.data);
       dispatch(addFoodToDiary(diary.data));
     })
     .catch(err => console.error('trouble fetching diary', err));
 };
 
+
 export const addingFoodToDiary = entryArr => dispatch => {
   console.log('what is entry,', entryArr);
-  entryArr.forEach(entry => {
+
+  for (const entry of entryArr) {
     axios.post('/api/diary', entry)
       .then(newEntry => {
+        console.log('what am i getting', newEntry.data);
         dispatch(addFoodToDiary(newEntry.data));
-        if (entry.user_food_entry) {
-          dispatch(mappingUserDiaryDataToFoodData(entry.user_food_entry[0], entry.user_food_entry[1], entry.user_food_entry[2]));
-        }
-        else if (entry.db_food_entry) {
-          dispatch(mappingDbDiaryDataToFoodData(entry.db_food_entry[0], entry.db_food_entry[1], entry.db_food_entry[2]));
-        }
-
       })
       .catch(err => console.error('error updating diary db', err));
-  })
+  }
+
 };
 
 
@@ -127,6 +115,7 @@ export const selectedDiaryDate = date => ({
 
 
 export const gettingDiaryId = date => dispatch => {
+  console.log('what is date?', date);
   axios.get(`/api/date/${date}`)
     .then(dateInfo => dispatch(selectedDiaryDate(dateInfo.data)))
     .catch(err => console.error('err retrieving date ', err));
@@ -194,3 +183,11 @@ export const removingFoodFromDiary = entry => (dispatch, getState) => {
 
 // API ACTIONS
 
+export const testing = entry => dispatch => {
+  axios.get(`/api/diary/${entry.date_id}`)
+    .then(entry => {
+      console.log('what am i getting?', entry.data)
+      dispatch(addFoodToDiary(entry.data))
+    })
+    .catch(err => console.error('fuck ', err));
+}
