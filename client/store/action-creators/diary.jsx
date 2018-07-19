@@ -2,7 +2,7 @@ import axios from 'axios';
 import {
   ADD_FOOD_TO_DIARY, SELECT_MEAL_TYPE, SELECT_DIARY_DATE,
   ADD_TO_BREAKFAST, ADD_TO_LUNCH, ADD_TO_DINNER, ADD_TO_SNACK, RECEIVE_DATABASE_QUERY, REMOVE_USER_FOOD_FROM_DIARY,
-  REMOVE_DB_FOOD_FROM_DIARY, REMOVE_FROM_BREAKFAST, REMOVE_FROM_LUNCH, REMOVE_FROM_DINNER, REMOVE_FROM_SNACK
+  REMOVE_DB_FOOD_FROM_DIARY, REMOVE_FROM_ENTRY
 } from '../actions';
 import API_KEY from '../../../config';
 
@@ -76,7 +76,7 @@ export const mappingDbDiaryDataToFoodData = (foodId, mealTypeId, servingSize) =>
 // Fetch diary and turn the arrays into a list of foods
 export const fetchingDiary = (user_id, date_id) => dispatch => {
   axios.get(`/api/diary/${date_id}`)
-    //Returns nested object with date_id, user_id, and all foods within that diary, need only food
+    // Returns nested object with date_id, user_id, and all foods within that diary, need only food
     .then(diary => {
       console.log('What is this?', diary.data);
       dispatch(addFoodToDiary(diary.data));
@@ -87,19 +87,15 @@ export const fetchingDiary = (user_id, date_id) => dispatch => {
 
 export const addingFoodToDiary = entryArr => dispatch => {
   console.log('what is entry,', entryArr);
-
-  for (const entry of entryArr) {
+  entryArr.forEach(entry => {
     axios.post('/api/diary', entry)
       .then(newEntry => {
         console.log('what am i getting', newEntry.data);
         dispatch(addFoodToDiary(newEntry.data));
       })
       .catch(err => console.error('error updating diary db', err));
-  }
-
+  });
 };
-
-
 
 
 // Post into diary model, will be given a user id, a date (have to use to set), an array
@@ -143,41 +139,16 @@ export const removeDbFoodFromDiary = entryArr => ({
   payload: entryArr
 });
 
-export const removeFoodFromMeal = (foodId, typeId) => {
-  if (typeId === 1) {
-    return {
-      type: REMOVE_FROM_BREAKFAST,
-      payload: foodId
-    };
-  } else if (typeId === 2) {
-    return {
-      type: REMOVE_FROM_LUNCH,
-      payload: foodId
-    };
-  } else if (typeId === 3) {
-    return {
-      type: REMOVE_FROM_DINNER,
-      payload: foodId
-    };
-  }
+export const removeFoodFromMeal = foodData => ({
+  type: REMOVE_FROM_ENTRY,
+  payload: foodData
+});
 
-  return {
-    type: REMOVE_FROM_SNACK,
-    payload: foodId
-  };
-};
-
-export const removingFoodFromDiary = entry => (dispatch, getState) => {
-  if (typeof entry.id === 'string') {
-    const obj = { db_food_entry: [entry.id, entry.typeId], date_id: entry.date_id };
-    axios.post('/api/diary/diaryentry', obj)
-      .then(updatedEntry => dispatch(addingFoodToDiary(updatedEntry.data)));
-  } else {
-    const obj = { user_food_entry: [entry.id, entry.typeId], date_id: entry.date_id };
-    axios.post('/api/diary/diaryentry', obj)
-      .then(updatedEntry => dispatch(addingFoodToDiary(updatedEntry.data)));
-  }
-  dispatch(removeFoodFromMeal(entry.id, entry.typeId));
+export const removingFoodFromDiary = entry => dispatch => {
+  console.log('Removing food entry object', entry);
+  axios.post('/api/diary/delete', entry)
+    .then(() => dispatch(removeFoodFromMeal({ food_id: entry.food_id, mealType: entry.mealType })))
+    .catch(err => console.error('action-creator err: deleting entry', err));
 };
 
 
@@ -186,8 +157,8 @@ export const removingFoodFromDiary = entry => (dispatch, getState) => {
 export const testing = entry => dispatch => {
   axios.get(`/api/diary/${entry.date_id}`)
     .then(entry => {
-      console.log('what am i getting?', entry.data)
-      dispatch(addFoodToDiary(entry.data))
+      console.log('what am i getting?', entry.data);
+      dispatch(addFoodToDiary(entry.data));
     })
     .catch(err => console.error('fuck ', err));
-}
+};

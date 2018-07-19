@@ -8,18 +8,16 @@ const StyledLeftButton = styled.button`
   background: url('../../public/mfpimage.png') no-repeat;
   height: 25px;
   width: 25px;
-
-`
+`;
 const StyledRightButton = styled.button`
   background: url('../../public/rightarrow.png') no-repeat;
   height: 25px;
   width: 25px;
-
-`
+`;
 
 export default props => {
   console.log('Examining props', props);
-  const entries = props.diary.entries;
+  const { entries } = props.diary;
   const breakfast = entries.filter(food => food.mealType === 1);
   const lunch = entries.filter(food => food.mealType === 2);
   const dinner = entries.filter(food => food.mealType === 3);
@@ -62,7 +60,7 @@ export default props => {
                     <td> {entry.food.carbs * entry.qty} </td>
                     <td> {entry.food.protein * entry.qty} </td>
                     <td> {entry.food.fat * entry.qty} </td>
-                    <td> <button onClick={(() => props.removeFood(entry.id, 1))}> Remove Food </button> </td>
+                    <td> <button onClick={(() => props.removeFood(entry.food.id, 1))}> Remove Food </button> </td>
                   </tr>
                 ))
               }
@@ -91,7 +89,7 @@ export default props => {
                     <td> {entry.food.carbs * entry.qty} </td>
                     <td> {entry.food.protein * entry.qty} </td>
                     <td> {entry.food.fat * entry.qty} </td>
-                    <td> <button onClick={(() => props.removeFood(entry.id, 2))}> Remove Food </button> </td>
+                    <td> <button onClick={(() => props.removeFood(entry.food.id, 2))}> Remove Food </button> </td>
                   </tr>
                 ))
               }
@@ -121,9 +119,8 @@ export default props => {
                     <td> {entry.food.carbs * entry.qty} </td>
                     <td> {entry.food.protein * entry.qty} </td>
                     <td> {entry.food.fat * entry.qty} </td>
-                    <td> <button onClick={(() => props.removeFood(entry.id, 3))}> Remove Food </button> </td>
+                    <td> <button onClick={(() => props.removeFood(entry.food.id, 3))}> Remove Food </button> </td>
                   </tr>
-
                 ))
               }
             </tbody>
@@ -152,9 +149,8 @@ export default props => {
                     <td> {entry.food.carbs * entry.qty} </td>
                     <td> {entry.food.protein * entry.qty} </td>
                     <td> {entry.food.fat * entry.qty} </td>
-                    <td> <button onClick={(() => props.removeFood(entry.id, 4))}> Remove Food </button> </td>
+                    <td> <button onClick={(() => props.removeFood(entry.food.id, 4))}> Remove Food </button> </td>
                   </tr>
-
                 ))
               }
             </tbody>
@@ -185,5 +181,4 @@ export default props => {
     </div>
 
   );
-
 };

@@ -34,13 +34,13 @@ router.post('/', (req, res) => {
       if (created) {
         entry.getFood()
           .then(food => {
-            let foodObj = entry.dataValues;
+            const foodObj = entry.dataValues;
             foodObj.food = food.dataValues;
             res.json(foodObj);
           });
-      }
-      else {
-        Diary.update({ qty: entry.qty + req.body.qty },
+      } else {
+        Diary.update(
+          { qty: entry.qty + req.body.qty },
           {
             returning: true,
             where: {
@@ -49,88 +49,103 @@ router.post('/', (req, res) => {
               food_id: req.body.food_id,
               mealType: req.body.mealType
             }
-          })
-          .then(entry => {
-            entry[1][0].getFood()
+          }
+        )
+          .then(updatedEntry => {
+            updatedEntry[1][0].getFood()
               .then(food => {
-                let foodObj = entry[1][0].dataValues;
+                const foodObj = updatedEntry[1][0].dataValues;
                 foodObj.food = food.dataValues;
                 res.json(foodObj);
               });
-          })
+          });
       }
     });
-})
+});
+
+router.post('/delete', (req, res) => {
+  console.log('what is req.body', req.body);
+  Diary.destroy({
+    where: {
+      user_id: req.user.dataValues.id,
+      date_id: req.body.date_id,
+      food_id: req.body.food_id,
+      mealType: req.body.mealType
+    }
+  })
+    .then(deletedRows => res.json(`successfully removed ${deletedRows} rows`))
+    .catch(err => console.error('trouble removing food', err));
+});
 
 // Will be sent the updated user food entry OR db food entry depending on what is deleted
-router.post('/diaryentry', (req, res) => {
-  console.log('what is req.body?', req.body);
-  if (req.body.user_food_entry) {
-    Diary.find({
-      where: {
-        user_id: req.user.dataValues.id,
-        date_id: req.body.date_id
-      }
-    })
-      .then(entry => {
-        let index = -1;
-        for (let i = 0; i < entry.user_food_entry.length; i += 1) {
-          if (entry.user_food_entry[i][0] === req.body.user_food_entry[0] && entry.user_food_entry[i][1] === req.body.user_food_entry[1]) {
-            index = i;
-          }
-          if (R.contains(R.slice(0, 1, req.body.user_food_entry), R.slice(0, 1, entry.user_food_entry[i]))) {
-            console.log('hahaha');
-          }
-        }
+// router.post('/diaryentry', (req, res) => {
+//   console.log('what is req.body?', req.body);
+//   if (req.body.user_food_entry) {
+//     Diary.find({
+//       where: {
+//         user_id: req.user.dataValues.id,
+//         date_id: req.body.date_id
+//       }
+//     })
+//       .then(entry => {
+//         let index = -1;
+//         for (let i = 0; i < entry.user_food_entry.length; i += 1) {
+//           if (entry.user_food_entry[i][0] === req.body.user_food_entry[0] && entry.user_food_entry[i][1] === req.body.user_food_entry[1]) {
+//             index = i;
+//           }
+//           if (R.contains(R.slice(0, 1, req.body.user_food_entry), R.slice(0, 1, entry.user_food_entry[i]))) {
+//             console.log('hahaha');
+//           }
+//         }
 
-        entry.user_food_entry.splice(index, 1);
-
-
-        entry.update({
-          user_food_entry: entry.user_food_entry
-        }, {
-            where: {
-              user_id: req.body.user_id,
-              date_id: req.body.date_id
-            }
-          })
-          .then((finalentry => res.json(finalentry)));
-      })
-      .catch(error => console.error('trouble removing diary entry', error));
-  } else {
-    Diary.find({
-      where: {
-        user_id: req.user.dataValues.id,
-        date_id: req.body.date_id
-      }
-    })
-      .then(entry => {
-        let index = -1;
-        for (let i = 0; i < entry.db_food_entry.length; i += 1) {
-          if (entry.db_food_entry[i][0] === req.body.db_food_entry[0] && entry.db_food_entry[i][1] === req.body.db_food_entry[1]) {
-            index = i;
-          }
-        }
-
-        entry.db_food_entry.splice(index, 1);
+//         entry.user_food_entry.splice(index, 1);
 
 
-        entry.update({
-          db_food_entry: entry.db_food_entry
-        }, {
-            where: {
-              user_id: req.body.user_id,
-              date_id: req.body.date_id
-            }
-          })
-          .then(finalentry => {
-            console.log('final entry', finalentry.dataValues);
-            res.json(finalentry);
-          });
-      })
-      .catch(error => console.error('trouble removing diary entry', error));
-  }
-});
+//         entry.update({
+//           user_food_entry: entry.user_food_entry
+//         }, {
+//             where: {
+//               user_id: req.body.user_id,
+//               date_id: req.body.date_id
+//             }
+//           })
+//           .then((finalentry => res.json(finalentry)));
+//       })
+//       .catch(error => console.error('trouble removing diary entry', error));
+//   } else {
+//     Diary.find({
+//       where: {
+//         user_id: req.user.dataValues.id,
+//         date_id: req.body.date_id
+//       }
+//     })
+//       .then(entry => {
+//         let index = -1;
+//         for (let i = 0; i < entry.db_food_entry.length; i += 1) {
+//           if (entry.db_food_entry[i][0] === req.body.db_food_entry[0] && entry.db_food_entry[i][1] === req.body.db_food_entry[1]) {
+//             index = i;
+//           }
+//         }
+
+//         entry.db_food_entry.splice(index, 1);
+
+
+//         entry.update({
+//           db_food_entry: entry.db_food_entry
+//         }, {
+//             where: {
+//               user_id: req.body.user_id,
+//               date_id: req.body.date_id
+//             }
+//           })
+//           .then(finalentry => {
+//             console.log('final entry', finalentry.dataValues);
+//             res.json(finalentry);
+//           });
+//       })
+//       .catch(error => console.error('trouble removing diary entry', error));
+//   }
+// });
 
 // Works but when a new entry is initialized, it isn't an array of arrays..
 /*
@@ -148,9 +163,6 @@ router.post('/diaryentry', (req, res) => {
       }
 */
 module.exports = router;
-
-
-
 //  router.post('/', (req, res) => {
 //   Diary.findOrCreate({
 //     where: {
