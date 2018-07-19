@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import moment from 'moment';
+import _ from 'lodash/fp';
+
 import { connect } from 'react-redux';
 import { Diary } from '../components';
 import { selectedMealType, selectedDiaryDate, gettingDiaryId, fetchingDiary, removingFoodFromDiary } from '../store/action-creators/diary';
 import history from '../history';
-import _ from 'lodash/fp';
+
 
 const mapState = state => ({
   user: state.auth.user,
@@ -42,7 +44,6 @@ class DiaryContainer extends Component {
 
   previousDayDiary = () => {
     this.props.gettingDiaryId(moment().add(-1, 'days').format('YYYY-MM-DD'));
-
   }
 
   // TODO: Test to see if I need this? Can't I just pass down props and dispatch selectedMealType from store
@@ -55,12 +56,13 @@ class DiaryContainer extends Component {
     this.props.selectedMealType(typeId);
   }
 
-  removeFood = (foodId, typeId) => {
+  removeFood = (foodId, mealType) => {
     const entry = {
-      id: foodId,
-      typeId,
+      food_id: foodId,
+      mealType,
       date_id: this.props.diary.currentDiaryDate.id
     };
+    console.log('entry working?', entry);
     this.props.removingFoodFromDiary(entry);
   }
 
