@@ -85,7 +85,6 @@ export const fetchingDiary = (user_id, date_id) => dispatch => {
 };
 
 
-
 export const addingFoodToDiary = entryArr => dispatch => {
   console.log('what is entry,', entryArr);
 
@@ -97,6 +96,7 @@ export const addingFoodToDiary = entryArr => dispatch => {
       })
       .catch(err => console.error('error updating diary db', err));
   }
+
 };
 
 

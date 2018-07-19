@@ -18,10 +18,6 @@ const mapDispatch = dispatch => ({
   }
 });
 class HomeContainer extends Component {
-  constructor(props) {
-    super(props);
-    this.testing = this.testing.bind(this);
-  }
   componentDidMount() {
     this.props.fetchingGoal();
   }
@@ -34,7 +30,7 @@ class HomeContainer extends Component {
   }
   render() {
     return (
-      <Home {...this.props} testing={this.testing} />
+      <Home {...this.props} />
     );
   }
 }
