@@ -73,8 +73,6 @@ class FoodContainer extends Component {
     let addFoodArr = [];
     let servingSizeArr = Array.from(e.target.qty);
 
-
-
     this.state.isChecked.forEach(food_id => {
       let qtyIndex = _.findIndex(servingSizeArr, { id: food_id + '' })
       let qty = +e.target.qty[qtyIndex].value;

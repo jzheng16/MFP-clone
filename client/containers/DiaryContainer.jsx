@@ -23,8 +23,8 @@ const mapDispatch = dispatch => ({
   gettingDiaryId(date) {
     dispatch(gettingDiaryId(date));
   },
-  fetchingDiary(user_id, date_id) {
-    dispatch(fetchingDiary(user_id, date_id));
+  fetchingDiary(date_id) {
+    dispatch(fetchingDiary(date_id));
   },
   fetchingDbDiary(date_id) {
     dispatch(fetchingDbDiary(date_id));
@@ -62,22 +62,17 @@ class DiaryContainer extends Component {
 
   removeFood = (food_id, mealType, databaseId) => {
     // Conditional to test whether user is removing personal food or food retrieved from database
-    console.log(`FoodId: ${food_id}  Meal Type: ${mealType}  DatabaseId: ${databaseId}`);
-    if (databaseId) {
-      const entry = {
-        databaseId,
-        mealType,
-        date_id: this.props.diary.currentDiaryDate.id
-      };
-      this.props.removingFoodFromDiary(entry);
-    } else {
-      const entry = {
-        food_id,
-        mealType,
-        date_id: this.props.diary.currentDiaryDate.id
-      };
-      this.props.removingFoodFromDiary(entry);
+    const entry = {
+      databaseId,
+      mealType,
+      date_id: this.props.diary.currentDiaryDate.id
     };
+    if (databaseId) {
+      entry.databaseId = databaseId;
+    } else {
+      entry.food_id = food_id;
+    };
+    this.props.removingFoodFromDiary(entry);
   };
 
   render() {

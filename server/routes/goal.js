@@ -3,7 +3,6 @@ const router = require('express').Router();
 
 // Query the user and eager load his goals
 router.get('/goal', (req, res) => {
-  console.log('What is req.user?', req.user.dataValues.id);
   Goal.findOne({
     where: {
       user_id: req.user.dataValues.id
