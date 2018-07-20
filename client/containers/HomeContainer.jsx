@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 import { connect } from 'react-redux';
 import { Home } from '../components';
 import { fetchingGoal } from '../store/action-creators/goal';
-import { testing } from '../store/action-creators/diary';
+import { gettingDiaryId } from '../store/action-creators/diary';
 
 const mapState = state => ({
   user: state.auth.user,
@@ -13,21 +14,16 @@ const mapDispatch = dispatch => ({
   fetchingGoal() {
     return dispatch(fetchingGoal());
   },
-  testing(entry) {
-    return dispatch(testing(entry));
-  }
+  gettingDiaryId(date) {
+    dispatch(gettingDiaryId(date));
+  },
 });
 class HomeContainer extends Component {
   componentDidMount() {
     this.props.fetchingGoal();
+    //this.props.gettingDiaryId(moment().format('YYYY-MM-DD'));
   }
 
-  testing() {
-    const entry = {
-      date_id: 199
-    }
-    this.props.testing(entry);
-  }
   render() {
     return (
       <Home {...this.props} />

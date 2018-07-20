@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import {
   ADD_FOOD_TO_DIARY, ADD_DB_FOOD_TO_DIARY, SELECT_MEAL_TYPE, SELECT_DIARY_DATE,
-  RECEIVE_DATABASE_QUERY, REMOVE_USER_FOOD_FROM_DIARY, REMOVE_DB_FOOD_FROM_DIARY
+  RECEIVE_DATABASE_QUERY, REMOVE_USER_FOOD_FROM_DIARY, REMOVE_DB_FOOD_FROM_DIARY,
 } from '../actions';
 
 const initialState = {
@@ -35,6 +35,7 @@ export default (state = initialState, action) => {
       newState.currentMealTypeId = action.payload;
       break;
     case SELECT_DIARY_DATE:
+      newState.entries = [];
       newState.currentDiaryDate = action.payload;
       break;
     case RECEIVE_DATABASE_QUERY:
