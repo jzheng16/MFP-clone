@@ -60,7 +60,7 @@ export default props => {
                     <td> {entry.food.carbs * entry.qty} </td>
                     <td> {entry.food.protein * entry.qty} </td>
                     <td> {entry.food.fat * entry.qty} </td>
-                    <td> <button onClick={(() => props.removeFood(entry.food.id, 1))}> Remove Food </button> </td>
+                    <td> <button onClick={(() => props.removeFood(entry.food.id, 1, entry.databaseId))}> Remove Food </button> </td>
                   </tr>
                 ))
               }
@@ -89,7 +89,7 @@ export default props => {
                     <td> {entry.food.carbs * entry.qty} </td>
                     <td> {entry.food.protein * entry.qty} </td>
                     <td> {entry.food.fat * entry.qty} </td>
-                    <td> <button onClick={(() => props.removeFood(entry.food.id, 2))}> Remove Food </button> </td>
+                    <td> <button onClick={(() => props.removeFood(entry.food.id, 2, entry.databaseId))}> Remove Food </button> </td>
                   </tr>
                 ))
               }
@@ -119,7 +119,7 @@ export default props => {
                     <td> {entry.food.carbs * entry.qty} </td>
                     <td> {entry.food.protein * entry.qty} </td>
                     <td> {entry.food.fat * entry.qty} </td>
-                    <td> <button onClick={(() => props.removeFood(entry.food.id, 3))}> Remove Food </button> </td>
+                    <td> <button onClick={(() => props.removeFood(entry.food.id, 3, entry.databaseId))}> Remove Food </button> </td>
                   </tr>
                 ))
               }
@@ -149,7 +149,7 @@ export default props => {
                     <td> {entry.food.carbs * entry.qty} </td>
                     <td> {entry.food.protein * entry.qty} </td>
                     <td> {entry.food.fat * entry.qty} </td>
-                    <td> <button onClick={(() => props.removeFood(entry.food.id, 4))}> Remove Food </button> </td>
+                    <td> <button onClick={(() => props.removeFood(entry.food.id, 4, entry.databaseId))}> Remove Food </button> </td>
                   </tr>
                 ))
               }

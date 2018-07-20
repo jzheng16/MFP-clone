@@ -4,7 +4,7 @@ import _ from 'lodash/fp';
 
 import { connect } from 'react-redux';
 import { Diary } from '../components';
-import { selectedMealType, selectedDiaryDate, gettingDiaryId, fetchingDiary, removingFoodFromDiary } from '../store/action-creators/diary';
+import { selectedMealType, selectedDiaryDate, gettingDiaryId, fetchingDiary, removingFoodFromDiary, fetchingDbDiary } from '../store/action-creators/diary';
 import history from '../history';
 
 
@@ -26,6 +26,9 @@ const mapDispatch = dispatch => ({
   fetchingDiary(user_id, date_id) {
     dispatch(fetchingDiary(user_id, date_id));
   },
+  fetchingDbDiary(date_id) {
+    dispatch(fetchingDbDiary(date_id));
+  },
   removingFoodFromDiary(entry) {
     dispatch(removingFoodFromDiary(entry));
   }
@@ -39,6 +42,7 @@ class DiaryContainer extends Component {
   componentDidUpdate(prevProps) {
     if (this.props.diary.currentDiaryDate.id !== prevProps.diary.currentDiaryDate.id) {
       this.props.fetchingDiary(this.props.user.id, this.props.diary.currentDiaryDate.id);
+      this.props.fetchingDbDiary(this.props.diary.currentDiaryDate.id);
     }
   }
 
@@ -56,15 +60,25 @@ class DiaryContainer extends Component {
     this.props.selectedMealType(typeId);
   }
 
-  removeFood = (foodId, mealType) => {
-    const entry = {
-      food_id: foodId,
-      mealType,
-      date_id: this.props.diary.currentDiaryDate.id
+  removeFood = (food_id, mealType, databaseId) => {
+    // Conditional to test whether user is removing personal food or food retrieved from database
+    console.log(`FoodId: ${food_id}  Meal Type: ${mealType}  DatabaseId: ${databaseId}`);
+    if (databaseId) {
+      const entry = {
+        databaseId,
+        mealType,
+        date_id: this.props.diary.currentDiaryDate.id
+      };
+      this.props.removingFoodFromDiary(entry);
+    } else {
+      const entry = {
+        food_id,
+        mealType,
+        date_id: this.props.diary.currentDiaryDate.id
+      };
+      this.props.removingFoodFromDiary(entry);
     };
-    console.log('entry working?', entry);
-    this.props.removingFoodFromDiary(entry);
-  }
+  };
 
   render() {
     return (

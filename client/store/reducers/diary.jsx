@@ -1,8 +1,8 @@
 import _ from 'lodash';
 import {
-  ADD_FOOD_TO_DIARY, SELECT_MEAL_TYPE, SELECT_DIARY_DATE,
+  ADD_FOOD_TO_DIARY, ADD_DB_FOOD_TO_DIARY, SELECT_MEAL_TYPE, SELECT_DIARY_DATE,
   ADD_TO_BREAKFAST, ADD_TO_LUNCH, ADD_TO_DINNER, ADD_TO_SNACK,
-  RECEIVE_DATABASE_QUERY, REMOVE_FROM_ENTRY, REMOVE_FROM_BREAKFAST, REMOVE_FROM_LUNCH, REMOVE_FROM_DINNER, REMOVE_FROM_SNACK
+  RECEIVE_DATABASE_QUERY, REMOVE_FROM_ENTRY, REMOVE_USER_FOOD_FROM_DIARY, REMOVE_DB_FOOD_FROM_DIARY, REMOVE_FROM_BREAKFAST, REMOVE_FROM_LUNCH, REMOVE_FROM_DINNER, REMOVE_FROM_SNACK
 } from '../actions';
 
 const initialState = {
@@ -23,6 +23,16 @@ export default (state = initialState, action) => {
     case ADD_FOOD_TO_DIARY:
       existingFoodIndex = _.findIndex(newState.entries, { id: action.payload.id });
       if (existingFoodIndex > -1) {
+        console.log('shit why does this exist');
+        newState.entries[existingFoodIndex].qty = action.payload.qty;
+      } else {
+        newState.entries = newState.entries.concat(action.payload);
+      }
+      break;
+    case ADD_DB_FOOD_TO_DIARY:
+      existingFoodIndex = _.findIndex(newState.entries, { id: action.payload.id, databaseId: action.payload.databaseId });
+      if (existingFoodIndex > -1) {
+        console.log('shit why does this exist');
         newState.entries[existingFoodIndex].qty = action.payload.qty;
       } else {
         newState.entries = newState.entries.concat(action.payload);
@@ -69,9 +79,13 @@ export default (state = initialState, action) => {
     case RECEIVE_DATABASE_QUERY:
       newState.databaseQuery = action.payload;
       break;
-    case REMOVE_FROM_ENTRY:
+    case REMOVE_USER_FOOD_FROM_DIARY:
       newState.entries = newState.entries.filter(entry => entry.mealType !== action.payload.mealType || entry.food_id !== action.payload.food_id);
       break;
+    case REMOVE_DB_FOOD_FROM_DIARY:
+      newState.entries = newState.entries.filter(entry => entry.mealType !== action.payload.mealType || entry.databaseId !== action.payload.databaseId);
+      break;
+
     case REMOVE_FROM_BREAKFAST:
       newState.breakfast = newState.breakfast.filter(entry => entry.id !== action.payload);
       break;

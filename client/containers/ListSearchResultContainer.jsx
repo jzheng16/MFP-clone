@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { ListSearchResult } from '../components';
-import { addingFoodToDiary } from '../store/action-creators/diary';
+import { addingFoodToDbDiary } from '../store/action-creators/diary';
 
 const mapState = state => ({
   diary: state.diary,
@@ -9,25 +9,27 @@ const mapState = state => ({
 });
 
 const mapDispatch = dispatch => ({
-  addingFoodToDiary(entry) {
-    return dispatch(addingFoodToDiary(entry));
+  addingFoodToDbDiary(entry) {
+    return dispatch(addingFoodToDbDiary(entry));
   }
 });
 
 
 class ListSearchResultContainer extends Component {
-  addingFoodToDiary = (e, ndbno) => {
+  addingFoodToDbDiary = (e, ndbno) => {
     e.preventDefault();
     const entry = {
+      databaseId: +ndbno,
+      mealType: this.props.diary.currentMealTypeId,
+      qty: +e.target.qty.value,
       user_id: this.props.user.id,
       date_id: this.props.diary.currentDiaryDate.id,
-      db_food_entry: [+ndbno, this.props.diary.currentMealTypeId, +e.target.serving_size.value]
     };
-    this.props.addingFoodToDiary([entry]);
+    this.props.addingFoodToDbDiary(entry);
   }
   render() {
     return (
-      <ListSearchResult {...this.props} addingFoodToDiary={this.addingFoodToDiary} />
+      <ListSearchResult {...this.props} addingFoodToDbDiary={this.addingFoodToDbDiary} />
     );
   }
 }
