@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import shortid from 'shortid';
 import styled from 'styled-components';
-// TODO: Fetch diary and display its shit on here
 
 const StyledLeftButton = styled.button`
   background: url('../../public/mfpimage.png') no-repeat;
@@ -16,7 +15,6 @@ const StyledRightButton = styled.button`
 `;
 
 export default props => {
-  console.log('Examining props', props);
   const { entries } = props.diary;
   const breakfast = entries.filter(food => food.mealType === 1);
   const lunch = entries.filter(food => food.mealType === 2);
@@ -179,6 +177,5 @@ export default props => {
 
       </div>
     </div>
-
   );
 };
