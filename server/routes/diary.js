@@ -3,6 +3,7 @@ const db = require('../../db');
 const fp = require('lodash/fp');
 
 const Diary = db.model('diary');
+const DiaryDatabase = db.model('database_diary');
 
 router.get('/:date_id', (req, res) => {
   Diary.findAll({
@@ -18,6 +19,54 @@ router.get('/:date_id', (req, res) => {
     .catch(error => console.error('err', error));
 });
 
+router.get('/database/:date_id', (req, res) => {
+  DiaryDatabase.findAll({
+    where: {
+      user_id: req.user.dataValues.id,
+      date_id: req.params.date_id
+    }
+  })
+    .then(entry => res.json(entry))
+    .catch(error => console.error('trouble receiving entries from database diary table', error));
+});
+
+router.post('/databasediary', (req, res) => {
+  console.log('what is res.body', req.body);
+
+  DiaryDatabase.findOrCreate({
+    where: {
+      user_id: req.user.dataValues.id,
+      date_id: req.body.date_id,
+      databaseId: req.body.databaseId,
+      mealType: req.body.mealType
+    },
+    defaults: req.body,
+  })
+    .spread((entry, created) => {
+      console.log('created?', created);
+      if (created) {
+        res.json(entry);
+      }
+      else {
+        DiaryDatabase.update({
+          qty: entry.qty + req.body.qty
+        }, {
+            returning: true,
+            where: {
+              user_id: req.user.dataValues.id,
+              date_id: req.body.date_id,
+              databaseId: req.body.databaseId,
+              mealType: req.body.mealType
+            }
+          }
+        )
+          .then(updatedEntry => {
+            console.log('Is this correct?', updatedEntry[1][0]);
+            res.json(updatedEntry[1][0]);
+          });
+      }
+    });
+});
 
 // Update diary with food info
 router.post('/', (req, res) => {
@@ -39,6 +88,9 @@ router.post('/', (req, res) => {
             res.json(foodObj);
           });
       } else {
+        console.log('qty?', entry.qty);
+        console.log('Qty qty?', entry.dataValues.qty);
+
         Diary.update(
           { qty: entry.qty + req.body.qty },
           {
@@ -70,6 +122,20 @@ router.post('/delete', (req, res) => {
       user_id: req.user.dataValues.id,
       date_id: req.body.date_id,
       food_id: req.body.food_id,
+      mealType: req.body.mealType
+    }
+  })
+    .then(deletedRows => res.json(`successfully removed ${deletedRows} rows`))
+    .catch(err => console.error('trouble removing food', err));
+});
+
+router.post('/databasediary/delete', (req, res) => {
+  console.log('what is req.body', req.body);
+  DiaryDatabase.destroy({
+    where: {
+      user_id: req.user.dataValues.id,
+      date_id: req.body.date_id,
+      databaseId: req.body.databaseId,
       mealType: req.body.mealType
     }
   })

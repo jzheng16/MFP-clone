@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {
-  ADD_FOOD_TO_DIARY, SELECT_MEAL_TYPE, SELECT_DIARY_DATE,
+  ADD_FOOD_TO_DIARY, ADD_DB_FOOD_TO_DIARY, SELECT_MEAL_TYPE, SELECT_DIARY_DATE,
   ADD_TO_BREAKFAST, ADD_TO_LUNCH, ADD_TO_DINNER, ADD_TO_SNACK, RECEIVE_DATABASE_QUERY, REMOVE_USER_FOOD_FROM_DIARY,
   REMOVE_DB_FOOD_FROM_DIARY, REMOVE_FROM_ENTRY
 } from '../actions';
@@ -8,6 +8,10 @@ import API_KEY from '../../../config';
 
 export const addFoodToDiary = food => ({
   type: ADD_FOOD_TO_DIARY,
+  payload: food
+});
+export const addDbFoodToDiary = food => ({
+  type: ADD_DB_FOOD_TO_DIARY,
   payload: food
 });
 
@@ -45,12 +49,12 @@ export const mappingUserDiaryDataToFoodData = (foodId, mealTypeId, servingSize) 
     .catch(err => console.error('trouble with mapping diary to food ', err));
 };
 
-export const mappingDbDiaryDataToFoodData = (foodId, mealTypeId, servingSize) => dispatch => {
-  console.log(foodId, mealTypeId, servingSize);
+export const mappingDbDiaryDataToFoodData = (foodObj) => dispatch => {
+  const { databaseId } = foodObj;
 
-  axios.get(`https://api.nal.usda.gov/ndb/nutrients/?format=json&api_key=${API_KEY}&nutrients=208&nutrients=205&nutrients=203&nutrients=204&ndbno=${foodId}`)
+  axios.get(`https://api.nal.usda.gov/ndb/nutrients/?format=json&api_key=${API_KEY}&nutrients=208&nutrients=205&nutrients=203&nutrients=204&ndbno=${databaseId}`)
     .then(report => {
-      console.log(report);
+      console.log('What is the food report returned', report);
       const foodInfo = {
         id: report.data.report.foods[0].ndbno,
         name: report.data.report.foods[0].name,
@@ -58,17 +62,9 @@ export const mappingDbDiaryDataToFoodData = (foodId, mealTypeId, servingSize) =>
         carbs: report.data.report.foods[0].nutrients[1].gm,
         protein: report.data.report.foods[0].nutrients[2].gm,
         fat: report.data.report.foods[0].nutrients[3].gm,
-        servingSize
       };
-      if (mealTypeId === 1) {
-        dispatch(addToBreakfast(foodInfo));
-      } else if (mealTypeId === 2) {
-        dispatch(addToLunch(foodInfo));
-      } else if (mealTypeId === 3) {
-        dispatch(addToDinner(foodInfo));
-      } else {
-        dispatch(addToSnack(foodInfo));
-      }
+      foodObj.food = foodInfo;
+      dispatch(addDbFoodToDiary(foodObj));
     })
     .catch(err => console.error('trouble with mapping diary to food ', err));
 };
@@ -130,25 +126,31 @@ export const searchingDatabase = query => dispatch => {
     .catch(err => console.error('Could not search database', err));
 };
 
-export const removeUserFoodFromDiary = entryArr => ({
+export const removeUserFoodFromDiary = entry => ({
   type: REMOVE_USER_FOOD_FROM_DIARY,
-  payload: entryArr
+  payload: entry
 });
-export const removeDbFoodFromDiary = entryArr => ({
+export const removeDbFoodFromDiary = entry => ({
   type: REMOVE_DB_FOOD_FROM_DIARY,
-  payload: entryArr
+  payload: entry
 });
 
-export const removeFoodFromMeal = foodData => ({
-  type: REMOVE_FROM_ENTRY,
-  payload: foodData
-});
+
 
 export const removingFoodFromDiary = entry => dispatch => {
   console.log('Removing food entry object', entry);
-  axios.post('/api/diary/delete', entry)
-    .then(() => dispatch(removeFoodFromMeal({ food_id: entry.food_id, mealType: entry.mealType })))
-    .catch(err => console.error('action-creator err: deleting entry', err));
+  // Differentiate between deleting personal food from diary or database food 
+  if (entry.databaseId) {
+    axios.post('/api/diary/databasediary/delete', entry)
+      .then(() => dispatch(removeDbFoodFromDiary({ databaseId: entry.databaseId, mealType: entry.mealType })))
+      .catch(err => console.error('action-creator err: deleting entry', err));
+  }
+  else {
+    axios.post('/api/diary/delete', entry)
+      .then(() => dispatch(removeUserFoodFromDiary({ food_id: entry.food_id, mealType: entry.mealType })))
+      .catch(err => console.error('action-creator err: deleting entry', err));
+  }
+
 };
 
 
@@ -162,3 +164,23 @@ export const testing = entry => dispatch => {
     })
     .catch(err => console.error('fuck ', err));
 };
+
+export const fetchingDbDiary = date_id => dispatch => {
+  axios.get(`/api/diary/database/${date_id}`)
+    .then(entry => {
+      console.log('what am i receiving from fetching db diary: Array or Obj?', entry.data);
+      entry.data.forEach(food => {
+        dispatch(mappingDbDiaryDataToFoodData(food));
+      })
+    })
+    .catch(error => console.error('trouble fetching db diary', error));
+}
+
+export const addingFoodToDbDiary = entry => dispatch => {
+  axios.post('/api/diary/databasediary', entry)
+    .then(food => {
+      console.log('what am i getting when i post to my db diary: ', food.data);
+      dispatch(mappingDbDiaryDataToFoodData(food.data));
+    })
+    .catch(err => console.error('trouble adding food to db diary', err));
+}

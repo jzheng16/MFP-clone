@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const db = require('../');
 
-const DatabaseFood = db.define('database_food', {
+const DatabaseDiary = db.define('database_diary', {
   databaseId: {
     type: Sequelize.INTEGER,
     allowNull: false
@@ -16,4 +16,4 @@ const DatabaseFood = db.define('database_food', {
   }
 });
 
-module.exports = DatabaseFood;
+module.exports = DatabaseDiary;
