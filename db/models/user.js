@@ -3,10 +3,10 @@ const db = require('..');
 const Sequelize = require('sequelize');
 const crypto = require('crypto');
 
-// TODO: Define constraints and encrypt password
+// TODO: Define constraints 
 
 const User = db.define(
-  'user', {
+  'users', {
     email: {
       type: Sequelize.STRING,
     },

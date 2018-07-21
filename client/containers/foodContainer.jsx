@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import _ from 'lodash';
 
 import { createFood, fetchFood } from '../store/action-creators/foodAction';
 import { addingFoodToDiary, searchingDatabase } from '../store/action-creators/diary';
 import { ListFoods, AddFood, SearchFood } from '../components';
 import history from '../history';
-import _ from 'lodash';
+
 
 const mapStateToProps = state => ({
   foods: state.foods,
@@ -34,11 +35,24 @@ class FoodContainer extends Component {
     this.searchingDatabase = this.searchingDatabase.bind(this);
     this.state = {
       isChecked: []
-    }
+    };
   }
 
   componentWillMount() {
     this.props.fetchFood();
+  }
+
+  onChange = e => {
+    let index;
+    const checkedArr = this.state.isChecked;
+
+    if (e.target.checked) {
+      checkedArr.push(+e.target.value);
+    } else {
+      index = checkedArr.indexOf(+e.target.value);
+      checkedArr.splice(index, 1);
+    }
+    this.setState({ isChecked: checkedArr });
   }
 
   addFood = e => {
@@ -54,29 +68,15 @@ class FoodContainer extends Component {
     this.props.createFood(newFood);
   }
 
-  onChange = e => {
-    let index;
-    let checkedArr = this.state.isChecked;
-
-    if (e.target.checked) {
-      checkedArr.push(+e.target.value);
-    }
-    else {
-      index = checkedArr.indexOf(+e.target.value);
-      checkedArr.splice(index, 1);
-    }
-    this.setState({ isChecked: checkedArr });
-  }
-
   addingFoodToDiary = e => {
     e.preventDefault();
-    let addFoodArr = [];
-    let servingSizeArr = Array.from(e.target.qty);
+    const addFoodArr = [];
+    const servingSizeArr = Array.from(e.target.qty);
 
     this.state.isChecked.forEach(food_id => {
-      let qtyIndex = _.findIndex(servingSizeArr, { id: food_id + '' })
-      let qty = +e.target.qty[qtyIndex].value;
-      let entry = {
+      const qtyIndex = _.findIndex(servingSizeArr, { id: `${food_id}` });
+      const qty = +e.target.qty[qtyIndex].value;
+      const entry = {
         user_id: this.props.user.id,
         date_id: this.props.diary.currentDiaryDate.id,
         mealType: this.props.diary.currentMealTypeId,

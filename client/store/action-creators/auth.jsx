@@ -27,7 +27,6 @@ export const signingUp = user => dispatch => {
     .catch(err => console.error('Oops had trouble signing up: ', err));
 };
 
-// TODO: Figure out Do i need a .get or .post? Or is any one ok?
 export const loggingOut = () => dispatch => {
   axios.get('/api/auth/logout')
     .then(() => {

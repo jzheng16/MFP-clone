@@ -31,6 +31,7 @@ router.post('/signup', (req, res, next) => {
       if (err.name === 'SequelizeConstraintError') {
         res.status(401).send('E-mail already exists');
       } else {
+        console.log('what is this error', err);
         next(err);
       }
     });

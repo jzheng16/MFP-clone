@@ -4,7 +4,7 @@ import {
   RECEIVE_DATABASE_QUERY, REMOVE_USER_FOOD_FROM_DIARY,
   REMOVE_DB_FOOD_FROM_DIARY,
 } from '../actions';
-import API_KEY from '../../../config';
+import { API_KEY } from '../../../config';
 
 /* Simple Action Creators */
 
@@ -42,30 +42,10 @@ export const receiveDatabaseQuery = data => ({
   payload: data
 });
 
-
 /* Redux Thunk Action-Creators */
 
-// Fetch diary and turn the arrays into a list of foods
-export const fetchingDiary = (date_id) => dispatch => {
-  axios.get(`/api/diary/${date_id}`)
-    .then(diary => {
-      dispatch(addFoodToDiary(diary.data));
-    })
-    .catch(err => console.error('trouble fetching diary', err));
-};
-
-export const fetchingDbDiary = date_id => dispatch => {
-  axios.get(`/api/diary/database/${date_id}`)
-    .then(entry => {
-      entry.data.forEach(food => {
-        dispatch(mappingDbDiaryDataToFoodData(food));
-      })
-    })
-    .catch(error => console.error('trouble fetching db diary', error));
-}
-
 // Take database diary ID's and make API calls to retrieve the nutrient reports for each food
-export const mappingDbDiaryDataToFoodData = (foodObj) => dispatch => {
+export const mappingDbDiaryDataToFoodData = foodObj => dispatch => {
   const { databaseId } = foodObj;
   axios.get(`https://api.nal.usda.gov/ndb/nutrients/?format=json&api_key=${API_KEY}&nutrients=208&nutrients=205&nutrients=203&nutrients=204&ndbno=${databaseId}`)
     .then(report => {
@@ -85,12 +65,30 @@ export const mappingDbDiaryDataToFoodData = (foodObj) => dispatch => {
 };
 
 
+// Fetch diary and turn the arrays into a list of foods
+export const fetchingDiary = date_id => dispatch => {
+  axios.get(`/api/diary/${date_id}`)
+    .then(diary => {
+      dispatch(addFoodToDiary(diary.data));
+    })
+    .catch(err => console.error('trouble fetching diary', err));
+};
+
+export const fetchingDbDiary = date_id => dispatch => {
+  axios.get(`/api/diary/database/${date_id}`)
+    .then(entry => {
+      entry.data.forEach(food => {
+        dispatch(mappingDbDiaryDataToFoodData(food));
+      });
+    })
+    .catch(error => console.error('trouble fetching db diary', error));
+};
+
 // Adding Food Action-Creators
 export const addingFoodToDiary = entryArr => dispatch => {
   entryArr.forEach(entry => {
     axios.post('/api/diary', entry)
       .then(newEntry => {
-        ;
         dispatch(addFoodToDiary(newEntry.data));
       })
       .catch(err => console.error('error updating diary db', err));
@@ -103,7 +101,7 @@ export const addingFoodToDbDiary = entry => dispatch => {
       dispatch(mappingDbDiaryDataToFoodData(food.data));
     })
     .catch(err => console.error('trouble adding food to db diary', err));
-}
+};
 
 // Setting Diary date to know which day to retrieve info from
 export const gettingDiaryId = date => dispatch => {
@@ -124,18 +122,14 @@ export const searchingDatabase = query => dispatch => {
 
 // Remove Food
 export const removingFoodFromDiary = entry => dispatch => {
-  // Differentiate between deleting personal food from diary or database food 
+  // Differentiate between deleting personal food from diary or database food
   if (entry.databaseId) {
     axios.post('/api/diary/databasediary/delete', entry)
       .then(() => dispatch(removeDbFoodFromDiary({ databaseId: entry.databaseId, mealType: entry.mealType })))
       .catch(err => console.error('action-creator err: deleting entry', err));
-  }
-  else {
+  } else {
     axios.post('/api/diary/delete', entry)
       .then(() => dispatch(removeUserFoodFromDiary({ food_id: entry.food_id, mealType: entry.mealType })))
       .catch(err => console.error('action-creator err: deleting entry', err));
   }
-
 };
-
-

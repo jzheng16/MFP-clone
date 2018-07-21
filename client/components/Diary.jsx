@@ -50,7 +50,7 @@ export default props => {
             </thead>
             <tbody>
               {breakfast && breakfast
-                .map((entry, index) => (
+                .map(entry => (
                   <tr key={shortid.generate()}>
                     <td> {entry.food.name} </td>
                     <td> {entry.qty} </td>
@@ -79,7 +79,7 @@ export default props => {
             </thead>
             <tbody>
               {lunch && lunch
-                .map((entry, index) => (
+                .map(entry => (
                   <tr key={shortid.generate()}>
                     <td> {entry.food.name} </td>
                     <td> {entry.qty} </td>
@@ -109,7 +109,7 @@ export default props => {
             </thead>
             <tbody>
               {dinner && dinner
-                .map((entry, index) => (
+                .map(entry => (
                   <tr key={shortid.generate()}>
                     <td> {entry.food.name} </td>
                     <td> {entry.qty} </td>
@@ -139,7 +139,7 @@ export default props => {
             </thead>
             <tbody>
               {snack && snack
-                .map((entry, index) => (
+                .map(entry => (
                   <tr key={shortid.generate()}>
                     <td> {entry.food.name} </td>
                     <td> {entry.qty} </td>

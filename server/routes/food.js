@@ -14,7 +14,6 @@ router.get('/getfood', (req, res) => {
 });
 
 router.post('/addfood', (req, res) => {
-  // Food object will be on the req.body
   Food.create(req.body)
     .then(createdFood => res.json(createdFood))
     .catch(err => console.error(err));

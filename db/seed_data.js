@@ -1,603 +1,471 @@
 const moment = require('moment');
 
-
-
 const User =
   [{
-    id: 1, email: 'bobo@bobo.com', password: '1234', first_name: 'Bobo', last_name: 'Kins', weight: [142, 139, 145, 174, 136]
+    email: 'bobo@bobo.com', password: '1234', first_name: 'Bobo', last_name: 'Kins', weight: [151, 153, 175, 173, 151]
   },
   {
-    id: 2, email: 'bproudman1@w3.org', password: 'lXWkd5', first_name: 'Torbjörn', last_name: 'Proudman', weight: [143, 165, 168, 139, 168]
+    email: 'medie1@ebay.co.uk', password: 'QPUJAR1OwQ2i', first_name: 'Marlo', last_name: 'Edie', weight: [159, 162, 164, 158, 174]
   },
   {
-    id: 3, email: 'cbosenworth2@nytimes.com', password: 'XMMXfZxb2', first_name: 'Dorothée', last_name: 'Bosenworth', weight: [168, 142, 137, 174, 151]
+    email: 'psimony2@rambler.ru', password: 'Qped6xY', first_name: 'Perla', last_name: 'Simony', weight: [169, 179, 162, 169, 156]
   },
   {
-    id: 4, email: 'mmeads3@smh.com.au', password: 'thTlXO', first_name: 'Publicité', last_name: 'Meads', weight: [177, 167, 166, 144, 172]
+    email: 'cforrestor3@foxnews.com', password: '1NouRgEFKi8', first_name: 'Catlaina', last_name: 'Forrestor', weight: [177, 166, 171, 180, 162]
   },
   {
-    id: 5, email: 'gjopke4@stumbleupon.com', password: '2ThYN1aGQ', first_name: 'Estée', last_name: 'Jopke', weight: [176, 173, 130, 144, 164]
+    email: 'jfifoot4@arizona.edu', password: 'zm6Fhj4', first_name: 'Joana', last_name: 'Fifoot', weight: [170, 167, 150, 165, 154]
   },
   {
-    id: 6, email: 'asiflet5@parallels.com', password: 'mp5N0Fl', first_name: 'Pål', last_name: 'Siflet', weight: [163, 144, 178, 155, 153]
+    email: 'csandle5@zdnet.com', password: 'UWGcjEU8r', first_name: 'Coleen', last_name: 'Sandle', weight: [155, 151, 163, 171, 167]
   },
   {
-    id: 7, email: 'kmunks6@youku.com', password: 'ecaSIh', first_name: 'Naéva', last_name: 'Munks', weight: [139, 138, 170, 164, 163]
+    email: 'dtreker6@washingtonpost.com', password: 'xyPY3xJKj', first_name: 'Dianemarie', last_name: 'Treker', weight: [173, 172, 154, 168, 173]
   },
   {
-    id: 8, email: 'imatzkaitis7@cnbc.com', password: 'LaGWAH8Y3G', first_name: 'Börje', last_name: 'Matzkaitis', weight: [163, 149, 141, 163, 144]
+    email: 'bbrakewell7@com.com', password: 'I1vCMIgUfcv', first_name: 'Bessie', last_name: 'Brakewell', weight: [169, 166, 168, 173, 152]
   },
   {
-    id: 9, email: 'ckyd8@nsw.gov.au', password: '5K9rLx', first_name: 'Aí', last_name: 'Kyd', weight: [159, 139, 152, 136, 152]
+    email: 'mvoff8@nps.gov', password: 'CsBUxSQ8', first_name: 'Milt', last_name: 'Voff', weight: [159, 161, 164, 162, 162]
   },
   {
-    id: 10, email: 'ghowels9@booking.com', password: 'ymGEVVorhxx', first_name: 'Loïca', last_name: 'Howels', weight: [159, 179, 179, 168, 150]
+    email: 'mhickinbottom9@columbia.edu', password: 'GsYLUtGBUKT', first_name: 'Madlin', last_name: 'Hickinbottom', weight: [171, 174, 157, 178, 167]
   },
   {
-    id: 11, email: 'edurransa@myspace.com', password: 'gcEQwf', first_name: 'Ráo', last_name: 'Durrans', weight: [166, 171, 135, 131, 152]
+    email: 'vfurneauxa@ovh.net', password: 'Zga5fQZY88', first_name: 'Vale', last_name: 'Furneaux', weight: [173, 165, 150, 168, 151]
   },
   {
-    id: 12, email: 'bellenb@purevolume.com', password: '735nIunrJdv', first_name: 'Edmée', last_name: 'Ellen', weight: [166, 141, 165, 141, 151]
+    email: 'einsullb@slideshare.net', password: 'YlKHRPlcQ8KG', first_name: 'Evita', last_name: 'Insull', weight: [154, 154, 159, 158, 159]
   },
   {
-    id: 13, email: 'trebouletc@360.cn', password: 'FbIvlL', first_name: 'Léa', last_name: 'Reboulet', weight: [176, 159, 131, 169, 139]
+    email: 'trichingsc@vimeo.com', password: 'WfmF6BTJK', first_name: 'Thia', last_name: 'Richings', weight: [175, 179, 175, 167, 174]
   },
   {
-    id: 14, email: 'ujacobowiczd@baidu.com', password: 'nDTdO2alpMt', first_name: 'Eléonore', last_name: 'Jacobowicz', weight: [153, 154, 157, 138, 143]
+    email: 'hgetleyd@chronoengine.com', password: 'VFLf1M00Big', first_name: 'Harvey', last_name: 'Getley', weight: [170, 154, 162, 166, 152]
   },
   {
-    id: 15, email: 'hwetheralde@java.com', password: 'GcsxTDv', first_name: 'Rébecca', last_name: 'Wetherald', weight: [168, 177, 166, 178, 136]
+    email: 'srobertshawe@acquirethisname.com', password: '2z8q141', first_name: 'Stanly', last_name: 'Robertshaw', weight: [180, 162, 152, 164, 162]
   },
   {
-    id: 16, email: 'vaddicottf@altervista.org', password: 'VSkVAEv6E', first_name: 'Maëline', last_name: 'Addicott', weight: [134, 143, 134, 157, 154]
+    email: 'cabberleyf@buzzfeed.com', password: 'eqAO0IbEyu', first_name: 'Corina', last_name: 'Abberley', weight: [175, 180, 151, 156, 178]
   },
   {
-    id: 17, email: 'jfennyg@mlb.com', password: 'i9SyrBi', first_name: 'Loïc', last_name: 'Fenny', weight: [161, 146, 179, 133, 143]
+    email: 'vrowng@washingtonpost.com', password: 'jl50apIa', first_name: 'Vernen', last_name: 'Rown', weight: [170, 170, 169, 151, 160]
   },
   {
-    id: 18, email: 'bboutwellh@yahoo.com', password: 'LnHCiQIrfLSl', first_name: 'Célestine', last_name: 'Boutwell', weight: [168, 136, 142, 145, 142]
+    email: 'sepeletth@guardian.co.uk', password: 'LJdyC7d0u', first_name: 'Sayer', last_name: 'Epelett', weight: [150, 165, 153, 164, 153]
   },
   {
-    id: 19, email: 'sgrishanovi@wisc.edu', password: '4UnK2TeDq', first_name: 'Ophélie', last_name: 'Grishanov', weight: [169, 152, 157, 146, 140]
+    email: 'ngouti@php.net', password: 'z15T8EJN', first_name: 'Neilla', last_name: 'Gout', weight: [175, 158, 166, 151, 167]
   },
   {
-    id: 20, email: 'lgreastyj@mapy.cz', password: 'NRfJBQ5I', first_name: 'Renée', last_name: 'Greasty', weight: [171, 143, 154, 168, 167]
+    email: 'aasliej@auda.org.au', password: 'YMfpDuGLG1', first_name: 'Amalie', last_name: 'Aslie', weight: [169, 179, 156, 151, 178]
   },
   {
-    id: 21, email: 'aspenslyk@ehow.com', password: 'qW7JADpwvcU', first_name: 'Björn', last_name: 'Spensly', weight: [132, 144, 134, 165, 169]
+    email: 'riacobettok@sitemeter.com', password: '9KrrHj', first_name: 'Randall', last_name: 'Iacobetto', weight: [179, 173, 152, 160, 152]
   },
   {
-    id: 22, email: 'ptyasl@infoseek.co.jp', password: 'd2E8bR38', first_name: 'Erwéi', last_name: 'Tyas', weight: [149, 157, 175, 137, 165]
+    email: 'cmaberl@msn.com', password: 'pK77blaBGeN', first_name: 'Cammy', last_name: 'Maber', weight: [166, 175, 155, 154, 168]
   },
   {
-    id: 23, email: 'bferneyhoughm@amazon.co.uk', password: 'eEvtdsv9jy', first_name: 'Eléonore', last_name: 'Ferneyhough', weight: [159, 153, 176, 131, 154]
+    email: 'etointonm@issuu.com', password: 'CDdx2gmDJ', first_name: 'Ermengarde', last_name: 'Tointon', weight: [152, 152, 168, 156, 158]
   },
   {
-    id: 24, email: 'lsheathern@cdbaby.com', password: 'dFYLwnDfqvJK', first_name: 'Loïca', last_name: 'Sheather', weight: [136, 158, 150, 172, 170]
+    email: 'hhandlingn@rambler.ru', password: 'vY3zYNPT', first_name: 'Hakeem', last_name: 'Handling', weight: [171, 164, 155, 161, 159]
   },
   {
-    id: 25, email: 'jmummeryo@shinystat.com', password: 'Wrt7yUEek4m', first_name: 'Styrbjörn', last_name: 'Mummery', weight: [159, 130, 148, 178, 163]
+    email: 'atrimbleo@bloglines.com', password: 'TYXvQjh', first_name: 'Archibold', last_name: 'Trimble', weight: [154, 163, 166, 169, 160]
   },
   {
-    id: 26, email: 'brembaudp@zimbio.com', password: 's6fRDH', first_name: 'Laurélie', last_name: 'Rembaud', weight: [144, 172, 143, 161, 132]
+    email: 'pjoreaup@dropbox.com', password: 'VdSl1L0a70', first_name: 'Philipa', last_name: 'Joreau', weight: [150, 152, 179, 151, 151]
   },
   {
-    id: 27, email: 'sberkaq@gov.uk', password: 'YLhQ3iC3', first_name: 'Marie-françoise', last_name: 'Berka', weight: [154, 164, 133, 139, 144]
+    email: 'glambournq@etsy.com', password: 'kllbegERVlt', first_name: 'Gabey', last_name: 'Lambourn', weight: [179, 156, 156, 161, 161]
   },
   {
-    id: 28, email: 'ssnuggr@hexun.com', password: '3v59a9lqvt', first_name: 'Mylène', last_name: 'Snugg', weight: [176, 156, 160, 143, 154]
+    email: 'gsimmankr@nifty.com', password: 'e5OD2AJdE', first_name: 'Gwenore', last_name: 'Simmank', weight: [163, 152, 155, 167, 177]
   },
   {
-    id: 29, email: 'bnoseworthys@craigslist.org', password: 'eNbR5R5SEXA', first_name: 'Anaël', last_name: 'Noseworthy', weight: [134, 148, 149, 172, 178]
+    email: 'ddunaways@rediff.com', password: 'EtWq3d6mox', first_name: 'Daryn', last_name: 'Dunaway', weight: [162, 168, 177, 167, 155]
   },
   {
-    id: 30, email: 'rmaceyt@skyrock.com', password: 'laeYLpfM', first_name: 'Maëlys', last_name: 'Macey', weight: [173, 132, 144, 147, 144]
+    email: 'brentoult@is.gd', password: '0AhVjWQjeH', first_name: 'Braden', last_name: 'Rentoul', weight: [179, 180, 169, 163, 171]
   },
   {
-    id: 31, email: 'solinu@oracle.com', password: 'p5Wmjwzrp', first_name: 'Tán', last_name: 'Olin', weight: [138, 159, 150, 176, 134]
+    email: 'dhazeldeneu@seesaa.net', password: 'TFSB3NiGb', first_name: 'Dame', last_name: 'Hazeldene', weight: [177, 163, 168, 153, 175]
   },
   {
-    id: 32, email: 'apaulatv@cnet.com', password: 'RFYmraM7', first_name: 'Cléa', last_name: 'Paulat', weight: [173, 151, 162, 174, 155]
+    email: 'ecamackev@hatena.ne.jp', password: 'cTkhFiGtbg', first_name: 'Elbertina', last_name: 'Camacke', weight: [155, 165, 156, 177, 154]
   },
   {
-    id: 33, email: 'hhaseldinew@ihg.com', password: 'E8kjrym5Rq', first_name: 'Marie-ève', last_name: 'Haseldine', weight: [175, 147, 162, 136, 149]
+    email: 'ewilgarw@bing.com', password: 'rJafAWNVx3', first_name: 'Eba', last_name: 'Wilgar', weight: [175, 173, 164, 160, 151]
   },
   {
-    id: 34, email: 'aallinx@youtube.com', password: 'ns8TrVlLJ', first_name: 'Desirée', last_name: 'Allin', weight: [130, 152, 170, 136, 160]
+    email: 'bteodorix@angelfire.com', password: 'VxMpU8', first_name: 'Bamby', last_name: 'Teodori', weight: [158, 152, 165, 156, 177]
   },
   {
-    id: 35, email: 'mteazy@prweb.com', password: 'qahYPLGcYdc', first_name: 'Béatrice', last_name: 'Teaz', weight: [149, 156, 168, 138, 172]
+    email: 'nfattoriniy@cnet.com', password: 'DZD3NIme2324', first_name: 'Ninette', last_name: 'Fattorini', weight: [178, 163, 180, 170, 161]
   },
   {
-    id: 36, email: 'aburburoughz@cargocollective.com', password: 'F4Amg3m', first_name: 'Mahélie', last_name: 'Burburough', weight: [138, 152, 149, 165, 169]
+    email: 'timmz@cocolog-nifty.com', password: 'xRssKVv4p', first_name: 'Tammy', last_name: 'Imm', weight: [156, 152, 177, 166, 167]
   },
   {
-    id: 37, email: 'draiment10@pbs.org', password: '0BOqJRAXV', first_name: 'Esbjörn', last_name: 'Raiment', weight: [130, 160, 144, 145, 142]
+    email: 'kpiscopiello10@istockphoto.com', password: 'ZIpRKPjn', first_name: 'Kinny', last_name: 'Piscopiello', weight: [161, 161, 156, 167, 152]
   },
   {
-    id: 38, email: 'cbiesinger11@nasa.gov', password: 'ipBCyEDOhQ', first_name: 'Marie-noël', last_name: 'Biesinger', weight: [164, 174, 136, 177, 148]
+    email: 'tcurrao11@tumblr.com', password: 'VFUa1O0R', first_name: 'Trudey', last_name: 'Currao', weight: [168, 171, 164, 175, 160]
   },
   {
-    id: 39, email: 'mrosenschein12@google.com.hk', password: 'gi9Q5n6', first_name: 'Andréanne', last_name: 'Rosenschein', weight: [137, 140, 161, 136, 147]
+    email: 'cklulik12@multiply.com', password: 'nejh13ueK', first_name: 'Carlin', last_name: 'Klulik', weight: [171, 178, 157, 165, 151]
   },
   {
-    id: 40, email: 'dcatlin13@google.de', password: 'F7GfBR', first_name: 'Vénus', last_name: 'Catlin', weight: [157, 162, 151, 140, 131]
+    email: 'bburgher13@issuu.com', password: 'pGM6gPLya', first_name: 'Beaufort', last_name: 'Burgher', weight: [154, 168, 150, 164, 156]
   },
   {
-    id: 41, email: 'lbiaggelli14@yale.edu', password: 'AwlF9O', first_name: 'Séréna', last_name: 'Biaggelli', weight: [152, 137, 140, 156, 159]
+    email: 'ujuorio14@t-online.de', password: 'IhpUZ31', first_name: 'Ursola', last_name: 'Juorio', weight: [179, 168, 164, 178, 160]
   },
   {
-    id: 42, email: 'apeople15@home.pl', password: 'Vehnrczk', first_name: 'Rébecca', last_name: 'People', weight: [167, 138, 138, 173, 146]
+    email: 'hjirousek15@blogger.com', password: '2uya1dWubc', first_name: 'Haroun', last_name: 'Jirousek', weight: [179, 180, 160, 152, 151]
   },
   {
-    id: 43, email: 'meddins16@opensource.org', password: '0iBlpnVsEkUn', first_name: 'Marlène', last_name: 'Eddins', weight: [152, 135, 134, 160, 133]
+    email: 'kphiller16@myspace.com', password: 'YtfViQZH', first_name: 'Kerrill', last_name: 'Philler', weight: [153, 151, 156, 167, 151]
   },
   {
-    id: 44, email: 'tlawty17@goo.ne.jp', password: 'NL3fA0GdSl', first_name: 'Måns', last_name: 'Lawty', weight: [175, 135, 144, 132, 167]
+    email: 'aadamolli17@barnesandnoble.com', password: 'VtiksnVMvqe', first_name: 'Amargo', last_name: 'Adamolli', weight: [178, 173, 177, 155, 172]
   },
   {
-    id: 45, email: 'lbelderson18@seesaa.net', password: 'NusagYVvli', first_name: 'Magdalène', last_name: 'Belderson', weight: [160, 144, 158, 168, 131]
+    email: 'mcollimore18@google.com.hk', password: 'Vz3vn66ubp', first_name: 'Magdalen', last_name: 'Collimore', weight: [152, 158, 152, 162, 174]
   },
   {
-    id: 46, email: 'kdroghan19@constantcontact.com', password: '88mZLNq', first_name: 'Lóng', last_name: 'Droghan', weight: [157, 178, 134, 156, 178]
+    email: 'ihamlington19@deviantart.com', password: 'ihPxV4jPLi', first_name: 'Ivett', last_name: 'Hamlington', weight: [157, 165, 168, 156, 170]
   },
   {
-    id: 47, email: 'rmarre1a@list-manage.com', password: 'oQHiFCGH', first_name: 'Tán', last_name: 'Marre', weight: [130, 148, 147, 167, 145]
+    email: 'lcloney1a@scribd.com', password: 'bU9wyYVk', first_name: 'Luciano', last_name: 'Cloney', weight: [180, 159, 174, 176, 156]
   },
   {
-    id: 48, email: 'lenbury1b@diigo.com', password: 'lYRaRufglX', first_name: 'Camélia', last_name: 'Enbury', weight: [160, 157, 139, 169, 148]
+    email: 'mpondjones1b@deliciousdays.com', password: 'wER5TsH', first_name: 'Mollee', last_name: 'Pond-Jones', weight: [150, 168, 156, 160, 164]
   },
   {
-    id: 49, email: 'jtrotman1c@cnn.com', password: 'qumKxl65', first_name: 'Annotés', last_name: 'Trotman', weight: [145, 148, 163, 155, 171]
+    email: 'mmattheus1c@nyu.edu', password: 'i8oPeiL1', first_name: 'Millisent', last_name: 'Mattheus', weight: [161, 178, 157, 180, 152]
   },
   {
-    id: 50, email: 'bhymer1d@adobe.com', password: 'sROIG8fWLg', first_name: 'Mahélie', last_name: 'Hymer', weight: [135, 178, 164, 158, 158]
+    email: 'gcleminson1d@mlb.com', password: 'LK2C54a9Eux', first_name: 'Ginelle', last_name: 'Cleminson', weight: [167, 161, 167, 158, 159]
   }];
 
 const Dates = [];
 
 for (let i = 0; i < 1000; i++) {
-  let days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-  let dayOfWeek = moment('2018-01-01', 'YYYY-MM-DD').add(i, 'day').isoWeekday();
-  let formattedDayOfWeek = days[dayOfWeek - 1];
-  let formattedDate = moment('2018-01-01', 'YYYY-MM-DD').add(i, 'day').format('YYYY-MM-DD');
+  const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+  const dayOfWeek = moment('2018-01-01', 'YYYY-MM-DD').add(i, 'day').isoWeekday();
+  const formattedDayOfWeek = days[dayOfWeek - 1];
+  const formattedDate = moment('2018-01-01', 'YYYY-MM-DD').add(i, 'day').format('YYYY-MM-DD');
   Dates.push({ id: i + 1, day: formattedDate, dow: formattedDayOfWeek });
-
 }
 
 const Goal =
   [{
-    id: 1, calorie: 1953, weight: 136, carbs: 79, protein: 130, fat: 41, user_id: 1
+    calorie: 1555, weight: 144, carbs: 92, protein: 131, fat: 60, user_id: 1
   },
   {
-    id: 2, calorie: 1421, weight: 149, carbs: 135, protein: 136, fat: 74, user_id: 2
+    calorie: 2950, weight: 155, carbs: 118, protein: 109, fat: 43, user_id: 2
   },
   {
-    id: 3, calorie: 1258, weight: 166, carbs: 50, protein: 123, fat: 76, user_id: 3
+    calorie: 1238, weight: 138, carbs: 93, protein: 122, fat: 141, user_id: 3
   },
   {
-    id: 4, calorie: 1469, weight: 164, carbs: 63, protein: 117, fat: 130, user_id: 4
+    calorie: 2799, weight: 180, carbs: 69, protein: 81, fat: 64, user_id: 4
   },
   {
-    id: 5, calorie: 1211, weight: 180, carbs: 148, protein: 140, fat: 43, user_id: 5
+    calorie: 1587, weight: 157, carbs: 60, protein: 132, fat: 43, user_id: 5
   },
   {
-    id: 6, calorie: 2372, weight: 145, carbs: 102, protein: 67, fat: 60, user_id: 6
+    calorie: 1512, weight: 178, carbs: 122, protein: 83, fat: 76, user_id: 6
   },
   {
-    id: 7, calorie: 2623, weight: 171, carbs: 128, protein: 82, fat: 63, user_id: 7
+    calorie: 2540, weight: 170, carbs: 46, protein: 117, fat: 47, user_id: 7
   },
   {
-    id: 8, calorie: 1806, weight: 151, carbs: 98, protein: 101, fat: 59, user_id: 8
+    calorie: 2139, weight: 161, carbs: 85, protein: 115, fat: 131, user_id: 8
   },
   {
-    id: 9, calorie: 2934, weight: 147, carbs: 40, protein: 92, fat: 141, user_id: 9
+    calorie: 2897, weight: 174, carbs: 126, protein: 93, fat: 69, user_id: 9
   },
   {
-    id: 10, calorie: 1622, weight: 143, carbs: 107, protein: 119, fat: 103, user_id: 10
+    calorie: 2593, weight: 145, carbs: 140, protein: 99, fat: 110, user_id: 10
   },
   {
-    id: 11, calorie: 1981, weight: 173, carbs: 119, protein: 97, fat: 76, user_id: 11
+    calorie: 2700, weight: 168, carbs: 80, protein: 90, fat: 101, user_id: 11
   },
   {
-    id: 12, calorie: 1541, weight: 141, carbs: 121, protein: 123, fat: 77, user_id: 12
+    calorie: 1255, weight: 146, carbs: 134, protein: 99, fat: 112, user_id: 12
   },
   {
-    id: 13, calorie: 2803, weight: 180, carbs: 122, protein: 142, fat: 111, user_id: 13
+    calorie: 1604, weight: 162, carbs: 69, protein: 75, fat: 46, user_id: 13
   },
   {
-    id: 14, calorie: 2968, weight: 146, carbs: 115, protein: 55, fat: 137, user_id: 14
+    calorie: 2220, weight: 164, carbs: 54, protein: 122, fat: 117, user_id: 14
   },
   {
-    id: 15, calorie: 2724, weight: 176, carbs: 126, protein: 148, fat: 146, user_id: 15
+    calorie: 1346, weight: 171, carbs: 101, protein: 111, fat: 129, user_id: 15
   },
   {
-    id: 16, calorie: 1317, weight: 136, carbs: 122, protein: 149, fat: 69, user_id: 16
+    calorie: 2451, weight: 136, carbs: 81, protein: 71, fat: 148, user_id: 16
   },
   {
-    id: 17, calorie: 2345, weight: 144, carbs: 59, protein: 98, fat: 78, user_id: 17
+    calorie: 1462, weight: 162, carbs: 80, protein: 75, fat: 43, user_id: 17
   },
   {
-    id: 18, calorie: 2035, weight: 173, carbs: 61, protein: 121, fat: 62, user_id: 18
+    calorie: 2009, weight: 134, carbs: 133, protein: 132, fat: 108, user_id: 18
   },
   {
-    id: 19, calorie: 2178, weight: 179, carbs: 103, protein: 130, fat: 135, user_id: 19
+    calorie: 2133, weight: 171, carbs: 140, protein: 94, fat: 80, user_id: 19
   },
   {
-    id: 20, calorie: 1784, weight: 140, carbs: 43, protein: 105, fat: 54, user_id: 20
+    calorie: 2420, weight: 167, carbs: 56, protein: 100, fat: 48, user_id: 20
   },
   {
-    id: 21, calorie: 2759, weight: 167, carbs: 82, protein: 143, fat: 71, user_id: 21
+    calorie: 1715, weight: 169, carbs: 78, protein: 108, fat: 42, user_id: 21
   },
   {
-    id: 22, calorie: 1269, weight: 170, carbs: 117, protein: 63, fat: 52, user_id: 22
+    calorie: 1968, weight: 146, carbs: 142, protein: 53, fat: 89, user_id: 22
   },
   {
-    id: 23, calorie: 2169, weight: 176, carbs: 98, protein: 62, fat: 98, user_id: 23
+    calorie: 2477, weight: 137, carbs: 111, protein: 87, fat: 56, user_id: 23
   },
   {
-    id: 24, calorie: 1340, weight: 151, carbs: 78, protein: 136, fat: 119, user_id: 24
+    calorie: 1721, weight: 137, carbs: 79, protein: 136, fat: 69, user_id: 24
   },
   {
-    id: 25, calorie: 1313, weight: 166, carbs: 42, protein: 52, fat: 108, user_id: 25
+    calorie: 1427, weight: 146, carbs: 53, protein: 132, fat: 122, user_id: 25
   },
   {
-    id: 26, calorie: 2189, weight: 133, carbs: 96, protein: 82, fat: 135, user_id: 26
+    calorie: 2391, weight: 133, carbs: 53, protein: 143, fat: 90, user_id: 26
   },
   {
-    id: 27, calorie: 2397, weight: 175, carbs: 112, protein: 83, fat: 118, user_id: 27
+    calorie: 2635, weight: 169, carbs: 122, protein: 90, fat: 52, user_id: 27
   },
   {
-    id: 28, calorie: 1573, weight: 157, carbs: 108, protein: 77, fat: 71, user_id: 28
+    calorie: 2277, weight: 158, carbs: 46, protein: 98, fat: 60, user_id: 28
   },
   {
-    id: 29, calorie: 1655, weight: 160, carbs: 136, protein: 101, fat: 84, user_id: 29
+    calorie: 2095, weight: 176, carbs: 80, protein: 50, fat: 51, user_id: 29
   },
   {
-    id: 30, calorie: 2354, weight: 132, carbs: 42, protein: 137, fat: 56, user_id: 30
+    calorie: 2506, weight: 151, carbs: 71, protein: 64, fat: 124, user_id: 30
   },
   {
-    id: 31, calorie: 2041, weight: 137, carbs: 57, protein: 72, fat: 56, user_id: 31
+    calorie: 1652, weight: 180, carbs: 68, protein: 61, fat: 124, user_id: 31
   },
   {
-    id: 32, calorie: 2323, weight: 174, carbs: 48, protein: 117, fat: 97, user_id: 32
+    calorie: 2526, weight: 173, carbs: 47, protein: 94, fat: 101, user_id: 32
   },
   {
-    id: 33, calorie: 1830, weight: 147, carbs: 146, protein: 68, fat: 115, user_id: 33
+    calorie: 1295, weight: 152, carbs: 142, protein: 139, fat: 106, user_id: 33
   },
   {
-    id: 34, calorie: 1468, weight: 179, carbs: 90, protein: 135, fat: 99, user_id: 34
+    calorie: 2303, weight: 178, carbs: 110, protein: 90, fat: 71, user_id: 34
   },
   {
-    id: 35, calorie: 2153, weight: 141, carbs: 71, protein: 121, fat: 58, user_id: 35
+    calorie: 2816, weight: 155, carbs: 84, protein: 61, fat: 138, user_id: 35
   },
   {
-    id: 36, calorie: 2824, weight: 141, carbs: 140, protein: 71, fat: 113, user_id: 36
+    calorie: 1580, weight: 137, carbs: 96, protein: 51, fat: 51, user_id: 36
   },
   {
-    id: 37, calorie: 2543, weight: 174, carbs: 119, protein: 138, fat: 88, user_id: 37
+    calorie: 2081, weight: 152, carbs: 147, protein: 85, fat: 104, user_id: 37
   },
   {
-    id: 38, calorie: 2277, weight: 176, carbs: 60, protein: 113, fat: 52, user_id: 38
+    calorie: 2876, weight: 145, carbs: 123, protein: 82, fat: 108, user_id: 38
   },
   {
-    id: 39, calorie: 2373, weight: 131, carbs: 150, protein: 73, fat: 117, user_id: 39
+    calorie: 1690, weight: 137, carbs: 121, protein: 47, fat: 91, user_id: 39
   },
   {
-    id: 40, calorie: 2067, weight: 132, carbs: 149, protein: 135, fat: 80, user_id: 40
+    calorie: 2704, weight: 157, carbs: 64, protein: 124, fat: 133, user_id: 40
   },
   {
-    id: 41, calorie: 1801, weight: 176, carbs: 122, protein: 131, fat: 119, user_id: 41
+    calorie: 1303, weight: 176, carbs: 64, protein: 94, fat: 43, user_id: 41
   },
   {
-    id: 42, calorie: 2794, weight: 131, carbs: 57, protein: 47, fat: 85, user_id: 42
+    calorie: 1759, weight: 156, carbs: 106, protein: 73, fat: 136, user_id: 42
   },
   {
-    id: 43, calorie: 2852, weight: 157, carbs: 88, protein: 127, fat: 53, user_id: 43
+    calorie: 2891, weight: 154, carbs: 135, protein: 46, fat: 122, user_id: 43
   },
   {
-    id: 44, calorie: 2269, weight: 155, carbs: 72, protein: 46, fat: 47, user_id: 44
+    calorie: 1805, weight: 152, carbs: 58, protein: 143, fat: 88, user_id: 44
   },
   {
-    id: 45, calorie: 2872, weight: 133, carbs: 131, protein: 121, fat: 57, user_id: 45
+    calorie: 1300, weight: 161, carbs: 143, protein: 121, fat: 115, user_id: 45
   },
   {
-    id: 46, calorie: 2283, weight: 161, carbs: 147, protein: 115, fat: 147, user_id: 46
+    calorie: 1725, weight: 161, carbs: 48, protein: 145, fat: 67, user_id: 46
   },
   {
-    id: 47, calorie: 2601, weight: 150, carbs: 64, protein: 124, fat: 71, user_id: 47
+    calorie: 2155, weight: 131, carbs: 110, protein: 123, fat: 139, user_id: 47
   },
   {
-    id: 48, calorie: 2591, weight: 173, carbs: 143, protein: 113, fat: 140, user_id: 48
+    calorie: 1401, weight: 174, carbs: 62, protein: 97, fat: 134, user_id: 48
   },
   {
-    id: 49, calorie: 1928, weight: 178, carbs: 65, protein: 52, fat: 121, user_id: 49
+    calorie: 2159, weight: 170, carbs: 55, protein: 79, fat: 65, user_id: 49
   },
   {
-    id: 50, calorie: 1957, weight: 178, carbs: 74, protein: 106, fat: 103, user_id: 50
+    calorie: 2346, weight: 133, carbs: 82, protein: 67, fat: 74, user_id: 50
   }];
 
 const Food = [{
-  id: 1, name: 'Galah', calories: 265, carbs: 74, protein: 60, fat: 138, user_id: 1
+  name: 'Sloth, two-toed', calories: 520, carbs: 73, protein: 108, fat: 137, user_id: 1
 },
 {
-  id: 2, name: 'Jaeger, long-tailed', calories: 568, carbs: 42, protein: 146, fat: 142, user_id: 1
+  name: 'Black kite', calories: 325, carbs: 45, protein: 127, fat: 147, user_id: 1
 },
 {
-  id: 3, name: 'Fringe-eared oryx', calories: 235, carbs: 69, protein: 124, fat: 140, user_id: 1
+  name: 'White-mantled colobus', calories: 251, carbs: 141, protein: 115, fat: 107, user_id: 3
 },
 {
-  id: 4, name: 'Sea birds', calories: 318, carbs: 111, protein: 42, fat: 108, user_id: 1
+  name: 'Squirrel, eastern fox', calories: 395, carbs: 61, protein: 100, fat: 93, user_id: 4
 },
 {
-  id: 5, name: 'Red-necked phalarope', calories: 276, carbs: 80, protein: 96, fat: 63, user_id: 1
+  name: 'Whale, southern right', calories: 280, carbs: 68, protein: 133, fat: 100, user_id: 2
 },
 {
-  id: 6, name: 'Blackish oystercatcher', calories: 201, carbs: 112, protein: 124, fat: 54, user_id: 1
+  name: 'Peccary, white-lipped', calories: 350, carbs: 62, protein: 145, fat: 107, user_id: 4
 },
 {
-  id: 7, name: 'Gull, kelp', calories: 345, carbs: 52, protein: 132, fat: 147, user_id: 1
+  name: 'Red-breasted cockatoo', calories: 269, carbs: 83, protein: 50, fat: 92, user_id: 4
 },
 {
-  id: 8, name: 'Squirrel, palm', calories: 264, carbs: 119, protein: 52, fat: 80, user_id: 1
+  name: 'Vulture, black', calories: 578, carbs: 53, protein: 129, fat: 143, user_id: 4
 },
 {
-  id: 9, name: 'Squirrel, uinta ground', calories: 205, carbs: 72, protein: 70, fat: 110, user_id: 1
+  name: 'Blackish oystercatcher', calories: 556, carbs: 52, protein: 124, fat: 127, user_id: 4
 },
 {
-  id: 10, name: 'Otter, canadian river', calories: 228, carbs: 51, protein: 116, fat: 50, user_id: 1
+  name: 'Loris, slender', calories: 559, carbs: 107, protein: 103, fat: 76, user_id: 3
 },
 {
-  id: 11, name: 'Horned puffin', calories: 581, carbs: 121, protein: 99, fat: 133, user_id: 1
+  name: 'Siskin, pine', calories: 291, carbs: 119, protein: 93, fat: 94, user_id: 2
 },
 {
-  id: 12, name: 'Thirteen-lined squirrel', calories: 517, carbs: 148, protein: 141, fat: 87, user_id: 1
+  name: 'Spotted deer', calories: 245, carbs: 107, protein: 60, fat: 74, user_id: 1
 },
 {
-  id: 13, name: 'Black-tailed deer', calories: 553, carbs: 64, protein: 92, fat: 51, user_id: 1
+  name: 'Monkey, black spider', calories: 369, carbs: 114, protein: 133, fat: 54, user_id: 2
 },
 {
-  id: 14, name: 'Devil, tasmanian', calories: 559, carbs: 123, protein: 78, fat: 109, user_id: 14
+  name: 'Red hartebeest', calories: 212, carbs: 63, protein: 133, fat: 75, user_id: 1
 },
 {
-  id: 15, name: 'Lizard, desert spiny', calories: 262, carbs: 108, protein: 96, fat: 112, user_id: 15
+  name: 'Magpie, black-backed', calories: 345, carbs: 87, protein: 97, fat: 53, user_id: 3
 },
 {
-  id: 16, name: 'Greater adjutant stork', calories: 173, carbs: 78, protein: 129, fat: 115, user_id: 16
+  name: 'Brown antechinus', calories: 174, carbs: 55, protein: 82, fat: 71, user_id: 1
 },
 {
-  id: 17, name: 'Swallow-tail gull', calories: 372, carbs: 67, protein: 139, fat: 53, user_id: 17
+  name: 'Quoll, eastern', calories: 271, carbs: 147, protein: 146, fat: 96, user_id: 2
 },
 {
-  id: 18, name: 'Flamingo, lesser', calories: 577, carbs: 73, protein: 104, fat: 125, user_id: 18
+  name: 'Colobus, magistrate black', calories: 207, carbs: 45, protein: 92, fat: 141, user_id: 4
 },
 {
-  id: 19, name: 'Australian brush turkey', calories: 445, carbs: 101, protein: 60, fat: 145, user_id: 19
+  name: 'Sloth, two-toed tree', calories: 273, carbs: 125, protein: 124, fat: 140, user_id: 3
 },
 {
-  id: 20, name: 'Badger, european', calories: 219, carbs: 143, protein: 43, fat: 145, user_id: 20
+  name: 'Bee-eater (unidentified)', calories: 260, carbs: 128, protein: 63, fat: 68, user_id: 3
 },
 {
-  id: 21, name: 'Southern right whale', calories: 391, carbs: 109, protein: 148, fat: 57, user_id: 21
+  name: 'Gaur', calories: 286, carbs: 150, protein: 109, fat: 69, user_id: 2
 },
 {
-  id: 22, name: 'Emerald green tree boa', calories: 397, carbs: 147, protein: 126, fat: 100, user_id: 22
+  name: 'Bohor reedbuck', calories: 420, carbs: 83, protein: 71, fat: 142, user_id: 3
 },
 {
-  id: 23, name: 'Mandras tree shrew', calories: 266, carbs: 53, protein: 143, fat: 79, user_id: 23
+  name: 'Common turkey', 'calories': 279, carbs: 130, protein: 84, fat: 66, user_id: 1
 },
 {
-  id: 24, name: 'Puna ibis', calories: 236, carbs: 70, protein: 57, fat: 108, user_id: 24
+  name: 'Civet cat', calories: 316, carbs: 138, protein: 79, fat: 135, user_id: 4
 },
 {
-  id: 25, name: 'Cat, cape wild', calories: 263, carbs: 76, protein: 68, fat: 121, user_id: 25
+  name: 'Monkey, red howler', calories: 268, carbs: 130, protein: 72, fat: 81, user_id: 2
 },
 {
-  id: 26, name: 'Bleu, blue-breasted cordon', calories: 265, carbs: 64, protein: 97, fat: 102, user_id: 26
+  name: 'Flycatcher, tyrant', calories: 185, carbs: 107, protein: 41, fat: 65, user_id: 3
 },
 {
-  id: 27, name: 'Tortoise, burmese brown mountain', calories: 373, carbs: 56, protein: 119, fat: 61, user_id: 27
+  name: 'Mouflon', calories: 286, carbs: 95, protein: 120, fat: 80, user_id: 1
 },
 {
-  id: 28, name: 'Macaque, japanese', calories: 474, carbs: 105, protein: 79, fat: 136, user_id: 28
+  name: 'Chuckwalla', calories: 251, carbs: 84, protein: 99, fat: 99, user_id: 4
 },
 {
-  id: 29, name: 'Chilean flamingo', calories: 172, carbs: 67, protein: 109, fat: 109, user_id: 29
+  name: 'Dark-winged trumpeter', calories: 521, carbs: 148, protein: 51, fat: 122, user_id: 2
 },
 {
-  id: 30, name: 'Goose, egyptian', calories: 454, carbs: 82, protein: 71, fat: 67, user_id: 30
+  name: 'Indian peacock', calories: 209, carbs: 106, protein: 133, fat: 82, user_id: 1
 },
 {
-  id: 31, name: 'Rhea, gray', calories: 354, carbs: 88, protein: 123, fat: 139, user_id: 31
+  name: 'Puku', calories: 233, carbs: 63, protein: 120, fat: 107, user_id: 3
 },
 {
-  id: 32, name: 'Wallaby, river', calories: 326, carbs: 128, protein: 72, fat: 61, user_id: 32
+  name: 'Bahama pintail', calories: 213, carbs: 99, protein: 146, fat: 134, user_id: 2
 },
 {
-  id: 33, name: 'Crane, sandhill', calories: 451, carbs: 92, protein: 95, fat: 92, user_id: 33
+  name: "Hartebeest, coke's", calories: 585, carbs: 76, protein: 43, fat: 128, user_id: 3
 },
 {
-  id: 34, name: 'Prairie falcon', calories: 222, carbs: 71, protein: 66, fat: 135, user_id: 34
+  name: 'Least chipmunk', calories: 462, carbs: 145, protein: 53, fat: 82, user_id: 3
 },
 {
-  id: 35, name: 'Giant armadillo', calories: 249, carbs: 75, protein: 44, fat: 100, user_id: 35
+  name: 'Bent-toed gecko', calories: 448, carbs: 64, protein: 135, fat: 122, user_id: 1
 },
 {
-  id: 36, name: 'Galapagos sea lion', calories: 343, carbs: 42, protein: 100, fat: 41, user_id: 36
+  name: "Kirk's dik dik", calories: 235, carbs: 114, protein: 120, fat: 97, user_id: 1
 },
 {
-  id: 37, name: 'Scarlet macaw', calories: 276, carbs: 128, protein: 104, fat: 100, user_id: 37
+  name: 'Deer, savannah', calories: 258, carbs: 143, protein: 91, fat: 114, user_id: 3
 },
 {
-  id: 38, name: 'Otter, north american river', calories: 196, carbs: 147, protein: 141, fat: 96, user_id: 38
+  name: 'Macaque, bonnet', calories: 195, carbs: 131, protein: 131, fat: 106, user_id: 4
 },
 {
-  id: 39, name: 'Chimpanzee', calories: 229, carbs: 94, protein: 103, fat: 149, user_id: 39
+  name: 'Royal tern', calories: 297, carbs: 143, protein: 134, fat: 95, user_id: 2
 },
 {
-  id: 40, name: 'Common wolf', calories: 207, carbs: 96, protein: 63, fat: 136, user_id: 40
+  name: 'Western grey kangaroo', calories: 348, carbs: 126, protein: 43, fat: 144, user_id: 4
 },
 {
-  id: 41, name: 'Western spotted skunk', calories: 320, carbs: 144, protein: 119, fat: 94, user_id: 41
+  name: 'Kiskadee, great', calories: 208, carbs: 82, protein: 110, fat: 142, user_id: 4
 },
 {
-  id: 42, name: "Gambel's quail", calories: 312, carbs: 77, protein: 74, fat: 61, user_id: 42
+  name: 'Red-tailed wambenger', calories: 488, carbs: 123, protein: 147, fat: 93, user_id: 3
 },
 {
-  id: 43, name: 'Red-breasted cockatoo', calories: 214, carbs: 139, protein: 98, fat: 140, user_id: 43
+  name: 'Sugar glider', calories: 344, carbs: 46, protein: 113, fat: 118, user_id: 1
 },
 {
-  id: 44, name: 'Egyptian viper', calories: 450, carbs: 140, protein: 139, fat: 121, user_id: 44
+  name: 'Coatimundi, ring-tailed', calories: 359, carbs: 107, protein: 92, fat: 74, user_id: 2
 },
 {
-  id: 45, name: 'Nelson ground squirrel', calories: 184, carbs: 102, protein: 67, fat: 78, user_id: 45
+  name: 'Sun gazer', calories: 437, carbs: 150, protein: 130, fat: 101, user_id: 2
 },
 {
-  id: 46, name: 'Australian masked owl', calories: 196, carbs: 64, protein: 128, fat: 107, user_id: 46
+  name: 'Lion, galapagos sea', calories: 483, carbs: 77, protein: 94, fat: 81, user_id: 4
 },
 {
-  id: 47, name: 'Heron, black-crowned night', calories: 293, carbs: 48, protein: 75, fat: 65, user_id: 47
+  name: 'Defassa waterbuck', calories: 200, carbs: 130, protein: 69, fat: 92, user_id: 2
 },
 {
-  id: 48, name: 'Seven-banded armadillo', calories: 281, carbs: 88, protein: 93, fat: 74, user_id: 48
+  name: 'Dove, white-winged', calories: 540, carbs: 94, protein: 44, fat: 98, user_id: 3
 },
 {
-  id: 49, name: 'Hawk, red-tailed', calories: 219, carbs: 123, protein: 108, fat: 96, user_id: 49
+  name: 'Owl, snowy', calories: 523, carbs: 102, protein: 148, fat: 64, user_id: 1
 },
 {
-  id: 50, name: 'Horned lark', calories: 235, carbs: 111, protein: 139, fat: 88, user_id: 50
+  name: 'Partridge, coqui', calories: 536, carbs: 48, protein: 41, fat: 58, user_id: 4
 }];
 
-const Diary = [
-  {
-    user_id: 1,
-    date_id: 200,
-    food_id: 1,
-    mealType: 1,
-    qty: 2
-  },
-  {
-    user_id: 1,
-    date_id: 200,
-    food_id: 2,
-    mealType: 2,
-    qty: 2
-  },
-  {
-    user_id: 1,
-    date_id: 200,
-    food_id: 3,
-    mealType: 3,
-    qty: 2,
-
-  },
-  {
-    user_id: 1,
-    date_id: 200,
-    food_id: 4,
-    mealType: 2,
-    qty: 5,
-  },
-  {
-    user_id: 1,
-    date_id: 200,
-    food_id: 5,
-    mealType: 4,
-    qty: 3,
-  },
-  {
-    user_id: 1,
-    date_id: 200,
-    food_id: 3,
-    mealType: 1,
-    qty: 5,
-  },
-  {
-    user_id: 1,
-    date_id: 200,
-    food_id: 3,
-    mealType: 2,
-    qty: 3,
-  },
-  {
-    user_id: 1,
-    date_id: 200,
-    food_id: 4,
-    mealType: 1,
-    qty: 2,
-  },
-]
-
-// const Diary_Food = [
-//   {
-//     mealType: 1,
-//     qty: 2,
-//     diary_id: 1,
-//     food_id: 5
-//   },
-//   {
-//     mealType: 1,
-//     qty: 3,
-//     diary_id: 1,
-//     food_id: 5
-//   },
-//   {
-//     mealType: 1,
-//     qty: 2,
-//     diary_id: 1,
-//     food_id: 6
-//   },
-//   {
-//     mealType: 1,
-//     qty: 10,
-//     diary_id: 1,
-//     food_id: 7
-//   },
-//   {
-//     mealType: 2,
-//     qty: 10,
-//     diary_id: 1,
-//     food_id: 3
-//   },
-//   {
-//     mealType: 2,
-//     qty: 10,
-//     diary_id: 1,
-//     food_id: 4
-//   },
-//   {
-//     mealType: 3,
-//     qty: 10,
-//     diary_id: 1,
-//     food_id: 7
-//   },
-//   {
-//     mealType: 3,
-//     qty: 10,
-//     diary_id: 1,
-//     food_id: 5
-//   },
-//   {
-//     mealType: 4,
-//     qty: 5,
-//     diary_id: 1,
-//     food_id: 1
-//   },
-//   {
-//     mealType: 4,
-//     qty: 9,
-//     diary_id: 1,
-//     food_id: 8
-//   },
-//   {
-//     mealType: 4,
-//     qty: 100,
-//     diary_id: 1,
-//     food_id: 6
-//   },
-// ]
-
 module.exports = {
-  User, Dates, Food, Goal, Diary, //Diary_Food
+  User, Dates, Food, Goal
 };
 

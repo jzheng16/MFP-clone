@@ -1,10 +1,8 @@
 const router = require('express').Router();
 const db = require('../../db');
-const fp = require('lodash/fp');
 
 const Diary = db.model('diary');
 const DiaryDatabase = db.model('database_diary');
-
 
 router.get('/:date_id', (req, res) => {
   Diary.findAll({
@@ -44,20 +42,18 @@ router.post('/databasediary', (req, res) => {
     .spread((entry, created) => {
       if (created) {
         res.json(entry);
-      }
-      else {
+      } else {
         DiaryDatabase.update({
           qty: entry.qty + req.body.qty
         }, {
-            returning: true,
-            where: {
-              user_id: req.user.dataValues.id,
-              date_id: req.body.date_id,
-              databaseId: req.body.databaseId,
-              mealType: req.body.mealType
-            }
+          returning: true,
+          where: {
+            user_id: req.user.dataValues.id,
+            date_id: req.body.date_id,
+            databaseId: req.body.databaseId,
+            mealType: req.body.mealType
           }
-        )
+        })
           .then(updatedEntry => res.json(updatedEntry[1][0]));
       }
     });
