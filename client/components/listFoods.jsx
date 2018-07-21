@@ -18,7 +18,7 @@ const StyledTHead1 = styled.th`
 `;
 const StyledTHead2 = styled.th`
   width: 40%;
-`
+`;
 const StyledTHead3 = styled.th`
   width: 40%;
 `;
@@ -31,9 +31,7 @@ const tableBody = styled.tbody`
 
 const StyledTableData = styled.td`
   text-align: center;
-`
-
-//TODO: Form can't go inside table, wrap it in a form instead
+`;
 
 export default props => {
   const sortedFoods = props.foods.allFoods.sort((a, b) => a.id - b.id);
@@ -71,4 +69,4 @@ export default props => {
       </form>
     </div>
   );
-}
+};

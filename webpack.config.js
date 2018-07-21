@@ -1,6 +1,5 @@
 const webpack = require('webpack');
 
-
 /**
  * Fast source maps rebuild quickly during development, but only give a link
  * to the line where the error occurred. The stack trace will show the bundled
@@ -15,8 +14,8 @@ module.exports = {
     'webpack-hot-middleware/client',
     'react-hot-loader/patch',
     './client/index.js',
-  ]
-  ,
+  ],
+
   output: {
     path: __dirname,
     filename: './public/bundle.js',
@@ -58,5 +57,4 @@ module.exports = {
     new webpack.NoEmitOnErrorsPlugin()
   ],
 };
-
 

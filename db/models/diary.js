@@ -13,15 +13,3 @@ const Diary = db.define('diary', {
 });
 
 module.exports = Diary;
-
-
-// db_food_entry: {
-//   type: Sequelize.ARRAY(Sequelize.ARRAY(Sequelize.INTEGER)),
-//     defaultValue: [],
-//       allowNull: false
-// },
-// user_food_entry: {
-//   type: Sequelize.ARRAY(Sequelize.ARRAY(Sequelize.INTEGER)),
-//     defaultValue: [],
-//       allowNull: false
-// }

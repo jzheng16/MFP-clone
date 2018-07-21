@@ -10,7 +10,6 @@ import DiaryContainer from './containers/DiaryContainer';
 import { fetchingUser } from './store/action-creators/auth';
 import ListSearchResultContainer from './containers/ListSearchResultContainer';
 
-// TODO: Map me function and put it inside the component did mount to validate user
 const mapDispatchToProps = dispatch => ({
   fetchingUser() {
     return dispatch(fetchingUser());

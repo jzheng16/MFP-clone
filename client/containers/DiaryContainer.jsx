@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import moment from 'moment';
-import _ from 'lodash/fp';
 
 import { connect } from 'react-redux';
 import { Diary } from '../components';
@@ -35,12 +34,10 @@ const mapDispatch = dispatch => ({
 });
 
 class DiaryContainer extends Component {
+  // Execute only when the user first visits their dirage page
   componentDidMount() {
-    console.log('what is this?', this.props.diary.currentDiaryDate.id);
     if (!this.props.diary.currentDiaryDate.id) {
       this.props.gettingDiaryId(moment().format('YYYY-MM-DD'));
-      // this.props.fetchingDiary(this.props.diary.currentDiaryDate.id);
-      // this.props.fetchingDbDiary(this.props.diary.currentDiaryDate.id);
     }
   }
 
@@ -52,7 +49,6 @@ class DiaryContainer extends Component {
   }
 
   previousDayDiary = () => {
-    console.log('what is this', this.props.diary.currentDiaryDate.day);
     this.props.gettingDiaryId(moment(this.props.diary.currentDiaryDate.day).add(-1, 'days').format('YYYY-MM-DD'));
   }
   nextDayDiary = () => {
@@ -80,7 +76,7 @@ class DiaryContainer extends Component {
       entry.databaseId = databaseId;
     } else {
       entry.food_id = food_id;
-    };
+    }
     this.props.removingFoodFromDiary(entry);
   };
 

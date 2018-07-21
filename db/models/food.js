@@ -25,13 +25,3 @@ const Food = db.define('food', {
 });
 
 module.exports = Food;
-
-// // // force: true will drop the table if it already exists
-// User.sync({ force: true }).then(() =>
-//   // Table created
-//   User.create({
-//     firstName: 'John',
-//     lastName: 'Hancock',
-//   }),
-// );
-// module.exports = User;

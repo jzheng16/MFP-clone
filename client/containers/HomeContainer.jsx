@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import moment from 'moment';
+
 import { connect } from 'react-redux';
 import { Home } from '../components';
 import { fetchingGoal } from '../store/action-creators/goal';
@@ -20,8 +20,9 @@ const mapDispatch = dispatch => ({
 });
 class HomeContainer extends Component {
   componentDidMount() {
-    this.props.fetchingGoal();
-    //this.props.gettingDiaryId(moment().format('YYYY-MM-DD'));
+    if (this.props.user.id) {
+      this.props.fetchingGoal();
+    }
   }
 
   render() {
