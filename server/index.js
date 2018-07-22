@@ -78,3 +78,4 @@ const server = app.listen(PORT, () => {
 });
 
 myStore.sync();
+

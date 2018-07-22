@@ -154,7 +154,7 @@ const User =
 
 const Dates = [];
 
-for (let i = 0; i < 1000; i++) {
+for (let i = 0; i < 1000; i += 1) {
   const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
   const dayOfWeek = moment('2018-01-01', 'YYYY-MM-DD').add(i, 'day').isoWeekday();
   const formattedDayOfWeek = days[dayOfWeek - 1];

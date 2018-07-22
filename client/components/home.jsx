@@ -3,17 +3,40 @@ import { NavLink, Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 
+const HomeHeader = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  justify-content: center;
+  align-items: center;
+  grid-gap: 10px;
+`;
+
 const Title = styled.h1`
-  position: relative;
-  top: 400px;
-  font-size: 1.5em;
+  grid-column: 1/4;
+  grid-row: 1/3;
   text-align: center;
-  color: orange;
+  color: white;
+  padding-right: 500px;
+`;
+
+const HomeImage = styled.img`
+  grid-column: 1/4;
+  grid-row: 1/3;
+  width: 100%;
+  height: auto;
+  /* margin: 0 auto; */
 `;
 const MiscInfo = styled.p`
   text-align: left;
+  font-size: 20px;
   font-family: serif;
   text-transform: none;
+`;
+
+const UserDisplayInfoDiv = styled.div`
+  grid-column: 1/3;
+  grid-row: 3/4;
 `;
 
 const UserDisplayInfo = styled.ul`
@@ -22,17 +45,6 @@ const UserDisplayInfo = styled.ul`
 `;
 
 const InfoList = styled.li`
-`;
-
-const HomeHeader = styled.div`
-  position: relative;
-`;
-
-const HomeImage = styled.img`
-  display: block;
-  max-width: 100%;
-  height: auto;
-  margin: 0 auto;
 `;
 
 const StyledLink = styled(Link)`
@@ -57,12 +69,11 @@ const StyledButton = styled.button`
 
 const Home = props => (
   <HomeHeader>
-
-    <Title> Welcome to MyFitnessClone!</Title>
     <HomeImage src={require('../../public/mfpimage.jpg')} />
+    <Title> Welcome to MyFitnessClone!</Title>
     <hr />
     {props.goal && props.user.weight ?
-      <div>
+      <UserDisplayInfoDiv>
         <h2> Welcome back {props.user.first_name} {props.user.last_name}! </h2>
         <MiscInfo>
           This page will show your calorie goal and how much you&#39;ve accomplished <br></br>
@@ -81,7 +92,7 @@ const Home = props => (
 
         <StyledLink to="/goal"> Edit Goals </StyledLink>
 
-      </div>
+      </UserDisplayInfoDiv>
       :
       <div>
         <MiscInfo>
