@@ -1,5 +1,50 @@
 const router = require('express').Router();
 const User = require('../../db/models/user');
+const multer = require('multer');
+const path = require('path');
+// Multer allows you to upload files and store it in your filessystem
+
+const storage = multer.diskStorage({ // Takes dest and filename
+  destination: (req, file, cb) => {
+    cb(null, path.resolve(__dirname, '../../uploads/')); // Where multer will store all uploads, must be static (public)
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.originalname); // new Date().toISOString().replace(/:/g, '-')
+  }
+
+});
+
+const fileFilter = (req, file, cb) => {
+  if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+    cb(null, true); // Accept file
+  } else {
+    cb(null, false); // Reject
+  }
+};
+const upload = multer({
+  storage,
+  limits: {
+    fileSize: 1024 * 1024 * 5 // 5 mb
+  },
+  fileFilter
+});
+
+// User routes
+
+router.post('/uploadimage', upload.single('file'), (req, res) => {
+  User.update({
+    avatarUrl: req.file.path // New file object will be attached to req with properties: originalname, mimetype, destination, path
+  }, {
+    returning: true,
+    where: {
+      id: req.user.dataValues.id
+    }
+  })
+    .then(updatedUser => {
+      console.log(updatedUser[1][0]);
+      res.json(updatedUser[1][0]);
+    });
+});
 
 // Login
 

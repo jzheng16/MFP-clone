@@ -45,3 +45,9 @@ config.js
 
 # HMR #
 hot/
+
+# Ignore uploads file with images
+uploads/*
+
+# Needed because project requires upload folder to compile
+!uploads/.gitkeep 

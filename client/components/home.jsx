@@ -2,6 +2,13 @@ import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import styled from 'styled-components';
 
+// Function used to require all images in upload folder because webpack cannot determine dynamic images during bundling
+function importAll(r) {
+  const images = {};
+  r.keys().map((item, index) => { images[item.replace('./', '')] = r(item); });
+  return images;
+}
+const images = importAll(require.context('../../uploads/', false, /\.(png|jpe?g|svg)$/));
 
 const HomeHeader = styled.div`
   display: grid;
@@ -26,6 +33,11 @@ const HomeImage = styled.img`
   width: 100%;
   height: auto;
   /* margin: 0 auto; */
+`;
+
+const ProfileImage = styled.img`
+ height:50px;
+ width:50px;
 `;
 const MiscInfo = styled.p`
   text-align: left;
@@ -67,45 +79,53 @@ const StyledButton = styled.button`
   border-radius: 2px;
 `;
 
-const Home = props => (
-  <HomeHeader>
-    <HomeImage src={require('../../public/mfpimage.jpg')} />
-    <Title> Welcome to MyFitnessClone!</Title>
-    <hr />
-    {props.goal && props.user.weight ?
-      <UserDisplayInfoDiv>
-        <h2> Welcome back {props.user.first_name} {props.user.last_name}! </h2>
-        <MiscInfo>
-          This page will show your calorie goal and how much you&#39;ve accomplished <br></br>
-          Your current weight and your macro split <br></br>
-        </MiscInfo>
+const Home = props => {
+  const image = props.user.avatarUrl ? props.user.avatarUrl.split('\\').slice(6).join('/') : 'profile';
+  console.log('image?', image);
 
-        <UserDisplayInfo>
-          <InfoList> Weight: {props.user.weight[props.user.weight.length - 1]} </InfoList>
-          <InfoList> Calories: {props.goal.calorie} </InfoList>
-          <InfoList> Carbs: {props.goal.carbs} </InfoList>
-          <InfoList> Protein: {props.goal.protein} </InfoList>
-          <InfoList> Fat: {props.goal.fat} </InfoList>
-        </UserDisplayInfo>
+  return (
+    <HomeHeader>
+      <HomeImage src={require('../../public/mfpimage.jpg')} />
+      <Title> Welcome to MyFitnessClone!</Title>
+      <hr />
+      {props.goal && props.user.weight ?
+        <UserDisplayInfoDiv>
+          <h2> Welcome back {props.user.first_name} {props.user.last_name}! </h2>
+          <MiscInfo>
+            This page will show your calorie goal and how much you&#39;ve accomplished <br></br>
+            Your current weight and your macro split <br></br>
+          </MiscInfo>
 
-        <StyledLink to="/addfood"> <StyledButton > Add Food </StyledButton> </StyledLink>
+          <UserDisplayInfo>
+            <InfoList> Weight: {props.user.weight[props.user.weight.length - 1]} </InfoList>
+            <InfoList> Calories: {props.goal.calorie} </InfoList>
+            <InfoList> Carbs: {props.goal.carbs} </InfoList>
+            <InfoList> Protein: {props.goal.protein} </InfoList>
+            <InfoList> Fat: {props.goal.fat} </InfoList>
+          </UserDisplayInfo>
 
-        <StyledLink to="/goal"> Edit Goals </StyledLink>
+          <StyledLink to="/addfood"> <StyledButton > Add Food </StyledButton> </StyledLink>
 
-      </UserDisplayInfoDiv>
-      :
-      <div>
-        <MiscInfo>
-          This page will show your calorie goal and how much you&#39;ve accomplished <br></br>
-          Your current weight and your macro split <br></br>
-          Will have a link to get started if you are new  <br></br>
-        </MiscInfo>
-        <Link to="/login"> Log-in to get started! </Link> <br></br>
-      </div>
+          <StyledLink to="/goal"> Edit Goals </StyledLink>
+          <form encType="multipart/form-data" onSubmit={props.uploadImage}>
+            <input name="image" type="file" />
+            <button type="submit"> Upload Image </button>
+          </form>
+          <ProfileImage src={images[image]} alt="Profile" height="50px" width="50px" />
+        </UserDisplayInfoDiv>
 
-    }
-  </HomeHeader>
+        :
+        <div>
+          <MiscInfo>
+            This page will show your calorie goal and how much you&#39;ve accomplished <br></br>
+            Your current weight and your macro split <br></br>
+            Will have a link to get started if you are new  <br></br>
+          </MiscInfo>
+          <Link to="/login"> Log-in to get started! </Link> <br></br>
+        </div>
 
-);
-
+      }
+    </HomeHeader>
+  );
+};
 export default Home;

@@ -1,4 +1,4 @@
-import { GET_USER, REMOVE_USER } from '../actions';
+import { GET_USER, REMOVE_USER, UPDATE_USER } from '../actions';
 
 
 const initialState = {
@@ -13,6 +13,10 @@ export default (state = initialState, action) => {
       break;
     case REMOVE_USER:
       break;
+    case UPDATE_USER:
+      newState.user = action.payload;
+      break;
+
     default:
       return state;
   }
