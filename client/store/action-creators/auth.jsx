@@ -1,11 +1,26 @@
 import axios from 'axios';
-import { GET_USER, REMOVE_USER } from '../actions';
+import { GET_USER, REMOVE_USER, UPDATE_USER } from '../actions';
 import history from '../../history';
 
 export const getUser = user => ({ type: GET_USER, payload: user });
 export const removeUser = () => ({ type: REMOVE_USER });
 
+export const updateUser = user => ({
+  type: UPDATE_USER,
+  payload: user
+});
+
 // Fetches user info on login
+
+export const uploadingUserImage = image => dispatch => {
+  axios.post('/api/auth/uploadimage', image)
+    .then(result => {
+      console.log(result.data);
+      dispatch(updateUser(result.data));
+    })
+    .catch(err => console.error('trouble uploading image', err));
+};
+
 export const fetchingUser = () => dispatch => {
   axios.get('/api/auth/me')
     .then(user => dispatch(getUser(user.data)))

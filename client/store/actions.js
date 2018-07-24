@@ -2,9 +2,10 @@
 export const ADD_FOOD = 'ADD_FOOD';
 export const GET_FOOD = 'GET_FOOD';
 
-//User Authentication
+// User Authentication
 export const GET_USER = 'GET_USER';
 export const REMOVE_USER = 'REMOVE_USER';
+export const UPDATE_USER = 'UPDATE_USER';
 
 // User Goals
 export const GET_GOAL = 'GET_GOAL';

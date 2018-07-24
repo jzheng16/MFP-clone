@@ -2,11 +2,12 @@
   "scripts": {
     "build": "webpack",
     "start-dev": "node server/index.js",
-    "start": "nodemon server/index.js --ignore public --ignore client",
+    "start": "nodemon server/index.js",
     "seed": "node db/seed.js",
     "test": "(npm run build|| true) && npm run start-dev"
   },
   "devDependencies": {
+    "@types/webpack-env": "^1.13.6",
     "babel": "^6.23.0",
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.3",
@@ -22,6 +23,7 @@
     "eslint-plugin-import": "^2.13.0",
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.7.0",
+    "file-loader": "^1.1.11",
     "morgan": "^1.9.0",
     "nodemon": "^1.17.3",
     "prettier": "^1.12.1",
@@ -53,6 +55,7 @@
     "lodash": "^4.17.10",
     "mime": "^2.3.1",
     "moment": "^2.22.1",
+    "multer": "^1.3.1",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "pg": "^7.4.1",

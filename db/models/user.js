@@ -35,7 +35,8 @@ const User = db.define(
       type: Sequelize.ARRAY(Sequelize.INTEGER)
     },
     avatarUrl: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
+      allowNull: true
     },
 
   }

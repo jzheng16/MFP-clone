@@ -43,11 +43,22 @@ module.exports = {
         test: /\.css$/,
         use: ['style-loader', 'css-loader'],
       },
+      // {
+      //   test: /\.(jpg|png)$/,
+      //   use: {
+      //     loader: 'url-loader'
+      //   }
+      // }
       {
-        test: /\.(jpg|png)$/,
-        use: {
-          loader: 'url-loader'
+        test: /\.(png|svg|jpg|gif)$/,
+        use: [{
+          loader: 'file-loader',
+          options: {
+            name: '[path][name].[ext]',
+          }
         }
+        ],
+
       }
     ],
   },
