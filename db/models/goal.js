@@ -21,7 +21,7 @@ const Goal = db.define('goal', {
   fat: {
     type: Sequelize.INTEGER,
     defaultValue: 0
-  },
+  }
 
 });
 

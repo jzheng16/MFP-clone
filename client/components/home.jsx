@@ -48,6 +48,7 @@ const UserDisplayInfoDiv = styled.div`
   grid-template-rows: repeat(2, 1fr);
 `;
 
+/* TODO: Experiment with float and have the text wrap around it */
 const ProfileImage = styled.img`
   grid-column: 1/2;
   grid-row: 1/2;
@@ -96,12 +97,14 @@ const StyledButton = styled.button`
 const Home = props => {
   const image = props.user.avatarUrl ? props.user.avatarUrl.split('\\').slice(6).join('/') : 'defaultImage.png';
   console.log('image?', image);
+  console.log('user', props.user);
+  console.log('goal', props.goal);
 
   return (
     <HomeHeader>
       <HomeImage src={require('../../public/mfpimage.jpg')} />
       <Title> Welcome to MyFitnessClone!</Title>
-      {props.goal && props.user.weight ?
+      {props.user.id ?
         <UserDisplayInfoDiv>
           <ProfileImage src={images[image]} alt="Profile Picture" />
 
@@ -111,11 +114,11 @@ const Home = props => {
           </MiscInfo>
           <UserDisplayInfo>
             <InfoList> Your current weight and your macro split: </InfoList>
-            <InfoList> Weight: {props.user.weight[props.user.weight.length - 1]} </InfoList>
-            <InfoList> Calories: {props.goal.calorie} </InfoList>
-            <InfoList> Carbs: {props.goal.carbs} </InfoList>
-            <InfoList> Protein: {props.goal.protein} </InfoList>
-            <InfoList> Fat: {props.goal.fat} </InfoList>
+            <InfoList> Weight: {props.user.weight ? props.user.weight[props.user.weight.length - 1] : 'Not Set'} </InfoList>
+            <InfoList> Calories: {props.goal ? props.goal.calorie : 'Not Set'} </InfoList>
+            <InfoList> Carbs: {props.goal ? props.goal.carbs : 'Not Set'} </InfoList>
+            <InfoList> Protein: {props.goal ? props.goal.protein : 'Not Set'} </InfoList>
+            <InfoList> Fat: {props.goal ? props.goal.fat : 'Not Set'} </InfoList>
             <StyledLink to="/addfood"> <StyledButton > Add Food </StyledButton> </StyledLink>
             <StyledLink to="/goal"> Edit Goals </StyledLink>
           </UserDisplayInfo>

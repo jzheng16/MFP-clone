@@ -38,6 +38,19 @@ const User = db.define(
       type: Sequelize.STRING,
       allowNull: true
     },
+    age: {
+      type: Sequelize.INTEGER,
+      allowNull: true
+    },
+    height: {
+      type: Sequelize.INTEGER,
+      allowNull: true
+    },
+    gender: {
+      type: Sequelize.ENUM('M', 'F'),
+      allowNull: true
+    },
+
 
   }
 );

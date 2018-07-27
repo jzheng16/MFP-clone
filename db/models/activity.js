@@ -1,22 +1,16 @@
 const Sequelize = require('sequelize');
 const db = require('../');
 
-const Plan = db.define('plan', {
+const Activity = db.define('activity', {
   title: {
     type: Sequelize.STRING
   },
   description: {
     type: Sequelize.TEXT
   },
-  calorieFactor: {
-    type: Sequelize.INTEGER
-  },
-  proteinFactor: {
+  factor: {
     type: Sequelize.FLOAT
-  },
-  fatFactor: {
-    type: Sequelize.FLOAT
-  },
+  }
 });
 
-module.exports = Plan;
+module.exports = Activity;
