@@ -163,156 +163,154 @@ for (let i = 0; i < 1000; i += 1) {
 }
 
 const Goal =
-  [{
-    calorie: 1555, weight: 144, carbs: 92, protein: 131, fat: 60, user_id: 1
-  },
-  {
-    calorie: 2950, weight: 155, carbs: 118, protein: 109, fat: 43, user_id: 2
-  },
-  {
-    calorie: 1238, weight: 138, carbs: 93, protein: 122, fat: 141, user_id: 3
-  },
-  {
-    calorie: 2799, weight: 180, carbs: 69, protein: 81, fat: 64, user_id: 4
-  },
-  {
-    calorie: 1587, weight: 157, carbs: 60, protein: 132, fat: 43, user_id: 5
-  },
-  {
-    calorie: 1512, weight: 178, carbs: 122, protein: 83, fat: 76, user_id: 6
-  },
-  {
-    calorie: 2540, weight: 170, carbs: 46, protein: 117, fat: 47, user_id: 7
-  },
-  {
-    calorie: 2139, weight: 161, carbs: 85, protein: 115, fat: 131, user_id: 8
-  },
-  {
-    calorie: 2897, weight: 174, carbs: 126, protein: 93, fat: 69, user_id: 9
-  },
-  {
-    calorie: 2593, weight: 145, carbs: 140, protein: 99, fat: 110, user_id: 10
-  },
-  {
-    calorie: 2700, weight: 168, carbs: 80, protein: 90, fat: 101, user_id: 11
-  },
-  {
-    calorie: 1255, weight: 146, carbs: 134, protein: 99, fat: 112, user_id: 12
-  },
-  {
-    calorie: 1604, weight: 162, carbs: 69, protein: 75, fat: 46, user_id: 13
-  },
-  {
-    calorie: 2220, weight: 164, carbs: 54, protein: 122, fat: 117, user_id: 14
-  },
-  {
-    calorie: 1346, weight: 171, carbs: 101, protein: 111, fat: 129, user_id: 15
-  },
-  {
-    calorie: 2451, weight: 136, carbs: 81, protein: 71, fat: 148, user_id: 16
-  },
-  {
-    calorie: 1462, weight: 162, carbs: 80, protein: 75, fat: 43, user_id: 17
-  },
-  {
-    calorie: 2009, weight: 134, carbs: 133, protein: 132, fat: 108, user_id: 18
-  },
-  {
-    calorie: 2133, weight: 171, carbs: 140, protein: 94, fat: 80, user_id: 19
-  },
-  {
-    calorie: 2420, weight: 167, carbs: 56, protein: 100, fat: 48, user_id: 20
-  },
-  {
-    calorie: 1715, weight: 169, carbs: 78, protein: 108, fat: 42, user_id: 21
-  },
-  {
-    calorie: 1968, weight: 146, carbs: 142, protein: 53, fat: 89, user_id: 22
-  },
-  {
-    calorie: 2477, weight: 137, carbs: 111, protein: 87, fat: 56, user_id: 23
-  },
-  {
-    calorie: 1721, weight: 137, carbs: 79, protein: 136, fat: 69, user_id: 24
-  },
-  {
-    calorie: 1427, weight: 146, carbs: 53, protein: 132, fat: 122, user_id: 25
-  },
-  {
-    calorie: 2391, weight: 133, carbs: 53, protein: 143, fat: 90, user_id: 26
-  },
-  {
-    calorie: 2635, weight: 169, carbs: 122, protein: 90, fat: 52, user_id: 27
-  },
-  {
-    calorie: 2277, weight: 158, carbs: 46, protein: 98, fat: 60, user_id: 28
-  },
-  {
-    calorie: 2095, weight: 176, carbs: 80, protein: 50, fat: 51, user_id: 29
-  },
-  {
-    calorie: 2506, weight: 151, carbs: 71, protein: 64, fat: 124, user_id: 30
-  },
-  {
-    calorie: 1652, weight: 180, carbs: 68, protein: 61, fat: 124, user_id: 31
-  },
-  {
-    calorie: 2526, weight: 173, carbs: 47, protein: 94, fat: 101, user_id: 32
-  },
-  {
-    calorie: 1295, weight: 152, carbs: 142, protein: 139, fat: 106, user_id: 33
-  },
-  {
-    calorie: 2303, weight: 178, carbs: 110, protein: 90, fat: 71, user_id: 34
-  },
-  {
-    calorie: 2816, weight: 155, carbs: 84, protein: 61, fat: 138, user_id: 35
-  },
-  {
-    calorie: 1580, weight: 137, carbs: 96, protein: 51, fat: 51, user_id: 36
-  },
-  {
-    calorie: 2081, weight: 152, carbs: 147, protein: 85, fat: 104, user_id: 37
-  },
-  {
-    calorie: 2876, weight: 145, carbs: 123, protein: 82, fat: 108, user_id: 38
-  },
-  {
-    calorie: 1690, weight: 137, carbs: 121, protein: 47, fat: 91, user_id: 39
-  },
-  {
-    calorie: 2704, weight: 157, carbs: 64, protein: 124, fat: 133, user_id: 40
-  },
-  {
-    calorie: 1303, weight: 176, carbs: 64, protein: 94, fat: 43, user_id: 41
-  },
-  {
-    calorie: 1759, weight: 156, carbs: 106, protein: 73, fat: 136, user_id: 42
-  },
-  {
-    calorie: 2891, weight: 154, carbs: 135, protein: 46, fat: 122, user_id: 43
-  },
-  {
-    calorie: 1805, weight: 152, carbs: 58, protein: 143, fat: 88, user_id: 44
-  },
-  {
-    calorie: 1300, weight: 161, carbs: 143, protein: 121, fat: 115, user_id: 45
-  },
-  {
-    calorie: 1725, weight: 161, carbs: 48, protein: 145, fat: 67, user_id: 46
-  },
-  {
-    calorie: 2155, weight: 131, carbs: 110, protein: 123, fat: 139, user_id: 47
-  },
-  {
-    calorie: 1401, weight: 174, carbs: 62, protein: 97, fat: 134, user_id: 48
-  },
-  {
-    calorie: 2159, weight: 170, carbs: 55, protein: 79, fat: 65, user_id: 49
-  },
-  {
-    calorie: 2346, weight: 133, carbs: 82, protein: 67, fat: 74, user_id: 50
-  }];
+  [
+    {
+      calorie: 2950, weight: 155, carbs: 118, protein: 109, fat: 43, user_id: 2
+    },
+    {
+      calorie: 1238, weight: 138, carbs: 93, protein: 122, fat: 141, user_id: 3
+    },
+    {
+      calorie: 2799, weight: 180, carbs: 69, protein: 81, fat: 64, user_id: 4
+    },
+    {
+      calorie: 1587, weight: 157, carbs: 60, protein: 132, fat: 43, user_id: 5
+    },
+    {
+      calorie: 1512, weight: 178, carbs: 122, protein: 83, fat: 76, user_id: 6
+    },
+    {
+      calorie: 2540, weight: 170, carbs: 46, protein: 117, fat: 47, user_id: 7
+    },
+    {
+      calorie: 2139, weight: 161, carbs: 85, protein: 115, fat: 131, user_id: 8
+    },
+    {
+      calorie: 2897, weight: 174, carbs: 126, protein: 93, fat: 69, user_id: 9
+    },
+    {
+      calorie: 2593, weight: 145, carbs: 140, protein: 99, fat: 110, user_id: 10
+    },
+    {
+      calorie: 2700, weight: 168, carbs: 80, protein: 90, fat: 101, user_id: 11
+    },
+    {
+      calorie: 1255, weight: 146, carbs: 134, protein: 99, fat: 112, user_id: 12
+    },
+    {
+      calorie: 1604, weight: 162, carbs: 69, protein: 75, fat: 46, user_id: 13
+    },
+    {
+      calorie: 2220, weight: 164, carbs: 54, protein: 122, fat: 117, user_id: 14
+    },
+    {
+      calorie: 1346, weight: 171, carbs: 101, protein: 111, fat: 129, user_id: 15
+    },
+    {
+      calorie: 2451, weight: 136, carbs: 81, protein: 71, fat: 148, user_id: 16
+    },
+    {
+      calorie: 1462, weight: 162, carbs: 80, protein: 75, fat: 43, user_id: 17
+    },
+    {
+      calorie: 2009, weight: 134, carbs: 133, protein: 132, fat: 108, user_id: 18
+    },
+    {
+      calorie: 2133, weight: 171, carbs: 140, protein: 94, fat: 80, user_id: 19
+    },
+    {
+      calorie: 2420, weight: 167, carbs: 56, protein: 100, fat: 48, user_id: 20
+    },
+    {
+      calorie: 1715, weight: 169, carbs: 78, protein: 108, fat: 42, user_id: 21
+    },
+    {
+      calorie: 1968, weight: 146, carbs: 142, protein: 53, fat: 89, user_id: 22
+    },
+    {
+      calorie: 2477, weight: 137, carbs: 111, protein: 87, fat: 56, user_id: 23
+    },
+    {
+      calorie: 1721, weight: 137, carbs: 79, protein: 136, fat: 69, user_id: 24
+    },
+    {
+      calorie: 1427, weight: 146, carbs: 53, protein: 132, fat: 122, user_id: 25
+    },
+    {
+      calorie: 2391, weight: 133, carbs: 53, protein: 143, fat: 90, user_id: 26
+    },
+    {
+      calorie: 2635, weight: 169, carbs: 122, protein: 90, fat: 52, user_id: 27
+    },
+    {
+      calorie: 2277, weight: 158, carbs: 46, protein: 98, fat: 60, user_id: 28
+    },
+    {
+      calorie: 2095, weight: 176, carbs: 80, protein: 50, fat: 51, user_id: 29
+    },
+    {
+      calorie: 2506, weight: 151, carbs: 71, protein: 64, fat: 124, user_id: 30
+    },
+    {
+      calorie: 1652, weight: 180, carbs: 68, protein: 61, fat: 124, user_id: 31
+    },
+    {
+      calorie: 2526, weight: 173, carbs: 47, protein: 94, fat: 101, user_id: 32
+    },
+    {
+      calorie: 1295, weight: 152, carbs: 142, protein: 139, fat: 106, user_id: 33
+    },
+    {
+      calorie: 2303, weight: 178, carbs: 110, protein: 90, fat: 71, user_id: 34
+    },
+    {
+      calorie: 2816, weight: 155, carbs: 84, protein: 61, fat: 138, user_id: 35
+    },
+    {
+      calorie: 1580, weight: 137, carbs: 96, protein: 51, fat: 51, user_id: 36
+    },
+    {
+      calorie: 2081, weight: 152, carbs: 147, protein: 85, fat: 104, user_id: 37
+    },
+    {
+      calorie: 2876, weight: 145, carbs: 123, protein: 82, fat: 108, user_id: 38
+    },
+    {
+      calorie: 1690, weight: 137, carbs: 121, protein: 47, fat: 91, user_id: 39
+    },
+    {
+      calorie: 2704, weight: 157, carbs: 64, protein: 124, fat: 133, user_id: 40
+    },
+    {
+      calorie: 1303, weight: 176, carbs: 64, protein: 94, fat: 43, user_id: 41
+    },
+    {
+      calorie: 1759, weight: 156, carbs: 106, protein: 73, fat: 136, user_id: 42
+    },
+    {
+      calorie: 2891, weight: 154, carbs: 135, protein: 46, fat: 122, user_id: 43
+    },
+    {
+      calorie: 1805, weight: 152, carbs: 58, protein: 143, fat: 88, user_id: 44
+    },
+    {
+      calorie: 1300, weight: 161, carbs: 143, protein: 121, fat: 115, user_id: 45
+    },
+    {
+      calorie: 1725, weight: 161, carbs: 48, protein: 145, fat: 67, user_id: 46
+    },
+    {
+      calorie: 2155, weight: 131, carbs: 110, protein: 123, fat: 139, user_id: 47
+    },
+    {
+      calorie: 1401, weight: 174, carbs: 62, protein: 97, fat: 134, user_id: 48
+    },
+    {
+      calorie: 2159, weight: 170, carbs: 55, protein: 79, fat: 65, user_id: 49
+    },
+    {
+      calorie: 2346, weight: 133, carbs: 82, protein: 67, fat: 74, user_id: 50
+    }];
 
 const Food = [{
   name: 'Sloth, two-toed', calories: 520, carbs: 73, protein: 108, fat: 137, user_id: 1
@@ -465,7 +463,66 @@ const Food = [{
   name: 'Partridge, coqui', calories: 536, carbs: 48, protein: 41, fat: 58, user_id: 4
 }];
 
+const Activity = [
+  {
+    title: 'Sedentary',
+    description: 'Little to no regular exercise.',
+    factor: 1.2
+  },
+  {
+    title: 'Lightly Active',
+    description: 'Intensive exercise for at least 20 minutes 1 to 3 times per week. This may include such things as bicycling, jogging, basketball, swimming, skating, etc.  If you do not exercise regularly, but you maintain a busy life style that requires you to walk frequently for long periods, you meet the requirements of this level.',
+    factor: 1.375
+  },
+  {
+    title: 'Moderately active',
+    description: 'Intensive exercise for at least 30 to 60 minutes 3 to 4 times per week. Any of the activities listed above will qualify.',
+    factor: 1.55
+  },
+  {
+    title: 'Very active',
+    description: 'Intensive exercise for 60 minutes or greater 5 to 7 days per week (see sample activities above).  Labor-intensive occupations also qualify for this level.  Labor-intensive occupations include construction work (brick laying, carpentry, general labor, etc.). Also farming, landscape worker or similar occupations.',
+    factor: 1.7
+  },
+  {
+    title: 'Extremely active',
+    description: 'Exceedingly active and/or very demanding activities:  Examples include:  (1) athlete with an almost unstoppable training schedule with multiple training sessions throughout the day  (2) very demanding job, such as shoveling coal or working long hours on an assembly line. Generally, this level of activity is very difficult to achieve.',
+    factor: 1.9
+  }
+];
+
+const Plan = [
+  {
+    title: 'Gain Weight',
+    description: 'To gain weight, we recommend eating 500 calories above your TDEE to gain 1 pound a week',
+    calorieFactor: 500,
+    proteinFactor: 0.8,
+    fatFactor: 0.5
+  },
+  {
+    title: 'Lose Weight ',
+    description: 'To lose weight, we recommend eating 500 calories below your TDEE to lose 1 pound per week',
+    calorieFactor: -500,
+    proteinFactor: 0.8,
+    fatFactor: 0.5
+  },
+  {
+    title: 'Build Muscle (Bulk)',
+    description: 'To gain muscle, we recommend eating 500 calories above your TDEE to gain a pound a week and eating more protein to build muscle and carbs for energy',
+    calorieFactor: 500,
+    proteinFactor: 1,
+    fatFactor: 0.4
+  },
+  {
+    title: 'Cut',
+    description: 'To lose weight while retaining as much muscle as possible, we recommend eating 250 calories less than your TDEE with more protein and less carbs. This will make sure you are retaining as much muscle as possible but you might see notciebly less energy during your workouts.',
+    calorieFactor: -250,
+    proteinFactor: 1,
+    fatFactor: 0.4
+  },
+];
+
 module.exports = {
-  User, Dates, Food, Goal
+  User, Dates, Food, Goal, Activity, Plan
 };
 
