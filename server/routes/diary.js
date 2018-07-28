@@ -47,6 +47,7 @@ router.post('/databasediary', (req, res) => {
           qty: entry.qty + req.body.qty
         }, {
           returning: true,
+          plain: true,
           where: {
             user_id: req.user.dataValues.id,
             date_id: req.body.date_id,
@@ -54,7 +55,7 @@ router.post('/databasediary', (req, res) => {
             mealType: req.body.mealType
           }
         })
-          .then(updatedEntry => res.json(updatedEntry[1][0]));
+          .then(updatedEntry => res.json(updatedEntry[1]));
       }
     });
 });
@@ -82,6 +83,7 @@ router.post('/', (req, res) => {
           { qty: entry.qty + req.body.qty },
           {
             returning: true,
+            plain: true,
             where: {
               user_id: req.user.dataValues.id,
               date_id: req.body.date_id,
@@ -91,9 +93,9 @@ router.post('/', (req, res) => {
           }
         )
           .then(updatedEntry => {
-            updatedEntry[1][0].getFood()
+            updatedEntry[1].getFood()
               .then(food => {
-                const foodObj = updatedEntry[1][0].dataValues;
+                const foodObj = updatedEntry[1].dataValues;
                 foodObj.food = food.dataValues;
                 res.json(foodObj);
               });

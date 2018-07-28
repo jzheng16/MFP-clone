@@ -12,6 +12,15 @@ export const updateUser = user => ({
 
 // Fetches user info on login
 
+export const updatingUserInformation = info => dispatch => {
+  axios.post('/api/auth/updateUserInfo', info)
+    .then(updatedUser => {
+      console.log('front-end updatedUser', updatedUser.data);
+      dispatch(updateUser(updatedUser.data));
+    })
+    .catch(err => console.error('updatingUserInformation Action creator error', err));
+};
+
 export const uploadingUserImage = image => dispatch => {
   axios.post('/api/auth/uploadimage', image)
     .then(result => {

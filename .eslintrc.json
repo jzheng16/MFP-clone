@@ -19,6 +19,21 @@
     "no-console": 0,
     "class-methods-use-this": 1,
     "linebreak-style": 0,
+    "no-mixed-operators": [
+      "error",
+      {
+        "allowSamePrecedence": true
+      }
+    ],
+    "object-curly-newline": [
+      "error",
+      {
+        "ObjectPattern": {
+          "multiline": true,
+          "minProperties": 5
+        }
+      }
+    ],
     "arrow-parens": [
       "error",
       "as-needed"

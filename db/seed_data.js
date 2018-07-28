@@ -379,7 +379,7 @@ const Food = [{
   name: 'Bohor reedbuck', calories: 420, carbs: 83, protein: 71, fat: 142, user_id: 3
 },
 {
-  name: 'Common turkey', 'calories': 279, carbs: 130, protein: 84, fat: 66, user_id: 1
+  name: 'Common turkey', calories: 279, carbs: 130, protein: 84, fat: 66, user_id: 1
 },
 {
   name: 'Civet cat', calories: 316, carbs: 138, protein: 79, fat: 135, user_id: 4
