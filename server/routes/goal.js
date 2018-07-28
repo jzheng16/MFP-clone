@@ -6,9 +6,6 @@ const db = require('../../db');
 router.post('/creategoal', (req, res) => {
   Goal.findOrCreate({
     where: { user_id: req.user.dataValues.id },
-    include: [
-      { model: db.model('plan') },
-      { model: db.model('activity') }],
     defaults: req.body
   })
     .spread(goal => {
