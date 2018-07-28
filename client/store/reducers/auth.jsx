@@ -1,9 +1,7 @@
 import { GET_USER, REMOVE_USER, UPDATE_USER } from '../actions';
 
 
-const initialState = {
-  user: {}
-};
+const initialState = { user: {} };
 
 export default (state = initialState, action) => {
   const newState = Object.assign({}, state);

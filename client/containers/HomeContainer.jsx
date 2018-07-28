@@ -38,8 +38,6 @@ class HomeContainer extends Component {
   }
 
   render() {
-    console.log('user', this.props.user);
-
     return (
       <Home {...this.props} uploadImage={this.uploadImage} />
     );

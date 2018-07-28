@@ -19,12 +19,12 @@ export default props => {
           about you so that we can design a custom plan just for you?
         </StyledParagraph>
         <Link to="something"> No thanks I got this </Link>
-        <form onSubmit={props.updateInformation}>
+        <form onSubmit={props.firstTimeGoalSubmission}>
           <label htmlFor="male">
-            <input type="radio" id="male" name="gender" value="male" /> Male
+            <input type="radio" id="male" name="gender" value="M" /> Male
           </label>
           <label htmlFor="female">
-            <input type="radio" id="female" name="gender" value="female" /> Female
+            <input type="radio" id="female" name="gender" value="F" /> Female
           </label>
 
           <label htmlFor="age"> Age:
@@ -32,31 +32,31 @@ export default props => {
           </label>
           <label htmlFor="weight"> Weight:
             <input type="number" name="weight" />
-            <select name="weight_unit">
-              <option value="lbs" selected>lbs</option>
-              <option value="kg">kg</option>
+            <select name="weight_unit" defaultValue="1">
+              <option value="1">lbs</option>
+              <option value="2.2">kg</option>
             </select>
           </label>
           <label htmlFor="height"> Height:
             <input type="number" name="height" />
-            <select name="heightunit">
-              <option value="in" selected>in.</option>
-              <option value="cm">cm</option>
+            <select name="height_unit" defaultValue="1">
+              <option value="1">in.</option>
+              <option value=".393701">cm</option>
             </select>
           </label>
           <label htmlFor="activity"> Activity:
-            <select name="activity">
-              <option value="1.2" selected> Sedentary </option>
-              <option value="1.375"> Lightly Active </option>
-              <option value="1.55"> Moderately Active </option>
-              <option value="1.7"> Very Active </option>
-              <option value="1.9"> Extremely Active </option>
+            <select name="activity" defaultValue="1">
+              <option value="1"> Sedentary </option>
+              <option value="2"> Lightly Active </option>
+              <option value="3"> Moderately Active </option>
+              <option value="4"> Very Active </option>
+              <option value="5"> Extremely Active </option>
             </select>
           </label>
           <p>
             <label htmlFor="plan"> What is your goal?
-              <select name="plan">
-                <option value="1" selected> Gain Weight </option>
+              <select name="plan" defaultValue="1">
+                <option value="1"> Gain Weight </option>
                 <option value="2"> Lose Weight </option>
                 <option value="3"> Build Muscle </option>
                 <option value="4"> Cut </option>

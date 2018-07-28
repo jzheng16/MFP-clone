@@ -1,8 +1,6 @@
 import { GET_GOAL, UPDATE_GOAL } from '../actions';
 
-const initialState = {
-  goal: {}
-};
+const initialState = { goal: {} };
 
 export default (state = initialState, action) => {
   const newState = Object.assign({}, state);

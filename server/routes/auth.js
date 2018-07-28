@@ -2,6 +2,7 @@ const router = require('express').Router();
 const User = require('../../db/models/user');
 const multer = require('multer');
 const path = require('path');
+const db = require('../../db');
 // Multer allows you to upload files and store it in your filessystem
 
 const storage = multer.diskStorage({ // Takes dest and filename
@@ -23,26 +24,40 @@ const fileFilter = (req, file, cb) => {
 };
 const upload = multer({
   storage,
-  limits: {
-    fileSize: 1024 * 1024 * 5 // 5 mb
-  },
+  limits: { fileSize: 1024 * 1024 * 5 }, // 5mb
   fileFilter
 });
 
 // User routes
 
-router.post('/uploadimage', upload.single('file'), (req, res) => {
-  User.update({
-    avatarUrl: req.file.path // New file object will be attached to req with properties: originalname, mimetype, destination, path
-  }, {
-    returning: true,
-    where: {
-      id: req.user.dataValues.id
+router.post('/updateUserInfo', (req, res) => {
+  User.update(
+    {
+      age: req.body.age,
+      gender: req.body.gender,
+      height: req.body.height,
+      weight: db.fn('array_append', db.col('weight'), req.body.weight)
+    },
+    {
+      returning: true,
+      plain: true,
+      where: { id: req.user.dataValues.id }
     }
+  )
+    .then(updatedUser => res.json(updatedUser[1]))
+    .catch(err => console.error('POST error to updateUserInfo', err));
+});
+
+router.post('/uploadimage', upload.single('file'), (req, res) => {
+  // New file object will be attached to req with properties: originalname, mimetype, destination, path
+  User.update({ avatarUrl: req.file.path }, {
+    returning: true,
+    plain: true,
+    where: { id: req.user.dataValues.id }
   })
     .then(updatedUser => {
-      console.log(updatedUser[1][0]);
-      res.json(updatedUser[1][0]);
+      console.log(updatedUser[1]);
+      res.json(updatedUser[1]);
     });
 });
 

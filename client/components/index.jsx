@@ -1,3 +1,4 @@
+
 /*
    This file will just export all of our components
    so that we don't need to figure out which component comes from which
@@ -13,4 +14,5 @@ export { default as Diary } from './Diary';
 export { default as SearchFood } from './SearchFood';
 export { default as ListSearchResult } from './ListSearchResult';
 export { default as ListFoods } from './ListFoods';
+export { default as InitialGoal } from './InitialGoal';
 

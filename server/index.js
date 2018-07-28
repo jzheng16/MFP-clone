@@ -39,9 +39,7 @@ app.use(express.json());
 app.use(morgan('dev'));
 
 // webpack middleware
-app.use(webpackDevMiddleware(compiler, {
-  publicPath: config.output.publicPath
-}));
+app.use(webpackDevMiddleware(compiler, { publicPath: config.output.publicPath }));
 app.use(require('webpack-hot-middleware')(compiler));
 
 // Create a session for each request Session Middleware
@@ -74,7 +72,7 @@ app.use((err, req, res) => {
   res.status(500).send(err.message || 'Something broke!');
 });
 
-const server = app.listen(PORT, () => {
+app.listen(PORT, () => {
   console.log(`Listening on ${PORT}`);
 });
 

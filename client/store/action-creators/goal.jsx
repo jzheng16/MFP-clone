@@ -19,6 +19,18 @@ export const fetchingGoal = () => dispatch => {
 
 export const updatingGoal = goal => dispatch => {
   axios.post('/api/goal/goal', goal)
-    .then(updatedGoal => dispatch(updateGoal(updatedGoal.data)))
+    .then(updatedGoal => {
+      console.log('updated Goal', updatedGoal.data);
+      dispatch(updateGoal(updatedGoal.data));
+    })
+    .catch(err => console.error('problem updating goals ', err));
+};
+
+export const creatingGoal = goal => dispatch => {
+  axios.post('/api/goal/creategoal', goal)
+    .then(newGoal => {
+      console.log('Goal ', newGoal.data);
+      dispatch(updateGoal(newGoal.data));
+    })
     .catch(err => console.error('problem updating goals ', err));
 };
