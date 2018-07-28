@@ -16,6 +16,4 @@ User.hasMany(DatabaseDiary);
 Diary.belongsTo(Food);
 Goal.belongsTo(Plan);
 Goal.belongsTo(Activity);
-module.exports = {
-  Food, User, Goal, Diary, Date, DatabaseDiary, Plan, Activity
-};
+module.exports = { Food, User, Goal, Diary, Date, DatabaseDiary, Plan, Activity };

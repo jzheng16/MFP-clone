@@ -24,9 +24,7 @@ const fileFilter = (req, file, cb) => {
 };
 const upload = multer({
   storage,
-  limits: {
-    fileSize: 1024 * 1024 * 5 // 5 mb
-  },
+  limits: { fileSize: 1024 * 1024 * 5 }, // 5mb
   fileFilter
 });
 
@@ -43,9 +41,7 @@ router.post('/updateUserInfo', (req, res) => {
     {
       returning: true,
       plain: true,
-      where: {
-        id: req.user.dataValues.id
-      }
+      where: { id: req.user.dataValues.id }
     }
   )
     .then(updatedUser => res.json(updatedUser[1]))
@@ -53,14 +49,11 @@ router.post('/updateUserInfo', (req, res) => {
 });
 
 router.post('/uploadimage', upload.single('file'), (req, res) => {
-  User.update({
-    avatarUrl: req.file.path // New file object will be attached to req with properties: originalname, mimetype, destination, path
-  }, {
+  // New file object will be attached to req with properties: originalname, mimetype, destination, path
+  User.update({ avatarUrl: req.file.path }, {
     returning: true,
     plain: true,
-    where: {
-      id: req.user.dataValues.id
-    }
+    where: { id: req.user.dataValues.id }
   })
     .then(updatedUser => {
       console.log(updatedUser[1]);

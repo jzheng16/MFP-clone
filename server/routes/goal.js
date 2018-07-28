@@ -5,22 +5,16 @@ const db = require('../../db');
 
 router.post('/creategoal', (req, res) => {
   Goal.findOrCreate({
-    where: {
-      user_id: req.user.dataValues.id
-    },
+    where: { user_id: req.user.dataValues.id },
     include: [
       { model: db.model('plan') },
       { model: db.model('activity') }],
     defaults: req.body
   })
-    .spread((goal, created) => {
+    .spread(goal => {
       Promise.all([goal.getPlan(), goal.getActivity()])
         .then(values => {
-          console.log('Plan', values[0].dataValues);
-          console.log('Activity', values[1].dataValues);
-
           const newGoal = { ...goal.dataValues, plan: values[0].dataValues, activity: values[1].dataValues };
-          console.log('new goal:', newGoal);
           res.json(newGoal);
         })
         .catch(err => console.error('error creating goal', err));
@@ -32,9 +26,7 @@ router.get('/goal', (req, res) => {
     include: [
       { model: db.model('plan') },
       { model: db.model('activity') }],
-    where: {
-      user_id: req.user.dataValues.id
-    }
+    where: { user_id: req.user.dataValues.id }
   })
     .then(goal => res.json(goal))
     .catch(err => console.error('cannot retrieve goals', err));
@@ -52,9 +44,7 @@ router.post('/goal', (req, res) => {
       fat: req.body.fat,
     },
     {
-      where: {
-        user_id: req.user.dataValues.id
-      },
+      where: { user_id: req.user.dataValues.id },
       returning: true,
       plain: true
     }

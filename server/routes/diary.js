@@ -6,9 +6,7 @@ const DiaryDatabase = db.model('database_diary');
 
 router.get('/:date_id', (req, res) => {
   Diary.findAll({
-    include: [{
-      model: db.model('food')
-    }],
+    include: [{ model: db.model('food') }],
     where: {
       user_id: req.user.dataValues.id,
       date_id: req.params.date_id,
@@ -43,9 +41,7 @@ router.post('/databasediary', (req, res) => {
       if (created) {
         res.json(entry);
       } else {
-        DiaryDatabase.update({
-          qty: entry.qty + req.body.qty
-        }, {
+        DiaryDatabase.update({ qty: entry.qty + req.body.qty }, {
           returning: true,
           plain: true,
           where: {

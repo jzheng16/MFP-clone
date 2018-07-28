@@ -3,9 +3,7 @@ import { connect } from 'react-redux';
 import { signingUp } from '../store/action-creators/auth';
 import { SignUpForm } from '../components';
 
-const mapState = state => ({
-
-});
+const mapState = state => ({});
 
 const mapDispatch = dispatch => ({
   signingUp(user) {
