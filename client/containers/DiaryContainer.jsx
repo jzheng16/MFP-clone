@@ -34,7 +34,7 @@ const mapDispatch = dispatch => ({
 });
 
 class DiaryContainer extends Component {
-  // Execute only when the user first visits their dirage page
+  // Execute only when the user first visits their diary page
   componentDidMount() {
     if (!this.props.diary.currentDiaryDate.id) {
       this.props.gettingDiaryId(moment().format('YYYY-MM-DD'));

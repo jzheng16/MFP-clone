@@ -43,7 +43,6 @@ class GoalContainer extends Component {
   }
 
   toggleEditing = () => {
-    console.log('is editing? ', this.state.isEditing);
     this.setState({ isEditing: !this.state.isEditing });
   }
 

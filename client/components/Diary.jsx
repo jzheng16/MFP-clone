@@ -4,14 +4,14 @@ import shortid from 'shortid';
 import styled from 'styled-components';
 
 const StyledLeftButton = styled.button`
-  background: url('../../public/mfpimage.png') no-repeat;
-  height: 25px;
-  width: 25px;
+  background-image: "url('../../public/mfpimage.png')";
+  height: 50px;
+  width: 50px;
 `;
 const StyledRightButton = styled.button`
-  background: url('../../public/rightarrow.png') no-repeat;
-  height: 25px;
-  width: 25px;
+  background: url(require('../../public/rightarrow.png')) no-repeat;
+  height: 50px;
+  width: 50px;
 `;
 
 export default props => {

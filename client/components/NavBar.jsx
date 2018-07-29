@@ -19,22 +19,23 @@ const NavBarWrapper = styled.div`
 `;
 
 const StyledNav = styled.nav`
-  grid-column: 2/3;
+  grid-column: 2/4;
+  display: inline-block;
   background-color: #0070BF;
 `;
 
 const StyledHomeIcon = styled.img`
-    display: inline-block;
-   
-    width: 50px;
-    height: 50px;
+  width: auto;
+  height: 60px;
 `;
 
 const StyledNavLink = styled(NavLink)`
   color: white;
   font-size: 15px;
-  margin: 0px 10px 0px 10px;
+  display: inline-block;
+  margin: 10px 10px 0px 10px;
   text-decoration: none;
+  vertical-align: middle;
 
   &:hover {
     color: green;
@@ -50,7 +51,7 @@ export default props => (
   <NavBarWrapper>
     {props.user ?
       <StyledNav>
-        <StyledNavLink id="navhome" to="/home" exact activeClassName={active}>  <StyledHomeIcon src={logo} alt="MyFitnessPal" />  </StyledNavLink>
+        <StyledNavLink image id="navhome" to="/home" exact activeClassName={active}>  <StyledHomeIcon src={logo} alt="MyFitnessPal" />  </StyledNavLink>
         <StyledNavLink to="/diary" exact activeClassName={active}> Diary </StyledNavLink>
         <StyledNavLink to="/measurements" exact activeClassName={active}> Track Measurements </StyledNavLink>
         <StyledNavLink to="/goal" exact activeClassName={active}>Goals </StyledNavLink>
@@ -59,7 +60,7 @@ export default props => (
       </StyledNav>
       :
       <StyledNav>
-        <StyledNavLink to="/home" exact activeClassName={active}>  <img src={logo} alt="MyFitnessPal" height="40px" width="40px" />  </StyledNavLink>
+        <StyledNavLink to="/home" exact activeClassName={active}>  <img src={logo} alt="MyFitnessPal" />  </StyledNavLink>
         <StyledNavLink to="/foods" exact activeClassName={active}> Foods </StyledNavLink>
         <StyledNavLink to="/login" exact activeClassName={active}> Log-In </StyledNavLink>
         <StyledNavLink to="/signup" exact activeClassName={active}> Sign-up</StyledNavLink>

@@ -47,11 +47,13 @@ router.post('/goal', (req, res) => {
     }
   )
     .then(goal => {
-      console.log('goal?', goal[1]);
-
-      res.json(goal[1]);
-    })
-    .catch(err => console.error('cannot retrieve goals', err));
+      Promise.all([goal[1].getPlan(), goal[1].getActivity()])
+        .then(values => {
+          const newGoal = { ...goal[1].dataValues, plan: values[0].dataValues, activity: values[1].dataValues };
+          res.json(newGoal);
+        })
+        .catch(err => console.error('error creating goal', err));
+    });
 });
 
 module.exports = router;
