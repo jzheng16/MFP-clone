@@ -47,12 +47,6 @@ class InitialGoalContainer extends Component {
       const protein = Math.floor(userWeight * plan.proteinFactor);
       const fat = Math.floor(userWeight * plan.fatFactor);
       const carbs = Math.floor((calorie - (protein * 4) - (fat * 9)) / 4);
-      console.log('BMR:  ', BMR);
-      console.log('TDEE: ', TDEE);
-      console.log('calories: ', calorie);
-      console.log('carbs: ', carbs);
-      console.log('protein: ', protein);
-      console.log('fat: ', fat);
       this.setState({
         TDEE,
         BMR,

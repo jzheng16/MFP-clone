@@ -9,7 +9,6 @@ function importAll(r) {
   return images;
 }
 const images = importAll(require.context('../../uploads/', false, /\.(png|jpe?g|svg)$/));
-console.log(images);
 
 const HomeHeader = styled.div`
   display: grid;
@@ -96,7 +95,6 @@ const StyledButton = styled.button`
 
 const Home = props => {
   const image = props.user.avatarUrl ? props.user.avatarUrl.split('\\').slice(6).join('/') : 'defaultImage.png';
-  console.log('image?', image);
   console.log('user', props.user);
   console.log('goal', props.goal);
 

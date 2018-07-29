@@ -23,8 +23,14 @@ const mapDispatch = dispatch => ({
   }
 });
 class HomeContainer extends Component {
-  componentDidUpdate(prevProps) {
-    if (prevProps.user.id !== this.props.user.id) {
+  componentDidMount() {
+    if (this.props.user.id) {
+      this.props.fetchingGoal();
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.user.id !== nextProps.user.id) {
       this.props.fetchingGoal();
     }
   }
