@@ -33,7 +33,6 @@ const StyledSpan = styled.span`
   display: inline-block;
   width: 5em;
   height: 2.5em;
-  
   text-align: center;
   line-height: 2.5em;
 `;
@@ -61,18 +60,18 @@ export default props => {
               <StyledSpan> Male </StyledSpan>
             </label>
             <label htmlFor="female">
-              <StyledGenderInput type="radio" id="female" name="gender" value="F" />
+              <StyledGenderInput type="radio" id="gender" name="gender" value="F" />
               <StyledSpan> Female </StyledSpan>
             </label>
           </StyledFieldSet>
           <StyledFieldSet>
             <label htmlFor="age"> Age:
-              <input type="number" name="age" />
+              <input type="text" name="age" maxLength="2" />
             </label>
           </StyledFieldSet>
           <StyledFieldSet>
             <label htmlFor="weight"> Weight:
-              <input type="number" name="weight" />
+              <input type="text" name="weight" maxLength="3" />
               <select name="weight_unit" defaultValue="1">
                 <option value="1">lbs</option>
                 <option value="2.2">kg</option>
@@ -81,7 +80,7 @@ export default props => {
           </StyledFieldSet>
           <StyledFieldSet>
             <label htmlFor="height"> Height:
-              <input type="number" name="height" />
+              <input type="text" name="height" maxLength="3" />
               <select name="height_unit" defaultValue="1">
                 <option value="1">in.</option>
                 <option value=".393701">cm</option>
