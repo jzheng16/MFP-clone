@@ -59,3 +59,12 @@ export const loggingOut = () => dispatch => {
     })
     .catch(err => console.error('trouble logging out ', err));
 };
+
+export const changingPassword = passwords => dispatch => {
+  axios.post('/api/auth/changepassword', passwords)
+    .then(updatedUser => {
+      console.log('updatedUser', updatedUser.data);
+      dispatch(getUser(updatedUser.data));
+    })
+    .catch(err => console.error('error changing password', err));
+};

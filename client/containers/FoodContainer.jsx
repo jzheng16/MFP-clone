@@ -33,9 +33,7 @@ class FoodContainer extends Component {
   constructor(props) {
     super(props);
     this.searchingDatabase = this.searchingDatabase.bind(this);
-    this.state = {
-      isChecked: []
-    };
+    this.state = { isChecked: [] };
   }
 
   componentWillMount() {
