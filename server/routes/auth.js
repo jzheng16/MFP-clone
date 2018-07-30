@@ -61,6 +61,26 @@ router.post('/uploadimage', upload.single('file'), (req, res) => {
     });
 });
 
+// Change password
+
+router.post('/changepassword', (req, res, next) => {
+  User.findOne({ where: { id: req.user.dataValues.id } })
+    .then(user => {
+      if (!user.correctPassword(req.body.currentPassword)) {
+        res.send('Entered incorrect password');
+      } else {
+        user.update({ password: req.body.newPassword }, {
+          returning: true,
+          plain: true,
+        })
+          .then(updatedUser => {
+            console.log('updated User', updatedUser);
+            res.json(updatedUser);
+          });
+      }
+    });
+});
+
 // Login
 
 router.post('/login', (req, res, next) => {
@@ -108,5 +128,6 @@ router.get('/logout', (req, res) => {
   req.session.destroy();
   res.redirect('/');
 });
+
 
 module.exports = router;

@@ -26,6 +26,7 @@ const Title = styled.h1`
   grid-row: 1/2;
   text-align: center;
   color: white;
+
   padding-right: 500px;
   
   
