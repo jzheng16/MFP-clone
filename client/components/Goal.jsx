@@ -60,7 +60,7 @@ export default props => {
               <StyledSpan> Male </StyledSpan>
             </label>
             <label htmlFor="female">
-              <StyledGenderInput type="radio" id="gender" name="gender" value="F" />
+              <StyledGenderInput type="radio" id="female" name="gender" value="F" />
               <StyledSpan> Female </StyledSpan>
             </label>
           </StyledFieldSet>

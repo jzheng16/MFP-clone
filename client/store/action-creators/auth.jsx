@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { GET_USER, REMOVE_USER, UPDATE_USER } from '../actions';
 import history from '../../history';
+// import { resolve } from 'url';
 
 export const getUser = user => ({ type: GET_USER, payload: user });
 export const removeUser = () => ({ type: REMOVE_USER });
@@ -60,11 +61,10 @@ export const loggingOut = () => dispatch => {
     .catch(err => console.error('trouble logging out ', err));
 };
 
-export const changingPassword = passwords => dispatch => {
-  axios.post('/api/auth/changepassword', passwords)
-    .then(updatedUser => {
-      console.log('updatedUser', updatedUser.data);
-      dispatch(getUser(updatedUser.data));
-    })
-    .catch(err => console.error('error changing password', err));
-};
+export const changingPassword = passwords => dispatch => axios.post('/api/auth/changepassword', passwords);
+
+// dispatch(getUser(updatedUser.data));
+// return new Promise((resolve, reject) => {
+//   resolve(updatedUser.data);
+// });
+

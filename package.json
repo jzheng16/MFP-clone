@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "build": "webpack -w",
+    "build": "webpack",
     "start-dev": "node server/index.js",
     "start": "nodemon server/index.js",
     "seed": "node db/seed.js",

@@ -60,7 +60,7 @@ export default props => (
       </StyledNav>
       :
       <StyledNav>
-        <StyledNavLink to="/home" exact activeClassName={active}>  <img src={logo} alt="MyFitnessPal" />  </StyledNavLink>
+        <StyledNavLink to="/home" exact activeClassName={active}>  <StyledHomeIcon src={logo} alt="MyFitnessPal" /> </StyledNavLink>
         <StyledNavLink to="/foods" exact activeClassName={active}> Foods </StyledNavLink>
         <StyledNavLink to="/login" exact activeClassName={active}> Log-In </StyledNavLink>
         <StyledNavLink to="/signup" exact activeClassName={active}> Sign-up</StyledNavLink>

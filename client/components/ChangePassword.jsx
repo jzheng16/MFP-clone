@@ -3,10 +3,10 @@ import React from 'react';
 export default props => (
   <div>
     <form onSubmit={props.changePassword}>
-      <label htmlFor="current_password">
+      <label htmlFor="current_password"> Enter current password
         <input type="password" name="current_password" required />
       </label>
-      <label htmlFor="new_password">
+      <label htmlFor="new_password"> Enter new password
         <input
           type="password"
           name="new_password"
@@ -16,7 +16,7 @@ export default props => (
           onChange={props.onNewPasswordChange}
         />
       </label>
-      <label htmlFor="confirm_password">
+      <label htmlFor="confirm_password"> Confirm new password
         <input type="password" name="confirm_password" onChange={props.onConfirmPasswordChange} required />
       </label>
       {props.newPassword && props.confirmPassword && props.newPassword !== props.confirmPassword ?

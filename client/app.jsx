@@ -5,6 +5,7 @@ import styledNormalize from 'styled-normalize';
 import React from 'react';
 import Routes from './routes';
 import NavBarContainer from './containers/NavBarContainer';
+import ToastsContainer from './containers/ToastsContainer';
 
 const resetStyles = () => injectGlobal`
   ${styledNormalize}
@@ -16,6 +17,7 @@ const app = () => {
     <div className="container">
       <NavBarContainer />
       <Routes />
+      <ToastsContainer />
     </div>
   );
 };
