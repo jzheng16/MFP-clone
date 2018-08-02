@@ -17,7 +17,6 @@ const HomeHeader = styled.div`
   /* justify-content: center; */  /* Aligns elements on the vertical axis */
   /* align-items: center; */    /* Aligns elements horizontally */  
   row-gap: 1em;
-
 `;
 
 const Title = styled.h1`
