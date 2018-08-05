@@ -9,19 +9,17 @@ const StyledUl = styled.ul`
 `;
 const StyledAlert = styled.li`
   /* align-items: flex-start;
-  
-  
   display: flex;  */
   /* padding: 16px;
   margin: 0 0 12px; */
   list-style: none;
   border-radius: 5px;
+  height: 3em;
+  width: 13em;
 `;
 
 const StyledAlertText = styled.p`
   /* flex: 1 1 auto;
-  
-  
   */
   display: inline-block;
   color: white;
@@ -38,12 +36,11 @@ const StyledDismissButton = styled.button`
   cursor: pointer;
   display: inline-block;
   font-size: .75em;
-  margin-left: 5em;
+  margin-left: 2em;
   
 `;
 
 export default props => {
-  const { id } = props.toasts;
   console.log('toasts props,', props);
   return (
     <StyledUl>
