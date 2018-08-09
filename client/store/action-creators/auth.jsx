@@ -33,7 +33,7 @@ export const uploadingUserImage = image => dispatch => {
 
 export const fetchingUser = () => dispatch => {
   axios.get('/api/auth/me')
-    .then(user => dispatch(getUser(user.data)))
+    .then(user => dispatch(getUser(user.data || {})))
     .catch(err => console.error('Trouble fetching user ', err));
 };
 
@@ -48,8 +48,15 @@ export const loggingIn = (email, password) => dispatch => {
 
 export const signingUp = user => dispatch => {
   axios.post('/api/auth/signup', user)
-    .then(newUser => dispatch(getUser(newUser.data)))
-    .catch(err => console.error('Oops had trouble signing up: ', err));
+    .then(newUser => {
+      console.log('what is this', newUser.data);
+      dispatch(getUser(newUser.data));
+      history.push('/');
+    })
+    .catch(err => {
+      console.log('Oops had trouble signing up: ', err.response.data);
+      dispatch(getUser(err.response));
+    });
 };
 
 export const loggingOut = () => dispatch => {

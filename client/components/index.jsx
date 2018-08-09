@@ -17,4 +17,6 @@ export { default as ListFoods } from './ListFoods';
 export { default as InitialGoal } from './InitialGoal';
 export { default as ChangePassword } from './ChangePassword';
 export { default as Toasts } from './Toasts';
+export { default as Footer } from './Footer';
+export { default as ChangeUserInfo } from './ChangeUserInfo';
 

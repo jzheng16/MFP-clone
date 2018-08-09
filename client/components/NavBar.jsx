@@ -42,16 +42,16 @@ const StyledNavLink = styled(NavLink)`
   }
 
   &.${active} {
-    font-weight: bold;
+    color: black;
   }
 
 `;
 
 export default props => (
   <NavBarWrapper>
-    {props.user ?
+    {props.user.id ?
       <StyledNav>
-        <StyledNavLink image id="navhome" to="/home" exact activeClassName={active}>  <StyledHomeIcon src={logo} alt="MyFitnessPal" />  </StyledNavLink>
+        <StyledNavLink id="navhome" to="/" exact activeClassName={active}>  <StyledHomeIcon src={logo} alt="MyFitnessPal" />  </StyledNavLink>
         <StyledNavLink to="/diary" exact activeClassName={active}> Diary </StyledNavLink>
         <StyledNavLink to="/measurements" exact activeClassName={active}> Track Measurements </StyledNavLink>
         <StyledNavLink to="/goal" exact activeClassName={active}>Goals </StyledNavLink>
@@ -60,7 +60,7 @@ export default props => (
       </StyledNav>
       :
       <StyledNav>
-        <StyledNavLink to="/home" exact activeClassName={active}>  <StyledHomeIcon src={logo} alt="MyFitnessPal" /> </StyledNavLink>
+        <StyledNavLink to="/" exact activeClassName={active}>  <StyledHomeIcon src={logo} alt="MyFitnessPal" /> </StyledNavLink>
         <StyledNavLink to="/foods" exact activeClassName={active}> Foods </StyledNavLink>
         <StyledNavLink to="/login" exact activeClassName={active}> Log-In </StyledNavLink>
         <StyledNavLink to="/signup" exact activeClassName={active}> Sign-up</StyledNavLink>

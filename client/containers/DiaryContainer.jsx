@@ -6,7 +6,6 @@ import { Diary } from '../components';
 import { selectedMealType, selectedDiaryDate, gettingDiaryId, fetchingDiary, removingFoodFromDiary, fetchingDbDiary } from '../store/action-creators/diary';
 import history from '../history';
 
-
 const mapState = state => ({
   user: state.auth.user,
   diary: state.diary
@@ -34,6 +33,10 @@ const mapDispatch = dispatch => ({
 });
 
 class DiaryContainer extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { something: null };
+  }
   // Execute only when the user first visits their diary page
   componentDidMount() {
     if (!this.props.diary.currentDiaryDate.id) {
@@ -47,6 +50,7 @@ class DiaryContainer extends Component {
       this.props.fetchingDbDiary(this.props.diary.currentDiaryDate.id);
     }
   }
+
 
   previousDayDiary = () => {
     this.props.gettingDiaryId(moment(this.props.diary.currentDiaryDate.day).add(-1, 'days').format('YYYY-MM-DD'));
@@ -82,7 +86,14 @@ class DiaryContainer extends Component {
 
   render() {
     return (
-      <Diary {...this.props} selectedMealType={this.selectedMealType} removeFood={this.removeFood} previousDayDiary={this.previousDayDiary} nextDayDiary={this.nextDayDiary} />
+      <Diary
+        {...this.props}
+        {...this.state}
+        selectedMealType={this.selectedMealType}
+        removeFood={this.removeFood}
+        previousDayDiary={this.previousDayDiary}
+        nextDayDiary={this.nextDayDiary}
+      />
     );
   }
 }

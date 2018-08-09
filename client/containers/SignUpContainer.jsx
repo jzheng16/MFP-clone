@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { signingUp } from '../store/action-creators/auth';
 import { SignUpForm } from '../components';
 
-const mapState = state => ({});
+const mapState = state => ({ user: state.auth.user });
 
 const mapDispatch = dispatch => ({
   signingUp(user) {
@@ -19,8 +19,13 @@ class SignUpContainer extends Component {
 
   handleSignup(e) {
     e.preventDefault();
-    this.props.signingUp({ email: e.target.email.value, password: e.target.password.value });
-    this.props.history.push('/home');
+    console.log('values: ', e.target.first_name.value, e.target.email.value, e.target.password.value);
+    this.props.signingUp({
+      email: e.target.email.value,
+      password: e.target.password.value,
+      first_name: e.target.first_name.value,
+      last_name: e.target.last_name.value
+    });
   }
   render() {
     return (

@@ -46,18 +46,15 @@ const StyledDismissButton = styled.button`
   
 `;
 
-export default props => {
-  console.log('toasts props,', props);
-  return (
-    <StyledUl>
-      {props.toasts && props.toasts.map(toast => (
-        <StyledAlert key={toast.id} style={{ backgroundColor: toast.backgroundColor }}>
-          <StyledAlertText> {toast.text} </StyledAlertText>
-          <StyledDismissButton onClick={() => props.onDismissClick(toast.id)}> X </StyledDismissButton>
-        </StyledAlert>
-      ))
-      }
-    </StyledUl>
-  );
-};
+export default props => (
+  <StyledUl>
+    {props.toasts && props.toasts.map(toast => (
+      <StyledAlert key={toast.id} style={{ backgroundColor: toast.backgroundColor }}>
+        <StyledAlertText> {toast.text} </StyledAlertText>
+        <StyledDismissButton onClick={() => props.onDismissClick(toast.id)}> X </StyledDismissButton>
+      </StyledAlert>
+    ))
+    }
+  </StyledUl>
+);
 

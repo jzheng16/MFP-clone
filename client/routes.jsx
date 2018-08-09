@@ -10,14 +10,14 @@ import DiaryContainer from './containers/DiaryContainer';
 import { fetchingUser } from './store/action-creators/auth';
 import ListSearchResultContainer from './containers/ListSearchResultContainer';
 import InitialGoalContainer from './containers/InitialGoalContainer';
-import ChangePasswordContainer from './containers/ChangePasswordContainer';
+import ProfileSettingsContainer from './containers/ProfileSettingsContainer';
 
 const mapDispatchToProps = dispatch => ({
   fetchingUser() {
     return dispatch(fetchingUser());
   }
 });
-const mapStateToProps = state => ({user: state.auth.user});
+const mapStateToProps = state => ({ user: state.auth.user });
 
 
 class Routes extends Component {
@@ -27,14 +27,13 @@ class Routes extends Component {
   render() {
     return (
       <div className="routes">
-        {this.props.user ?
+        {this.props.user.id ?
           <Switch>
             <Route exact path="/" component={HomeContainer} />
             <Route exact path="/login" component={LoginContainer} />
-            <Route exact path="/me" component={ChangePasswordContainer} />
+            <Route exact path="/me" component={ProfileSettingsContainer} />
             <Route exact path="/addFood" component={FoodContainer} />
             <Route exact path="/diary" component={DiaryContainer} />
-            <Route exact path="/home" component={HomeContainer} />
             <Route exact path="/goal" component={GoalContainer} />
             <Route exact path="/goal/plan" component={InitialGoalContainer} />
             <Route exact path="/food/search" component={ListSearchResultContainer} />
