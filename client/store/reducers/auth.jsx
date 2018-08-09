@@ -10,6 +10,7 @@ export default (state = initialState, action) => {
       newState.user = action.payload;
       break;
     case REMOVE_USER:
+      newState.user = {};
       break;
     case UPDATE_USER:
       newState.user = action.payload;

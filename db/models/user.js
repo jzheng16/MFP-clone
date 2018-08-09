@@ -82,5 +82,19 @@ const setSaltAndPassword = user => {
   }
 };
 
+const capitalizeFirstLetter = user => {
+  if (user.changed('first_name') && user.changed('last_name')) {
+    user.first_name = user.first_name[0].toUpperCase() + user.first_name.slice(1);
+    user.last_name = user.last_name[0].toUpperCase() + user.last_name.slice(1);
+  }
+}
+
+const capitalizeFirstLetterOnModelUpdate = users => {
+  users.attributes.first_name = users.attributes.first_name[0].toUpperCase() + users.attributes.first_name.slice(1);
+  users.attributes.last_name = users.attributes.last_name[0].toUpperCase() + users.attributes.first_name.slice(1);
+}
+
+User.beforeCreate(capitalizeFirstLetter);
+User.beforeBulkUpdate(capitalizeFirstLetterOnModelUpdate);   // Model.update
 User.beforeCreate(setSaltAndPassword);
-User.beforeUpdate(setSaltAndPassword);
+User.beforeUpdate(setSaltAndPassword);  // Used when instance.update

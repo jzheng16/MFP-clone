@@ -31,21 +31,31 @@ const upload = multer({
 // User routes
 
 router.post('/updateUserInfo', (req, res) => {
-  User.update(
-    {
-      age: req.body.age,
-      gender: req.body.gender,
-      height: req.body.height,
-      weight: db.fn('array_append', db.col('weight'), req.body.weight)
-    },
-    {
+  if (req.weight) {
+    User.update(
+      {
+        age: req.body.age,
+        gender: req.body.gender,
+        height: req.body.height,
+        weight: db.fn('array_append', db.col('weight'), req.body.weight)
+      },
+      {
+        returning: true,
+        plain: true,
+        where: { id: req.user.dataValues.id }
+      }
+    )
+      .then(updatedUser => res.json(updatedUser[1]))
+      .catch(err => console.error('POST error to updateUserInfo', err));
+  } else {
+    User.update(req.body, {
       returning: true,
       plain: true,
       where: { id: req.user.dataValues.id }
-    }
-  )
-    .then(updatedUser => res.json(updatedUser[1]))
-    .catch(err => console.error('POST error to updateUserInfo', err));
+    })
+      .then(updatedUser => res.json(updatedUser[1]))
+      .catch(err => console.error('POST error to updateUserInfo', err));
+  }
 });
 
 router.post('/uploadimage', upload.single('file'), (req, res) => {
@@ -108,7 +118,7 @@ router.post('/signup', (req, res, next) => {
       }
     })
     .catch(err => {
-      if (err.name === 'SequelizeConstraintError') {
+      if (err.name === 'SequelizeUniqueConstraintError') {
         res.status(401).send('E-mail already exists');
       } else {
         console.log('what is this error', err);

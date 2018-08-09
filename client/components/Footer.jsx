@@ -7,6 +7,8 @@ const FooterWrapper = styled.footer`
 `;
 
 export default props => (
-  <h1> Footer </h1>
+  <FooterWrapper>
+    <p> &#169; 2018 Joey Zheng </p>
+  </FooterWrapper>
 );
 

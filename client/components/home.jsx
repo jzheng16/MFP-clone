@@ -11,7 +11,6 @@ function importAll(r) {
 const images = importAll(require.context('../../uploads/', false, /\.(png|jpe?g|svg)$/));
 
 const HomeHeader = styled.div`
-
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: auto 1fr;
@@ -28,15 +27,14 @@ const HomeHeader = styled.div`
 `;
 
 const Title = styled.h1`
-  
   grid-column: 1/4;
   grid-row: 1/2;
   text-align: center;
   color: white;
-
-  padding-right: 500px;
-  
-  
+  padding-right: 15em;
+  @media (min-width: 768px) {
+    padding-top: 5em;
+  }
 `;
 
 const HomeImage = styled.img`
@@ -59,8 +57,8 @@ const UserDisplayInfoDiv = styled.div`
 const ProfileImage = styled.img`
   grid-column: 1/2;
   grid-row: 1/2;
-  height:100%;
   width:100%;
+  height:100%;
   object-fit: contain;
 
 `;
@@ -103,29 +101,29 @@ const StyledButton = styled.button`
 
 const Home = props => {
   const image = props.user.avatarUrl ? props.user.avatarUrl.split('\\').slice(6).join('/') : 'defaultImage.png';
+  const { user, goal } = props;
   console.log('user', props.user);
   console.log('goal', props.goal);
-  console.log(require('../../public/mfpimage.jpg'));
 
   return (
     <HomeHeader>
       <HomeImage src={require('../../public/mfpimage.jpg')} />
       <Title> Welcome to MyFitnessClone!</Title>
-      {props.user.id ?
+      {user.id ?
         <UserDisplayInfoDiv>
           <ProfileImage src={images[image]} alt="Profile Picture" />
-
           <MiscInfo>
             MyFitnessClone allows you to set and achieve your goals by making sure that you&#39;re on track! <br></br>
             This page will show your calorie goal and how much you&#39;ve accomplished for the day!<br></br>
           </MiscInfo>
           <UserDisplayInfo>
+            <h3> Welcome back {user.first_name} </h3>
             <InfoList> Your current weight and your macro split: </InfoList>
-            <InfoList> Weight: {props.user.weight ? props.user.weight[props.user.weight.length - 1] : 'Not Set'} </InfoList>
-            <InfoList> Calories: {props.goal ? props.goal.calorie : 'Not Set'} </InfoList>
-            <InfoList> Carbs: {props.goal ? props.goal.carbs : 'Not Set'} </InfoList>
-            <InfoList> Protein: {props.goal ? props.goal.protein : 'Not Set'} </InfoList>
-            <InfoList> Fat: {props.goal ? props.goal.fat : 'Not Set'} </InfoList>
+            <InfoList> Weight: {user.weight ? user.weight[user.weight.length - 1] : 'Not Set'} </InfoList>
+            <InfoList> Calories: {goal ? goal.calorie : 'Not Set'} </InfoList>
+            <InfoList> Carbs: {goal ? goal.carbs : 'Not Set'} </InfoList>
+            <InfoList> Protein: {goal ? goal.protein : 'Not Set'} </InfoList>
+            <InfoList> Fat: {goal ? goal.fat : 'Not Set'} </InfoList>
             <StyledLink to="/addfood"> <StyledButton > Add Food </StyledButton> </StyledLink>
             <StyledLink to="/goal"> Edit Goals </StyledLink>
           </UserDisplayInfo>
@@ -134,7 +132,6 @@ const Home = props => {
             <button type="submit"> Upload Image </button>
           </form>
         </UserDisplayInfoDiv>
-
         :
         <div>
           <MiscInfo>
@@ -144,12 +141,9 @@ const Home = props => {
           </MiscInfo>
           <Link to="/login"> Log-in to get started! </Link> <br></br>
         </div>
-
       }
     </HomeHeader>
   );
 };
 export default Home;
 
-
-//   <h2> Welcome back {props.user.first_name} {props.user.last_name}! </h2>

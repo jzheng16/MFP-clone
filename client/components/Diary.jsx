@@ -36,7 +36,6 @@ export default props => {
       <StyledLeftButton onClick={props.previousDayDiary}> </StyledLeftButton>
       <Title> Your Food Diary for {props.diary.currentDiaryDate.day} </Title>
       <StyledRightButton onClick={props.nextDayDiary}> </StyledRightButton>
-
       <hr />
       <div className="diary">
         <div className="displayFoods">

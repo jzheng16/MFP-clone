@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import shortid from 'shortid';
-import { ChangePassword } from '../components';
-import { changingPassword } from '../store/action-creators/auth';
+import { ChangePassword, ChangeUserInfo } from '../components';
+import { changingPassword, updatingUserInformation } from '../store/action-creators/auth';
 import { addToast, deleteToast } from '../store/action-creators/toasts';
 
-const mapState = state => ({ user: state.auth.user });
 const mapDispatch = dispatch => ({
+  updatingUserInformation(userObj) {
+    dispatch(updatingUserInformation(userObj));
+  },
   changingPassword(passwords) {
     return dispatch(changingPassword(passwords));
   },
@@ -18,7 +20,7 @@ const mapDispatch = dispatch => ({
   }
 });
 
-class ChangePasswordContainer extends Component {
+class ProfileSettingsContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -34,6 +36,14 @@ class ChangePasswordContainer extends Component {
   onConfirmPasswordChange = e => {
     this.setState({ confirmPassword: e.target.value });
   }
+
+  changingName = e => {
+    e.preventDefault();
+    console.log('event: ', e.target.first_name.value);
+    console.log('event: ', e.target.last_name.value);
+    this.props.updatingUserInformation({ first_name: e.target.first_name.value, last_name: e.target.last_name.value });
+  }
+
   changePassword = e => {
     e.preventDefault();
     const passwords = {
@@ -56,17 +66,21 @@ class ChangePasswordContainer extends Component {
         }
       });
   };
+
   render() {
     return (
-      <ChangePassword
-        {...this.props}
-        {...this.state}
-        changePassword={this.changePassword}
-        onConfirmPasswordChange={this.onConfirmPasswordChange}
-        onNewPasswordChange={this.onNewPasswordChange}
-      />
+      <div>
+        <ChangePassword
+          {...this.props}
+          {...this.state}
+          changePassword={this.changePassword}
+          onConfirmPasswordChange={this.onConfirmPasswordChange}
+          onNewPasswordChange={this.onNewPasswordChange}
+        />
+        <ChangeUserInfo {...this.props} changingName={this.changingName} />
+      </div>
     );
   }
 }
 
-export default connect(mapState, mapDispatch)(ChangePasswordContainer);
+export default connect(null, mapDispatch)(ProfileSettingsContainer);
