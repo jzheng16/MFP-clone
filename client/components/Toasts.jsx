@@ -16,6 +16,12 @@ const StyledAlert = styled.li`
   border-radius: 5px;
   height: 3em;
   width: 13em;
+  
+  animation-duration: 3s;
+  animation-name: slideout;
+  @keyframes slideout {
+    100% { opacity: 0}
+  }
 `;
 
 const StyledAlertText = styled.p`

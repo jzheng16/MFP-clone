@@ -31,7 +31,6 @@ const SubmitPassword = styled.button`
     cursor: default;
     background-color: #edf1f2;
     border-color: #e0e6e8;
-
   }
 `;
 

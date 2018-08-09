@@ -30,7 +30,8 @@
       {
         "ObjectPattern": {
           "multiline": true,
-          "minProperties": 5
+          "minProperties": 5,
+          "consistent": true
         }
       }
     ],
