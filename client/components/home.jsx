@@ -11,12 +11,20 @@ function importAll(r) {
 const images = importAll(require.context('../../uploads/', false, /\.(png|jpe?g|svg)$/));
 
 const HomeHeader = styled.div`
+
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr;
+  row-gap: 1em;
+  @media (min-width: 768px) {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(3, 1fr);
+  grid-template-rows: auto auto 1fr;
   /* justify-content: center; */  /* Aligns elements on the vertical axis */
   /* align-items: center; */    /* Aligns elements horizontally */  
   row-gap: 1em;
+  }
+ 
 `;
 
 const Title = styled.h1`
@@ -97,6 +105,7 @@ const Home = props => {
   const image = props.user.avatarUrl ? props.user.avatarUrl.split('\\').slice(6).join('/') : 'defaultImage.png';
   console.log('user', props.user);
   console.log('goal', props.goal);
+  console.log(require('../../public/mfpimage.jpg'));
 
   return (
     <HomeHeader>

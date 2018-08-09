@@ -4,14 +4,20 @@ import shortid from 'shortid';
 import styled from 'styled-components';
 
 const StyledLeftButton = styled.button`
-  background-image: "url('../../public/mfpimage.png')";
-  height: 50px;
-  width: 50px;
+  display: inline-block;
+  background-image: url('leftarrow.png') no-repeat;
+  width: 5em;
+  height: 5em;
+  background-position: center center;
 `;
 const StyledRightButton = styled.button`
-  background: url(require('../../public/rightarrow.png')) no-repeat;
-  height: 50px;
-  width: 50px;
+  background: url('rightarrow.png') no-repeat;
+  max-width: 100%;
+  height: auto;
+`;
+
+const Title = styled.h1`
+  display: inline-block;
 `;
 
 export default props => {
@@ -27,11 +33,9 @@ export default props => {
 
   return (
     <div>
-      <h1>
-        <StyledLeftButton onClick={props.previousDayDiary}> </StyledLeftButton>
-        Your Food Diary for {props.diary.currentDiaryDate.day}
-        <StyledRightButton onClick={props.nextDayDiary}> </StyledRightButton>
-      </h1>
+      <StyledLeftButton onClick={props.previousDayDiary}> </StyledLeftButton>
+      <Title> Your Food Diary for {props.diary.currentDiaryDate.day} </Title>
+      <StyledRightButton onClick={props.nextDayDiary}> </StyledRightButton>
 
       <hr />
       <div className="diary">

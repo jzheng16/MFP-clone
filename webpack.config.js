@@ -19,24 +19,21 @@ module.exports = {
   output: {
     path: __dirname,
     filename: './public/bundle.js',
-    publicPath: '/public/',
+    // publicPath: '/public/',
+    publicPath: '/',
     hotUpdateChunkFilename: 'hot/hot-update.js',
     hotUpdateMainFilename: 'hot/hot-update.json'
   },
   context: __dirname,
   devtool: 'inline-source-map',
-  resolve: {
-    extensions: ['.js', '.jsx', '.json', '*'],
-  },
+  resolve: { extensions: ['.js', '.jsx', '.json', '*'] },
   module: {
     rules: [
       {
         test: /jsx?$/,
         exclude: /(node_modules|bower_components)/,
         use: [
-          {
-            loader: 'babel-loader',
-          },
+          { loader: 'babel-loader' },
         ],
       },
       {
@@ -53,9 +50,7 @@ module.exports = {
         test: /\.(png|svg|jpg|gif)$/,
         use: [{
           loader: 'file-loader',
-          options: {
-            name: '[path][name].[ext]',
-          }
+          options: { name: '[path][name].[ext]' }
         }
         ],
 
