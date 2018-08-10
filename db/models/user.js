@@ -90,8 +90,10 @@ const capitalizeFirstLetter = user => {
 }
 
 const capitalizeFirstLetterOnModelUpdate = users => {
-  users.attributes.first_name = users.attributes.first_name[0].toUpperCase() + users.attributes.first_name.slice(1);
-  users.attributes.last_name = users.attributes.last_name[0].toUpperCase() + users.attributes.first_name.slice(1);
+  if (users.attributes.first_name && users.attributes.last_name) {
+    users.attributes.first_name = users.attributes.first_name[0].toUpperCase() + users.attributes.first_name.slice(1);
+    users.attributes.last_name = users.attributes.last_name[0].toUpperCase() + users.attributes.first_name.slice(1);
+  }
 }
 
 User.beforeCreate(capitalizeFirstLetter);

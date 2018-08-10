@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Home } from '../components';
 import { fetchingGoal } from '../store/action-creators/goal';
 import { gettingDiaryId } from '../store/action-creators/diary';
-import { uploadingUserImage } from '../store/action-creators/auth';
+import { uploadingUserImage, test } from '../store/action-creators/auth';
 
 const mapState = state => ({
   user: state.auth.user,

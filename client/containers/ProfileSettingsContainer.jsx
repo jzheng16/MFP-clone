@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import shortid from 'shortid';
-import { ChangePassword, ChangeUserInfo } from '../components';
+import { ChangePassword, ChangeUserInfo, ChangeEmail } from '../components';
 import { changingPassword, updatingUserInformation } from '../store/action-creators/auth';
 import { addToast, deleteToast } from '../store/action-creators/toasts';
 
@@ -44,6 +44,11 @@ class ProfileSettingsContainer extends Component {
     this.props.updatingUserInformation({ first_name: e.target.first_name.value, last_name: e.target.last_name.value });
   }
 
+  changingEmail = e => {
+    e.preventDefault();
+    this.props.updatingUserInformation({ email: e.target.email.value });
+  }
+
   changePassword = e => {
     e.preventDefault();
     const passwords = {
@@ -78,6 +83,7 @@ class ProfileSettingsContainer extends Component {
           onNewPasswordChange={this.onNewPasswordChange}
         />
         <ChangeUserInfo {...this.props} changingName={this.changingName} />
+        <ChangeEmail {...this.props} changingEmail={this.changingEmail} />
       </div>
     );
   }

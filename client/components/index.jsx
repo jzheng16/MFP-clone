@@ -19,4 +19,5 @@ export { default as ChangePassword } from './ChangePassword';
 export { default as Toasts } from './Toasts';
 export { default as Footer } from './Footer';
 export { default as ChangeUserInfo } from './ChangeUserInfo';
+export { default as ChangeEmail } from './ChangeEmail';
 
