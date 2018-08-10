@@ -34,6 +34,13 @@ const SubmitPassword = styled.button`
   }
 `;
 
+const PasswordMatch = styled.span`
+  color: #308800;
+`;
+const PasswordMismatch = styled.span`
+  color: #bb0628;
+`;
+
 export default props => (
   <div>
     <form onSubmit={props.changePassword}>
@@ -55,7 +62,12 @@ export default props => (
         <PasswordInput type="password" name="confirm_password" onChange={props.onConfirmPasswordChange} required />
       </label>
       {props.newPassword && props.confirmPassword && props.newPassword !== props.confirmPassword ?
-        <b> Passwords must match </b>
+        <PasswordMismatch> Passwords must match </PasswordMismatch>
+        :
+        null
+      }
+      {props.newPassword && props.confirmPassword && props.newPassword === props.confirmPassword ?
+        <PasswordMatch> Your passwords match! </PasswordMatch>
         :
         null
       }

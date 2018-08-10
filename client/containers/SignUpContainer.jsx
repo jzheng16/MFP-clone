@@ -19,7 +19,6 @@ class SignUpContainer extends Component {
 
   handleSignup(e) {
     e.preventDefault();
-    console.log('values: ', e.target.first_name.value, e.target.email.value, e.target.password.value);
     this.props.signingUp({
       email: e.target.email.value,
       password: e.target.password.value,

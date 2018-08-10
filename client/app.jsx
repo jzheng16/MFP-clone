@@ -6,6 +6,7 @@ import React from 'react';
 import Routes from './routes';
 import NavBarContainer from './containers/NavBarContainer';
 import ToastsContainer from './containers/ToastsContainer';
+import { Footer } from './components/';
 
 const resetStyles = () => injectGlobal`
   ${styledNormalize}
@@ -18,6 +19,7 @@ const app = () => {
       <NavBarContainer />
       <Routes />
       <ToastsContainer />
+      <Footer />
     </div>
   );
 };
