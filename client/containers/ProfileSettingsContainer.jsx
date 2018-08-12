@@ -39,8 +39,6 @@ class ProfileSettingsContainer extends Component {
 
   changingName = e => {
     e.preventDefault();
-    console.log('event: ', e.target.first_name.value);
-    console.log('event: ', e.target.last_name.value);
     this.props.updatingUserInformation({ first_name: e.target.first_name.value, last_name: e.target.last_name.value });
   }
 

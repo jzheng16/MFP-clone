@@ -1,30 +1,31 @@
 import React from 'react';
-
 import styled from 'styled-components';
+import { Button, Input } from './StyledComponents';
 
 const PasswordLabel = styled.label`
 
 `;
 
-const PasswordInput = styled.input`
+const PasswordInput = styled(Input)`
   display: block;
   margin-bottom: 1em;
+  border-color: initial;
 `;
 
-const SubmitPassword = styled.button`
+const ConfirmPassword = styled(Input)`
   display: block;
-  border-width: 1px;
-  border-radius: 4px;
-  background-color: #14aaf5;
-  border-color: #14aaf5;
-  box-sizing: border-box;
+  border-color: initial;
+`;
+const SubmitPassword = styled(Button)`
+  display: block;
   height: 2em;
   width: 10em;
   font-size: 13px;
-  color: #fff;
-  fill: #fff;
-  cursor: pointer;
-  font-family: Arial;
+  color: white;
+  fill: white;
+  border-radius: 4px;
+  border-color: #14aaf5;
+  background-color: #14aaf5;
   &:disabled {
     color: #b7bfc6;
     fill: #b7bfc6;
@@ -33,12 +34,15 @@ const SubmitPassword = styled.button`
     border-color: #e0e6e8;
   }
 `;
-
 const PasswordMatch = styled.span`
+  font-size: 12px;
+  padding-left: 5px;
   color: #308800;
 `;
 const PasswordMismatch = styled.span`
   color: #bb0628;
+  font-size: 12px;
+  padding-left: 5px;
 `;
 
 export default props => (
@@ -59,7 +63,7 @@ export default props => (
         />
       </label>
       <label htmlFor="confirm_password"> Confirm new password
-        <PasswordInput type="password" name="confirm_password" onChange={props.onConfirmPasswordChange} required />
+        <ConfirmPassword type="password" name="confirm_password" onChange={props.onConfirmPasswordChange} required />
       </label>
       {props.newPassword && props.confirmPassword && props.newPassword !== props.confirmPassword ?
         <PasswordMismatch> Passwords must match </PasswordMismatch>
