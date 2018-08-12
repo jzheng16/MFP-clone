@@ -2,22 +2,30 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import shortid from 'shortid';
 import styled from 'styled-components';
+import { Button } from './StyledComponents';
 
-const StyledLeftButton = styled.button`
-  display: inline-block;
-  background-image: url('leftarrow.png') no-repeat;
-  width: 5em;
-  height: 5em;
-  background-position: center center;
+const StyledLeftButton = styled(Button)`
+  background-color: #0070BF;
+  height: 36px;
+  margin-right: 0;
 `;
-const StyledRightButton = styled.button`
-  background: url('rightarrow.png') no-repeat;
-  max-width: 100%;
-  height: auto;
+const StyledRightButton = styled(Button)`
+  background-color: #0070BF;
+  height: 36px;
 `;
 
 const Title = styled.h1`
   display: inline-block;
+  color: white;
+  background-color:  #0070BF;
+  
+  
+`;
+
+const ButtonImage = styled.img`
+  height: 27px;
+  width: 27px;
+  fill: black;
 `;
 
 export default props => {
@@ -33,9 +41,9 @@ export default props => {
 
   return (
     <div>
-      <StyledLeftButton onClick={props.previousDayDiary}> </StyledLeftButton>
+      <StyledLeftButton onClick={props.previousDayDiary}> <ButtonImage src="/left-pointing-arrow.svg" /> </StyledLeftButton>
       <Title> Your Food Diary for {props.diary.currentDiaryDate.day} </Title>
-      <StyledRightButton onClick={props.nextDayDiary}> </StyledRightButton>
+      <StyledRightButton onClick={props.nextDayDiary}> <ButtonImage src="/right-pointing-arrow.svg" /> </StyledRightButton>
       <hr />
       <div className="diary">
         <div className="displayFoods">
