@@ -11,6 +11,11 @@ import { fetchingUser } from './store/action-creators/auth';
 import ListSearchResultContainer from './containers/ListSearchResultContainer';
 import InitialGoalContainer from './containers/InitialGoalContainer';
 import ProfileSettingsContainer from './containers/ProfileSettingsContainer';
+import styled from 'styled-components';
+
+const BodyWrapper = styled.div`
+  min-height: calc(100vh - 70px);
+`;
 
 const mapDispatchToProps = dispatch => ({
   fetchingUser() {
@@ -26,7 +31,7 @@ class Routes extends Component {
   }
   render() {
     return (
-      <div className="routes">
+      <BodyWrapper>
         {this.props.user.id ?
           <Switch>
             <Route exact path="/" component={HomeContainer} />
@@ -45,7 +50,7 @@ class Routes extends Component {
             <Route exact path="/signup" component={SignUpContainer} />
           </Switch>
         }
-      </div>
+      </BodyWrapper>
     );
   }
 }
