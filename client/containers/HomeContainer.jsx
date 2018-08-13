@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Home } from '../components';
 import { fetchingGoal } from '../store/action-creators/goal';
 import { gettingDiaryId } from '../store/action-creators/diary';
-import { uploadingUserImage, test } from '../store/action-creators/auth';
+import { uploadingUserImage, testing } from '../store/action-creators/auth';
 
 const mapState = state => ({
   user: state.auth.user,
@@ -20,6 +20,9 @@ const mapDispatch = dispatch => ({
   },
   uploadingUserImage(image) {
     dispatch(uploadingUserImage(image));
+  },
+  testing() {
+    dispatch(testing());
   }
 });
 class HomeContainer extends Component {
