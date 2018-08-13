@@ -70,6 +70,13 @@ export const loggingOut = () => dispatch => {
 
 export const changingPassword = passwords => dispatch => axios.post('/api/auth/changepassword', passwords);
 
+export const testing = () => dispatch => {
+  axios.post('/api/auth/testing')
+    .then(response => {
+      console.log('response', response.data);
+    });
+};
+
 // dispatch(getUser(updatedUser.data));
 // return new Promise((resolve, reject) => {
 //   resolve(updatedUser.data);

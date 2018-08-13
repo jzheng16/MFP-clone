@@ -1,6 +1,8 @@
 import { Route, withRouter, Switch } from 'react-router-dom';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import styled from 'styled-components';
+
 import FoodContainer from './containers/FoodContainer';
 import LoginContainer from './containers/LoginContainer';
 import SignUpContainer from './containers/SignUpContainer';
@@ -11,7 +13,7 @@ import { fetchingUser } from './store/action-creators/auth';
 import ListSearchResultContainer from './containers/ListSearchResultContainer';
 import InitialGoalContainer from './containers/InitialGoalContainer';
 import ProfileSettingsContainer from './containers/ProfileSettingsContainer';
-import styled from 'styled-components';
+
 
 const BodyWrapper = styled.div`
   min-height: calc(100vh - 70px);

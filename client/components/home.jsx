@@ -131,6 +131,7 @@ const Home = props => {
             <input name="image" type="file" />
             <button type="submit"> Upload Image </button>
           </form>
+          <button onClick={props.testing}> Click me </button>
         </UserDisplayInfoDiv>
         :
         <div>

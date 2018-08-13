@@ -4,6 +4,8 @@ const multer = require('multer');
 const path = require('path');
 const db = require('../../db');
 // Multer allows you to upload files and store it in your filessystem
+const nodemailer = require('nodemailer');
+const CONFIG = require('../../config');
 
 const storage = multer.diskStorage({ // Takes dest and filename
   destination: (req, file, cb) => {
@@ -137,6 +139,37 @@ router.get('/logout', (req, res) => {
   req.logout(); // Clear req.user object
   req.session.destroy();
   res.redirect('/');
+});
+
+router.post('/testing', (req, res) => {
+  console.log('im here');
+
+  const transport = nodemailer.createTransport({
+    service: 'Gmail',
+    auth: {
+      user: CONFIG.emailUsername,
+      pass: CONFIG.emailPassword
+    },
+    logger: false,
+    debug: false
+  });
+
+  const link = 'hohoho';
+  const message = {
+    from: ' "MyFitnessClone" <test.no.reply.mfpclone@gmail.com>',
+    to: 'jxzheng16@gmail.com',
+    subject: 'E-mail verification needed!',
+    text: `Verification needed!! Click here to verify e-mail! ${link}`,
+    html: ''
+  };
+
+  transport.sendMail(message, (error, info) => {
+    if (error) {
+      return console.log(error);
+    }
+    console.log('Message sent: %s', info.messageId);
+    res.json('success');
+  });
 });
 
 
