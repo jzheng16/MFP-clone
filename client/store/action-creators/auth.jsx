@@ -51,7 +51,7 @@ export const signingUp = user => dispatch => {
     .then(newUser => {
       console.log('what is this', newUser.data);
       dispatch(getUser(newUser.data));
-      history.push('/');
+      history.push('/verification');
     })
     .catch(err => {
       console.log('Oops had trouble signing up: ', err.response.data);
@@ -76,6 +76,31 @@ export const testing = () => dispatch => {
       console.log('response', response.data);
     });
 };
+
+export const sendingVerificationEmail = user => dispatch => {
+  axios.post('/api/auth/sendemail', user)
+    .then(response => {
+      // not sure
+      console.log('response', response.data);
+    });
+};
+
+export const resendingVerificationEmail = user => dispatch => {
+  axios.post('/api/auth/sendemail?resend=true', user)
+    .then(response => {
+      // not sure
+      console.log('response', response.data);
+    });
+};
+
+export const verifyingUser = verificationId => dispatch => {
+  axios.post('/api/auth/verify', { verificationId })
+    .then(response => {
+      dispatch(getUser(response.data));
+      console.log('response', response.data);
+    });
+};
+
 
 // dispatch(getUser(updatedUser.data));
 // return new Promise((resolve, reject) => {

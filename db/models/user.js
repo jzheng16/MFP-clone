@@ -51,6 +51,10 @@ const User = db.define(
       type: Sequelize.ENUM('M', 'F'),
       allowNull: true
     },
+    verified: {
+      type: Sequelize.BOOLEAN,
+      defaultValue: false
+    }
 
 
   }
