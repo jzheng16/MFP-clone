@@ -3,17 +3,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
-import FoodContainer from './containers/FoodContainer';
-import LoginContainer from './containers/LoginContainer';
-import SignUpContainer from './containers/SignUpContainer';
-import HomeContainer from './containers/HomeContainer';
-import GoalContainer from './containers/GoalContainer';
-import DiaryContainer from './containers/DiaryContainer';
-import { fetchingUser } from './store/action-creators/auth';
-import ListSearchResultContainer from './containers/ListSearchResultContainer';
-import InitialGoalContainer from './containers/InitialGoalContainer';
-import ProfileSettingsContainer from './containers/ProfileSettingsContainer';
+// Container Components
+import {
+  FoodContainer, LoginContainer, SignUpContainer, HomeContainer, GoalContainer, DiaryContainer,
+  ListSearchResultContainer, InitialGoalContainer, ProfileSettingsContainer, VerificationContainer
+} from './containers';
 
+// Action-creators
+import { fetchingUser } from './store/action-creators/auth';
 
 const BodyWrapper = styled.div`
   min-height: calc(100vh - 70px);
@@ -38,6 +35,7 @@ class Routes extends Component {
           <Switch>
             <Route exact path="/" component={HomeContainer} />
             <Route exact path="/login" component={LoginContainer} />
+            <Route exact path="/verification" component={VerificationContainer} />
             <Route exact path="/me" component={ProfileSettingsContainer} />
             <Route exact path="/addFood" component={FoodContainer} />
             <Route exact path="/diary" component={DiaryContainer} />
