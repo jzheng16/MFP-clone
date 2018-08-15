@@ -6,7 +6,7 @@ import { Router } from 'react-router-dom';
 import store from './store';
 
 // stylesheet
-// import '../public/index.css';
+import '../public/index.css';
 
 import history from './history';
 import App from './app';

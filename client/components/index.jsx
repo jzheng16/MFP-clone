@@ -20,4 +20,6 @@ export { default as Toasts } from './Toasts';
 export { default as Footer } from './Footer';
 export { default as ChangeUserInfo } from './ChangeUserInfo';
 export { default as ChangeEmail } from './ChangeEmail';
+export { default as Verification } from './Verification';
+export { default as NotFound } from './NotFound';
 
