@@ -21,5 +21,8 @@ export { default as Footer } from './Footer';
 export { default as ChangeUserInfo } from './ChangeUserInfo';
 export { default as ChangeEmail } from './ChangeEmail';
 export { default as Verification } from './Verification';
+<<<<<<< HEAD
 export { default as NotFound } from './NotFound';
+=======
+>>>>>>> origin
 

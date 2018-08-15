@@ -25,7 +25,8 @@ class ProfileSettingsContainer extends Component {
     super(props);
     this.state = {
       newPassword: '',
-      confirmPassword: ''
+      confirmPassword: '',
+      showPasswordDialog: false
     };
   }
 
@@ -35,6 +36,12 @@ class ProfileSettingsContainer extends Component {
   }
   onConfirmPasswordChange = e => {
     this.setState({ confirmPassword: e.target.value });
+  }
+
+  onAnchorClick = () => {
+    console.log('hello hello');
+
+    this.setState({ showPasswordDialog: true });
   }
 
   changingName = e => {
@@ -79,6 +86,7 @@ class ProfileSettingsContainer extends Component {
           changePassword={this.changePassword}
           onConfirmPasswordChange={this.onConfirmPasswordChange}
           onNewPasswordChange={this.onNewPasswordChange}
+          onAnchorClick={this.onAnchorClick}
         />
         <ChangeUserInfo {...this.props} changingName={this.changingName} />
         <ChangeEmail {...this.props} changingEmail={this.changingEmail} />

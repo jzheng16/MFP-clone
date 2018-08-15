@@ -45,38 +45,50 @@ const PasswordMismatch = styled.span`
   padding-left: 5px;
 `;
 
-export default props => (
-  <div>
-    <form onSubmit={props.changePassword}>
+const ShowDialog = styled(Button)`
+  border-style: none;
+  background-color: transparent;
+  font-size: 13px;
+  color: #14aaf5;
+  &:hover {
+    text-decoration: underline;
+  }
 
-      <label htmlFor="current_password"> Enter current password
-        <PasswordInput type="password" name="current_password" required />
-      </label>
-      <label htmlFor="new_password"> Enter new password
-        <PasswordInput
-          type="password"
-          name="new_password"
-          minLength="8"
-          required
-          placeholder="8 characters minimum"
-          onChange={props.onNewPasswordChange}
-        />
-      </label>
-      <label htmlFor="confirm_password"> Confirm new password
-        <ConfirmPassword type="password" name="confirm_password" onChange={props.onConfirmPasswordChange} required />
-      </label>
-      {props.newPassword && props.confirmPassword && props.newPassword !== props.confirmPassword ?
-        <PasswordMismatch> Passwords must match </PasswordMismatch>
-        :
-        null
-      }
-      {props.newPassword && props.confirmPassword && props.newPassword === props.confirmPassword ?
-        <PasswordMatch> Your passwords match! </PasswordMatch>
-        :
-        null
-      }
-      <SubmitPassword type="submit" disabled={props.newPassword !== props.confirmPassword}> Change Password </SubmitPassword>
-    </form>
-  </div>
+`;
+export default props => (
+  props.showPasswordDialog ?
+    <div>
+      <form onSubmit={props.changePassword}>
+        <label htmlFor="current_password"> Enter current password
+          <PasswordInput type="password" name="current_password" required />
+        </label>
+        <label htmlFor="new_password"> Enter new password
+          <PasswordInput
+            type="password"
+            name="new_password"
+            minLength="8"
+            required
+            placeholder="8 characters minimum"
+            onChange={props.onNewPasswordChange}
+          />
+        </label>
+        <label htmlFor="confirm_password"> Confirm new password
+          <ConfirmPassword type="password" name="confirm_password" onChange={props.onConfirmPasswordChange} required />
+        </label>
+        {props.newPassword && props.confirmPassword && props.newPassword !== props.confirmPassword ?
+          <PasswordMismatch> Passwords must match </PasswordMismatch>
+          :
+          null
+        }
+        {props.newPassword && props.confirmPassword && props.newPassword === props.confirmPassword ?
+          <PasswordMatch> Your passwords match! </PasswordMatch>
+          :
+          null
+        }
+        <SubmitPassword type="submit" disabled={props.newPassword !== props.confirmPassword}> Change Password </SubmitPassword>
+      </form>
+    </div>
+    :
+    <ShowDialog onClick={props.onAnchorClick}> Change your password... </ShowDialog>
 );
 

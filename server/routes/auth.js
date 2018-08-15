@@ -1,10 +1,15 @@
 const router = require('express').Router();
 const User = require('../../db/models/user');
+const Verification = require('../../db/models/verification');
 const multer = require('multer');
 const path = require('path');
 const db = require('../../db');
 <<<<<<< Updated upstream
 // Multer allows you to upload files and store it in your filessystem
+const nodemailer = require('nodemailer');
+const shortid = require('shortid');
+const CONFIG = require('../../config');
+
 
 =======
 const nodemailer = require('nodemailer');
@@ -143,6 +148,141 @@ router.get('/logout', (req, res) => {
   req.logout(); // Clear req.user object
   req.session.destroy();
   res.redirect('/');
+});
+
+router.post('/sendemail', (req, res) => {
+  const transport = nodemailer.createTransport({
+    service: 'Gmail',
+    auth: {
+      user: CONFIG.emailUsername,
+      pass: CONFIG.emailPassword
+    },
+    logger: false,
+    debug: false
+  });
+
+  const link = shortid.generate();
+
+  const message = {
+    from: ' "MyFitnessClone" <test.no.reply.mfpclone@gmail.com>',
+    to: req.body.email,
+    subject: 'MyFitnessClone E-mail verification needed!',
+    html: `  <table border="0" cellPadding="0" cellSpacing="0" height="100%" width="100%" id="bodyTable">
+    <tr>
+      <td valign="top">
+        <table border="0" cellPadding="20" cellSpacing="0" width="600px" id="emailContainer">
+          <tr>
+            <td align="center" valign="top">
+              <table border="0" cellPadding="20" cellSpacing="0" width="100%" id="emailHeader">
+                <tr>
+                  <td align="center" valign="top" height="70px" style="font-size: 24px;color: white;background-color: #0070BF;vertical-align:middle">
+                    <p> MyFitnessClone </p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td align="center" valign="top">
+              <table border="0" cellPadding="20" cellSpacing="0" width="100%" id="emailBody">
+                <tr>
+                  <td align="center" valign="top">
+                    <h1> Welcome to MyFitnessClone </h1>
+                    <p> Let's get started by verifying your e-mail. Verifying your e-mail helps you in case you ever forget your password. Don't worry, we will never send any further e-mails without your permission. </p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td align="center" valign="top">
+              <table border="0" cellPadding="20" cellSpacing="0" width="30%" id="emailHeader">
+                <tr>
+                  <td align="center" valign="top" style="background-color: #0070BF;border-radius: 5px;border: 2px solid #0070BF;padding: 10px;text-align: center;">
+                    <a style="display: block;color: #ffffff;font-size: 12px;text-decoration: none;;" href="http://localhost:3000/verification/?verificationId=${link}">
+                      Verify Email
+                    </a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td align="center" valign="top">
+              <table border="0" cellPadding="20" cellSpacing="0" width="100%" id="emailHeader">
+                <tr>
+                  <td align="left" valign="top" text-align: "left" style="color: #8c8c8c">
+                    <p> Thank you, <br /> MyFitnessClone Team <br />(aka: one lonely developer) </p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table >`
+
+  };
+  if (req.query.resend) {
+    Verification.destroy({ where: { user_id: req.user.dataValues.id } })
+      .then(() => {
+        Verification.create({
+          verificationId: link,
+          user_id: req.user.dataValues.id
+        })
+          .then(() => {
+            transport.sendMail(message, (error, info) => {
+              if (error) {
+                return console.log(error);
+              }
+              console.log('Message sent: %s', info.messageId);
+              res.json('success');
+            });
+          });
+      });
+  } else {
+    Verification.create({
+      verificationId: link,
+      user_id: req.user.dataValues.id
+    })
+      .then(() => {
+        transport.sendMail(message, (error, info) => {
+          if (error) {
+            return console.log(error);
+          }
+          console.log('Message sent: %s', info.messageId);
+          res.json('success');
+        });
+      });
+  }
+});
+
+router.post('/verify', (req, res) => {
+  console.log('req.body', req.body.verificationId);
+
+  Verification.findOne({
+    where: {
+      verificationId: req.body.verificationId,
+      user_id: req.user.dataValues.id
+    }
+  })
+    .then(verified => {
+      if (verified) {
+        User.update(
+          { verified: true },
+          {
+            returning: true,
+            plain: true,
+            where: { id: req.user.dataValues.id }
+          }
+        )
+          .then(updatedUser => res.json(updatedUser[1]))
+          .catch(err => console.log('Trouble verifying user', err));
+      } else {
+        res.status(401).send('Trouble validating user');
+      }
+    });
 });
 
 
