@@ -4,20 +4,11 @@ const Verification = require('../../db/models/verification');
 const multer = require('multer');
 const path = require('path');
 const db = require('../../db');
-<<<<<<< Updated upstream
-// Multer allows you to upload files and store it in your filessystem
-const nodemailer = require('nodemailer');
-const shortid = require('shortid');
-const CONFIG = require('../../config');
-
-
-=======
 const nodemailer = require('nodemailer');
 const shortid = require('shortid');
 const CONFIG = require('../../config');
 
 // Multer allows you to upload files and store it in your filessystem
->>>>>>> Stashed changes
 const storage = multer.diskStorage({ // Takes dest and filename
   destination: (req, file, cb) => {
     cb(null, path.resolve(__dirname, '../../uploads/')); // Where multer will store all uploads, must be static (public)

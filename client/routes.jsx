@@ -1,17 +1,6 @@
 import { Route, withRouter, Switch } from 'react-router-dom';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-import FoodContainer from './containers/FoodContainer';
-import LoginContainer from './containers/LoginContainer';
-import SignUpContainer from './containers/SignUpContainer';
-import HomeContainer from './containers/HomeContainer';
-import GoalContainer from './containers/GoalContainer';
-import DiaryContainer from './containers/DiaryContainer';
-=======
-=======
->>>>>>> origin
 import styled from 'styled-components';
 
 // Container Components
@@ -20,13 +9,7 @@ import {
   ListSearchResultContainer, InitialGoalContainer, ProfileSettingsContainer, VerificationContainer
 } from './containers';
 
-<<<<<<< HEAD
 import { NotFound } from './components';
-// Action-creators
->>>>>>> Stashed changes
-=======
-// Action-creators
->>>>>>> origin
 import { fetchingUser } from './store/action-creators/auth';
 
 const BodyWrapper = styled.div`

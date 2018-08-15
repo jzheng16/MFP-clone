@@ -31,7 +31,7 @@ const Title = styled.h1`
   grid-column: 1/2;
   text-align: center;
   color: white;
-  margin-left: 15em;
+ 
   
   /* @media (min-width: 768px) {
     
