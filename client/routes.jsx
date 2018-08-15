@@ -9,7 +9,7 @@ import {
   ListSearchResultContainer, InitialGoalContainer, ProfileSettingsContainer, VerificationContainer
 } from './containers';
 
-// Action-creators
+import { NotFound } from './components';
 import { fetchingUser } from './store/action-creators/auth';
 
 const BodyWrapper = styled.div`
@@ -42,12 +42,14 @@ class Routes extends Component {
             <Route exact path="/goal" component={GoalContainer} />
             <Route exact path="/goal/plan" component={InitialGoalContainer} />
             <Route exact path="/food/search" component={ListSearchResultContainer} />
+            <Route component={NotFound} />
           </Switch>
           :
           <Switch>
             <Route exact path="/" component={HomeContainer} />
             <Route exact path="/login" component={LoginContainer} />
             <Route exact path="/signup" component={SignUpContainer} />
+            <Route component={NotFound} />
           </Switch>
         }
       </BodyWrapper>

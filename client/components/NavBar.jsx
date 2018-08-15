@@ -11,21 +11,22 @@ import logo from '../../public/mfp.png';
 const active = btoa(Math.random());
 
 const NavBarWrapper = styled.div`
-  display: grid;
-  grid-template-rows: 100px;
-  grid-template-columns: repeat(3, 1fr);
   background-color: #0070BF;
+  width: 100%;
+  height: 100px;
+  box-sizing: border-box;
 
+  
 `;
 
 const StyledNav = styled.nav`
-  grid-column: 2/4;
   display: inline-block;
+
   background-color: #0070BF;
 `;
 
 const StyledHomeIcon = styled.img`
-  width: auto;
+  /* width: auto; */
   height: 60px;
 `;
 

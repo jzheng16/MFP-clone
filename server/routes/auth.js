@@ -4,12 +4,11 @@ const Verification = require('../../db/models/verification');
 const multer = require('multer');
 const path = require('path');
 const db = require('../../db');
-// Multer allows you to upload files and store it in your filessystem
 const nodemailer = require('nodemailer');
 const shortid = require('shortid');
 const CONFIG = require('../../config');
 
-
+// Multer allows you to upload files and store it in your filessystem
 const storage = multer.diskStorage({ // Takes dest and filename
   destination: (req, file, cb) => {
     cb(null, path.resolve(__dirname, '../../uploads/')); // Where multer will store all uploads, must be static (public)
@@ -78,7 +77,7 @@ router.post('/uploadimage', upload.single('file'), (req, res) => {
 
 // Change password
 
-router.post('/changepassword', (req, res, next) => {
+router.post('/changepassword', (req, res) => {
   User.findOne({ where: { id: req.user.dataValues.id } })
     .then(user => {
       if (!user.correctPassword(req.body.currentPassword)) {
@@ -89,7 +88,6 @@ router.post('/changepassword', (req, res, next) => {
           plain: true,
         })
           .then(updatedUser => {
-            console.log('updated User', updatedUser);
             res.json(updatedUser);
           });
       }
@@ -126,7 +124,6 @@ router.post('/signup', (req, res, next) => {
       if (err.name === 'SequelizeUniqueConstraintError') {
         res.status(401).send('E-mail already exists');
       } else {
-        console.log('what is this error', err);
         next(err);
       }
     });

@@ -15,50 +15,52 @@ const HomeHeader = styled.div`
   grid-template-columns: 1fr;
   grid-template-rows: auto 1fr;
   row-gap: 1em;
-  @media (min-width: 768px) {
-  display: grid;
+  
+
+  /* @media (min-width: 768px) {
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: auto auto 1fr;
   /* justify-content: center; */  /* Aligns elements on the vertical axis */
   /* align-items: center; */    /* Aligns elements horizontally */  
-  row-gap: 1em;
-  }
+  /* row-gap: 1em; */
+  /* } */
  
 `;
 
 const Title = styled.h1`
-  grid-column: 1/4;
-  grid-row: 1/2;
+  grid-column: 1/2;
   text-align: center;
   color: white;
-  padding-right: 15em;
-  @media (min-width: 768px) {
-    padding-top: 5em;
-  }
+ 
+  
+  /* @media (min-width: 768px) {
+    
+    grid-column: 1/4;
+    grid-row: 1/2;
+  } */    
 `;
 
 const HomeImage = styled.img`
-  grid-column: 1/4;
-  grid-row: 1/3;
   width: 100%;
   height: auto;
-  /* margin: 0 auto; */
+ 
 `;
 
 const UserDisplayInfoDiv = styled.div`
-  grid-column: 1/4;
+    /* grid-column: 1/4;
   grid-row: 3/5;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(2, 1fr);
+grid - template- r ows: repeat(2, 1fr); */
 `;
 
 /* TODO: Experiment with float and have the text wrap around it */
 const ProfileImage = styled.img`
   grid-column: 1/2;
   grid-row: 1/2;
-  width:100%;
-  height:100%;
+  width: 100%;
+  max-width: 400px;
+  height: auto;
   object-fit: contain;
 
 `;
@@ -77,7 +79,7 @@ const UserDisplayInfo = styled.ul`
 `;
 
 const InfoList = styled.li`
-`;
+  `;
 
 const StyledLink = styled(Link)`
 
@@ -86,7 +88,7 @@ const StyledLink = styled(Link)`
   }
   &:hover {
     border-bottom: 1px transparent;     
-    background: #CDFEAA;
+      background: #CDFEAA;
   }
   
 `;

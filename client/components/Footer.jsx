@@ -5,14 +5,13 @@ import { Ul, List } from './StyledComponents';
 
 const FooterWrapper = styled.footer`
   width: 100%; /* not needed since it will default expand to 100%? */
+  background: #d9e4ea;
   background: #242729;
   height: auto;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   align-items: center;
   justify-content: center;
-  
-
 `;
 
 const StyledCopyright = styled.p`
