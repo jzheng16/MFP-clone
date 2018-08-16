@@ -1,7 +1,8 @@
 import React from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-
+import HomeBackgroundImage from '../../public/mfpimage.jpg';
+import { Button, Ul, List } from './StyledComponents';
 // Function used to require all images in upload folder because webpack cannot determine dynamic images during bundling
 function importAll(r) {
   const images = {};
@@ -9,14 +10,13 @@ function importAll(r) {
   return images;
 }
 const images = importAll(require.context('../../uploads/', false, /\.(png|jpe?g|svg)$/));
+const breakpoints = { first: '470px' };
 
 const HomeHeader = styled.div`
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: auto 1fr;
+  grid-template-rows: 1fr;
   row-gap: 1em;
-  
-
   /* @media (min-width: 768px) {
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: auto auto 1fr;
@@ -26,28 +26,27 @@ const HomeHeader = styled.div`
   /* } */
  
 `;
-
-const Title = styled.h1`
+const HomeImage = styled.img`
   grid-column: 1/2;
-  text-align: center;
+  grid-row: 1/2;
+  width: 100%;
+  height: auto;
+`;
+const Title = styled.h3`
+  grid-column: 1/2;
+  grid-row: 1/2;
+  font-size: 1em;
+  height: 5em;
   color: white;
  
-  
   /* @media (min-width: 768px) {
-    
     grid-column: 1/4;
     grid-row: 1/2;
   } */    
 `;
 
-const HomeImage = styled.img`
-  width: 100%;
-  height: auto;
- 
-`;
-
 const UserDisplayInfoDiv = styled.div`
-    /* grid-column: 1/4;
+  /* grid-column: 1/4;
   grid-row: 3/5;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -59,8 +58,9 @@ const ProfileImage = styled.img`
   grid-column: 1/2;
   grid-row: 1/2;
   width: 100%;
-  max-width: 400px;
+  
   height: auto;
+  max-height: 200px;
   object-fit: contain;
 
 `;
@@ -73,13 +73,12 @@ const MiscInfo = styled.p`
   text-transform: none;
 `;
 
-const UserDisplayInfo = styled.ul`
-  list-style: none;    /* list-style shorthand for list-style-type image position */
-  padding-left: 2rem;
+const UserDisplayInfo = styled(Ul)`
 `;
 
-const InfoList = styled.li`
-  `;
+const InfoList = styled(List)`
+ 
+`;
 
 const StyledLink = styled(Link)`
 
@@ -93,27 +92,39 @@ const StyledLink = styled(Link)`
   
 `;
 
-const StyledButton = styled.button`
-  color: black;
-  font-size: 1em;
-  margin: 1em;
-  padding: .25em 1em;
-  border-radius: 2px;
+const StyledButton = styled(Button)`
+ 
+`;
+
+const StyledUploadImage = styled.input`
+  display: none;
+`;
+
+const StyledLabel = styled.label`
+  width: 100%;
+  height: 10em;
+  &:hover {
+    background-color: black;
+  }
 `;
 
 const Home = props => {
-  const image = props.user.avatarUrl ? props.user.avatarUrl.split('\\').slice(6).join('/') : 'defaultImage.png';
+  const profilePicture = props.user.avatarUrl || 'defaultImage.png';
   const { user, goal } = props;
-  console.log('user', props.user);
-  console.log('goal', props.goal);
+  // console.log('user', props.user);
+  // console.log('goal', props.goal);
+  console.log('images', profilePicture);
 
   return (
     <HomeHeader>
-      <HomeImage src={require('../../public/mfpimage.jpg')} />
+      <HomeImage src={HomeBackgroundImage} />
       <Title> Welcome to MyFitnessClone!</Title>
       {user.id ?
         <UserDisplayInfoDiv>
-          <ProfileImage src={images[image]} alt="Profile Picture" />
+          <StyledLabel htmlFor="fileUpload">
+            <ProfileImage src={images[profilePicture]} alt="Profile Picture" />
+            <StyledUploadImage name="image" type="file" id="fileUpload" onChange={props.uploadImage} />
+          </StyledLabel>
           <MiscInfo>
             MyFitnessClone allows you to set and achieve your goals by making sure that you&#39;re on track! <br></br>
             This page will show your calorie goal and how much you&#39;ve accomplished for the day!<br></br>
@@ -127,13 +138,10 @@ const Home = props => {
             <InfoList> Protein: {goal ? goal.protein : 'Not Set'} </InfoList>
             <InfoList> Fat: {goal ? goal.fat : 'Not Set'} </InfoList>
             <StyledLink to="/addfood"> <StyledButton > Add Food </StyledButton> </StyledLink>
-            <StyledLink to="/goal"> Edit Goals </StyledLink>
+            <StyledLink to="/goal"> <StyledButton > Edit Goals </StyledButton> </StyledLink>
           </UserDisplayInfo>
-          <form encType="multipart/form-data" onSubmit={props.uploadImage}>
-            <input name="image" type="file" />
-            <button type="submit"> Upload Image </button>
-          </form>
-          <button onClick={props.testing}> Click me </button>
+          <StyledUploadImage name="image" type="file" onChange={props.uploadImage} />
+
         </UserDisplayInfoDiv>
         :
         <div>

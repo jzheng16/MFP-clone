@@ -5,7 +5,7 @@ const axios = require('axios');
 const fs = require('fs');
 
 const User =
-  [{ email: 'bobo@bobo.com', password: '1234', first_name: 'Bobo', last_name: 'Kins', weight: [151, 153, 175, 173, 151] },
+  [{ email: 'bobo@bobo.com', password: '1234', first_name: 'Bobo', last_name: 'Kins', weight: [151, 153, 175, 173, 151], verified: true },
     { email: 'medie1@ebay.co.uk', password: 'QPUJAR1OwQ2i', first_name: 'Marlo', last_name: 'Edie', weight: [159, 162, 164, 158, 174] },
     { email: 'psimony2@rambler.ru', password: 'Qped6xY', first_name: 'Perla', last_name: 'Simony', weight: [169, 179, 162, 169, 156] },
     { email: 'cforrestor3@foxnews.com', password: '1NouRgEFKi8', first_name: 'Catlaina', last_name: 'Forrestor', weight: [177, 166, 171, 180, 162] },

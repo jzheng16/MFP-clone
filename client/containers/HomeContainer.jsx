@@ -40,9 +40,11 @@ class HomeContainer extends Component {
 
   uploadImage = event => {
     event.preventDefault();
+    console.log('event?', event.target.files);
+
     // Create form object for multer to parse
     const form = new FormData();
-    form.append('file', event.target.image.files[0]);
+    form.append('file', event.target.files[0]);
     this.props.uploadingUserImage(form);
   }
 

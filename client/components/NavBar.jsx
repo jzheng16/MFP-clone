@@ -4,8 +4,36 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
-
+import { slide as Menu } from 'react-burger-menu';
 import logo from '../../public/mfp.png';
+
+const styles = {
+  bmBurgerButton: {
+    position: 'absolute',
+    width: '36px',
+    height: '30px',
+    left: '36px',
+    top: '36px'
+  },
+  bmBurgerBars: { background: '#373a47' },
+  bmCrossButton: {
+    height: '24px',
+    width: '24px'
+  },
+  bmCross: { background: '#bdc3c7' },
+  bmMenu: {
+    background: '#373a47',
+    padding: '2.5em 1.5em',
+    fontSize: '1.15em'
+  },
+
+  bmItemList: {
+    color: '#b8b7ad',
+    padding: '0.8em 1em 0 0'
+  },
+  bmItem: { display: 'block' },
+  bmOverlay: { background: 'rgba(0, 0, 0, 0.3)' }
+};
 
 
 const active = btoa(Math.random());
@@ -32,7 +60,7 @@ const StyledHomeIcon = styled.img`
 
 const StyledNavLink = styled(NavLink)`
   color: white;
-  font-size: 15px;
+  font-size: 16px;
   display: inline-block;
   margin: 10px 10px 0px 10px;
   text-decoration: none;
@@ -45,30 +73,54 @@ const StyledNavLink = styled(NavLink)`
   &.${active} {
     color: black;
   }
+`;
 
+const StyledMenuLink = styled(StyledNavLink)`
+  padding-bottom: 1em;
 `;
 
 export default props => (
-  <NavBarWrapper>
-    {props.user.id ?
-      <StyledNav>
-        <StyledNavLink id="navhome" to="/" exact activeClassName={active}>  <StyledHomeIcon src={logo} alt="MyFitnessPal" />  </StyledNavLink>
-        <StyledNavLink to="/diary" exact activeClassName={active}> Diary </StyledNavLink>
-        <StyledNavLink to="/measurements" exact activeClassName={active}> Track Measurements </StyledNavLink>
-        <StyledNavLink to="/goal" exact activeClassName={active}>Goals </StyledNavLink>
-        <StyledNavLink to="/me" exact activeClassName={active}> Me! </StyledNavLink>
-        <StyledNavLink to="/logout" id="logout" onClick={props.handleLogout}> Logout </StyledNavLink>
-      </StyledNav>
-      :
-      <StyledNav>
-        <StyledNavLink to="/" exact activeClassName={active}>  <StyledHomeIcon src={logo} alt="MyFitnessPal" /> </StyledNavLink>
-        <StyledNavLink to="/foods" exact activeClassName={active}> Foods </StyledNavLink>
-        <StyledNavLink to="/login" exact activeClassName={active}> Log-In </StyledNavLink>
-        <StyledNavLink to="/signup" exact activeClassName={active}> Sign-up</StyledNavLink>
-      </StyledNav>
+  props.width > 450 ?
+    <NavBarWrapper>
+      {props.user.id ?
+        <StyledNav>
+          <StyledNavLink id="navhome" to="/" exact activeClassName={active}>  <StyledHomeIcon src={logo} alt="MyFitnessPal" />  </StyledNavLink>
+          <StyledNavLink to="/diary" exact activeClassName={active}> Diary </StyledNavLink>
+          <StyledNavLink to="/measurements" exact activeClassName={active}> Track Measurements </StyledNavLink>
+          <StyledNavLink to="/goal" exact activeClassName={active}>Goals </StyledNavLink>
+          <StyledNavLink to="/me" exact activeClassName={active}> Me! </StyledNavLink>
+          <StyledNavLink to="/logout" id="logout" onClick={props.handleLogout}> Logout </StyledNavLink>
+        </StyledNav>
+        :
+        <StyledNav>
+          <StyledNavLink to="/" exact activeClassName={active}>  <StyledHomeIcon src={logo} alt="MyFitnessPal" /> </StyledNavLink>
+          <StyledNavLink to="/foods" exact activeClassName={active}> Foods </StyledNavLink>
+          <StyledNavLink to="/login" exact activeClassName={active}> Log-In </StyledNavLink>
+          <StyledNavLink to="/signup" exact activeClassName={active}> Sign-up</StyledNavLink>
+        </StyledNav>
 
-    }
-  </NavBarWrapper>
+      }
+    </NavBarWrapper>
+    :
+    <NavBarWrapper>
+      {props.user.id ?
+        <Menu isOpen={props.isOpen} width={250} styles={styles}>
+          <StyledMenuLink id="navhome" to="/" exact activeClassName={active} onClick={props.closeMenu}>  <StyledHomeIcon src={logo} alt="MyFitnessPal" />  </StyledMenuLink>
+          <StyledMenuLink to="/diary" exact activeClassName={active} onClick={props.closeMenu}> Diary </StyledMenuLink>
+          <StyledMenuLink to="/measurements" exact activeClassName={active} onClick={props.closeMenu}> Track Measurements </StyledMenuLink>
+          <StyledMenuLink to="/goal" exact activeClassName={active} onClick={props.closeMenu}>Goals </StyledMenuLink>
+          <StyledMenuLink to="/me" exact activeClassName={active} onClick={props.closeMenu}> Me! </StyledMenuLink>
+          <StyledMenuLink to="/logout" id="logout" onClick={() => { props.handleLogout(); props.closeMenu(); }} > Logout </StyledMenuLink>
+        </Menu>
+        :
+        <Menu isOpen={props.isOpen} width={250} styles={styles}>
+          <StyledMenuLink to="/" exact activeClassName={active} onClick={props.closeMenu}>  <StyledHomeIcon src={logo} alt="MyFitnessPal" /> </StyledMenuLink>
+          <StyledMenuLink to="/foods" exact activeClassName={active} onClick={props.closeMenu}> Foods </StyledMenuLink>
+          <StyledMenuLink to="/login" exact activeClassName={active} onClick={props.closeMenu}> Log-In </StyledMenuLink>
+          <StyledMenuLink to="/signup" exact activeClassName={active} onClick={props.closeMenu}> Sign-up</StyledMenuLink>
+        </Menu>
+      }
+    </NavBarWrapper >
 
 );
 
