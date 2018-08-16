@@ -64,13 +64,12 @@ router.post('/updateUserInfo', (req, res) => {
 
 router.post('/uploadimage', upload.single('file'), (req, res) => {
   // New file object will be attached to req with properties: originalname, mimetype, destination, path
-  User.update({ avatarUrl: req.file.path }, {
+  User.update({ avatarUrl: req.file.originalname }, {
     returning: true,
     plain: true,
     where: { id: req.user.dataValues.id }
   })
     .then(updatedUser => {
-      console.log(updatedUser[1]);
       res.json(updatedUser[1]);
     });
 });

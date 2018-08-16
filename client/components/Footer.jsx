@@ -5,7 +5,6 @@ import { Ul, List } from './StyledComponents';
 
 const FooterWrapper = styled.footer`
   width: 100%; /* not needed since it will default expand to 100%? */
-  background: #d9e4ea;
   background: #242729;
   height: auto;
   display: grid;
@@ -21,7 +20,7 @@ const StyledCopyright = styled.p`
 `;
 
 const LinkWrapper = styled.div`
-  grid-column: 2/3;
+  grid-column: 2/4;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   align-items: center;

@@ -34,19 +34,24 @@ export const A = styled.a`
 export const Ul = styled.ul`
   list-style: none;
   margin: 0;
+  padding: 0;
   width: 100%;
   max-height: 30em;
+  text-align: center;
   overflow-y: auto; /* values: scroll, hidden, auto, visible (default) */
-  padding: 0 1em;
+  
 `;
 
 export const List = styled.li`
   width: 100%;
-  height: 3em;
+  height: 2em;
   display: flex;
   align-items: center;
+  justify-content: center;
   position: relative;
   border-top: 1px solid #eee;
+  
+  
   &:first-child {
     border-top: none;
   }

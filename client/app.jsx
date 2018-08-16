@@ -8,6 +8,7 @@ import NavBarContainer from './containers/NavBarContainer';
 import ToastsContainer from './containers/ToastsContainer';
 import { Footer } from './components/';
 
+// Normalize styles across all browsers. Not a CSS reset.
 const resetStyles = () => injectGlobal`
   ${styledNormalize}
 `;
