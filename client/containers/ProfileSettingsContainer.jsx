@@ -39,8 +39,6 @@ class ProfileSettingsContainer extends Component {
   }
 
   onAnchorClick = () => {
-    console.log('hello hello');
-
     this.setState({ showPasswordDialog: true });
   }
 

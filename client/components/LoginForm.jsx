@@ -1,23 +1,70 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import { Button } from './StyledComponents';
 
-export default props => (
-  <div>
-    <form className="login" onSubmit={props.handleLogin}>
-      <label htmlFor="email"> Email:
-        <input id="email" type="text" name="email" />
 
-      </label>
-      <label htmlFor="password">  Password:
-        <input id="password" type="password" name="password" />
+const StyledLabel = styled.label`
+  display: block;
+  margin-bottom: 7px;
+`;
 
-      </label>
-      <button type="submit"> Submit </button>
-    </form>
+const StyledEmailInput = styled.input`
+  border: 1px solid #d5dce0;
+  border-radius: 3px;
+  height: 1.5em;
+  margin-bottom: 1em;
+`;
 
-    <b> Don&#39;t have an account?
-      <NavLink to="/signup"> Sign-up! </NavLink>
-    </b>
+const StyledPasswordInput = styled(StyledEmailInput)`
+  margin-bottom: .5em;
+`;
 
-  </div>
-);
+const StyledLoginButton = styled(Button)`
+  display: block;
+  border-radius: 1px;
+  color: white;
+  background-color: #14aaf5;
+  border-color: #14aaf5;
+  width: 4em;
+  height: 1.5em;
+  margin-left: 8em;
+  &:disabled{
+  color: #b7bfc6;
+    fill: #b7bfc6;
+    cursor: default;
+    background-color: #edf1f2;
+    border-color: #e0e6e8;
+  }
+`;
+
+const ForgotPasswordLink = styled(Link)`
+  display: block;
+  text-decoration: none;
+  font-size: .75em;
+  margin-bottom: 1em;
+  
+`;
+
+export default props => {
+  console.log(!props.password && !props.email);
+
+  return (
+    <div>
+      <form className="login" onSubmit={props.handleLogin}>
+        <StyledLabel htmlFor="email"> Email Address </StyledLabel>
+        <StyledEmailInput onChange={props.onEmailChange} id="email" type="text" name="email" />
+
+        <StyledLabel htmlFor="password">  Password </StyledLabel>
+        <StyledPasswordInput onChange={props.onPasswordChange} id="password" type="password" name="password" />
+        <ForgotPasswordLink to="/forgotpassword"> Forgot your password?</ForgotPasswordLink>
+        <StyledLoginButton type="submit" disabled={!props.password || !props.email}> Log-in </StyledLoginButton>
+      </form>
+
+      <b> Don&#39;t have an account?
+        <Link to="/signup"> Sign-up! </Link>
+      </b>
+
+    </div>
+  );
+};
