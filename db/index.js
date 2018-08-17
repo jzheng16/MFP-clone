@@ -15,6 +15,7 @@ const db = new Sequelize(
     define: {
       underscored: true,
       freezeTableName: true,
+      timestamps: false
     }
   },
 );

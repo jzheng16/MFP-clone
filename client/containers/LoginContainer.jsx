@@ -9,26 +9,33 @@ const mapDispatchToProps = dispatch => ({
   }
 });
 
-const mapStateToProps = state => ({
-  user: state.auth.user
-});
+const mapStateToProps = state => ({ user: state.auth.user });
 
 class LoginContainer extends Component {
   constructor(props) {
     super(props);
     this.handleLogin = this.handleLogin.bind(this);
+    this.state = { email: '', password: '' };
   }
   componentDidMount() {
   }
 
-  handleLogin(e) {
+  onPasswordChange = e => {
+    this.setState({ password: e.target.value });
+  }
+
+  onEmailChange = e => {
+    this.setState({ email: e.target.value });
+  }
+
+  handleLogin = e => {
     e.preventDefault();
     this.props.loggingIn(e.target.email.value, e.target.password.value);
   }
 
   render() {
     return (
-      <LoginForm {...this.props} handleLogin={this.handleLogin} />
+      <LoginForm {...this.props} {...this.state} onPasswordChange={this.onPasswordChange} onEmailChange={this.onEmailChange} handleLogin={this.handleLogin} />
     );
   }
 }

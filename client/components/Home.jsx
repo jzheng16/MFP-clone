@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import HomeBackgroundImage from '../../public/mfpimage.jpg';
@@ -93,7 +94,11 @@ const StyledLink = styled(Link)`
 `;
 
 const StyledButton = styled(Button)`
- 
+ background-color: #0070BF
+ border-radius: 10px;
+ border: none;
+ color: white;
+ padding: 8px 8px;
 `;
 
 const StyledUploadImage = styled.input`
@@ -108,9 +113,9 @@ const StyledLabel = styled.label`
   }
 `;
 
-const Home = props => {
-  const profilePicture = props.user.avatarUrl || 'defaultImage.png';
-  const { user, goal } = props;
+const Home = ({ user, goal, uploadImage }) => {
+  const profilePicture = user.avatarUrl || 'defaultImage.png';
+
   // console.log('user', props.user);
   // console.log('goal', props.goal);
   console.log('images', profilePicture);
@@ -123,7 +128,7 @@ const Home = props => {
         <UserDisplayInfoDiv>
           <StyledLabel htmlFor="fileUpload">
             <ProfileImage src={images[profilePicture]} alt="Profile Picture" />
-            <StyledUploadImage name="image" type="file" id="fileUpload" onChange={props.uploadImage} />
+            <StyledUploadImage name="image" type="file" id="fileUpload" onChange={uploadImage} />
           </StyledLabel>
           <MiscInfo>
             MyFitnessClone allows you to set and achieve your goals by making sure that you&#39;re on track! <br></br>
@@ -140,7 +145,7 @@ const Home = props => {
             <StyledLink to="/addfood"> <StyledButton > Add Food </StyledButton> </StyledLink>
             <StyledLink to="/goal"> <StyledButton > Edit Goals </StyledButton> </StyledLink>
           </UserDisplayInfo>
-          <StyledUploadImage name="image" type="file" onChange={props.uploadImage} />
+
 
         </UserDisplayInfoDiv>
         :
@@ -156,5 +161,35 @@ const Home = props => {
     </HomeHeader>
   );
 };
+
+Home.propTypes = {
+  user: PropTypes.shape({
+    age: PropTypes.number,
+    avatarUrl: PropTypes.string,
+    email: PropTypes.string,
+    first_name: PropTypes.string,
+    last_name: PropTypes.string,
+    gender: PropTypes.string,
+    height: PropTypes.number,
+    id: PropTypes.number,
+    verified: PropTypes.bool,
+    weight: PropTypes.arrayOf(PropTypes.number)
+  }),
+  goal: PropTypes.shape({
+    id: PropTypes.number,
+    calorie: PropTypes.number,
+    weight: PropTypes.number,
+    carbs: PropTypes.number,
+    protein: PropTypes.number,
+    fat: PropTypes.number,
+    user_id: PropTypes.number,
+    plan_id: PropTypes.number,
+    activity_id: PropTypes.number
+  }),
+  uploadImage: PropTypes.func.isRequired
+};
+
+Home.defaultProps = { user: {}, goal: {} };
+
 export default Home;
 

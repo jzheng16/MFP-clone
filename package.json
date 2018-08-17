@@ -3,8 +3,8 @@
     "build": "webpack",
     "start-dev": "node server/index.js",
     "start": "nodemon server/index.js",
-    "seed": "node db/seed.js",
-    "test": "(npm run seed || true) && (npm run build || true) && (npm run start-dev || true)"
+    "seed": "(npm run seed || true) && (npm run build || true) && (npm run start-dev || true)",
+    "test": "(npm run build || true) && (npm run start-dev || true)"
   },
   "devDependencies": {
     "@types/webpack-env": "^1.13.6",
@@ -61,6 +61,7 @@
     "passport-local": "^1.0.0",
     "pg": "^7.4.1",
     "pg-hstore": "^2.3.2",
+    "prop-types": "^15.6.2",
     "query-string": "^6.1.0",
     "ramda": "^0.25.0",
     "react": "^16.3.2",

@@ -35,7 +35,7 @@ const mapDispatch = dispatch => ({
 class DiaryContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = { something: null };
+    this.state = { something: false, counter: 0 };
   }
   // Execute only when the user first visits their diary page
   componentDidMount() {
@@ -51,7 +51,11 @@ class DiaryContainer extends Component {
     }
   }
 
+  count = () => {
+    console.log(this.state);
 
+    this.setState({ counter: this.state.counter + 1 });
+  }
   previousDayDiary = () => {
     this.props.gettingDiaryId(moment(this.props.diary.currentDiaryDate.day).add(-1, 'days').format('YYYY-MM-DD'));
   }
@@ -93,6 +97,7 @@ class DiaryContainer extends Component {
         removeFood={this.removeFood}
         previousDayDiary={this.previousDayDiary}
         nextDayDiary={this.nextDayDiary}
+        count={this.count}
       />
     );
   }
