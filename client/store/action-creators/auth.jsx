@@ -51,7 +51,7 @@ export const signingUp = user => dispatch => {
     .then(newUser => {
       console.log('what is this', newUser.data);
       dispatch(getUser(newUser.data));
-      history.push('/verification');
+      history.push('/signup-step2');
     })
     .catch(err => {
       console.log('Oops had trouble signing up: ', err.response.data);

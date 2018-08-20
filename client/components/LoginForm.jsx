@@ -62,7 +62,7 @@ export default props => {
       </form>
 
       <b> Don&#39;t have an account?
-        <Link to="/signup"> Sign-up! </Link>
+        <Link to="/signup-step1"> Sign-up! </Link>
       </b>
 
     </div>

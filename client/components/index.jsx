@@ -8,6 +8,7 @@ export { default as AddFood } from './AddFood';
 export { default as Home } from './Home';
 export { default as LoginForm } from './LoginForm';
 export { default as SignUpForm } from './SignUpForm';
+export { default as SignUpGoal } from './SignUpGoal';
 export { default as NavBar } from './NavBar';
 export { default as Goal } from './Goal';
 export { default as Diary } from './Diary';

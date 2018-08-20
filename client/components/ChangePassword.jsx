@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { Button, Input } from './StyledComponents';
 
 const PasswordLabel = styled.label`
-
 `;
 
 const PasswordInput = styled(Input)`
@@ -53,7 +52,6 @@ const ShowDialog = styled(Button)`
   &:hover {
     text-decoration: underline;
   }
-
 `;
 export default props => (
   props.showPasswordDialog ?
@@ -91,4 +89,3 @@ export default props => (
     :
     <ShowDialog onClick={props.onAnchorClick}> Change your password... </ShowDialog>
 );
-

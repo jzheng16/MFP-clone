@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Goal } from '../components';
 import { fetchingGoal, updatingGoal, creatingGoal } from '../store/action-creators/goal';
-import { updatingUserInformation } from '../store/action-creators/auth';
-
 import history from '../history';
 
 const mapState = state => ({
@@ -17,9 +15,6 @@ const mapDispatch = dispatch => ({
   },
   updatingGoal(goal) {
     return dispatch(updatingGoal(goal));
-  },
-  updatingUserInformation(info) {
-    return dispatch(updatingUserInformation(info));
   },
   creatingGoal(goal) {
     return dispatch(creatingGoal(goal));
@@ -43,7 +38,9 @@ class GoalContainer extends Component {
   }
 
   toggleEditing = () => {
-    this.setState({ isEditing: !this.state.isEditing });
+    // setState is asynchronous so if next state depends on previous state, always use prevState
+    // React can also batch setState calls
+    this.setState(prevState => ({ isEditing: !prevState.isEditing }));
   }
 
   handleGoalUpdate = e => {
@@ -59,33 +56,6 @@ class GoalContainer extends Component {
     this.setState({ isEditing: !this.state.isEditing });
   }
 
-  firstTimeGoalSubmission = e => {
-    e.preventDefault();
-    const selectedWeightUnitIndex = e.target.weight_unit.selectedIndex;
-    const weight = Math.floor((e.target.weight.value * e.target.weight_unit[selectedWeightUnitIndex].value));
-    const selectedHeightUnitIndex = e.target.height_unit.selectedIndex;
-    const height = Math.floor((e.target.height.value * e.target.height_unit[selectedHeightUnitIndex].value));
-    // NOTE: Id is just the index + 1
-    const selectedActivityId = e.target.activity.selectedIndex + 1;
-    console.log('selectedActivityId: ', selectedActivityId);
-    const selectedPlanId = e.target.plan.selectedIndex + 1;
-    console.log('selectedPlanId: ', selectedPlanId);
-    this.props.updatingUserInformation({
-      gender: e.target.gender.value,
-      age: +e.target.age.value,
-      weight,
-      height
-    });
-    this.props.creatingGoal({
-      activity_id: selectedActivityId,
-      plan_id: selectedPlanId,
-    });
-
-    // Redirect user to their plan
-    history.push('goal/plan');
-  }
-
-
   render() {
     return (
       <Goal
@@ -93,7 +63,6 @@ class GoalContainer extends Component {
         {...this.state}
         toggleEditing={this.toggleEditing}
         handleGoalUpdate={this.handleGoalUpdate}
-        firstTimeGoalSubmission={this.firstTimeGoalSubmission}
       />
     );
   }

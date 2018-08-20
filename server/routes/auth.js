@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const User = require('../../db/models/user');
+const Goal = require('../../db/models/goal');
 const Verification = require('../../db/models/verification');
 const multer = require('multer');
 const path = require('path');
@@ -116,7 +117,9 @@ router.post('/signup', (req, res, next) => {
   User.create(req.body)
     .then(user => {
       if (user) {
-        req.login(user, err => (err ? next(err) : res.json(user)));
+        Goal.create({ user_id: user.id })
+          .then(() => req.login(user, err => (err ? next(err) : res.json(user))))
+          .catch(err => console.log('err creating goal during signup', err));
       }
     })
     .catch(err => {

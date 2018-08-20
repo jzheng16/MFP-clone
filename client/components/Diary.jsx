@@ -10,17 +10,18 @@ const DiaryHeader = styled.div`
   width: 90%;
   height: auto;
   border-bottom: 2px solid #111111;
+  display: flex;
+  justify-content: center;
+  margin-top: 2em;
   
 `;
 
 const StyledLeftButton = styled(Button)`
   background-color: #0070BF;
- 
   margin-right: 0;
 `;
 const StyledRightButton = styled(Button)`
   background-color: #0070BF;
-
 `;
 
 const DeleteButton = styled.button`
@@ -34,6 +35,7 @@ const DeleteButton = styled.button`
 `;
 
 const Title = styled.span`
+  display: inline-block;
   color: white;
   height:36px;
   background-color:  #0070BF;
@@ -64,6 +66,10 @@ const NameHeader = styled.th`
   text-align: left;
 `;
 
+const BreakfastHeader = styled.h2`
+  margin: 0;
+`;
+
 const NutritionData = styled.td`
   text-align: center;
   /* border-bottom: 1px dotted #000000; */
@@ -90,15 +96,17 @@ const AddFood = styled(Button)`
   border-radius: 10px;
 `;
 
+const InvisibleDiv = styled.div`
+  padding-bottom: 3em;
+`;
+
 const getTotal = (entryArr, property) => entryArr.reduce((total, entry) => total + (entry.food[property] * entry.qty), 0);
 
 /*
-
 TODO:
 Fix Header
 Find way to decrease render calculations
 Implement Remaining and Goals
-
 */
 
 export default ({
@@ -143,7 +151,7 @@ export default ({
       <NutritionTable className="listBreakfast">
         <thead>
           <tr>
-            <NameHeader> <h2> Breakfast  </h2>   </NameHeader>
+            <NameHeader> <BreakfastHeader> Breakfast  </BreakfastHeader>   </NameHeader>
             <TableHeader> Qty </TableHeader>
             <TableHeader> Calories </TableHeader>
             <TableHeader> Carbs </TableHeader>
@@ -251,6 +259,8 @@ export default ({
             <NutritionData> {snackTotalProtein} </NutritionData>
             <NutritionData> {snackTotalFat} </NutritionData>
           </tr>
+
+          <tr><td><InvisibleDiv></InvisibleDiv></td></tr>
 
 
           <tr>
