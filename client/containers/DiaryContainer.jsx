@@ -35,7 +35,7 @@ const mapDispatch = dispatch => ({
 class DiaryContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = { something: false, counter: 0 };
+    this.state = { something: false };
   }
   // Execute only when the user first visits their diary page
   componentDidMount() {
@@ -97,7 +97,6 @@ class DiaryContainer extends Component {
         removeFood={this.removeFood}
         previousDayDiary={this.previousDayDiary}
         nextDayDiary={this.nextDayDiary}
-        count={this.count}
       />
     );
   }

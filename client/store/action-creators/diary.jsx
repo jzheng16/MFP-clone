@@ -58,8 +58,8 @@ export const mappingDbDiaryDataToFoodData = foodObj => dispatch => {
         protein: report.data.report.foods[0].nutrients[2].gm,
         fat: report.data.report.foods[0].nutrients[3].gm,
       };
-      foodObj.food = foodInfo;
-      dispatch(addDbFoodToDiary(foodObj));
+      const entries = { ...foodObj, food: foodInfo };
+      dispatch(addDbFoodToDiary(entries));
     })
     .catch(err => console.error('trouble with mapping diary to food ', err));
 };

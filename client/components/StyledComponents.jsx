@@ -39,7 +39,6 @@ export const Ul = styled.ul`
   max-height: 30em;
   text-align: center;
   overflow-y: auto; /* values: scroll, hidden, auto, visible (default) */
-  
 `;
 
 export const List = styled.li`
@@ -51,7 +50,6 @@ export const List = styled.li`
   position: relative;
   border-top: 1px solid #eee;
   
-  
   &:first-child {
     border-top: none;
   }
@@ -61,4 +59,8 @@ export const ListItem = styled.div`
   display: flex;
   justify-content: space-between /* align flex items horizontally. values: center flex-start, end, space-between */
   align-items: center; /* align items vertically */
+`;
+
+export const Label = styled.label`
+  
 `;

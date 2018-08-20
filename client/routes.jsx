@@ -1,16 +1,18 @@
 import { Route, withRouter, Switch } from 'react-router-dom';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+
 import styled from 'styled-components';
 
 // Container Components
 import {
   FoodContainer, LoginContainer, SignUpContainer, HomeContainer, GoalContainer, DiaryContainer,
-  ListSearchResultContainer, InitialGoalContainer, ProfileSettingsContainer, VerificationContainer
+  ListSearchResultContainer, InitialGoalContainer, ProfileSettingsContainer, VerificationContainer, SignUpGoalContainer
 } from './containers';
 
 import { NotFound } from './components';
 import { fetchingUser } from './store/action-creators/auth';
+
 
 const BodyWrapper = styled.div`
   min-height: calc(100vh - 70px);
@@ -42,14 +44,19 @@ class Routes extends Component {
             <Route exact path="/goal" component={GoalContainer} />
             <Route exact path="/goal/plan" component={InitialGoalContainer} />
             <Route exact path="/food/search" component={ListSearchResultContainer} />
+            <Route exact path="/signup-step2" component={SignUpGoalContainer} />
             <Route component={NotFound} />
+
           </Switch>
           :
           <Switch>
             <Route exact path="/" component={HomeContainer} />
             <Route exact path="/login" component={LoginContainer} />
             <Route exact path="/signup" component={SignUpContainer} />
+            <Route exact path="/signup-step1" component={SignUpContainer} />
+            <Route exact path="/signup-step2" component={SignUpGoalContainer} />
             <Route component={NotFound} />
+
           </Switch>
         }
       </BodyWrapper>

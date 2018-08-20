@@ -96,7 +96,7 @@ export default props => (
           <StyledNavLink to="/" exact activeClassName={active}>  <StyledHomeIcon src={logo} alt="MyFitnessPal" /> </StyledNavLink>
           <StyledNavLink to="/foods" exact activeClassName={active}> Foods </StyledNavLink>
           <StyledNavLink to="/login" exact activeClassName={active}> Log-In </StyledNavLink>
-          <StyledNavLink to="/signup" exact activeClassName={active}> Sign-up</StyledNavLink>
+          <StyledNavLink to="/signup-step1" exact activeClassName={active}> Sign-up</StyledNavLink>
         </StyledNav>
 
       }
@@ -117,10 +117,11 @@ export default props => (
           <StyledMenuLink to="/" exact activeClassName={active} onClick={props.closeMenu}>  <StyledHomeIcon src={logo} alt="MyFitnessPal" /> </StyledMenuLink>
           <StyledMenuLink to="/foods" exact activeClassName={active} onClick={props.closeMenu}> Foods </StyledMenuLink>
           <StyledMenuLink to="/login" exact activeClassName={active} onClick={props.closeMenu}> Log-In </StyledMenuLink>
-          <StyledMenuLink to="/signup" exact activeClassName={active} onClick={props.closeMenu}> Sign-up</StyledMenuLink>
+          <StyledMenuLink to="/signup-step1" exact activeClassName={active} onClick={props.closeMenu}> Sign-up</StyledMenuLink>
         </Menu>
       }
     </NavBarWrapper >
+
 
 );
 

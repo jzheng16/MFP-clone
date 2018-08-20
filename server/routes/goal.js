@@ -14,7 +14,7 @@ router.post('/creategoal', (req, res) => {
           const newGoal = { ...goal.dataValues, plan: values[0].dataValues, activity: values[1].dataValues };
           res.json(newGoal);
         })
-        .catch(err => console.error('error creating goal', err));
+        .catch(err => console.error('error creating goalsss', err));
     });
 });
 
@@ -49,8 +49,13 @@ router.post('/goal', (req, res) => {
     .then(goal => {
       Promise.all([goal[1].getPlan(), goal[1].getActivity()])
         .then(values => {
-          const newGoal = { ...goal[1].dataValues, plan: values[0].dataValues, activity: values[1].dataValues };
-          res.json(newGoal);
+          if (values[0]) {
+            console.log(values);
+            const newGoal = { ...goal[1].dataValues, plan: values[0].dataValues, activity: values[1].dataValues };
+            res.json(newGoal);
+          } else {
+            res.json(goal[1]);
+          }
         })
         .catch(err => console.error('error creating goal', err));
     });

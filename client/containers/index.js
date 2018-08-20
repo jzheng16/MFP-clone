@@ -1,5 +1,6 @@
 export { default as HomeContainer } from './HomeContainer';
 export { default as SignUpContainer } from './SignUpContainer';
+export { default as SignUpGoalContainer } from './SignUpGoalContainer';
 export { default as NavBarContainer } from './NavBarContainer';
 export { default as GoalContainer } from './GoalContainer';
 export { default as DiaryContainer } from './DiaryContainer';

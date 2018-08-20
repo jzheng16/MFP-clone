@@ -14,8 +14,7 @@ const db = new Sequelize(
     logging: false,
     define: {
       underscored: true,
-      freezeTableName: true,
-      timestamps: false
+      freezeTableName: true
     }
   },
 );

@@ -3,7 +3,8 @@
     "build": "webpack",
     "start-dev": "node server/index.js",
     "start": "nodemon server/index.js",
-    "seed": "(npm run seed || true) && (npm run build || true) && (npm run start-dev || true)",
+    "seed": "node db/seed.js",
+    "seed-test": "(npm run seed || true) && (npm run build || true) && (npm run start-dev || true)",
     "test": "(npm run build || true) && (npm run start-dev || true)"
   },
   "devDependencies": {
