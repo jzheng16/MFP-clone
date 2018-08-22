@@ -5,8 +5,9 @@ import _ from 'lodash';
 import { createFood, fetchFood } from '../store/action-creators/foodAction';
 import { addingFoodToDiary, searchingDatabase } from '../store/action-creators/diary';
 import { ListFoods, AddFood, SearchFood } from '../components';
+import { addToast, deleteToast } from '../store/action-creators/toasts';
 import history from '../history';
-
+import shortid from 'shortid';
 
 const mapStateToProps = state => ({
   foods: state.foods,
@@ -25,6 +26,12 @@ const mapDispatchToProps = dispatch => ({
   },
   searchingDatabase(query) {
     return dispatch(searchingDatabase(query));
+  },
+  addToast(styles) {
+    return dispatch(addToast(styles));
+  },
+  deleteToast(id) {
+    return dispatch(deleteToast(id));
   }
 
 });
@@ -86,6 +93,11 @@ class FoodContainer extends Component {
     });
     console.log('Final addFoodArr', addFoodArr);
     this.props.addingFoodToDiary(addFoodArr);
+    const notifId = shortid.generate();
+    this.props.addToast({ text: 'Food successfully added!', id: notifId, backgroundColor: '#DFF2BF', color: '#4F8A10' });
+    // setTimeout(() => {
+    //   this.props.deleteToast(notifId);
+    // }, 100000);
   }
 
   searchingDatabase = e => {

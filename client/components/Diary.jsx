@@ -184,7 +184,7 @@ export default ({
             <NutritionData> {breakfastTotalProtein} </NutritionData>
             <NutritionData> {breakfastTotalFat} </NutritionData>
           </tr>
-          <tr><h2> Lunch </h2></tr>
+          <tr><td><h2> Lunch </h2></td></tr>
           {lunch && lunch
             .map(entry => (
               <tr key={shortid.generate()}>
@@ -209,7 +209,7 @@ export default ({
             <NutritionData> {lunchTotalProtein} </NutritionData>
             <NutritionData> {lunchTotalFat} </NutritionData>
           </tr>
-          <tr><h2> Dinner </h2></tr>
+          <tr><td><h2> Dinner </h2></td></tr>
           {dinner && dinner
             .map(entry => (
               <tr key={shortid.generate()}>
@@ -234,7 +234,7 @@ export default ({
             <NutritionData> {dinnerTotalProtein} </NutritionData>
             <NutritionData> {dinnerTotalFat} </NutritionData>
           </tr>
-          <tr><h2> Snack </h2></tr>
+          <tr><td><h2> Snacks </h2></td></tr>
           {snack && snack
             .map(entry => (
               <tr key={shortid.generate()}>
