@@ -18,8 +18,8 @@ const app = () => {
   return (
     <div className="container">
       <NavBarContainer />
-      <Routes />
       <ToastsContainer />
+      <Routes />
       <Footer />
     </div>
   );

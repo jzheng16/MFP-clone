@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { updatingUserInformation, creatingGoal } from '../store/action-creators/auth';
-
+import { updatingUserInformation } from '../store/action-creators/auth';
+import { creatingGoal } from '../store/action-creators/goal';
+import { VerificationContainer } from './index';
 import { SignUpGoal } from '../components';
 import history from '../history';
 
@@ -45,11 +46,14 @@ class SignUpGoalContainer extends Component {
     });
 
     // Redirect user to their plan
-    history.push('/verification');
+    // history.push('/verification');
   }
   render() {
     return (
-      <SignUpGoal {...this.props} firstTimeGoalSubmission={this.firstTimeGoalSubmission} />
+      <div>
+        <VerificationContainer {...this.props} />
+        <SignUpGoal {...this.props} firstTimeGoalSubmission={this.firstTimeGoalSubmission} />
+      </div>
     );
   }
 }

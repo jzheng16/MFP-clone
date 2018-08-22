@@ -7,7 +7,29 @@ const StyledUl = styled.ul`
   right: 3em;
   width: 15em;
 `;
-const StyledAlert = styled.li`
+
+const SuccessAlertUl = styled.ul`
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  margin: 0;
+  padding: 0;
+`;
+
+const AnotherAlertLi = styled.li`
+  list-style: none;
+  width: 100%;
+  height: 2em;
+  text-align: center;
+  animation-name: dropdown;
+  animation-duration: 1s;
+  @keyframes dropdown{
+    0% {top: 0px;}
+    100% {top: 1em}; 
+    }
+`;
+const StyledAlertLi = styled.li`
   /* align-items: flex-start;
   display: flex;  */
   /* padding: 16px;
@@ -47,14 +69,14 @@ const StyledDismissButton = styled.button`
 `;
 
 export default props => (
-  <StyledUl>
+  <SuccessAlertUl>
     {props.toasts && props.toasts.map(toast => (
-      <StyledAlert key={toast.id} style={{ backgroundColor: toast.backgroundColor }}>
+      <AnotherAlertLi key={toast.id} style={{ backgroundColor: toast.backgroundColor }}>
         <StyledAlertText> {toast.text} </StyledAlertText>
         <StyledDismissButton onClick={() => props.onDismissClick(toast.id)}> X </StyledDismissButton>
-      </StyledAlert>
+      </AnotherAlertLi>
     ))
     }
-  </StyledUl>
+  </SuccessAlertUl>
 );
 
