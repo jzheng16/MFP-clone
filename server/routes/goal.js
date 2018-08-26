@@ -4,14 +4,18 @@ const db = require('../../db');
 // Query the user and eager load his goals
 
 router.post('/creategoal', (req, res) => {
-  Goal.findOrCreate({
+  console.log('req.body', req.body);
+  Goal.update(req.body, {
     where: { user_id: req.user.dataValues.id },
-    defaults: req.body
+    returning: true,
+    plain: true
   })
-    .spread(goal => {
-      Promise.all([goal.getPlan(), goal.getActivity()])
+    .then(goal => {
+      console.log('goal datavalues', goal);
+
+      Promise.all([goal[1].getPlan(), goal[1].getActivity()])
         .then(values => {
-          const newGoal = { ...goal.dataValues, plan: values[0].dataValues, activity: values[1].dataValues };
+          const newGoal = { ...goal[1].dataValues, plan: values[0].dataValues, activity: values[1].dataValues };
           res.json(newGoal);
         })
         .catch(err => console.error('error creating goalsss', err));
@@ -31,15 +35,9 @@ router.get('/goal', (req, res) => {
 
 
 // Update goals
-router.post('/goal', (req, res) => {
+router.post('/updateGoal', (req, res) => {
   Goal.update(
-    {
-      calorie: req.body.calorie,
-      weight: req.body.weight,
-      carbs: req.body.carbs,
-      protein: req.body.protein,
-      fat: req.body.fat,
-    },
+    req.body,
     {
       where: { user_id: req.user.dataValues.id },
       returning: true,
