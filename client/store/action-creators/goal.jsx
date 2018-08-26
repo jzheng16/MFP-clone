@@ -27,7 +27,7 @@ export const updatingGoal = goal => dispatch => {
 };
 
 export const creatingGoal = goal => dispatch => {
-  axios.post('/api/goal/creategoal', goal)
+  axios.post('/api/goal/goal', goal)
     .then(newGoal => {
       console.log('Goal ', newGoal.data);
       dispatch(updateGoal(newGoal.data));

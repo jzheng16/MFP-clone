@@ -36,7 +36,9 @@ const upload = multer({
 // User routes
 
 router.post('/updateUserInfo', (req, res) => {
-  if (req.weight) {
+  console.log('user id?', req.user.dataValues.id);
+  console.log('req.body', req.body);
+  if (req.body.weight) {
     User.update(
       {
         age: req.body.age,
@@ -59,7 +61,7 @@ router.post('/updateUserInfo', (req, res) => {
       where: { id: req.user.dataValues.id }
     })
       .then(updatedUser => res.json(updatedUser[1]))
-      .catch(err => console.error('POST error to updateUserInfo', err));
+      .catch(err => console.error('error to updateUserInfo', err));
   }
 });
 

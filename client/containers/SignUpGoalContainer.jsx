@@ -40,6 +40,7 @@ class SignUpGoalContainer extends Component {
       weight,
       height
     });
+    console.log(e.target.gender.value, e.target.age.value, weight, height);
     this.props.creatingGoal({
       activity_id: selectedActivityId,
       plan_id: selectedPlanId,
