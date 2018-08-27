@@ -11,8 +11,6 @@ router.post('/creategoal', (req, res) => {
     plain: true
   })
     .then(goal => {
-      console.log('goal datavalues', goal);
-
       Promise.all([goal[1].getPlan(), goal[1].getActivity()])
         .then(values => {
           const newGoal = { ...goal[1].dataValues, plan: values[0].dataValues, activity: values[1].dataValues };
