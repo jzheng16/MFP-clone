@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_GOAL, UPDATE_GOAL } from '../actions';
+import { GET_GOAL, UPDATE_GOAL, ERROR_GOAL } from '../actions';
 
 export const getGoal = goal => ({
   type: GET_GOAL,
@@ -11,14 +11,25 @@ export const updateGoal = updatedGoal => ({
   payload: updatedGoal
 });
 
+export const errorGoal = error => ({
+  type: ERROR_GOAL,
+  payload: error
+});
+
 export const fetchingGoal = () => dispatch => {
   axios.get('/api/goal/goal')
-    .then(goals => dispatch(getGoal(goals.data)))
+    .then(goals => {
+      if (goals.data) {
+        dispatch(getGoal(goals.data));
+      } else {
+        dispatch(errorGoal('no goal found'));
+      }
+    })
     .catch(err => console.error('problem getting goals', err));
 };
 
 export const updatingGoal = goal => dispatch => {
-  axios.post('/api/goal/goal', goal)
+  axios.post('/api/goal/updateGoal', goal)
     .then(updatedGoal => {
       console.log('updated Goal', updatedGoal.data);
       dispatch(updateGoal(updatedGoal.data));
@@ -27,7 +38,7 @@ export const updatingGoal = goal => dispatch => {
 };
 
 export const creatingGoal = goal => dispatch => {
-  axios.post('/api/goal/goal', goal)
+  axios.post('/api/goal/updateGoal', goal)
     .then(newGoal => {
       console.log('Goal ', newGoal.data);
       dispatch(updateGoal(newGoal.data));

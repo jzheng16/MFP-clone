@@ -27,7 +27,9 @@ router.get('/goal', (req, res) => {
       { model: db.model('activity') }],
     where: { user_id: req.user.dataValues.id }
   })
-    .then(goal => res.json(goal))
+    .then(goal => {
+      res.json(goal);
+    })
     .catch(err => console.error('cannot retrieve goals', err));
 });
 

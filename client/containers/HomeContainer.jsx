@@ -6,7 +6,7 @@ import { fetchingGoal } from '../store/action-creators/goal';
 import { gettingDiaryId } from '../store/action-creators/diary';
 import { uploadingUserImage, testing } from '../store/action-creators/auth';
 
-class HomeContainer extends Component {
+export class HomeContainer extends Component {
   componentDidMount() {
     if (this.props.user.id) {
       this.props.fetchingGoal();
@@ -41,7 +41,7 @@ const mapState = state => ({
   goal: state.goal.goal
 });
 
-const mapDispatch = dispatch => ({
+export const mapDispatch = dispatch => ({
   fetchingGoal() {
     return dispatch(fetchingGoal());
   },
