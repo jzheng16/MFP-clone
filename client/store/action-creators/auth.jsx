@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { GET_USER, REMOVE_USER, UPDATE_USER } from '../actions';
 import history from '../../history';
-// import { resolve } from 'url';
 
 export const getUser = user => ({ type: GET_USER, payload: user });
 export const removeUser = () => ({ type: REMOVE_USER });

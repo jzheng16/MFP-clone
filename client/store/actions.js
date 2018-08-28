@@ -10,6 +10,7 @@ export const UPDATE_USER = 'UPDATE_USER';
 // User Goals
 export const GET_GOAL = 'GET_GOAL';
 export const UPDATE_GOAL = 'UPDATE_GOAL';
+export const ERROR_GOAL = 'ERROR_GOAL';
 
 // Diary Actions
 export const ADD_FOOD_TO_DIARY = 'ADD_FOOD_TO_DIARY';

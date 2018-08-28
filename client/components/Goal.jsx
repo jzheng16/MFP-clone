@@ -59,23 +59,23 @@ export default props => {
       {props.isEditing ?
         <form className="goal-form" onSubmit={props.handleGoalUpdate}>
           <label htmlFor="weight">
-            Weight <input id="weight" type="number" name="weight" defaultValue={props.goal.weight} />
+            Weight <input id="weight" type="number" name="weight" defaultValue={props.goal.weight || 0} />
           </label>
 
           <label htmlFor="calories">
-            Calories: <input id="calories" type="number" name="calorie" defaultValue={props.goal.calorie} />
+            Calories: <input id="calories" type="number" name="calorie" defaultValue={props.goal.calorie || 0} />
           </label>
 
           <label htmlFor="carbs">
-            Carbs: <input id="carbs" type="number" name="carbs" defaultValue={props.goal.carbs} />
+            Carbs: <input id="carbs" type="number" name="carbs" defaultValue={props.goal.carbs || 0} />
           </label>
 
           <label htmlFor="protein">
-            Protein: <input id="protein" type="number" name="protein" defaultValue={props.goal.protein} />
+            Protein: <input id="protein" type="number" name="protein" defaultValue={props.goal.protein || 0} />
           </label>
 
           <label htmlFor="fat">
-            Fat: <input id="fat" type="number" name="fat" defaultValue={props.goal.fat} />
+            Fat: <input id="fat" type="number" name="fat" defaultValue={props.goal.fat || 0} />
           </label>
 
           <button type="submit"> Update </button>
@@ -83,11 +83,11 @@ export default props => {
         :
         <div>
           <Ul>
-            <List> Weight: {props.goal.weight} </List>
-            <List> Calories: {props.goal.calorie} </List>
-            <List> Carbs: {props.goal.carbs} </List>
-            <List> Protein: {props.goal.protein} </List>
-            <List> Fat: {props.goal.fat} </List>
+            <List> Weight: {props.goal.weight || 'Not Set'} </List>
+            <List> Calories: {props.goal.calorie || 'Not Set'} </List>
+            <List> Carbs: {props.goal.carbs || 'Not Set'} </List>
+            <List> Protein: {props.goal.protein || 'Not Set'} </List>
+            <List> Fat: {props.goal.fat || 'Not Set'} </List>
           </Ul>
           <EditGoals onClick={props.toggleEditing}> Edit </EditGoals>
         </div>

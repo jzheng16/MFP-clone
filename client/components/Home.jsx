@@ -26,7 +26,9 @@ const HomeHeader = styled.div`
   /* row-gap: 1em; */
   /* } */
  
+ 
 `;
+
 const HomeImage = styled.img`
   grid-column: 1/2;
   grid-row: 1/2;
@@ -36,9 +38,13 @@ const HomeImage = styled.img`
 const Title = styled.h3`
   grid-column: 1/2;
   grid-row: 1/2;
-  font-size: 1em;
+  margin: 0;
+  font-size: 4.5vw;
   height: 5em;
   color: white;
+  margin-top: 3.5em;
+  align-self: center;
+  
  
   /* @media (min-width: 768px) {
     grid-column: 1/4;
@@ -47,11 +53,13 @@ const Title = styled.h3`
 `;
 
 const UserDisplayInfoDiv = styled.div`
+  width: 90%;
+  margin: auto;
   /* grid-column: 1/4;
   grid-row: 3/5;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-grid - template- r ows: repeat(2, 1fr); */
+  grid-template-rows: repeat(2, 1fr); */
 `;
 
 /* TODO: Experiment with float and have the text wrap around it */
