@@ -135,6 +135,8 @@ router.post('/signup', (req, res, next) => {
 
 // Create route to fetch the logged in user. This route will be hit every time a user accesses our page
 router.get('/me', (req, res) => {
+  console.log('?', req.user);
+
   res.json(req.user);
 });
 

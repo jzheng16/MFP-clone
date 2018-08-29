@@ -31,7 +31,7 @@ export class HomeContainer extends Component {
 
   render() {
     return (
-      <Home {...this.props} uploadImage={this.uploadImage} />
+      <Home user={this.props.user} goal={this.props.goal} uploadImage={this.uploadImage} />
     );
   }
 }

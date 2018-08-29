@@ -5,12 +5,9 @@ import styled from 'styled-components';
 import HomeBackgroundImage from '../../public/mfpimage.jpg';
 import { Button, Ul, List } from './StyledComponents';
 // Function used to require all images in upload folder because webpack cannot determine dynamic images during bundling
-function importAll(r) {
-  const images = {};
-  r.keys().map(item => { images[item.replace('./', '')] = r(item); });
-  return images;
-}
-const images = importAll(require.context('../../uploads/', false, /\.(png|jpe?g|svg)$/));
+import images from './helper';
+
+
 const breakpoints = { first: '470px' };
 
 const HomeHeader = styled.div`
@@ -18,6 +15,7 @@ const HomeHeader = styled.div`
   grid-template-columns: 1fr;
   grid-template-rows: 1fr;
   row-gap: 1em;
+  
   /* @media (min-width: 768px) {
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: auto auto 1fr;
@@ -51,6 +49,8 @@ const Title = styled.h3`
     grid-row: 1/2;
   } */    
 `;
+
+Title.displayName = 'Title';
 
 const UserDisplayInfoDiv = styled.div`
   width: 90%;
@@ -123,15 +123,12 @@ const StyledLabel = styled.label`
 
 const Home = ({ user, goal, uploadImage }) => {
   const profilePicture = user.avatarUrl || 'defaultImage.png';
-
   // console.log('user', props.user);
   // console.log('goal', props.goal);
-  console.log('images', profilePicture);
-
   return (
     <HomeHeader>
       <HomeImage src={HomeBackgroundImage} />
-      <Title> Welcome to MyFitnessClone!</Title>
+      <Title>Welcome to MyFitnessClone!</Title>
       {user.id ?
         <UserDisplayInfoDiv>
           <StyledLabel htmlFor="fileUpload">
