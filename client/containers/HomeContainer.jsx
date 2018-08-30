@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Home } from '../components';
 import { fetchingGoal } from '../store/action-creators/goal';
-import { gettingDiaryId } from '../store/action-creators/diary';
 import { uploadingUserImage, testing } from '../store/action-creators/auth';
 
 export class HomeContainer extends Component {
@@ -45,9 +44,6 @@ export const mapDispatch = dispatch => ({
   fetchingGoal() {
     return dispatch(fetchingGoal());
   },
-  gettingDiaryId(date) {
-    dispatch(gettingDiaryId(date));
-  },
   uploadingUserImage(image) {
     dispatch(uploadingUserImage(image));
   },
@@ -82,7 +78,6 @@ HomeContainer.propTypes = {
     activity_id: PropTypes.number
   }),
   fetchingGoal: PropTypes.func.isRequired,
-  gettingDiaryId: PropTypes.func.isRequired,
   uploadingUserImage: PropTypes.func.isRequired,
 };
 

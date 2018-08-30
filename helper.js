@@ -39,4 +39,4 @@ const importAll = r => {
   return images;
 };
 
-export default importAll(require.context('../../uploads/', false, /\.(png|jpe?g|svg)$/));
+export default importAll(require.context('./uploads', false, /\.(png|jpe?g|svg)$/));

@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import HomeBackgroundImage from '../../public/mfpimage.jpg';
 import { Button, Ul, List } from './StyledComponents';
 // Function used to require all images in upload folder because webpack cannot determine dynamic images during bundling
-import images from './helper';
+import images from '../../helper';
 
 
 const breakpoints = { first: '470px' };

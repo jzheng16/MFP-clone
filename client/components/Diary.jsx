@@ -7,7 +7,7 @@ import Delete from '../../public/delete.svg';
 
 
 const DiaryHeader = styled.div`
-  width: 90%;
+  width: 100%;
   height: auto;
   border-bottom: 2px solid #111111;
   display: flex;
@@ -18,7 +18,7 @@ const DiaryHeader = styled.div`
 
 const StyledLeftButton = styled(Button)`
   background-color: #0070BF;
-  margin-right: 0;
+
 `;
 const StyledRightButton = styled(Button)`
   background-color: #0070BF;
@@ -137,6 +137,7 @@ export default ({
   const totalCarbs = getTotal(entries, 'carbs');
   const totalProtein = getTotal(entries, 'protein');
   const totalFat = getTotal(entries, 'fat');
+  console.log('props', diary);
 
   return (
     <div>
