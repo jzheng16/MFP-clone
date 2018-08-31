@@ -6,7 +6,8 @@ api
   .use('/auth', require('./auth'))
   .use('/goal', require('./goal'))
   .use('/diary', require('./diary'))
-  .use('/date', require('./date'));
+  .use('/date', require('./date'))
+  .use('/measurement', require('./measurement'));
 
 // No routes hit?
 api.use((req, res) => res.status(404).end());

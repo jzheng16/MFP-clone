@@ -8,6 +8,7 @@ const Plan = require('./plan');
 const Activity = require('./activity');
 const Exercise = require('./exercise');
 const Verification = require('./verification');
+const Measurement = require('./measurement');
 
 Goal.belongsTo(User);
 User.hasMany(Diary);
@@ -19,4 +20,5 @@ Diary.belongsTo(Food);
 Goal.belongsTo(Plan);
 Goal.belongsTo(Activity);
 User.hasOne(Verification);
-module.exports = { Food, User, Goal, Diary, Date, DatabaseDiary, Plan, Activity, Exercise, Verification };
+User.hasOne(Measurement);
+module.exports = { Food, User, Goal, Diary, Date, DatabaseDiary, Plan, Activity, Exercise, Verification, Measurement };
