@@ -24,3 +24,4 @@ require('./models');
 
 db.didSync = db.sync()
   .then(() => console.log('sync successful'));
+
