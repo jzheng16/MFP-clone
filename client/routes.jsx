@@ -7,7 +7,8 @@ import styled from 'styled-components';
 // Container Components
 import {
   FoodContainer, LoginContainer, SignUpContainer, HomeContainer, GoalContainer, DiaryContainer,
-  ListSearchResultContainer, InitialGoalContainer, ProfileSettingsContainer, VerificationContainer, SignUpGoalContainer
+  ListSearchResultContainer, InitialGoalContainer, ProfileSettingsContainer, VerificationContainer, SignUpGoalContainer,
+  MeasurementContainer
 } from './containers';
 
 import { NotFound } from './components';
@@ -45,6 +46,7 @@ class Routes extends Component {
             <Route exact path="/goal/plan" component={InitialGoalContainer} />
             <Route exact path="/food/search" component={ListSearchResultContainer} />
             <Route exact path="/signup-step2" component={SignUpGoalContainer} />
+            <Route exact path="/measurement" component={MeasurementContainer} />
             <Route component={NotFound} />
 
           </Switch>

@@ -23,4 +23,5 @@ export { default as ChangeUserInfo } from './ChangeUserInfo';
 export { default as ChangeEmail } from './ChangeEmail';
 export { default as Verification } from './Verification';
 export { default as NotFound } from './NotFound';
+export { default as Measurement } from './Measurement';
 

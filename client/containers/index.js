@@ -11,3 +11,4 @@ export { default as ProfileSettingsContainer } from './ProfileSettingsContainer'
 export { default as VerificationContainer } from './VerificationContainer';
 export { default as LoginContainer } from './LoginContainer';
 export { default as FoodContainer } from './FoodContainer';
+export { default as MeasurementContainer } from './MeasurementContainer';
