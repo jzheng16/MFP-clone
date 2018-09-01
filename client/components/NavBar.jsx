@@ -86,7 +86,7 @@ export default props => (
         <StyledNav>
           <StyledNavLink id="navhome" to="/" exact activeClassName={active}>  <StyledHomeIcon src={logo} alt="MyFitnessPal" />  </StyledNavLink>
           <StyledNavLink to="/diary" exact activeClassName={active}> Diary </StyledNavLink>
-          <StyledNavLink to="/measurements" exact activeClassName={active}> Track Measurements </StyledNavLink>
+          <StyledNavLink to="/measurement" exact activeClassName={active}> Track Measurements </StyledNavLink>
           <StyledNavLink to="/goal" exact activeClassName={active}>Goals </StyledNavLink>
           <StyledNavLink to="/me" exact activeClassName={active}> Me! </StyledNavLink>
           <StyledNavLink to="/logout" id="logout" onClick={props.handleLogout}> Logout </StyledNavLink>
@@ -107,7 +107,7 @@ export default props => (
         <Menu isOpen={props.isOpen} width={250} styles={styles}>
           <StyledMenuLink id="navhome" to="/" exact activeClassName={active} onClick={props.closeMenu}>  <StyledHomeIcon src={logo} alt="MyFitnessPal" />  </StyledMenuLink>
           <StyledMenuLink to="/diary" exact activeClassName={active} onClick={props.closeMenu}> Diary </StyledMenuLink>
-          <StyledMenuLink to="/measurements" exact activeClassName={active} onClick={props.closeMenu}> Track Measurements </StyledMenuLink>
+          <StyledMenuLink to="/measurement" exact activeClassName={active} onClick={props.closeMenu}> Track Measurements </StyledMenuLink>
           <StyledMenuLink to="/goal" exact activeClassName={active} onClick={props.closeMenu}>Goals </StyledMenuLink>
           <StyledMenuLink to="/me" exact activeClassName={active} onClick={props.closeMenu}> Me! </StyledMenuLink>
           <StyledMenuLink to="/logout" id="logout" onClick={() => { props.handleLogout(); props.closeMenu(); }} > Logout </StyledMenuLink>
