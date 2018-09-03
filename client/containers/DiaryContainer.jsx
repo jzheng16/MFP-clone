@@ -51,11 +51,6 @@ class DiaryContainer extends Component {
     }
   }
 
-  count = () => {
-    console.log(this.state);
-
-    this.setState({ counter: this.state.counter + 1 });
-  }
   previousDayDiary = () => {
     this.props.gettingDiaryId(moment(this.props.diary.currentDiaryDate.day).add(-1, 'days').format('YYYY-MM-DD'));
   }

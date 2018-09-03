@@ -11,11 +11,11 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  console.log('req.body', typeof req.body.weight);
-  console.log('req.body', typeof JSON.parse(req.body.weight));
-  console.log('req.body', typeof JSON.stringify(req.body.weight));
-  console.log('req.body', req.body.weight);
-  console.log('req.body', JSON.stringify(req.body.weight));
+  // console.log('req.body', typeof req.body.weight);
+  // console.log('req.body', typeof JSON.parse(req.body.weight));
+  // console.log('req.body', typeof JSON.stringify(req.body.weight));
+  // console.log('req.body', req.body.weight);
+  // console.log('req.body', JSON.stringify(req.body.weight));
 
 
   const updatedObj = {};
