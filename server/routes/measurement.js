@@ -3,7 +3,7 @@ const { Measurement } = require('../../db/models');
 const db = require('../../db');
 
 router.get('/', (req, res) => {
-  Measurement.findOne({ where: { user_id: 1 } })
+  Measurement.findOne({ where: { user_id: req.user.dataValues.id } })
     .then(measurement => {
       res.json(measurement);
     })
@@ -11,16 +11,11 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  // console.log('req.body', typeof req.body.weight);
-  // console.log('req.body', typeof JSON.parse(req.body.weight));
-  // console.log('req.body', typeof JSON.stringify(req.body.weight));
-  // console.log('req.body', req.body.weight);
-  // console.log('req.body', JSON.stringify(req.body.weight));
-
-
   const updatedObj = {};
   Object.keys(req.body).forEach(key => {
-    updatedObj[key] = db.fn('array_append', db.col(`${key}`), JSON.stringify(req.body[key]));
+    if (req.body[key]) {
+      updatedObj[key] = db.fn('array_append', db.col(`${key}`), JSON.stringify(req.body[key]));
+    }
   });
 
   console.log(updatedObj);
@@ -28,7 +23,7 @@ router.post('/', (req, res) => {
   Measurement.update(updatedObj, {
     returning: true,
     plain: true,
-    where: { user_id: 1 }
+    where: { user_id: req.user.dataValues.id }
   })
     .then(updated => {
       res.json(updated[1]);
