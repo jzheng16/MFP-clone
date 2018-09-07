@@ -34,6 +34,14 @@ const Measurement = db.define('measurement', {
     type: Sequelize.ARRAY(Sequelize.JSON),
     defaultValue: []
   },
+  thigh: {
+    type: Sequelize.ARRAY(Sequelize.JSON),
+    defaultValue: []
+  },
+  hips: {
+    type: Sequelize.ARRAY(Sequelize.JSON),
+    defaultValue: []
+  }
 });
 
 module.exports = Measurement;

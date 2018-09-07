@@ -20,10 +20,18 @@ class MeasurementContainer extends Component {
   updateMeasurement = e => {
     e.preventDefault();
     const today = moment().unix();
-    console.log('value: ', e.target.weight.value);
-
-    console.log('event: ', e.target);
-    const measurementObj = { weight: { date: today, value: +e.target.weight.value } };
+    const {
+      weight, arm, waist, thigh, hips, neck
+    } = e.target;
+    const measurementObj = {
+      weight: weight.value ? { date: today, value: +e.target.weight.value } : null,
+      arm: arm.value ? { date: today, value: +e.target.arm.value } : null,
+      waist: waist.value ? { date: today, value: +e.target.waist.value } : null,
+      neck: neck.value ? { date: today, value: +e.target.neck.value } : null,
+      thigh: thigh.value ? { date: today, value: +e.target.thigh.value } : null,
+      hips: hips.value ? { date: today, value: +e.target.hips.value } : null
+    };
+    console.log(measurementObj);
     this.props.updatingMeasurement(measurementObj);
   }
 
@@ -33,7 +41,6 @@ class MeasurementContainer extends Component {
     );
   }
 }
-
 
 export const mapDispatch = dispatch => ({
   fetchingMeasurement() {
