@@ -2,7 +2,7 @@ import React from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import moment from 'moment';
 import styled from 'styled-components';
-
+import Select from 'react-select';
 
 const ChartWrapper = styled.div`
   width: 100%;
@@ -17,39 +17,59 @@ const CheckInWrapper = styled.div`
 `;
 
 const CheckInTable = styled.table`
+ table-layout: auto;
   width: 60%;
   align: left;
   border: 10px solid black;
 `;
 
 const CheckInTableRow = styled.tr`
-
+  text-align: center;
 `;
 
 const CheckInTableData = styled.td`
+  text-align: center;
+  background-color: #f6f6f6;
 `;
+
+const MacroOptions = [
+  { value: 'calorie', label: 'Calorie' },
+  { value: 'carbs', label: 'Carbs' },
+  { value: 'protein', label: 'Protein' },
+  { value: 'fat', label: 'Fat' }
+];
+const MeasurementOptions = [
+  { value: 'weight', label: 'Weight' },
+  { value: 'arm', label: 'Arm' },
+  { value: 'waist', label: 'Waist' },
+  { value: 'neck', label: 'Neck' },
+  { value: 'thigh', label: 'Thigh' },
+  { value: 'hips', label: 'Hips' }
+];
+
+
+const GroupedOptions = [
+  { label: 'Measurements', options: MeasurementOptions },
+  { label: 'Macros', options: MacroOptions },
+];
 
 export default ({ measurement, changeGraph, updateMeasurement, display }) => {
   const {
     weight, calorie, carbs, arm, fat, neck, protein, waist, thigh, hips
   } = measurement;
-  console.log('display:', display);
 
+  const today = moment().format('MM-DD');
+
+  // TODO: Duplicate code for table data render? Only one row changed for ternary condition
   return (
     <ChartWrapper>
-      <select onChange={changeGraph}>
-        <option value="weight">Weight</option>
-        <option value="calorie">Calories</option>
-        <option value="carbs">Carbohydrates</option>
-        <option value="protein">Protein</option>
+      <Select
+        options={GroupedOptions}
+        defaultValue={MeasurementOptions[1]}
+        onChange={changeGraph}
 
-        <option value="fat">Fat</option>
-        <option value="arm">Arm</option>
-        <option value="waist">Waist</option>
-        <option value="neck">Neck</option>
-        <option value="thigh">Thigh</option>
-        <option value="hips">Hips</option>
-      </select>
+      />
+
       <LineChart
         width={600}
         height={300}
@@ -86,45 +106,87 @@ export default ({ measurement, changeGraph, updateMeasurement, display }) => {
             </CheckInTableRow>
           </thead>
           <tbody>
-            <CheckInTableRow>
-              <CheckInTableData>Weight</CheckInTableData>
-              <CheckInTableData><input id="weight" type="number" name="weight" /></CheckInTableData>
-              <CheckInTableData>{weight ? weight[weight.length - 1].value : 'None'} </CheckInTableData>
-              <CheckInTableData>{weight ? moment.unix(weight[weight.length - 1].date).format('YYYY-MM-DD') : 'None'}</CheckInTableData>
-            </CheckInTableRow>
-            <CheckInTableRow>
-              <CheckInTableData>Arm</CheckInTableData>
-              <CheckInTableData><input id="Arm" type="number" name="arm" /></CheckInTableData>
-              <CheckInTableData>{arm ? arm[arm.length - 1].value : 'None'} </CheckInTableData>
-              <CheckInTableData>{arm ? moment.unix(arm[arm.length - 1].date).format('YYYY-MM-DD') : 'None'}</CheckInTableData>
-            </CheckInTableRow>
-            <CheckInTableRow>
-              <CheckInTableData>Waist</CheckInTableData>
-              <CheckInTableData><input id="Waist" type="number" name="waist" /></CheckInTableData>
-              <CheckInTableData>{waist ? waist[waist.length - 1].value : 'None'} </CheckInTableData>
-              <CheckInTableData>{waist ? moment.unix(waist[waist.length - 1].date).format('YYYY-MM-DD') : 'None'}</CheckInTableData>
-            </CheckInTableRow>
-            <CheckInTableRow>
-              <CheckInTableData>Neck</CheckInTableData>
-              <CheckInTableData><input id="Neck" type="number" name="neck" /></CheckInTableData>
-              <CheckInTableData>{neck ? neck[neck.length - 1].value : 'None'} </CheckInTableData>
-              <CheckInTableData>{neck ? moment.unix(neck[neck.length - 1].date).format('YYYY-MM-DD') : 'None'}</CheckInTableData>
-            </CheckInTableRow>
-            <CheckInTableRow>
-              <CheckInTableData>Thigh</CheckInTableData>
-              <CheckInTableData><input id="Thigh" type="number" name="thigh" /></CheckInTableData>
-              <CheckInTableData>{thigh ? thigh[thigh.length - 1].value : 'None'} </CheckInTableData>
-              <CheckInTableData>{thigh ? moment.unix(thigh[thigh.length - 1].date).format('YYYY-MM-DD') : 'None'}</CheckInTableData>
-            </CheckInTableRow>
-            <CheckInTableRow>
-              <CheckInTableData>Hips</CheckInTableData>
-              <CheckInTableData><input id="Hips" type="number" name="hips" /></CheckInTableData>
-              <CheckInTableData>{hips ? hips[hips.length - 1].value : 'None'} </CheckInTableData>
-              <CheckInTableData>{hips ? moment.unix(hips[hips.length - 1].date).format('YYYY-MM-DD') : 'None'}</CheckInTableData>
-            </CheckInTableRow>
+            {weight && today !== moment.unix(weight[weight.length - 1].date).format('MM-DD') ?
+              <CheckInTableRow>
+                <CheckInTableData>Weight</CheckInTableData>
+                <CheckInTableData><input id="weight" type="number" name="weight" /></CheckInTableData>
+                <CheckInTableData>{weight ? weight[weight.length - 1].value : 'None'} </CheckInTableData>
+                <CheckInTableData>{weight ? moment.unix(weight[weight.length - 1].date).fromNow() : 'Never'}</CheckInTableData>
+              </CheckInTableRow>
+              :
+              <CheckInTableRow>
+                <CheckInTableData>Weight</CheckInTableData>
+                <CheckInTableData><input disabled id="weight" type="number" name="weight" /></CheckInTableData>
+                <CheckInTableData>{weight ? weight[weight.length - 1].value : 'None'} </CheckInTableData>
+                <CheckInTableData>{weight ? moment.unix(weight[weight.length - 1].date).fromNow() : 'Never'}</CheckInTableData>
+              </CheckInTableRow>
+            }
+            {arm && today !== moment.unix(arm[arm.length - 1].date).format('MM-DD') ?
+              <CheckInTableRow>
+                <CheckInTableData>Arm</CheckInTableData>
+                <CheckInTableData><input id="arm" type="number" name="arm" /></CheckInTableData>
+                <CheckInTableData>{arm ? arm[arm.length - 1].value : 'None'} </CheckInTableData>
+                <CheckInTableData>{arm ? moment.unix(arm[arm.length - 1].date).fromNow() : 'Never'}</CheckInTableData>
+                <CheckInTableData>{console.log(today, moment.unix(arm[arm.length - 1].date).format('MM-DD'))}
+                </CheckInTableData>
+              </CheckInTableRow>
+              :
+              <CheckInTableRow>
+                <CheckInTableData>Arm</CheckInTableData>
+                <CheckInTableData><input disabled id="arm" type="number" name="arm" /></CheckInTableData>
+                <CheckInTableData>{arm ? arm[arm.length - 1].value : 'None'} </CheckInTableData>
+                <CheckInTableData>{arm ? moment.unix(arm[arm.length - 1].date).fromNow() : 'Never'}</CheckInTableData>
+              </CheckInTableRow>
+            }
+            {waist && today !== moment.unix(waist[waist.length - 1].date).format('MM-DD') ?
+              <CheckInTableRow>
+                <CheckInTableData>Waist</CheckInTableData>
+                <CheckInTableData><input id="waist" type="number" name="waist" /></CheckInTableData>
+                <CheckInTableData>{waist ? waist[waist.length - 1].value : 'None'} </CheckInTableData>
+                <CheckInTableData>{waist ? moment.unix(waist[waist.length - 1].date).fromNow() : 'Never'}</CheckInTableData>
+              </CheckInTableRow>
+              :
+              <CheckInTableRow>
+                <CheckInTableData>Waist</CheckInTableData>
+                <CheckInTableData><input disabled id="waist" type="number" name="waist" /></CheckInTableData>
+                <CheckInTableData>{waist ? waist[waist.length - 1].value : 'None'} </CheckInTableData>
+                <CheckInTableData>{waist ? moment.unix(waist[waist.length - 1].date).fromNow() : 'Never'}</CheckInTableData>
+              </CheckInTableRow>
+            }
+            {neck && today !== moment.unix(neck[neck.length - 1].date).format('MM-DD') ?
+              <CheckInTableRow>
+                <CheckInTableData>Neck</CheckInTableData>
+                <CheckInTableData><input id="neck" type="number" name="neck" /></CheckInTableData>
+                <CheckInTableData>{neck ? neck[neck.length - 1].value : 'None'} </CheckInTableData>
+                <CheckInTableData>{neck ? moment.unix(neck[neck.length - 1].date).fromNow() : 'Never'}</CheckInTableData>
+              </CheckInTableRow>
+              :
+              <CheckInTableRow>
+                <CheckInTableData>Neck</CheckInTableData>
+                <CheckInTableData><input disabled id="neck" type="number" name="neck" /></CheckInTableData>
+                <CheckInTableData>{neck ? neck[neck.length - 1].value : 'None'} </CheckInTableData>
+                <CheckInTableData>{neck ? moment.unix(neck[neck.length - 1].date).fromNow() : 'Never'}</CheckInTableData>
+              </CheckInTableRow>
+            }
+            {hips && today !== moment.unix(hips[hips.length - 1].date).format('MM-DD') ?
+              <CheckInTableRow>
+                <CheckInTableData>Hips</CheckInTableData>
+                <CheckInTableData><input id="hips" type="number" name="hips" /></CheckInTableData>
+                <CheckInTableData>{hips ? hips[hips.length - 1].value : 'None'} </CheckInTableData>
+                <CheckInTableData>{hips ? moment.unix(hips[hips.length - 1].date).fromNow() : 'Never'}</CheckInTableData>
+              </CheckInTableRow>
+              :
+              <CheckInTableRow>
+                <CheckInTableData>Hips</CheckInTableData>
+                <CheckInTableData><input disabled id="hips" type="number" name="hips" /></CheckInTableData>
+                <CheckInTableData>{hips ? hips[hips.length - 1].value : 'None'} </CheckInTableData>
+                <CheckInTableData>{hips ? moment.unix(hips[hips.length - 1].date).fromNow() : 'Never'}</CheckInTableData>
+              </CheckInTableRow>
+            }
           </tbody>
           <tfoot>
             <CheckInTableRow>
+              {}
               <CheckInTableData> <button type="submit"> Update </button> </CheckInTableData>
               <CheckInTableData>Placeholder for  edit previous entries</CheckInTableData>
               <CheckInTableData>Placeholder</CheckInTableData>
