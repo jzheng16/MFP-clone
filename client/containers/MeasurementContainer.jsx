@@ -14,7 +14,7 @@ class MeasurementContainer extends Component {
   }
 
   changeGraph = e => {
-    this.setState({ display: e.target.value });
+    this.setState({ display: e.value });
   }
 
   updateMeasurement = e => {
