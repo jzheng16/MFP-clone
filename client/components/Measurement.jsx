@@ -5,8 +5,6 @@ import Select from 'react-select';
 import { formatDistance, format } from 'date-fns';
 import shortid from 'shortid';
 
-const CONVERT_SECONDS_TO_MILLISECONDS = 1000;
-
 const ChartWrapper = styled.div`
   width: 100%;
   margin: auto;
@@ -59,13 +57,7 @@ const GroupedOptions = [
 ];
 
 export default ({ measurement, changeGraph, updateMeasurement, display }) => {
-  const {
-    weight, calorie, carbs, arm, fat, neck, protein, waist, thigh, hips
-  } = measurement;
-
   const today = format(new Date(), 'MM-dd');
-
-  console.log('measurement??????????????', measurement);
 
   // TODO: Duplicate code for table data render? Only one row changed for ternary condition
   return (
@@ -94,7 +86,7 @@ export default ({ measurement, changeGraph, updateMeasurement, display }) => {
 
         />
         <CartesianGrid strokeDasharray="4 4" />
-        <Tooltip labelFormatter={date => format(new Date(date * CONVERT_SECONDS_TO_MILLISECONDS), 'MM-dd')} />
+        <Tooltip labelFormatter={date => format(new Date(date), 'MM-dd')} />
         <Legend />
         <Line type="linear" dataKey="value" name={`${display.charAt(0).toUpperCase() + display.slice(1)}`} stroke="#8884d8" activeDot={{ r: 8 }} />
 
