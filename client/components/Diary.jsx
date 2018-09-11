@@ -137,7 +137,7 @@ export default ({
   const totalCarbs = getTotal(entries, 'carbs');
   const totalProtein = getTotal(entries, 'protein');
   const totalFat = getTotal(entries, 'fat');
-  console.log('props', diary);
+
 
   return (
     <div>
