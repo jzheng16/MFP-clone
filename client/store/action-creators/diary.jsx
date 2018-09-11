@@ -105,7 +105,6 @@ export const addingFoodToDbDiary = entry => dispatch => {
 
 // Setting Diary date to know which day to retrieve info from
 export const gettingDiaryId = date => dispatch => {
-  console.log('what is date?', date);
   axios.get(`/api/date/${date}`)
     .then(dateInfo => dispatch(selectedDiaryDate(dateInfo.data)))
     .catch(err => console.error('err retrieving date ', err));

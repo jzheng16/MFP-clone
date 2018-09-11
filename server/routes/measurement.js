@@ -3,7 +3,7 @@ const { Measurement } = require('../../db/models');
 const db = require('../../db');
 
 router.get('/', (req, res) => {
-  Measurement.findOne({ where: { user_id: req.user.dataValues.id } })
+  Measurement.findOne({ attributes: ['weight', 'calorie', 'protein', 'carbs', 'fat', 'arm', 'waist', 'neck', 'thigh', 'hips'] }, { where: { user_id: req.user.dataValues.id } })
     .then(measurement => {
       res.json(measurement);
     })

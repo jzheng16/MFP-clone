@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import moment from 'moment';
+import { getTime } from 'date-fns';
 import { Measurement } from '../components';
 import { fetchingMeasurement, updatingMeasurement } from '../store/action-creators/measurement';
 
@@ -19,7 +19,7 @@ class MeasurementContainer extends Component {
 
   updateMeasurement = e => {
     e.preventDefault();
-    const today = moment().unix();
+    const today = getTime(new Date());
     const {
       weight, arm, waist, thigh, hips, neck
     } = e.target;

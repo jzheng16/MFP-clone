@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import moment from 'moment';
-
+import { format, subDays, addDays } from 'date-fns';
 import { connect } from 'react-redux';
 import { Diary } from '../components';
 import { selectedMealType, selectedDiaryDate, gettingDiaryId, fetchingDiary, removingFoodFromDiary, fetchingDbDiary } from '../store/action-creators/diary';
@@ -40,7 +39,7 @@ class DiaryContainer extends Component {
   // Execute only when the user first visits their diary page
   componentDidMount() {
     if (!this.props.diary.currentDiaryDate.id) {
-      this.props.gettingDiaryId(moment().format('YYYY-MM-DD'));
+      this.props.gettingDiaryId(format(new Date(), 'yyyy-MM-dd'));
     }
   }
 
@@ -51,11 +50,12 @@ class DiaryContainer extends Component {
     }
   }
 
+  // TODO: Weird Bug where subDays and addDays is offset by +1 days
   previousDayDiary = () => {
-    this.props.gettingDiaryId(moment(this.props.diary.currentDiaryDate.day).add(-1, 'days').format('YYYY-MM-DD'));
+    this.props.gettingDiaryId(format(subDays(new Date(this.props.diary.currentDiaryDate.day), 0), 'yyyy-MM-dd'));
   }
   nextDayDiary = () => {
-    this.props.gettingDiaryId(moment(this.props.diary.currentDiaryDate.day).add(1, 'days').format('YYYY-MM-DD'));
+    this.props.gettingDiaryId(format(addDays(new Date(this.props.diary.currentDiaryDate.day), 2), 'yyyy-MM-dd'));
   }
 
   // TODO: Test to see if I need this? Can't I just pass down props and dispatch selectedMealType from store
