@@ -48,7 +48,7 @@ const ButtonImage = styled.img`
 `;
 
 const NutritionTable = styled.table`
-  width: 80%;
+  width: 90%;
   margin: 20px auto;
   table-layout: auto;
 `;
@@ -74,6 +74,14 @@ const NutritionData = styled.td`
   text-align: center;
   /* border-bottom: 1px dotted #000000; */
   background-color: #f6f6f6;
+  /* font-size: .8em; */
+`;
+
+const RemainingMacros = styled.td`
+  text-align: center;
+  background-color: #f6f6f6;
+  /* font-size: .8em; */
+  color: ${props => (props.over ? 'red' : 'green')};
 `;
 
 const FoodName = styled.td`
@@ -82,6 +90,7 @@ const FoodName = styled.td`
    overflow: hidden;
   text-overflow: ellipsis;
   background-color: #f6f6f6;
+  /* font-size: .8em; */
 `;
 
 const SummaryTitle = styled.td`
@@ -110,8 +119,10 @@ Implement Remaining and Goals
 */
 
 export default ({
-  diary, removeFood, previousDayDiary, nextDayDiary, selectedMealType
+  diary, removeFood, previousDayDiary, nextDayDiary, selectedMealType, goal
 }) => {
+  console.log('goal? ', goal);
+
   const { entries } = diary;
   const breakfast = entries.filter(food => food.mealType === 1);
   const breakfastTotalCalories = getTotal(breakfast, 'calories');
@@ -275,18 +286,18 @@ export default ({
           <tr>
             <SummaryTitle>Goal</SummaryTitle>
             <td></td>
-            <NutritionData> {totalCalories} </NutritionData>
-            <NutritionData> {totalCarbs} </NutritionData>
-            <NutritionData> {totalProtein} </NutritionData>
-            <NutritionData> {totalFat} </NutritionData>
+            <NutritionData> {goal.calorie} </NutritionData>
+            <NutritionData> {goal.carbs} </NutritionData>
+            <NutritionData> {goal.protein} </NutritionData>
+            <NutritionData> {goal.fat} </NutritionData>
           </tr>
           <tr>
             <SummaryTitle>Remaining</SummaryTitle>
             <td></td>
-            <NutritionData> {totalCalories} </NutritionData>
-            <NutritionData> {totalCarbs} </NutritionData>
-            <NutritionData> {totalProtein} </NutritionData>
-            <NutritionData> {totalFat} </NutritionData>
+            <RemainingMacros remaining> {goal.calorie - totalCalories} </RemainingMacros>
+            <RemainingMacros remaining> {goal.carbs - totalCarbs} </RemainingMacros>
+            <RemainingMacros {...`${goal.protein - totalProtein > 0 ? '' : 'over'}`}> {goal.protein - totalProtein} </RemainingMacros>
+            <RemainingMacros {...`${goal.fat - totalFat > 0 ? '' : 'over'}`}> {goal.fat - totalFat} </RemainingMacros>
           </tr>
 
 
