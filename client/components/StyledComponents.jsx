@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 export const Button = styled.button`
-  border: 1px solid #41addd;  /* width style color */
+  
+  border: 1px solid #14aaf5;  /* width style color */
   box-sizing: border-box; 
   font-size: 16px;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -9,6 +10,11 @@ export const Button = styled.button`
   cursor: pointer;
   /* Does not allow user to select the text */
   user-select: none;
+  color: white;
+  fill: white;
+  border-radius: 4px;
+  background-color: #14aaf5;
+
 `;
 
 export const Input = styled.input`

@@ -1,6 +1,14 @@
 import { GET_GOAL, UPDATE_GOAL } from '../actions';
 
-const initialState = { goal: {} };
+const initialState = {
+  goal: {
+    weight: 0,
+    calorie: 0,
+    carbs: 0,
+    fat: 0,
+    protein: 0
+  }
+};
 
 export default (state = initialState, action) => {
   const newState = Object.assign({}, state);

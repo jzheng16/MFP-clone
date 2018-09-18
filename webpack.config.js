@@ -35,6 +35,7 @@ module.exports = {
         use: [
           { loader: 'babel-loader' },
         ],
+
       },
       {
         test: /\.css$/,
@@ -62,5 +63,6 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin()
   ],
+  node: { fs: 'empty' },
 };
 

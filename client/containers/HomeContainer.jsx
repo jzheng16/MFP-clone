@@ -3,10 +3,9 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Home } from '../components';
 import { fetchingGoal } from '../store/action-creators/goal';
-import { gettingDiaryId } from '../store/action-creators/diary';
 import { uploadingUserImage, testing } from '../store/action-creators/auth';
 
-class HomeContainer extends Component {
+export class HomeContainer extends Component {
   componentDidMount() {
     if (this.props.user.id) {
       this.props.fetchingGoal();
@@ -31,7 +30,7 @@ class HomeContainer extends Component {
 
   render() {
     return (
-      <Home {...this.props} uploadImage={this.uploadImage} />
+      <Home user={this.props.user} goal={this.props.goal} uploadImage={this.uploadImage} />
     );
   }
 }
@@ -41,12 +40,9 @@ const mapState = state => ({
   goal: state.goal.goal
 });
 
-const mapDispatch = dispatch => ({
+export const mapDispatch = dispatch => ({
   fetchingGoal() {
     return dispatch(fetchingGoal());
-  },
-  gettingDiaryId(date) {
-    dispatch(gettingDiaryId(date));
   },
   uploadingUserImage(image) {
     dispatch(uploadingUserImage(image));
@@ -82,7 +78,6 @@ HomeContainer.propTypes = {
     activity_id: PropTypes.number
   }),
   fetchingGoal: PropTypes.func.isRequired,
-  gettingDiaryId: PropTypes.func.isRequired,
   uploadingUserImage: PropTypes.func.isRequired,
 };
 

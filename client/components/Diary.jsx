@@ -7,7 +7,7 @@ import Delete from '../../public/delete.svg';
 
 
 const DiaryHeader = styled.div`
-  width: 90%;
+  width: 100%;
   height: auto;
   border-bottom: 2px solid #111111;
   display: flex;
@@ -18,7 +18,7 @@ const DiaryHeader = styled.div`
 
 const StyledLeftButton = styled(Button)`
   background-color: #0070BF;
-  margin-right: 0;
+
 `;
 const StyledRightButton = styled(Button)`
   background-color: #0070BF;
@@ -138,6 +138,7 @@ export default ({
   const totalProtein = getTotal(entries, 'protein');
   const totalFat = getTotal(entries, 'fat');
 
+
   return (
     <div>
       <DiaryHeader>
@@ -184,7 +185,7 @@ export default ({
             <NutritionData> {breakfastTotalProtein} </NutritionData>
             <NutritionData> {breakfastTotalFat} </NutritionData>
           </tr>
-          <tr><h2> Lunch </h2></tr>
+          <tr><td><h2> Lunch </h2></td></tr>
           {lunch && lunch
             .map(entry => (
               <tr key={shortid.generate()}>
@@ -209,7 +210,7 @@ export default ({
             <NutritionData> {lunchTotalProtein} </NutritionData>
             <NutritionData> {lunchTotalFat} </NutritionData>
           </tr>
-          <tr><h2> Dinner </h2></tr>
+          <tr><td><h2> Dinner </h2></td></tr>
           {dinner && dinner
             .map(entry => (
               <tr key={shortid.generate()}>
@@ -234,7 +235,7 @@ export default ({
             <NutritionData> {dinnerTotalProtein} </NutritionData>
             <NutritionData> {dinnerTotalFat} </NutritionData>
           </tr>
-          <tr><h2> Snack </h2></tr>
+          <tr><td><h2> Snacks </h2></td></tr>
           {snack && snack
             .map(entry => (
               <tr key={shortid.generate()}>

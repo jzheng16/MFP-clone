@@ -45,6 +45,8 @@ class GoalContainer extends Component {
 
   handleGoalUpdate = e => {
     e.preventDefault();
+    console.log('typeof', typeof e.target.weight.value);
+
     const goal = {
       weight: e.target.weight.value,
       calorie: e.target.calorie.value,

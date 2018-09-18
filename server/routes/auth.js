@@ -36,7 +36,9 @@ const upload = multer({
 // User routes
 
 router.post('/updateUserInfo', (req, res) => {
-  if (req.weight) {
+  console.log('user id?', req.user.dataValues.id);
+  console.log('req.body', req.body);
+  if (req.body.weight) {
     User.update(
       {
         age: req.body.age,
@@ -59,7 +61,7 @@ router.post('/updateUserInfo', (req, res) => {
       where: { id: req.user.dataValues.id }
     })
       .then(updatedUser => res.json(updatedUser[1]))
-      .catch(err => console.error('POST error to updateUserInfo', err));
+      .catch(err => console.error('error to updateUserInfo', err));
   }
 });
 
@@ -117,6 +119,7 @@ router.post('/signup', (req, res, next) => {
   User.create(req.body)
     .then(user => {
       if (user) {
+        console.log(user.id);
         Goal.create({ user_id: user.id })
           .then(() => req.login(user, err => (err ? next(err) : res.json(user))))
           .catch(err => console.log('err creating goal during signup', err));
@@ -129,6 +132,10 @@ router.post('/signup', (req, res, next) => {
         next(err);
       }
     });
+});
+
+router.get('/test', (req, res) => {
+  res.status(200).json('hello');
 });
 
 // Create route to fetch the logged in user. This route will be hit every time a user accesses our page

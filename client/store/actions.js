@@ -10,6 +10,7 @@ export const UPDATE_USER = 'UPDATE_USER';
 // User Goals
 export const GET_GOAL = 'GET_GOAL';
 export const UPDATE_GOAL = 'UPDATE_GOAL';
+export const ERROR_GOAL = 'ERROR_GOAL';
 
 // Diary Actions
 export const ADD_FOOD_TO_DIARY = 'ADD_FOOD_TO_DIARY';
@@ -20,6 +21,10 @@ export const RECEIVE_DATABASE_QUERY = 'RECEIVE_DATABASE_QUERY';
 export const RETRIEVING_FOOD_FROM_DATABASE = 'RETRIEVING_FOOD_FROM_DATABASE';
 export const REMOVE_USER_FOOD_FROM_DIARY = 'REMOVE_USER_FOOD_FROM_DIARY';
 export const REMOVE_DB_FOOD_FROM_DIARY = 'REMOVE_DB_FOOD_FROM_DIARY';
+
+// Measurement Actions
+export const GET_MEASUREMENT = 'GET_MEASUREMENT';
+export const UPDATE_MEASUREMENT = 'UPDATE_MEASUREMENT';
 
 // Toasts Actions
 export const ADD_TOAST = 'ADD_TOAST';

@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { GET_USER, REMOVE_USER, UPDATE_USER } from '../actions';
 import history from '../../history';
-// import { resolve } from 'url';
 
 export const getUser = user => ({ type: GET_USER, payload: user });
 export const removeUser = () => ({ type: REMOVE_USER });
@@ -13,14 +12,13 @@ export const updateUser = user => ({
 
 // Fetches user info on login
 
-export const updatingUserInformation = info => dispatch => {
+export const updatingUserInformation = info => dispatch =>
   axios.post('/api/auth/updateUserInfo', info)
     .then(updatedUser => {
-      console.log('front-end updatedUser', updatedUser.data);
       dispatch(updateUser(updatedUser.data));
     })
     .catch(err => console.error('updatingUserInformation Action creator error', err));
-};
+
 
 export const uploadingUserImage = image => dispatch => {
   axios.post('/api/auth/uploadimage', image)
@@ -31,11 +29,13 @@ export const uploadingUserImage = image => dispatch => {
     .catch(err => console.error('trouble uploading image', err));
 };
 
-export const fetchingUser = () => dispatch => {
+export const fetchingUser = () => dispatch =>
   axios.get('/api/auth/me')
-    .then(user => dispatch(getUser(user.data || {})))
-    .catch(err => console.error('Trouble fetching user ', err));
-};
+    .then(user => {
+      dispatch(getUser(user.data || {}));
+    })
+    .catch(err => console.error(err));
+
 
 export const loggingIn = (email, password) => dispatch => {
   axios.post('/api/auth/login', { email, password })
@@ -46,10 +46,9 @@ export const loggingIn = (email, password) => dispatch => {
     .catch(err => console.error('Had trouble logging in', err));
 };
 
-export const signingUp = user => dispatch => {
+export const signingUp = user => dispatch =>
   axios.post('/api/auth/signup', user)
     .then(newUser => {
-      console.log('what is this', newUser.data);
       dispatch(getUser(newUser.data));
       history.push('/signup-step2');
     })
@@ -57,16 +56,16 @@ export const signingUp = user => dispatch => {
       console.log('Oops had trouble signing up: ', err.response.data);
       dispatch(getUser(err.response));
     });
-};
 
-export const loggingOut = () => dispatch => {
+
+export const loggingOut = () => dispatch =>
   axios.get('/api/auth/logout')
     .then(() => {
       dispatch(removeUser());
       history.push('/login');
     })
-    .catch(err => console.error('trouble logging out ', err));
-};
+    .catch(err => console.log('trouble logging out ', err));
+
 
 export const changingPassword = passwords => dispatch => axios.post('/api/auth/changepassword', passwords);
 

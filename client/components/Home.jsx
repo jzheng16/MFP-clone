@@ -5,12 +5,9 @@ import styled from 'styled-components';
 import HomeBackgroundImage from '../../public/mfpimage.jpg';
 import { Button, Ul, List } from './StyledComponents';
 // Function used to require all images in upload folder because webpack cannot determine dynamic images during bundling
-function importAll(r) {
-  const images = {};
-  r.keys().map(item => { images[item.replace('./', '')] = r(item); });
-  return images;
-}
-const images = importAll(require.context('../../uploads/', false, /\.(png|jpe?g|svg)$/));
+import images from '../../helper';
+
+
 const breakpoints = { first: '470px' };
 
 const HomeHeader = styled.div`
@@ -18,6 +15,7 @@ const HomeHeader = styled.div`
   grid-template-columns: 1fr;
   grid-template-rows: 1fr;
   row-gap: 1em;
+  
   /* @media (min-width: 768px) {
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: auto auto 1fr;
@@ -26,7 +24,9 @@ const HomeHeader = styled.div`
   /* row-gap: 1em; */
   /* } */
  
+ 
 `;
+
 const HomeImage = styled.img`
   grid-column: 1/2;
   grid-row: 1/2;
@@ -36,9 +36,13 @@ const HomeImage = styled.img`
 const Title = styled.h3`
   grid-column: 1/2;
   grid-row: 1/2;
-  font-size: 1em;
+  margin: 0;
+  font-size: 4.5vw;
   height: 5em;
   color: white;
+  margin-top: 3.5em;
+  align-self: center;
+  
  
   /* @media (min-width: 768px) {
     grid-column: 1/4;
@@ -46,12 +50,16 @@ const Title = styled.h3`
   } */    
 `;
 
+Title.displayName = 'Title';
+
 const UserDisplayInfoDiv = styled.div`
+  width: 90%;
+  margin: auto;
   /* grid-column: 1/4;
   grid-row: 3/5;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-grid - template- r ows: repeat(2, 1fr); */
+  grid-template-rows: repeat(2, 1fr); */
 `;
 
 /* TODO: Experiment with float and have the text wrap around it */
@@ -115,15 +123,12 @@ const StyledLabel = styled.label`
 
 const Home = ({ user, goal, uploadImage }) => {
   const profilePicture = user.avatarUrl || 'defaultImage.png';
-
   // console.log('user', props.user);
   // console.log('goal', props.goal);
-  console.log('images', profilePicture);
-
   return (
     <HomeHeader>
       <HomeImage src={HomeBackgroundImage} />
-      <Title> Welcome to MyFitnessClone!</Title>
+      <Title>Welcome to MyFitnessClone!</Title>
       {user.id ?
         <UserDisplayInfoDiv>
           <StyledLabel htmlFor="fileUpload">
