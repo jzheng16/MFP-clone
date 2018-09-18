@@ -7,7 +7,8 @@ import history from '../history';
 
 const mapState = state => ({
   user: state.auth.user,
-  diary: state.diary
+  diary: state.diary,
+  goal: state.goal.goal
 });
 
 const mapDispatch = dispatch => ({
@@ -36,6 +37,7 @@ class DiaryContainer extends Component {
     super(props);
     this.state = { something: false };
   }
+
   // Execute only when the user first visits their diary page
   componentDidMount() {
     if (!this.props.diary.currentDiaryDate.id) {

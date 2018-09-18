@@ -4,7 +4,6 @@ const db = require('../../db');
 // Query the user and eager load his goals
 
 router.post('/creategoal', (req, res) => {
-  console.log('req.body', req.body);
   Goal.update(req.body, {
     where: { user_id: req.user.dataValues.id },
     returning: true,
@@ -27,9 +26,7 @@ router.get('/goal', (req, res) => {
       { model: db.model('activity') }],
     where: { user_id: req.user.dataValues.id }
   })
-    .then(goal => {
-      res.json(goal);
-    })
+    .then(goal => res.json(goal))
     .catch(err => console.error('cannot retrieve goals', err));
 });
 
