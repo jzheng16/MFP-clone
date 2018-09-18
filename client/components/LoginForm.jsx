@@ -46,25 +46,21 @@ const ForgotPasswordLink = styled(Link)`
   
 `;
 
-export default props => {
-  console.log(!props.password && !props.email);
+export default props => (
+  <div>
+    <form className="login" onSubmit={props.handleLogin}>
+      <StyledLabel htmlFor="email"> Email Address </StyledLabel>
+      <StyledEmailInput onChange={props.onEmailChange} id="email" type="text" name="email" />
 
-  return (
-    <div>
-      <form className="login" onSubmit={props.handleLogin}>
-        <StyledLabel htmlFor="email"> Email Address </StyledLabel>
-        <StyledEmailInput onChange={props.onEmailChange} id="email" type="text" name="email" />
+      <StyledLabel htmlFor="password">  Password </StyledLabel>
+      <StyledPasswordInput onChange={props.onPasswordChange} id="password" type="password" name="password" />
+      <ForgotPasswordLink to="/forgotpassword"> Forgot your password?</ForgotPasswordLink>
+      <StyledLoginButton type="submit" disabled={!props.password || !props.email}> Log-in </StyledLoginButton>
+    </form>
 
-        <StyledLabel htmlFor="password">  Password </StyledLabel>
-        <StyledPasswordInput onChange={props.onPasswordChange} id="password" type="password" name="password" />
-        <ForgotPasswordLink to="/forgotpassword"> Forgot your password?</ForgotPasswordLink>
-        <StyledLoginButton type="submit" disabled={!props.password || !props.email}> Log-in </StyledLoginButton>
-      </form>
+    <b> Don&#39;t have an account?
+      <Link to="/signup-step1"> Sign-up! </Link>
+    </b>
 
-      <b> Don&#39;t have an account?
-        <Link to="/signup-step1"> Sign-up! </Link>
-      </b>
-
-    </div>
-  );
-};
+  </div>
+);
