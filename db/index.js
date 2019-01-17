@@ -2,6 +2,7 @@
 const Sequelize = require('sequelize');
 const config = require('../config');
 
+const url = process.env.NODE_ENV !== 'production' ? config.DATABASE_URL : process.env.DATABASE_URL;
 // If you deploy your app to something like heroku, your db url will be available on database_url.
 // const db = new Sequelize('postgres://localhost:5432/mfp-clone', {
 const db = new Sequelize(
@@ -18,6 +19,8 @@ const db = new Sequelize(
     }
   },
 );
+
+
 module.exports = db;
 
 require('./models');

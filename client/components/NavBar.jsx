@@ -48,7 +48,11 @@ const NavBarWrapper = styled.div`
 `;
 
 const StyledNav = styled.nav`
-  display: inline-block;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 
   background-color: #0070BF;
 `;
@@ -60,11 +64,12 @@ const StyledHomeIcon = styled.img`
 
 const StyledNavLink = styled(NavLink)`
   color: white;
-  font-size: 16px;
-  display: inline-block;
-  margin: 10px 10px 0px 10px;
+  font-size: 1.5em;
+
+  margin: 10px 1em 0px 1em;
   text-decoration: none;
-  vertical-align: middle;
+
+  
 
   &:hover {
     color: green;
@@ -80,7 +85,7 @@ const StyledMenuLink = styled(StyledNavLink)`
 `;
 
 export default props => (
-  props.width > 450 ?
+  props.width > 850 ?
     <NavBarWrapper>
       {props.user.id ?
         <StyledNav>

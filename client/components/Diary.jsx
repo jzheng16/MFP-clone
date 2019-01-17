@@ -4,24 +4,70 @@ import shortid from 'shortid';
 import styled from 'styled-components';
 import { Button } from './StyledComponents';
 import Delete from '../../public/delete.svg';
+import left from '../../public/left-pointing-arrow.svg';
+import right from '../../public/right-pointing-arrow.svg';
 
-
-const DiaryHeader = styled.div`
-  width: 100%;
-  height: auto;
-  border-bottom: 2px solid #111111;
+const Title = styled.div`
   display: flex;
+  flex-direction: row;
   justify-content: center;
-  margin-top: 2em;
+  align-items: center;
+  color: white;
+  width: 100%;
+  height: 3em;
   
+  border-bottom: 2px solid #111111;
+  margin-top: 2em;
+  flex-grow: 1;
 `;
 
 const StyledLeftButton = styled(Button)`
   background-color: #0070BF;
-
+  background-image: url(${left});
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 3em;
+  height: 100%;
+  border: none;
+  cursor: pointer;
+  border-radius: none;
 `;
+
+const DiaryHeader = styled.p`
+  line-height: 1.5;
+  margin: 0;
+  width: 50%;
+  text-align: center;
+  font-size: 2em;
+  background-color:  #0070BF;
+  height: 100%;
+
+  @media (max-width: 868px) {
+    width: 70%;
+    font-size: 1.5em;
+    line-height: 1.8;
+  }
+
+  @media (max-width: 500px) {
+    width: 70%;
+    font-size: 1.3em;
+    line-height: 2.5;
+  }
+  
+  
+  
+`;
+
 const StyledRightButton = styled(Button)`
   background-color: #0070BF;
+  background-image: url(${right});
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 3em;
+  height: 100%;
+  border: none;
+  cursor: pointer;
+  border-radius: none;
 `;
 
 const DeleteButton = styled.button`
@@ -34,18 +80,6 @@ const DeleteButton = styled.button`
   cursor: pointer;
 `;
 
-const Title = styled.span`
-  display: inline-block;
-  color: white;
-  height:36px;
-  background-color:  #0070BF;
-`;
-
-const ButtonImage = styled.img`
-  height: 27px;
-  width: 27px;
-  fill: black;
-`;
 
 const NutritionTable = styled.table`
   width: 90%;
@@ -66,9 +100,11 @@ const NameHeader = styled.th`
   text-align: left;
 `;
 
-const BreakfastHeader = styled.h2`
+const BreakfastHeader = styled.h1`
   margin: 0;
+  /* temporary for screenshot */
 `;
+
 
 const NutritionData = styled.td`
   text-align: center;
@@ -87,7 +123,7 @@ const RemainingMacros = styled.td`
 const FoodName = styled.td`
   max-width: 0;
   text-align: left;
-   overflow: hidden;
+  overflow: hidden;
   text-overflow: ellipsis;
   background-color: #f6f6f6;
   /* font-size: .8em; */
@@ -113,7 +149,6 @@ const getTotal = (entryArr, property) => entryArr.reduce((total, entry) => total
 
 /*
 TODO:
-Fix Header
 Find way to decrease render calculations
 Implement Remaining and Goals
 */
@@ -152,13 +187,13 @@ export default ({
 
   return (
     <div>
-      <DiaryHeader>
-        <Title>
-          <StyledLeftButton onClick={previousDayDiary}> <ButtonImage src="/left-pointing-arrow.svg" /> </StyledLeftButton>
-          Your Food Diary for {diary.currentDiaryDate.day}
-          <StyledRightButton onClick={nextDayDiary}> <ButtonImage src="/right-pointing-arrow.svg" /> </StyledRightButton>
-        </Title>
-      </DiaryHeader>
+
+      <Title>
+        <StyledLeftButton onClick={previousDayDiary}></StyledLeftButton>
+        <DiaryHeader> Your Food Diary for {diary.currentDiaryDate.day} </DiaryHeader>
+        <StyledRightButton onClick={nextDayDiary}></StyledRightButton>
+      </Title>
+
 
       <NutritionTable className="listBreakfast">
         <thead>
@@ -196,7 +231,7 @@ export default ({
             <NutritionData> {breakfastTotalProtein} </NutritionData>
             <NutritionData> {breakfastTotalFat} </NutritionData>
           </tr>
-          <tr><td><h2> Lunch </h2></td></tr>
+          <tr><td><h1> Lunch </h1></td></tr>
           {lunch && lunch
             .map(entry => (
               <tr key={shortid.generate()}>
@@ -221,7 +256,7 @@ export default ({
             <NutritionData> {lunchTotalProtein} </NutritionData>
             <NutritionData> {lunchTotalFat} </NutritionData>
           </tr>
-          <tr><td><h2> Dinner </h2></td></tr>
+          <tr><td><h1> Dinner </h1></td></tr>
           {dinner && dinner
             .map(entry => (
               <tr key={shortid.generate()}>
@@ -246,7 +281,7 @@ export default ({
             <NutritionData> {dinnerTotalProtein} </NutritionData>
             <NutritionData> {dinnerTotalFat} </NutritionData>
           </tr>
-          <tr><td><h2> Snacks </h2></td></tr>
+          <tr><td><h1> Snacks </h1></td></tr>
           {snack && snack
             .map(entry => (
               <tr key={shortid.generate()}>
@@ -294,10 +329,10 @@ export default ({
           <tr>
             <SummaryTitle>Remaining</SummaryTitle>
             <td></td>
-            <RemainingMacros remaining> {goal.calorie - totalCalories} </RemainingMacros>
-            <RemainingMacros remaining> {goal.carbs - totalCarbs} </RemainingMacros>
-            <RemainingMacros {...`${goal.protein - totalProtein > 0 ? '' : 'over'}`}> {goal.protein - totalProtein} </RemainingMacros>
-            <RemainingMacros {...`${goal.fat - totalFat > 0 ? '' : 'over'}`}> {goal.fat - totalFat} </RemainingMacros>
+            <RemainingMacros over={goal.calorie - totalCalories < 0}> {goal.calorie - totalCalories} </RemainingMacros>
+            <RemainingMacros over={goal.carbs - totalCarbs < 0}> {goal.carbs - totalCarbs} </RemainingMacros>
+            <RemainingMacros over={goal.protein - totalProtein < 0}> {goal.protein - totalProtein} </RemainingMacros>
+            <RemainingMacros over={goal.fat - totalFat < 0}> {goal.fat - totalFat} </RemainingMacros>
           </tr>
 
 
