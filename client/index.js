@@ -7,6 +7,7 @@ import store from './store';
 
 // stylesheet
 import '../public/index.css';
+import '../node_modules/semantic-ui-css/semantic.min.css';
 
 import history from './history';
 import App from './app';

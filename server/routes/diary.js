@@ -28,6 +28,7 @@ router.get('/database/:date_id', (req, res) => {
 });
 
 router.post('/databasediary', (req, res) => {
+  console.log('???????????????????????????????????', req.body);
   DiaryDatabase.findOrCreate({
     where: {
       user_id: req.user.dataValues.id,
@@ -53,7 +54,8 @@ router.post('/databasediary', (req, res) => {
         })
           .then(updatedEntry => res.json(updatedEntry[1]));
       }
-    });
+    })
+    .catch(error => console.error('trouble receiving entries from database diary table', error));
 });
 
 router.post('/', (req, res) => {
@@ -97,7 +99,8 @@ router.post('/', (req, res) => {
               });
           });
       }
-    });
+    })
+    .catch(err => console.error('trouble adding food', err));
 });
 
 router.post('/delete', (req, res) => {
