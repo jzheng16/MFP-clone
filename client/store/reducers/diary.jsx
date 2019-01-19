@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import {
   ADD_FOOD_TO_DIARY, ADD_DB_FOOD_TO_DIARY, SELECT_MEAL_TYPE, SELECT_DIARY_DATE,
   RECEIVE_DATABASE_QUERY, REMOVE_USER_FOOD_FROM_DIARY, REMOVE_DB_FOOD_FROM_DIARY,
@@ -16,7 +15,8 @@ export default (state = initialState, action) => {
   let existingFoodIndex = -1;
   switch (action.type) {
     case ADD_FOOD_TO_DIARY:
-      existingFoodIndex = _.findIndex(newState.entries, { id: action.payload.id });
+
+      existingFoodIndex = newState.entries.findIndex(entry => entry.id === action.payload.id);
       if (existingFoodIndex > -1) {
         newState.entries[existingFoodIndex].qty = action.payload.qty;
       } else {
@@ -24,7 +24,9 @@ export default (state = initialState, action) => {
       }
       break;
     case ADD_DB_FOOD_TO_DIARY:
-      existingFoodIndex = _.findIndex(newState.entries, { id: action.payload.id, databaseId: action.payload.databaseId });
+
+      existingFoodIndex = newState.entries.findIndex(entry => entry.id === action.payload.id && entry.databaseId === action.payload.databaseId);
+
       if (existingFoodIndex > -1) {
         newState.entries[existingFoodIndex].qty = action.payload.qty;
       } else {

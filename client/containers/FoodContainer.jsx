@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
+import shortid from 'shortid';
+
+import { Tab } from 'semantic-ui-react';
 
 import { createFood, fetchFood } from '../store/action-creators/foodAction';
-import { addingFoodToDiary, searchingDatabase } from '../store/action-creators/diary';
-import { ListFoods, AddFood, SearchFood } from '../components';
+import { addingFoodToDiary, searchingDatabase, addingFoodToDbDiary } from '../store/action-creators/diary';
+import { ListFoods, AddFood, SearchFood, ListSearchResult } from '../components';
 import { addToast, deleteToast } from '../store/action-creators/toasts';
 import history from '../history';
-import shortid from 'shortid';
+
 
 const mapStateToProps = state => ({
   foods: state.foods,
@@ -32,6 +35,9 @@ const mapDispatchToProps = dispatch => ({
   },
   deleteToast(id) {
     return dispatch(deleteToast(id));
+  },
+  addingFoodToDbDiary(entry) {
+    return dispatch(addingFoodToDbDiary(entry));
   }
 
 });
@@ -40,7 +46,7 @@ class FoodContainer extends Component {
   constructor(props) {
     super(props);
     this.searchingDatabase = this.searchingDatabase.bind(this);
-    this.state = { isChecked: [] };
+    this.state = { isChecked: [], tabIndex: 2 };
   }
 
   componentWillMount() {
@@ -60,6 +66,12 @@ class FoodContainer extends Component {
     this.setState({ isChecked: checkedArr });
   }
 
+  handleTabChange = (e, data) => {
+    console.log('​FoodContainer -> tabId', this.state.tabIndex);
+
+    this.setState({ tabIndex: data.activeIndex });
+  };
+
   addFood = e => {
     e.preventDefault();
     const newFood = {
@@ -77,43 +89,75 @@ class FoodContainer extends Component {
     e.preventDefault();
     const addFoodArr = [];
     const servingSizeArr = Array.from(e.target.qty);
+    console.log('​FoodContainer -> servingSizeArr', servingSizeArr);
 
-    this.state.isChecked.forEach(food_id => {
-      const qtyIndex = _.findIndex(servingSizeArr, { id: `${food_id}` });
+    this.state.isChecked.forEach(foodId => {
+      const qtyIndex = servingSizeArr.findIndex(servingSize => servingSize.id === `${foodId}`);
+
       const qty = +e.target.qty[qtyIndex].value;
       const entry = {
+
         user_id: this.props.user.id,
         date_id: this.props.diary.currentDiaryDate.id,
         mealType: this.props.diary.currentMealTypeId,
-        food_id,
+        food_id: foodId,
         qty
       };
+      console.log('​FoodContainer -> entry', entry);
 
       addFoodArr.push(entry);
     });
     console.log('Final addFoodArr', addFoodArr);
     this.props.addingFoodToDiary(addFoodArr);
-    const notifId = shortid.generate();
-    this.props.addToast({ text: 'Food successfully added!', id: notifId, backgroundColor: '#DFF2BF', color: '#4F8A10' });
-    // setTimeout(() => {
-    //   this.props.deleteToast(notifId);
-    // }, 100000);
   }
 
   searchingDatabase = e => {
     e.preventDefault();
     this.props.searchingDatabase(e.target.q.value);
-    history.push('/food/search');
+    // history.push('/food/search');
   }
 
+  // TODO: Error with addingFoodToDatabaseDiary, works if history.push
+
+  addingFoodToDatabaseDiary = (e, ndbno) => {
+    console.log('hellooooooo');
+    e.preventDefault();
+    const entry = {
+      databaseId: +ndbno,
+      mealType: this.props.diary.currentMealTypeId,
+      qty: +e.target.qty.value,
+      user_id: this.props.user.id,
+      date_id: this.props.diary.currentDiaryDate.id,
+    };
+    console.log(entry);
+    this.props.addingFoodToDbDiary(entry);
+  }
+
+
   render() {
+    const panes = [
+      {
+        menuItem: 'Search Database',
+        render: () => (
+          <Tab.Pane>
+            <div>
+              <SearchFood {...this.props} searchingDatabase={this.searchingDatabase} />
+              <ListSearchResult {...this.props} addingFoodToDatabaseDiary={this.addingFoodToDatabaseDiary} />
+            </div>
+          </Tab.Pane>
+        )
+      },
+      { menuItem: 'Add New Food', render: () => <Tab.Pane> <AddFood addFood={this.addFood} /></Tab.Pane> },
+      { menuItem: 'List Foods', render: () => <Tab.Pane> <ListFoods {...this.props} {...this.state} addingFoodToDiary={this.addingFoodToDiary} onChange={this.onChange} /></Tab.Pane> },
+    ];
     return (
       <div>
-        <div className="addFood">
-          <SearchFood {...this.props} searchingDatabase={this.searchingDatabase} />
-          <AddFood addFood={this.addFood} />
-          <ListFoods {...this.props} {...this.state} addingFoodToDiary={this.addingFoodToDiary} onChange={this.onChange} />
-        </div>
+        <Tab
+          menuPosition="right"
+          onTabChange={this.handleTabChange}
+          activeIndex={this.state.tabIndex}
+          panes={panes}
+        />
       </div>
     );
   }
