@@ -5,7 +5,7 @@ import styledNormalize from 'styled-normalize';
 import React from 'react';
 import Routes from './routes';
 import NavBarContainer from './containers/NavBarContainer';
-import ToastsContainer from './containers/ToastsContainer';
+
 import { Footer } from './components/';
 
 // Normalize styles across all browsers. Not a CSS reset.

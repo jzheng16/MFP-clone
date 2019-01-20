@@ -38,7 +38,7 @@ export default props => {
 
     <form className="signup" onSubmit={props.handleSignup}>
       <StyledLabel htmlFor="email"> Email </StyledLabel>
-      <StyledSignupInput id="email" name="email" type="email" required />
+      <StyledSignupInput id="email" name="email" type="email" autoComplete="email" required />
       <StyledLabel htmlFor="password"> Password </StyledLabel>
       <StyledSignupInput id="password" name="password" type="password" required />
       <StyledLabel htmlFor="email"> First name </StyledLabel>

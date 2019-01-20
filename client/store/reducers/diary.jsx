@@ -3,11 +3,24 @@ import {
   RECEIVE_DATABASE_QUERY, REMOVE_USER_FOOD_FROM_DIARY, REMOVE_DB_FOOD_FROM_DIARY,
 } from '../actions';
 
-const initialState = {
+const loadState = () => {
+  try {
+    const serializedState = localStorage.getItem('state');
+    console.log('HELLO HERE I AM LOADING', serializedState);
+    if (serializedState === null) {
+      return undefined;
+    }
+    return JSON.parse(serializedState);
+  } catch (err) {
+    return undefined;
+  }
+};
+
+const initialState = loadState() || {
   entries: [],
   currentMealTypeId: 0,
   currentDiaryDate: {},
-  databaseQuery: {}
+  databaseQuery: []
 };
 
 export default (state = initialState, action) => {
@@ -39,6 +52,7 @@ export default (state = initialState, action) => {
     case SELECT_DIARY_DATE:
       newState.entries = [];
       newState.currentDiaryDate = action.payload;
+      localStorage.setItem('state', JSON.stringify(action.payload));
       break;
     case RECEIVE_DATABASE_QUERY:
       newState.databaseQuery = action.payload;

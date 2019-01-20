@@ -25,7 +25,3 @@ export const REMOVE_DB_FOOD_FROM_DIARY = 'REMOVE_DB_FOOD_FROM_DIARY';
 // Measurement Actions
 export const GET_MEASUREMENT = 'GET_MEASUREMENT';
 export const UPDATE_MEASUREMENT = 'UPDATE_MEASUREMENT';
-
-// Toasts Actions
-export const ADD_TOAST = 'ADD_TOAST';
-export const DELETE_TOAST = 'DELETE_TOAST';

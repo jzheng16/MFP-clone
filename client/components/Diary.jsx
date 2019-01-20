@@ -107,9 +107,13 @@ const BreakfastHeader = styled.h1`
 
 
 const NutritionData = styled.td`
-  text-align: center;
+  text-align: ${props => (props.alignLeft ? 'center' : 'center')};
+ 
+  font-weight: ${props => (props.bold ? 'bold' : 'normal')};
+  
   /* border-bottom: 1px dotted #000000; */
-  background-color: #f6f6f6;
+  /* background-color: #f6f6f6; */
+
   /* font-size: .8em; */
 `;
 
@@ -118,6 +122,7 @@ const RemainingMacros = styled.td`
   background-color: #f6f6f6;
   /* font-size: .8em; */
   color: ${props => (props.over ? 'red' : 'green')};
+  
 `;
 
 const FoodName = styled.td`
@@ -125,12 +130,8 @@ const FoodName = styled.td`
   text-align: left;
   overflow: hidden;
   text-overflow: ellipsis;
-  background-color: #f6f6f6;
+  /* background-color: #f6f6f6; */
   /* font-size: .8em; */
-`;
-
-const SummaryTitle = styled.td`
-  text-align: right;
 `;
 
 const AddFood = styled(Button)`
@@ -144,6 +145,13 @@ const AddFood = styled(Button)`
 const InvisibleDiv = styled.div`
   padding-bottom: 3em;
 `;
+
+const TableRow = styled.tr`
+ &:nth-child(even) {
+    background-color: #f6f6f6;
+  }
+`;
+
 
 const getTotal = (entryArr, property) => entryArr.reduce((total, entry) => total + (entry.food[property] * entry.qty), 0);
 
@@ -208,28 +216,28 @@ export default ({
         </thead>
         <tbody>
           {breakfast && breakfast
-            .map(entry => (
-              <tr key={shortid.generate()}>
-                <FoodName> {entry.food.name} </FoodName>
-                <NutritionData> {entry.qty} </NutritionData>
-                <NutritionData> {entry.food.calories * entry.qty} </NutritionData>
-                <NutritionData> {entry.food.carbs * entry.qty} </NutritionData>
-                <NutritionData> {entry.food.protein * entry.qty} </NutritionData>
-                <NutritionData> {entry.food.fat * entry.qty} </NutritionData>
-                <NutritionData>
+            .map((entry, index) => (
+              <TableRow key={shortid.generate()}>
+                <FoodName index={index}> {entry.food.name} </FoodName>
+                <NutritionData index={index}> {entry.qty} </NutritionData>
+                <NutritionData index={index}> {entry.food.calories * entry.qty} </NutritionData>
+                <NutritionData index={index}> {entry.food.carbs * entry.qty} </NutritionData>
+                <NutritionData index={index}> {entry.food.protein * entry.qty} </NutritionData>
+                <NutritionData index={index}> {entry.food.fat * entry.qty} </NutritionData>
+                <NutritionData index={index}>
                   <DeleteButton onClick={(() => removeFood(entry.food.id, 1, entry.databaseId))}>
                   </DeleteButton>
                 </NutritionData>
-              </tr>
+              </TableRow>
             ))
           }
           <tr>
             <td><AddFood onClick={() => selectedMealType(1)}> Add Food </AddFood></td>
-            <td>   </td>
-            <NutritionData> {breakfastTotalCalories} </NutritionData>
-            <NutritionData> {breakfastTotalCarbs} </NutritionData>
-            <NutritionData> {breakfastTotalProtein} </NutritionData>
-            <NutritionData> {breakfastTotalFat} </NutritionData>
+            <NutritionData bold> <b> Total </b>  </NutritionData>
+            <NutritionData bold> {breakfastTotalCalories} </NutritionData>
+            <NutritionData bold> {breakfastTotalCarbs} </NutritionData>
+            <NutritionData bold> {breakfastTotalProtein} </NutritionData>
+            <NutritionData bold> {breakfastTotalFat} </NutritionData>
           </tr>
           <tr><td><h1> Lunch </h1></td></tr>
           {lunch && lunch
@@ -275,7 +283,7 @@ export default ({
           }
           <tr>
             <td><AddFood onClick={() => selectedMealType(3)}> Add Food </AddFood></td>
-            <td>   </td>
+            <NutritionData bold> Total </NutritionData>
             <NutritionData> {dinnerTotalCalories} </NutritionData>
             <NutritionData> {dinnerTotalCarbs} </NutritionData>
             <NutritionData> {dinnerTotalProtein} </NutritionData>
@@ -300,7 +308,7 @@ export default ({
           }
           <tr>
             <td><AddFood onClick={() => selectedMealType(4)}> Add Food </AddFood></td>
-            <td>   </td>
+            <NutritionData bold> Total </NutritionData>
             <NutritionData> {snackTotalCalories} </NutritionData>
             <NutritionData> {snackTotalCarbs} </NutritionData>
             <NutritionData> {snackTotalProtein} </NutritionData>
@@ -311,24 +319,24 @@ export default ({
 
 
           <tr>
-            <SummaryTitle>Total</SummaryTitle>
             <td></td>
+            <NutritionData bold alignLeft>Total</NutritionData>
             <NutritionData> {totalCalories} </NutritionData>
             <NutritionData> {totalCarbs} </NutritionData>
             <NutritionData> {totalProtein} </NutritionData>
             <NutritionData> {totalFat} </NutritionData>
           </tr>
           <tr>
-            <SummaryTitle>Goal</SummaryTitle>
             <td></td>
+            <NutritionData bold alignLeft>Goal</NutritionData>
             <NutritionData> {goal.calorie} </NutritionData>
             <NutritionData> {goal.carbs} </NutritionData>
             <NutritionData> {goal.protein} </NutritionData>
             <NutritionData> {goal.fat} </NutritionData>
           </tr>
           <tr>
-            <SummaryTitle>Remaining</SummaryTitle>
             <td></td>
+            <NutritionData bold alignLeft>Remaining</NutritionData>
             <RemainingMacros over={goal.calorie - totalCalories < 0}> {goal.calorie - totalCalories} </RemainingMacros>
             <RemainingMacros over={goal.carbs - totalCarbs < 0}> {goal.carbs - totalCarbs} </RemainingMacros>
             <RemainingMacros over={goal.protein - totalProtein < 0}> {goal.protein - totalProtein} </RemainingMacros>

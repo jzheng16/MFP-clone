@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import shortid from 'shortid';
 import { ChangePassword, ChangeUserInfo, ChangeEmail } from '../components';
 import { changingPassword, updatingUserInformation } from '../store/action-creators/auth';
-import { addToast, deleteToast } from '../store/action-creators/toasts';
+
 
 const mapDispatch = dispatch => ({
   updatingUserInformation(userObj) {
@@ -11,12 +11,6 @@ const mapDispatch = dispatch => ({
   },
   changingPassword(passwords) {
     return dispatch(changingPassword(passwords));
-  },
-  addToast(options) {
-    return dispatch(addToast(options));
-  },
-  deleteToast(toastId) {
-    return dispatch(deleteToast(toastId));
   }
 });
 

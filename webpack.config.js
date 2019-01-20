@@ -25,7 +25,7 @@ module.exports = {
     hotUpdateMainFilename: 'hot/hot-update.json'
   },
   context: __dirname,
-  devtool: 'inline-source-map',
+  devtool: 'cheap-module-eval-source-map',
   resolve: { extensions: ['.js', '.jsx', '.json', '*'] },
   module: {
     rules: [
