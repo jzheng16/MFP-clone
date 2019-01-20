@@ -4,7 +4,6 @@ import FoodReducer from './foods';
 import authReducer from './auth';
 import goalReducer from './goal';
 import diaryReducer from './diary';
-import toastReducer from './toasts';
 import measurementReducer from './measurement';
 
 const rootReducer = combineReducers({
@@ -12,7 +11,6 @@ const rootReducer = combineReducers({
   auth: authReducer,
   goal: goalReducer,
   diary: diaryReducer,
-  toast: toastReducer,
   measurement: measurementReducer
 });
 

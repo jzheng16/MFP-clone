@@ -48,7 +48,7 @@ class DiaryContainer extends Component {
   componentDidUpdate(prevProps) {
     if (this.props.diary.currentDiaryDate.id !== prevProps.diary.currentDiaryDate.id) {
       console.log(this.props.diary.currentDiaryDate.id);
-
+      console.log('here??????????');
       this.props.fetchingDiary(this.props.diary.currentDiaryDate.id);
       this.props.fetchingDbDiary(this.props.diary.currentDiaryDate.id);
     }

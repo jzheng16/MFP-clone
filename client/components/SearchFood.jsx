@@ -1,5 +1,5 @@
 import React from 'react';
-import { Input } from 'semantic-ui-react';
+import { Input, Button, Image, List, Form } from 'semantic-ui-react';
 
 export default props => (
   <div>
@@ -9,18 +9,33 @@ export default props => (
 
     </form>
 
-    {props.diary.databaseQuery && props.diary.databaseQuery.list ? props.diary.databaseQuery.list.item.map(item => (
-      <li key={item.ndbno}> {item.name}
-        <form onSubmit={e => props.addingFoodToDbDiary(e, item.ndbno)}>
-          <label htmlFor="qty"> Qty
-            <input type="number" defaultValue="1" name="qty" />
-          </label>
-          <button type="submit"> Add Food </button>
-        </form>
-      </li>
-    ))
-      : null
+    <List divided verticalAlign="middle">
 
-    }
+
+      {props.diary.databaseQuery && props.diary.databaseQuery.map(item => (
+        <List.Item key={item.ndbno}>
+          <Form onSubmit={e => props.addingFoodToDbDiary(e, item.ndbno, item.name)}>
+            <List.Content>
+              {item.name}
+            </List.Content>
+            <List.Content>
+              <Input type="number" name="qty" step="1" placeholder="# of servings..." />
+            </List.Content>
+
+            <List.Content floated="right">
+              <Button content="Add Food" type="submit" />
+            </List.Content>
+
+          </Form>
+        </List.Item>
+
+      ))
+
+
+      }
+
+    </List>
+
+
   </div>
 );

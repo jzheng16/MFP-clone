@@ -50,13 +50,16 @@ export const mappingDbDiaryDataToFoodData = foodObj => dispatch => {
   axios.get(`https://api.nal.usda.gov/ndb/nutrients/?format=json&api_key=${API_KEY}&nutrients=208&nutrients=205&nutrients=203&nutrients=204&ndbno=${databaseId}`)
     .then(report => {
       console.log('What is the food report returned', report);
+      console.log('Food obj:', foodObj);
+      const foodDetail = report.data.report.foods[0];
+      const truncatedName = foodObj.name.length > 60 ? `${foodObj.name.substring(0, foodObj.name.length)}...` : foodObj.name;
       const foodInfo = {
-        id: report.data.report.foods[0].ndbno,
-        name: report.data.report.foods[0].name,
-        calories: report.data.report.foods[0].nutrients[0].gm,
-        carbs: report.data.report.foods[0].nutrients[1].gm,
-        protein: report.data.report.foods[0].nutrients[2].gm,
-        fat: report.data.report.foods[0].nutrients[3].gm,
+        id: foodDetail.ndbno,
+        name: `${truncatedName} ${foodDetail.measure}`,
+        calories: Math.round(foodDetail.nutrients[0].gm) || 0,
+        carbs: Math.round(foodDetail.nutrients[1].gm) || 0,
+        protein: Math.round(foodDetail.nutrients[2].gm) || 0,
+        fat: Math.round(foodDetail.nutrients[3].gm) || 0,
       };
       const entries = { ...foodObj, food: foodInfo };
       dispatch(addDbFoodToDiary(entries));
@@ -112,9 +115,33 @@ export const gettingDiaryId = date => dispatch => {
 
 // API call to query database
 export const searchingDatabase = query => dispatch => {
-  axios.get(`https://api.nal.usda.gov/ndb/search/?format=json&q=${query}&sort=n&max=25&offset=0&api_key=${API_KEY}`)
+  axios.get(`https://api.nal.usda.gov/ndb/search/?format=json&q=${query}&sort=r&max=25&offset=0&api_key=${API_KEY}`)
     .then(results => {
-      dispatch(receiveDatabaseQuery(results.data));
+      // API doesn't give us clean results, have to do some string modification
+      const items = results.data.list.item.map(item => {
+        let match = item.name.length;
+        if (item.name.indexOf('UPC') > -1) {
+          match = item.name.indexOf('UPC') - 2;
+        } else if (item.name.indexOf('GTIN') > -1) {
+          match = item.name.indexOf('GTIN') - 2;
+        }
+
+        console.log('DID I MATCH', match);
+        return {
+          ...item,
+          name:
+            item.name
+              .substring(0, match)
+              .toLowerCase()
+              .split(' ')
+              .map(word => word.charAt(0).toUpperCase() + word.substring(1))
+              .join(' ')
+
+
+        };
+      });
+      dispatch(receiveDatabaseQuery(items));
+      console.log('modified items:', items);
     })
     .catch(err => console.error('Could not search database', err));
 };

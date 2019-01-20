@@ -4,8 +4,9 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import HomeBackgroundImage from '../../public/mfpimage.jpg';
 import { Button, Ul, List } from './StyledComponents';
+
 // Function used to require all images in upload folder because webpack cannot determine dynamic images during bundling
-import images from '../../helper';
+// import images from '../../helper';
 
 
 const breakpoints = { first: '470px' };
@@ -121,18 +122,18 @@ const StyledLabel = styled.label`
   }
 `;
 
-const Home = ({ user, goal, uploadImage }) => {
-  const profilePicture = user.avatarUrl || 'defaultImage.png';
+const Home = ({ user, goal, uploadImage }) =>
+  // const profilePicture = user.avatarUrl || 'defaultImage.png';
   // console.log('user', props.user);
   // console.log('goal', props.goal);
-  return (
+  (
     <HomeHeader>
       <HomeImage src={HomeBackgroundImage} />
       <Title>Welcome to MyFitnessClone!</Title>
       {user.id ?
         <UserDisplayInfoDiv>
           <StyledLabel htmlFor="fileUpload">
-            <ProfileImage src={images[profilePicture]} alt="Profile Picture" />
+            <ProfileImage src={HomeBackgroundImage} alt="Profile Picture" />
             <StyledUploadImage name="image" type="file" id="fileUpload" onChange={uploadImage} />
           </StyledLabel>
           <MiscInfo>
@@ -165,7 +166,6 @@ const Home = ({ user, goal, uploadImage }) => {
       }
     </HomeHeader>
   );
-};
 
 Home.propTypes = {
   user: PropTypes.shape({

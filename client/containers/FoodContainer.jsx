@@ -1,15 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import _ from 'lodash';
-import shortid from 'shortid';
-
 import { Tab } from 'semantic-ui-react';
 
 import { createFood, fetchFood } from '../store/action-creators/foodAction';
 import { addingFoodToDiary, searchingDatabase, addingFoodToDbDiary } from '../store/action-creators/diary';
 import { ListFoods, AddFood, SearchFood, ListSearchResult } from '../components';
-import { addToast, deleteToast } from '../store/action-creators/toasts';
-import history from '../history';
 
 
 const mapStateToProps = state => ({
@@ -29,12 +24,6 @@ const mapDispatchToProps = dispatch => ({
   },
   searchingDatabase(query) {
     return dispatch(searchingDatabase(query));
-  },
-  addToast(styles) {
-    return dispatch(addToast(styles));
-  },
-  deleteToast(id) {
-    return dispatch(deleteToast(id));
   },
   addingFoodToDbDiary(entry) {
     return dispatch(addingFoodToDbDiary(entry));
@@ -119,12 +108,13 @@ class FoodContainer extends Component {
 
   // TODO: Error with addingFoodToDatabaseDiary, works if history.push
 
-  addingFoodToDatabaseDiary = (e, ndbno) => {
+  addingFoodToDbDiary = (e, ndbno, name) => {
     console.log('hellooooooo');
     e.preventDefault();
     const entry = {
       databaseId: +ndbno,
       mealType: this.props.diary.currentMealTypeId,
+      name,
       qty: +e.target.qty.value,
       user_id: this.props.user.id,
       date_id: this.props.diary.currentDiaryDate.id,
@@ -141,8 +131,8 @@ class FoodContainer extends Component {
         render: () => (
           <Tab.Pane>
             <div>
-              <SearchFood {...this.props} searchingDatabase={this.searchingDatabase} />
-              <ListSearchResult {...this.props} addingFoodToDatabaseDiary={this.addingFoodToDatabaseDiary} />
+              <SearchFood {...this.props} searchingDatabase={this.searchingDatabase} addingFoodToDbDiary={this.addingFoodToDbDiary} />
+              <ListSearchResult {...this.props} addingFoodToDbDiary={this.addingFoodToDbDiary} />
             </div>
           </Tab.Pane>
         )

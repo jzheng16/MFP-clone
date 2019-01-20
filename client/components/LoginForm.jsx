@@ -50,10 +50,23 @@ export default props => (
   <div>
     <form className="login" onSubmit={props.handleLogin}>
       <StyledLabel htmlFor="email"> Email Address </StyledLabel>
-      <StyledEmailInput onChange={props.onEmailChange} id="email" type="text" name="email" />
+      <StyledEmailInput
+        id="email"
+        name="email"
+        type="text"
+        onChange={props.onEmailChange}
+        autoComplete="email"
+      />
 
       <StyledLabel htmlFor="password">  Password </StyledLabel>
-      <StyledPasswordInput onChange={props.onPasswordChange} id="password" type="password" name="password" />
+      <StyledPasswordInput
+        id="password"
+        name="password"
+        type="password"
+        onChange={props.onPasswordChange}
+        autoComplete="current-password"
+      />
+
       <ForgotPasswordLink to="/forgotpassword"> Forgot your password?</ForgotPasswordLink>
       <StyledLoginButton type="submit" disabled={!props.password || !props.email}> Log-in </StyledLoginButton>
     </form>
