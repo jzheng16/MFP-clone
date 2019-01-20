@@ -1,8 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { Message, Form } from 'semantic-ui-react';
+
 import { Button } from './StyledComponents';
 
+const StyledContainer = styled.div`
+   background-color: #e9e9e9;
+   width: 100%;
+   height: 100vh;
+   position: relative;
+`;
 
 const StyledLabel = styled.label`
   display: block;
@@ -10,14 +18,23 @@ const StyledLabel = styled.label`
 `;
 
 const StyledEmailInput = styled.input`
-  border: 1px solid #d5dce0;
-  border-radius: 3px;
-  height: 1.5em;
-  margin-bottom: 1em;
+  display: block;
+  font-size: 1.2em !important;
+  border: 1px solid #d9d9d9 !important;
+  border-radius: 0 !important;
+  outline: none;
+  padding: 15px 15px !important;
+  width: 60% !important;
+  margin: 0 auto 1.4em auto !important;
+  transition: .3s ease;
+  &:focus {
+    border: 1px solid #33b5e5;
+    color: #333333;
+  }
 `;
 
 const StyledPasswordInput = styled(StyledEmailInput)`
-  margin-bottom: .5em;
+  margin-bottom: 1em !important;
 `;
 
 const StyledLoginButton = styled(Button)`
@@ -26,9 +43,10 @@ const StyledLoginButton = styled(Button)`
   color: white;
   background-color: #14aaf5;
   border-color: #14aaf5;
-  width: 4em;
-  height: 1.5em;
-  margin-left: 8em;
+  width: 60%;
+  padding: 10px;
+  
+  margin: 0 auto 1em auto;
   &:disabled{
   color: #b7bfc6;
     fill: #b7bfc6;
@@ -38,42 +56,104 @@ const StyledLoginButton = styled(Button)`
   }
 `;
 
-const ForgotPasswordLink = styled(Link)`
+const StyledLink = styled(Link)`
   display: block;
   text-decoration: none;
-  font-size: .75em;
-  margin-bottom: 1em;
+  font-size: .8em;
+  width: 60%;
+  margin: 0 auto;
+
+  margin-bottom: 1.3em;
+  
   
 `;
 
-export default props => (
-  <div>
-    <form className="login" onSubmit={props.handleLogin}>
-      <StyledLabel htmlFor="email"> Email Address </StyledLabel>
-      <StyledEmailInput
-        id="email"
-        name="email"
-        type="text"
-        onChange={props.onEmailChange}
-        autoComplete="email"
-      />
+const ErrorMessage = styled(Message)`
+  
+  margin: 0 auto !important;
+  display: block !important;
+`;
 
-      <StyledLabel htmlFor="password">  Password </StyledLabel>
-      <StyledPasswordInput
-        id="password"
-        name="password"
-        type="password"
-        onChange={props.onPasswordChange}
-        autoComplete="current-password"
-      />
+const StyledForm = styled(Form)`
+  position: absolute !important;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) !important;
+  padding: 40px;
+  border-top: #33b5e5 !important;
+  max-width: 800px !important;
+  width: 100%;
+  margin: 0 auto;
 
-      <ForgotPasswordLink to="/forgotpassword"> Forgot your password?</ForgotPasswordLink>
-      <StyledLoginButton type="submit" disabled={!props.password || !props.email}> Log-in </StyledLoginButton>
-    </form>
+ 
 
-    <b> Don&#39;t have an account?
-      <Link to="/signup-step1"> Sign-up! </Link>
-    </b>
+  box-shadow: 0 0 3px rgba(0, 0, 0, .1);
+  background-color: white;
+ 
+`;
 
-  </div>
-);
+const StyledTitle = styled.h2`
+  color: #0070BF;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 1.4em;
+`;
+
+const SignupSpan = styled.span`
+  font-weight: bold;
+  display: inline-block;
+  margin-right: .4em;
+`;
+
+
+export default props => {
+  console.log('login props', props);
+  return (
+    <StyledContainer>
+
+
+      <StyledForm className="login" onSubmit={props.handleLogin}>
+
+        {props.error &&
+          <ErrorMessage
+            error
+            header="Login Failed"
+            content={props.error}
+            onDismiss={props.removeError}
+          />
+        }
+        <StyledTitle> Login to your account</StyledTitle>
+        <StyledEmailInput
+          id="email"
+          name="email"
+          type="text"
+          onChange={props.onEmailChange}
+          autoComplete="email"
+          placeholder="Email"
+        />
+
+
+        <StyledPasswordInput
+          id="password"
+          name="password"
+          type="password"
+          onChange={props.onPasswordChange}
+          autoComplete="current-password"
+          placeholder="Password"
+        />
+
+        <StyledLink to="/forgotpassword"> Forgot your password?</StyledLink>
+        <StyledLoginButton type="submit" disabled={!props.password || !props.email}> Login </StyledLoginButton>
+
+        <StyledLink to="/signup-step1">
+          <SignupSpan> Don&#39;t have an account? </SignupSpan> Sign-up!
+        </StyledLink>
+
+
+      </StyledForm>
+
+
+    </StyledContainer>
+
+  );
+};
