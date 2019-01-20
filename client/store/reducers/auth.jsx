@@ -1,7 +1,7 @@
-import { GET_USER, REMOVE_USER, UPDATE_USER } from '../actions';
+import { GET_USER, REMOVE_USER, UPDATE_USER, SET_AUTH_ERROR, REMOVE_AUTH_ERROR } from '../actions';
 
 
-const initialState = { user: {} };
+const initialState = { user: {}, error: '' };
 
 export default (state = initialState, action) => {
   const newState = Object.assign({}, state);
@@ -14,6 +14,13 @@ export default (state = initialState, action) => {
       break;
     case UPDATE_USER:
       newState.user = action.payload;
+      break;
+
+    case SET_AUTH_ERROR:
+      newState.error = action.payload;
+      break;
+    case REMOVE_AUTH_ERROR:
+      newState.error = '';
       break;
 
     default:

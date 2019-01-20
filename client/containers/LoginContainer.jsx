@@ -1,21 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import LoginForm from '../components/LoginForm';
-import { loggingIn } from '../store/action-creators/auth';
+import { loggingIn, removeError } from '../store/action-creators/auth';
 
 const mapDispatchToProps = dispatch => ({
   loggingIn(email, password) {
     return dispatch(loggingIn(email, password));
+  },
+  removeError() {
+    return dispatch(removeError());
   }
 });
 
-const mapStateToProps = state => ({ user: state.auth.user });
+const mapStateToProps = state => ({ user: state.auth.user, error: state.auth.error });
 
 class LoginContainer extends Component {
   constructor(props) {
     super(props);
     this.handleLogin = this.handleLogin.bind(this);
-    this.state = { email: '', password: '' };
+    this.state = { email: '', password: '', isError: false };
   }
   componentDidMount() {
   }
@@ -32,6 +35,7 @@ class LoginContainer extends Component {
     e.preventDefault();
     this.props.loggingIn(e.target.email.value, e.target.password.value);
   }
+
 
   render() {
     return (

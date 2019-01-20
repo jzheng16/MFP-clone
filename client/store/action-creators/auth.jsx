@@ -1,10 +1,11 @@
 import axios from 'axios';
-import { GET_USER, REMOVE_USER, UPDATE_USER } from '../actions';
+import { GET_USER, REMOVE_USER, UPDATE_USER, SET_AUTH_ERROR, REMOVE_AUTH_ERROR } from '../actions';
 import history from '../../history';
 
 export const getUser = user => ({ type: GET_USER, payload: user });
 export const removeUser = () => ({ type: REMOVE_USER });
-
+export const setError = error => ({ type: SET_AUTH_ERROR, payload: error });
+export const removeError = () => ({ type: REMOVE_AUTH_ERROR });
 export const updateUser = user => ({
   type: UPDATE_USER,
   payload: user
@@ -43,7 +44,10 @@ export const loggingIn = (email, password) => dispatch => {
       dispatch(getUser(user.data));
       history.push('/');
     })
-    .catch(err => console.error('Had trouble logging in', err));
+    .catch(err => {
+      console.log('Oops had trouble logging in: ', err.response.data);
+      dispatch(setError(err.response.data));
+    });
 };
 
 export const signingUp = user => dispatch =>
@@ -54,7 +58,7 @@ export const signingUp = user => dispatch =>
     })
     .catch(err => {
       console.log('Oops had trouble signing up: ', err.response.data);
-      dispatch(getUser(err.response));
+      dispatch(setError(err.response.data));
     });
 
 
@@ -69,12 +73,6 @@ export const loggingOut = () => dispatch =>
 
 export const changingPassword = passwords => dispatch => axios.post('/api/auth/changepassword', passwords);
 
-export const testing = () => dispatch => {
-  axios.post('/api/auth/testing')
-    .then(response => {
-      console.log('response', response.data);
-    });
-};
 
 export const sendingVerificationEmail = user => dispatch => {
   axios.post('/api/auth/sendemail', user)
