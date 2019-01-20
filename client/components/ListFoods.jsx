@@ -1,71 +1,40 @@
 import React from 'react';
 import styled from 'styled-components';
-
-const ListFoodTable = styled.table`
-  table-layout: fixed;  /* Makes table behave more predictably */
-  width: 75%;
-  border-collapse: collapse; /* Each element by default has a border which doesn't look great, this removes them*/
-  border: 1px solid blue; /* size type color */
-`;
-
-const ListFoodHeadings = styled.tr`
-/* Headings: Name, Calories, Serving Size? */
-`;
-
-const StyledTHead1 = styled.th`
-  width: 5%;
-  
-`;
-const StyledTHead2 = styled.th`
-  width: 40%;
-`;
-const StyledTHead3 = styled.th`
-  width: 40%;
-`;
-const StyledTHead4 = styled.th`
-  width: 55;
-`;
-const tableBody = styled.tbody`
-  text-align: center;
-`;
-
-const StyledTableData = styled.td`
-  text-align: center;
-`;
+import { Table, Button, Input } from 'semantic-ui-react';
 
 export default props => {
   const sortedFoods = props.foods.allFoods.sort((a, b) => a.id - b.id);
   return (
     <div>
       <form onSubmit={props.addingFoodToDiary}>
-        <ListFoodTable>
-          <caption> List of your Foods </caption>
-          <thead>
-            <ListFoodHeadings>
-              <StyledTHead1> </StyledTHead1>
-              <StyledTHead2> Name </StyledTHead2>
-              <StyledTHead3> Calories </StyledTHead3>
-              <StyledTHead4> Serving Size </StyledTHead4>
-            </ListFoodHeadings>
-          </thead>
-          <tbody>
+        <Table color="blue" striped celled fixed singleLine>
+          <Table.Header>
+            <Table.Row>
+              <Table.HeaderCell width={1} />
+              <Table.HeaderCell width={6}>Name</Table.HeaderCell>
+              <Table.HeaderCell width={3}>Calories</Table.HeaderCell>
+              <Table.HeaderCell width={3}>Serving Size</Table.HeaderCell>
+            </Table.Row>
+          </Table.Header>
+          <Table.Body>
             {sortedFoods && sortedFoods.map(food => (
-              <tr key={food.id}>
-                <StyledTableData> <input type="checkbox" name="add_checked" value={food.id} onChange={props.onChange} /> </StyledTableData>
-                <StyledTableData> {food.name} </StyledTableData>
-                <StyledTableData> {food.calories} </StyledTableData>
-                <StyledTableData> <input type="number" defaultValue="1" id={food.id} name="qty" /> </StyledTableData>
-              </tr>
+              <Table.Row key={food.id}>
+                <Table.Cell collapsing> <Input type="checkbox" name="add_checked" value={food.id} onChange={props.onChange} size="small" /> </Table.Cell>
+                <Table.Cell> {food.name} </Table.Cell>
+                <Table.Cell> {food.calories} </Table.Cell>
+                <Table.Cell> <Input type="number" defaultValue="1" foodname={food.name} id={food.id} name="qty" size="small" /> </Table.Cell>
+              </Table.Row>
             ))
             }
-          </tbody>
-          <tfoot>
-            <tr>
-              <StyledTableData> <button type="submit"> Add Food to Diary </button> </StyledTableData>
-              <StyledTableData> Add Food </StyledTableData>
-            </tr>
-          </tfoot>
-        </ListFoodTable>
+          </Table.Body>
+          <Table.Footer>
+            <Table.Row>
+              <Table.HeaderCell colSpan="4">
+                <Button content="Add Checked Foods to Diary" icon="add" labelPosition="left" primary size="small" />
+              </Table.HeaderCell>
+            </Table.Row>
+          </Table.Footer>
+        </Table>
       </form>
     </div>
   );

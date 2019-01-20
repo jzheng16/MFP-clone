@@ -50,7 +50,6 @@ export const mappingDbDiaryDataToFoodData = foodObj => dispatch => {
   axios.get(`https://api.nal.usda.gov/ndb/nutrients/?format=json&api_key=${API_KEY}&nutrients=208&nutrients=205&nutrients=203&nutrients=204&ndbno=${databaseId}`)
     .then(report => {
       console.log('What is the food report returned', report);
-      console.log('Food obj:', foodObj);
       const foodDetail = report.data.report.foods[0];
       const truncatedName = foodObj.name.length > 60 ? `${foodObj.name.substring(0, foodObj.name.length)}...` : foodObj.name;
       const foodInfo = {
