@@ -18,7 +18,6 @@ const app = () => {
   return (
     <div className="container">
       <NavBarContainer />
-
       <Routes />
       <Footer />
     </div>
