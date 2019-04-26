@@ -77,16 +77,15 @@ class FoodContainer extends Component {
     const servingSizeArr = Array.from(e.target.qty);
     this.state.isChecked.forEach(foodId => {
       const qtyIndex = servingSizeArr.findIndex(servingSize => servingSize.id === `${foodId}`);
+
       if (this.state.message === '') {
         const message = this.state.isChecked.length > 1 ?
-          `${e.target.qty[qtyIndex].getAttribute('foodname')} and ${this.state.isChecked.length - 1} other food(s) has just been added to your diary!`
+          `${e.target.qty[qtyIndex].getAttribute('data-name')} and ${this.state.isChecked.length - 1} other food(s) has just been added to your diary!`
           :
-          `${e.target.qty[qtyIndex].getAttribute('foodname')} was added to your diary!`;
+          `${e.target.qty[qtyIndex].getAttribute('data-name')} was added to your diary!`;
 
         this.setState({ message });
       }
-
-      console.log('Quantity:', e.target.qty[qtyIndex].getAttribute('data'));
       const qty = +e.target.qty[qtyIndex].value;
       const entry = {
 

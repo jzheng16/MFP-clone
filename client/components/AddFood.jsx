@@ -7,6 +7,7 @@ const StyledFoodInput = styled(Input)`
   padding-bottom: 1em;
 `;
 
+
 const StyledHeader = styled(Message.Header)`
   margin-bottom: .75em !important;
   font-size: 1.5em !important;
@@ -15,19 +16,20 @@ const StyledHeader = styled(Message.Header)`
 export default props =>
   (
     <Grid>
-      <Message info>
-        <StyledHeader> Note </StyledHeader>
-        <Message.Content> When adding a new food, make sure that your macronutrients all add up correctly to the amount of calories </Message.Content>
-        <Message.List items={[
-          'Carbohydrates and proteins are 4 calories per gram, fat is 9 calories per gram.',
-          'Example: A small apple has 14 grams of carbohydrates, .3 grams of protein, and .2g of fat.',
-          'To calculate the total amount of calories: (14 * 4) + (.3 * 4) + (.2 * 9) = 59 calories.'
-        ]}
-        />
-      </Message>
+
 
       <Grid.Row centered>
-        <Grid.Column width={6}>
+        <Grid.Column width={8}>
+          <Message info>
+            <StyledHeader> Note </StyledHeader>
+            <Message.Content> When adding a new food, make sure that your macronutrients all add up correctly to the amount of calories </Message.Content>
+            <Message.List items={[
+              'Carbohydrates and proteins are 4 calories per gram, fat is 9 calories per gram.',
+              'Example: A small apple has 14 grams of carbohydrates, .3 grams of protein, and .2g of fat.',
+              'To calculate the total amount of calories: (14 * 4) + (.3 * 4) + (.2 * 9) = 59 calories.'
+            ]}
+            />
+          </Message>
           <Form onSubmit={props.addFood}>
             <label htmlFor="name">
               <StyledFoodInput id="name" type="text" name="name" placeholder="Name" />

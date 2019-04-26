@@ -2,6 +2,31 @@ import React from 'react';
 import styled from 'styled-components';
 import { Table, Button, Input } from 'semantic-ui-react';
 
+const StyledQuantityInput = styled.input`
+  display: block;
+  outline: none;
+  &&&& {
+ 
+    font-size: 1.2em;
+    border: 1px solid #d9d9d9;
+    border-radius: 0;
+    padding: 10px 15px;
+    margin: .5em 0 .5em 0;
+   
+    
+    &:hover{
+     box-shadow: inset 1px 2px 8px rgba(0, 0, 0, 0.02);
+    };
+
+    &:focus{
+    border: 1px solid #33b5e5;
+    color: #333333;
+    box-shadow: inset 1px 2px 4px rgba(0, 0, 0, 0.01), 0px 0px 8px rgba(0, 0, 0, 0.2);
+    } 
+  }
+`;
+
+
 export default props => {
   const sortedFoods = props.foods.allFoods.sort((a, b) => a.id - b.id);
   return (
@@ -22,7 +47,7 @@ export default props => {
                 <Table.Cell collapsing> <Input type="checkbox" name="add_checked" value={food.id} onChange={props.onChange} size="small" /> </Table.Cell>
                 <Table.Cell> {food.name} </Table.Cell>
                 <Table.Cell> {food.calories} </Table.Cell>
-                <Table.Cell> <Input type="number" defaultValue="1" foodname={food.name} id={food.id} name="qty" size="small" /> </Table.Cell>
+                <Table.Cell> <StyledQuantityInput placeholder="hi" type="number" defaultValue="1" data-name={food.name} id={food.id} name="qty" size="small" /> </Table.Cell>
               </Table.Row>
             ))
             }

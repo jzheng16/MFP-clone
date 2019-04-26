@@ -33,16 +33,21 @@ const mapDispatch = dispatch => ({
 });
 
 class DiaryContainer extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { something: false };
-  }
-
   // Execute only when the user first visits their diary page
   componentDidMount() {
-    if (!this.props.diary.currentDiaryDate.id) {
+    const { currentDiaryDate } = this.props.diary;
+    console.log(!currentDiaryDate.id);
+    if (!currentDiaryDate.id) {
+      console.log('fetching?');
       this.props.gettingDiaryId(format(new Date(), 'yyyy-MM-dd'));
     }
+    /* TODO: Not sure why I need this
+    else {
+      console.log('fetching?', !currentDiaryDate.id);
+      this.props.fetchingDiary(currentDiaryDate.id);
+      this.props.fetchingDbDiary(currentDiaryDate.id);
+    }
+    */
   }
 
   componentDidUpdate(prevProps) {
