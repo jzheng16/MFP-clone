@@ -36,8 +36,9 @@ class Routes extends Component {
       <BodyWrapper>
         {this.props.user.id ?
           <Switch>
-            <Route exact path="/" component={HomeContainer} />
+
             <Route exact path="/login" component={LoginContainer} />
+            <Route exact path="/" component={HomeContainer} />
             <Route exact path="/verification" component={VerificationContainer} />
             <Route exact path="/me" component={ProfileSettingsContainer} />
             <Route exact path="/addFood" component={FoodContainer} />
@@ -52,8 +53,9 @@ class Routes extends Component {
           </Switch>
           :
           <Switch>
-            <Route exact path="/" component={HomeContainer} />
+
             <Route exact path="/login" component={LoginContainer} />
+            <Route exact path="/" component={HomeContainer} />
             <Route exact path="/signup" component={SignUpContainer} />
             <Route exact path="/signup-step1" component={SignUpContainer} />
             <Route exact path="/signup-step2" component={SignUpGoalContainer} />

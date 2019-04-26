@@ -97,6 +97,7 @@ export const addingFoodToDiary = entryArr => dispatch => {
   });
 };
 
+// Thunk action creator
 export const addingFoodToDbDiary = entry => dispatch => {
   axios.post('/api/diary/databasediary', entry)
     .then(food => {

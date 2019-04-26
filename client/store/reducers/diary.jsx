@@ -23,6 +23,7 @@ const initialState = loadState() || {
   databaseQuery: []
 };
 
+
 export default (state = initialState, action) => {
   const newState = Object.assign({}, state);
   let existingFoodIndex = -1;

@@ -153,7 +153,10 @@ const TableRow = styled.tr`
 `;
 
 
-const getTotal = (entryArr, property) => entryArr.reduce((total, entry) => total + (entry.food[property] * entry.qty), 0);
+const getTotal = (entryArr, property) => entryArr.reduce(
+  (total, entry) => (entry.food[property] ? total + (entry.food[property] * entry.qty) : total)
+  , 0
+);
 
 /*
 TODO:
@@ -164,8 +167,6 @@ Implement Remaining and Goals
 export default ({
   diary, removeFood, previousDayDiary, nextDayDiary, selectedMealType, goal
 }) => {
-  console.log('goal? ', goal);
-
   const { entries } = diary;
   const breakfast = entries.filter(food => food.mealType === 1);
   const breakfastTotalCalories = getTotal(breakfast, 'calories');
